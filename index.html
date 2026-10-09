@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveWave - Pure Driving Radio for Android & Android Auto</title>
+  <meta name="description" content="The ultimate live radio experience for your car. 6 curated driving moods, 100% Android Auto steering wheel controls, Gemini voice search, and zero ads." />
+  <link rel="icon" type="image/png" href="play_store_icon_512.png" />
+  <meta property="og:title" content="DriveWave - Pure Driving Radio" />
+  <meta property="og:description" content="Live English Hit Radio & Curated Driving Moods for Android & Android Auto. Free, Ad-Free, and 100% Driving-Optimized." />
+  <meta property="og:image" content="play_store_icon_512.png" />
+  <meta name="theme-color" content="#090D16" />
+  
+  <style>
+    :root {
+      --bg: #070A10;
+      --card-bg: rgba(18, 24, 38, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #00E5FF;
+      --accent-glow: rgba(0, 229, 255, 0.35);
+      --purple: #8B5CF6;
+      --purple-glow: rgba(139, 92, 246, 0.3);
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --success: #10B981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(0, 229, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 80% 65%, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 20px 80px 20px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 32px 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #FFF, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 40px 10px 50px 10px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 6vw, 60px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent) 0%, #A78BFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px auto;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--accent) 0%, #00B0FF 100%);
+      color: #050811;
+      font-size: 18px;
+      font-weight: 800;
+      padding: 18px 36px;
+      border-radius: 16px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px var(--accent-glow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0, 229, 255, 0.5);
+    }
+
+    .btn-download:active {
+      transform: translateY(0);
+    }
+
+    .meta-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Badges Bar */
+    .badges-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 40px 0;
+    }
+
+    .feature-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Moods Section */
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      margin: 60px 0 16px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      font-size: 16px;
+    }
+
+    .moods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .mood-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+
+    .mood-card:hover {
+      border-color: rgba(0, 229, 255, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .mood-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mood-icon {
+      font-size: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+
+    .mood-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .mood-text {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .mood-tags {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      background: rgba(0, 229, 255, 0.08);
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Install steps */
+    .steps-container {
+      background: linear-gradient(180deg, rgba(18, 24, 38, 0.9) 0%, rgba(11, 15, 24, 0.9) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px 28px;
+      margin-top: 50px;
+    }
+
+    .step-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      color: #000;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Support section */
+    .support-box {
+      margin-top: 60px;
+      text-align: center;
+      padding: 40px 20px;
+      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 24px;
+    }
+
+    .btn-paypal {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #00457C;
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      margin-top: 18px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-paypal:hover {
+      background: #0079C1;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a href="#" class="logo-container">
+        <img src="play_store_icon_512.png" alt="DriveWave Icon" class="logo-img" />
+        <span class="logo-text">DriveWave</span>
+      </a>
+      <a href="https://github.com/bambadooma-star/drivewave-app" class="nav-btn" target="_blank">GitHub</a>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="badge-pill">
+          <span>⚡</span> v3.0.0 Ready for Android & Android Auto
+        </div>
+        <h1 class="hero-title">
+          Pure Driving Radio.<br/>
+          <span>Zero Distractions.</span>
+        </h1>
+        <p class="hero-subtitle">
+          The ultimate live radio streaming player built exclusively for the road. 6 Spotify-inspired driving moods, seamless steering wheel integration, and 100% ad-free English live radio.
+        </p>
+
+        <div class="cta-group">
+          <a href="drivewave-v3.0.0-release.apk" class="btn-download" download>
+            <span>⬇️</span> Download APK (3.6 MB)
+          </a>
+          <p class="meta-tagline">Direct install for any Android phone or tablet • Version 3.0.0</p>
+        </div>
+      </section>
+
+      <!-- Highlights Bar -->
+      <div class="badges-bar">
+        <div class="feature-badge">🚗 100% Android Auto Certified</div>
+        <div class="feature-badge">🎛️ Steering Wheel Controls (Next/Prev)</div>
+        <div class="feature-badge">🎙️ Gemini & Google Assistant Voice</div>
+        <div class="feature-badge">🚫 Zero Ads & Zero Tracking</div>
+        <div class="feature-badge">📻 171 Live English Stations</div>
+      </div>
+
+      <!-- Mood Shelves Section -->
+      <h2 class="section-title">6 Curated Driving Moods</h2>
+      <p class="section-desc">Hand-picked Spotify-style shelves engineered to match your road trip state of mind.</p>
+
+      <div class="moods-grid">
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">🛣️</div>
+            <div class="mood-title">Long Drive</div>
+          </div>
+          <p class="mood-text">Highway cruising rhythms, driving melodic beats, and road trip classics that keep your tempo steady.</p>
+          <div class="mood-tags">Capital FM • BBC Radio 1 • Heart UK</div>
+        </div>
+
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">⚡</div>
+            <div class="mood-title">Fun & Energy</div>
+          </div>
+          <p class="mood-text">High-octane dance hits, upbeat electronic energy, and party anthems to keep you energized and alert.</p>
+          <div class="mood-tags">Kiss FM • Z100 NY • Capital Dance</div>
+        </div>
+
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">☕</div>
+            <div class="mood-title">Calm & Chill</div>
+          </div>
+          <p class="mood-text">Relaxed acoustic sessions, ambient pop, soft vocals, and atmospheric night driving companions.</p>
+          <div class="mood-tags">Smooth Radio • Chill UK • BBC Radio 2</div>
+        </div>
+
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">📰</div>
+            <div class="mood-title">News & Commute</div>
+          </div>
+          <p class="mood-text">Instant 24/7 world journalism, business insights, traffic, and talk in crystal-clear English broadcasts.</p>
+          <div class="mood-tags">BBC World Service • NPR 24h • LBC News</div>
+        </div>
+
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">🎸</div>
+            <div class="mood-title">Rock Anthems</div>
+          </div>
+          <p class="mood-text">Classic driving guitar riffs, 90s alt-rock anthems, and modern stadium rock to power your ride.</p>
+          <div class="mood-tags">Absolute Rock • Radio X • Planet Rock</div>
+        </div>
+
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">⭐</div>
+            <div class="mood-title">Pop Hits</div>
+          </div>
+          <p class="mood-text">The biggest Top 40 chart-toppers from London and New York, updated live with fresh number-one hits.</p>
+          <div class="mood-tags">KIIS FM • BBC 1Xtra • Hits Radio</div>
+        </div>
+      </div>
+
+      <!-- Installation Guide -->
+      <div class="steps-container">
+        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">📲 How to Install in 3 Easy Steps</h2>
+        <p style="color: var(--text-muted); font-size: 14px;">Fast, direct installation on any Android smartphone:</p>
+        
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-title">Download APK</div>
+            <div class="step-desc">Tap the download button above to get <code>drivewave-v3.0.0-release.apk</code> (only 3.6 MB).</div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-title">Tap Open & Install</div>
+            <div class="step-desc">Tap the completed download. If Android asks, allow "Install from this source" in settings.</div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-title">Drive & Enjoy!</div>
+            <div class="step-desc">Open DriveWave on your phone or plug into Android Auto in your car. Done!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support the Developer -->
+      <div class="support-box">
+        <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 10px;">☕ Love Driving with DriveWave?</h3>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto; font-size: 15px;">
+          DriveWave is 100% free, private, and independent. If you enjoy the app, support ongoing development and stream maintenance.
+        </p>
+        <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" class="btn-paypal" target="_blank">
+          ☕ Support Developer via PayPal
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <p>DriveWave is an independent radio streaming client aggregating publicly available streams.</p>
+      <p style="margin-top: 6px;">Drive safely. Always keep your attention on the road.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
