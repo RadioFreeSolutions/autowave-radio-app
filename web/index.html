@@ -282,13 +282,20 @@
           <span id="volume-percent" class="volume-percent">85%</span>
         </div>
 
-        <button id="btn-toggle-mini" class="btn-player-action" title="Floating Corner Mini Player / Picture-in-Picture">
-          <span>🗗</span>
+        <button id="btn-toggle-mini" class="btn-player-action" title="Pop-out Mini Player (Picture-in-Picture)">
+          <span>⧉</span>
         </button>
       </div>
     </footer>
 
-    <!-- Floating Corner Mini Widget (Quick Controls & Auto Tab-Switch popup) -->
+    <!-- Restore Pill when playing in Pop-out Mini Player -->
+    <div id="pip-restore-bar" class="pip-restore-bar" title="Click to bring player back to tab">
+      <span style="color: var(--accent);">⧉</span>
+      <span>Playing in Pop-out Mini Player</span>
+      <span style="background: rgba(255,255,255,0.12); padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700;">Restore Bar ✕</span>
+    </div>
+
+    <!-- Floating Corner Mini Widget (Fallback) -->
     <div id="corner-mini-widget" class="corner-mini-widget hidden" aria-label="Quick Mini Player">
       <button id="btn-mini-close" class="btn-mini-close" title="Close Mini Player" aria-label="Close">✕</button>
       <div class="mini-widget-content">

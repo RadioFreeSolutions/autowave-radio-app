@@ -298,6 +298,9 @@
 
     localStorage.setItem(LS_LAST_STATION, station.id);
 
+    updateDocumentPipUI();
+    renderVideoPipFrame();
+
     if (shouldPlay) {
       startAudio(station);
     }
@@ -429,6 +432,10 @@
 
   let miniManuallyClosed = false;
   let pipWindow = null;
+  let pipVideoEl = null;
+  let pipCanvasEl = null;
+  let pipCanvasCtx = null;
+  let pipCanvasInterval = null;
   const canonicalTitle = document.title;
 
   function updateTabTitle() {
@@ -444,7 +451,6 @@
   }
 
   function showMiniWidget() {
-    // Mini corner widget is only for desktop screens
     if (window.innerWidth <= 768) return;
     document.body.classList.add('mini-player-active');
     if (cornerMiniWidget) {
@@ -470,73 +476,225 @@
     }
   }
 
-  async function openDocumentPiP() {
-    if (!('documentPictureInPicture' in window)) {
-      showMiniWidget();
-      return;
+  function updateDocumentPipUI() {
+    if (!pipWindow || pipWindow.closed) return;
+    try {
+      const art = currentStation ? (currentStation.favicon || 'icon-512.png') : 'icon-512.png';
+      const title = currentStation ? currentStation.name : 'DriveWave Radio';
+      const sub = currentStation ? `${currentStation.flag || '📻'} Live Stream` : 'Pure Driving Radio';
+
+      const artEl = pipWindow.document.querySelector('.pip-art');
+      const titleEl = pipWindow.document.querySelector('.pip-title');
+      const subEl = pipWindow.document.querySelector('.pip-sub');
+      const playEl = pipWindow.document.getElementById('pip-play');
+
+      if (artEl) artEl.src = art;
+      if (titleEl) titleEl.textContent = title;
+      if (subEl) subEl.textContent = sub;
+      if (playEl) playEl.textContent = isPlaying ? '⏸' : '▶';
+    } catch (e) {}
+  }
+
+  function renderVideoPipFrame() {
+    if (!pipCanvasCtx) return;
+    const ctx = pipCanvasCtx;
+    const w = 512, h = 512;
+
+    ctx.fillStyle = '#070A10';
+    ctx.fillRect(0, 0, w, h);
+
+    const grad = ctx.createRadialGradient(w / 2, h / 2, 50, w / 2, h / 2, 250);
+    grad.addColorStop(0, 'rgba(0, 229, 255, 0.15)');
+    grad.addColorStop(1, 'rgba(7, 10, 16, 0.98)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.textAlign = 'center';
+    const name = currentStation ? currentStation.name : 'DriveWave Radio';
+    ctx.fillText(name, w / 2, 75);
+
+    ctx.fillStyle = '#00E5FF';
+    ctx.font = '600 17px -apple-system, BlinkMacSystemFont, sans-serif';
+    const sub = currentStation ? `${currentStation.flag || '📻'} Live Broadcast` : 'Pure Driving Radio';
+    ctx.fillText(sub, w / 2, 108);
+
+    const artImg = playerArt;
+    if (artImg && artImg.complete && artImg.naturalWidth > 0) {
+      try {
+        ctx.save();
+        ctx.beginPath();
+        const rx = 146, ry = 140, rw = 220, rh = 220, r = 24;
+        if (ctx.roundRect) {
+          ctx.roundRect(rx, ry, rw, rh, r);
+        } else {
+          ctx.rect(rx, ry, rw, rh);
+        }
+        ctx.clip();
+        ctx.drawImage(artImg, rx, ry, rw, rh);
+        ctx.restore();
+      } catch (e) {}
     }
 
+    if (isPlaying) {
+      ctx.fillStyle = '#00E5FF';
+      for (let i = 0; i < 5; i++) {
+        const barH = 10 + Math.random() * 24;
+        ctx.fillRect(w / 2 - 40 + i * 18, 430 - barH, 10, barH);
+      }
+    } else {
+      ctx.fillStyle = '#9CA3AF';
+      ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillText('⏸ PAUSED', w / 2, 420);
+    }
+  }
+
+  async function openVideoPiP() {
+    if (!pipCanvasEl) {
+      pipCanvasEl = document.createElement('canvas');
+      pipCanvasEl.width = 512;
+      pipCanvasEl.height = 512;
+      pipCanvasCtx = pipCanvasEl.getContext('2d');
+    }
+
+    if (!pipVideoEl) {
+      pipVideoEl = document.createElement('video');
+      pipVideoEl.muted = true;
+      pipVideoEl.playsInline = true;
+      pipVideoEl.style.position = 'fixed';
+      pipVideoEl.style.width = '1px';
+      pipVideoEl.style.height = '1px';
+      pipVideoEl.style.opacity = '0.01';
+      pipVideoEl.style.pointerEvents = 'none';
+      document.body.appendChild(pipVideoEl);
+
+      pipVideoEl.addEventListener('leavepictureinpicture', () => {
+        if (pipCanvasInterval) {
+          clearInterval(pipCanvasInterval);
+          pipCanvasInterval = null;
+        }
+        document.body.classList.remove('mini-player-active');
+      });
+    }
+
+    renderVideoPipFrame();
+
+    if (!pipVideoEl.srcObject) {
+      const stream = pipCanvasEl.captureStream(10);
+      pipVideoEl.srcObject = stream;
+    }
+
+    await pipVideoEl.play();
+    await pipVideoEl.requestPictureInPicture();
+    document.body.classList.add('mini-player-active');
+    hideMiniWidget();
+
+    if (!pipCanvasInterval) {
+      pipCanvasInterval = setInterval(renderVideoPipFrame, 250);
+    }
+  }
+
+  async function openDocumentPiP() {
     if (pipWindow) {
       pipWindow.close();
       pipWindow = null;
+      document.body.classList.remove('mini-player-active');
       return;
     }
 
-    try {
-      pipWindow = await window.documentPictureInPicture.requestWindow({
-        width: 360,
-        height: 150,
-      });
+    pipWindow = await window.documentPictureInPicture.requestWindow({
+      width: 360,
+      height: 150,
+    });
 
-      const style = pipWindow.document.createElement('style');
-      style.textContent = `
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background: #070A10; color: #FFF; display: flex; align-items: center; justify-content: space-between; padding: 14px; height: 100vh; overflow: hidden; }
-        .pip-card { display: flex; align-items: center; gap: 12px; width: 100%; }
-        .pip-art { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; background: #121826; }
-        .pip-info { flex: 1; min-width: 0; }
-        .pip-title { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #FFF; }
-        .pip-sub { font-size: 12px; color: #00E5FF; margin-top: 2px; }
-        .pip-controls { display: flex; align-items: center; gap: 8px; }
-        .pip-btn { background: rgba(255,255,255,0.1); border: none; color: #FFF; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; }
-        .pip-play { background: #00E5FF; color: #000; width: 40px; height: 40px; font-size: 16px; }
-      `;
-      pipWindow.document.head.appendChild(style);
+    const style = pipWindow.document.createElement('style');
+    style.textContent = `
+      * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      body { background: #070A10; color: #FFF; display: flex; align-items: center; justify-content: space-between; padding: 14px; height: 100vh; overflow: hidden; user-select: none; }
+      .pip-card { display: flex; align-items: center; gap: 12px; width: 100%; }
+      .pip-art { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; background: #121826; flex-shrink: 0; border: 1px solid rgba(0, 229, 255, 0.3); }
+      .pip-info { flex: 1; min-width: 0; overflow: hidden; }
+      .pip-title { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #FFF; }
+      .pip-sub { font-size: 12px; color: #00E5FF; font-weight: 600; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pip-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+      .pip-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #FFF; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+      .pip-btn:hover { background: rgba(255,255,255,0.2); }
+      .pip-play { background: linear-gradient(135deg, #00E5FF 0%, #00B0FF 100%); color: #000; width: 40px; height: 40px; font-size: 16px; border: none; font-weight: bold; }
+      .pip-play:hover { transform: scale(1.05); }
+    `;
+    pipWindow.document.head.appendChild(style);
 
-      function renderPip() {
-        if (!pipWindow) return;
-        const art = currentStation ? (currentStation.favicon || 'icon-512.png') : 'icon-512.png';
-        const title = currentStation ? currentStation.name : 'DriveWave Radio';
-        const sub = currentStation ? `${currentStation.flag || '📻'} Live Stream` : 'Pure Driving Radio';
-        pipWindow.document.body.innerHTML = `
-          <div class="pip-card">
-            <img class="pip-art" src="${art}" alt="Artwork" />
-            <div class="pip-info">
-              <div class="pip-title">${title}</div>
-              <div class="pip-sub">${sub}</div>
-            </div>
-            <div class="pip-controls">
-              <button id="pip-prev" class="pip-btn" title="Previous">⏮</button>
-              <button id="pip-play" class="pip-btn pip-play" title="Play/Pause">${isPlaying ? '⏸' : '▶'}</button>
-              <button id="pip-next" class="pip-btn" title="Next">⏭</button>
-            </div>
-          </div>
-        `;
+    const art = currentStation ? (currentStation.favicon || 'icon-512.png') : 'icon-512.png';
+    const title = currentStation ? currentStation.name : 'DriveWave Radio';
+    const sub = currentStation ? `${currentStation.flag || '📻'} Live Stream` : 'Pure Driving Radio';
 
-        pipWindow.document.getElementById('pip-prev')?.addEventListener('click', () => { playPrevious(); renderPip(); });
-        pipWindow.document.getElementById('pip-play')?.addEventListener('click', () => { togglePlayPause(); renderPip(); });
-        pipWindow.document.getElementById('pip-next')?.addEventListener('click', () => { playNext(); renderPip(); });
-      }
+    pipWindow.document.body.innerHTML = `
+      <div class="pip-card">
+        <img class="pip-art" src="${art}" alt="Artwork" />
+        <div class="pip-info">
+          <div class="pip-title">${title}</div>
+          <div class="pip-sub">${sub}</div>
+        </div>
+        <div class="pip-controls">
+          <button id="pip-prev" class="pip-btn" title="Previous">⏮</button>
+          <button id="pip-play" class="pip-btn pip-play" title="Play/Pause">${isPlaying ? '⏸' : '▶'}</button>
+          <button id="pip-next" class="pip-btn" title="Next">⏭</button>
+        </div>
+      </div>
+    `;
 
-      renderPip();
+    pipWindow.document.getElementById('pip-prev')?.addEventListener('click', () => { playPrevious(); });
+    pipWindow.document.getElementById('pip-play')?.addEventListener('click', () => { togglePlayPause(); });
+    pipWindow.document.getElementById('pip-next')?.addEventListener('click', () => { playNext(); });
 
-      pipWindow.addEventListener('pagehide', () => {
-        pipWindow = null;
-      });
-    } catch (err) {
-      console.warn('PiP window failed to open:', err);
-      showMiniWidget();
+    pipWindow.addEventListener('pagehide', () => {
+      pipWindow = null;
+      document.body.classList.remove('mini-player-active');
+    });
+
+    document.body.classList.add('mini-player-active');
+    hideMiniWidget();
+  }
+
+  async function togglePopoutMiniPlayer() {
+    // 1. If Document PiP is open, close it
+    if (pipWindow && !pipWindow.closed) {
+      pipWindow.close();
+      pipWindow = null;
+      document.body.classList.remove('mini-player-active');
+      return;
     }
+
+    // 2. If Video PiP is open, exit it
+    if (document.pictureInPictureElement) {
+      try {
+        await document.exitPictureInPicture();
+      } catch (e) {}
+      document.body.classList.remove('mini-player-active');
+      return;
+    }
+
+    // 3. Try Document Picture-in-Picture first (Chrome/Edge desktop - rich HTML)
+    if ('documentPictureInPicture' in window) {
+      try {
+        await openDocumentPiP();
+        return;
+      } catch (err) {
+        console.warn('Document PiP request failed:', err);
+      }
+    }
+
+    // 4. Try Video Picture-in-Picture fallback (Safari, Firefox, Android Chrome)
+    try {
+      await openVideoPiP();
+      return;
+    } catch (err) {
+      console.warn('Video PiP request failed:', err);
+    }
+
+    // 5. Ultimate fallback if browser denies all PiP permissions
+    toggleMiniWidget();
   }
 
   /** Update playback button and equalizer UI */
@@ -556,6 +714,8 @@
       equalizer.style.opacity = playing ? '1' : '0.2';
     }
 
+    updateDocumentPipUI();
+    renderVideoPipFrame();
     updateTabTitle();
     renderStations();
   }
@@ -713,8 +873,13 @@
     if (btnMiniPlay) btnMiniPlay.addEventListener('click', togglePlayPause);
     if (btnMiniPrev) btnMiniPrev.addEventListener('click', playPrevious);
     if (btnMiniNext) btnMiniNext.addEventListener('click', playNext);
-    if (btnMiniPip) btnMiniPip.addEventListener('click', openDocumentPiP);
-    if (btnToggleMini) btnToggleMini.addEventListener('click', toggleMiniWidget);
+    if (btnMiniPip) btnMiniPip.addEventListener('click', togglePopoutMiniPlayer);
+    if (btnToggleMini) btnToggleMini.addEventListener('click', togglePopoutMiniPlayer);
+
+    const pipRestoreBar = document.getElementById('pip-restore-bar');
+    if (pipRestoreBar) {
+      pipRestoreBar.addEventListener('click', togglePopoutMiniPlayer);
+    }
 
     // Clicking mini widget card (outside control buttons) restores full player bar
     if (cornerMiniWidget) {
