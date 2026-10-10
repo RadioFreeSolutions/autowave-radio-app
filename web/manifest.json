@@ -1,0 +1,17 @@
+{
+  "name": "DriveWave Web - Pure Driving Radio",
+  "short_name": "DriveWave",
+  "description": "Live English & Latin Hit Radio for Desktop, Mobile & Car Browsers",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070A10",
+  "theme_color": "#070A10",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
