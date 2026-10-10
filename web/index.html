@@ -153,7 +153,21 @@
 
     <!-- Main Area -->
     <main class="main-content">
-      <!-- Top Bar -->
+      <!-- Mobile Brand Header (Visible on Mobile only) -->
+      <div class="mobile-top-bar">
+        <a href="#" class="mobile-brand-group">
+          <img src="icon-512.png" alt="DriveWave" class="mobile-brand-logo" />
+          <span class="mobile-brand-name">DriveWave</span>
+        </a>
+        <div class="mobile-top-actions">
+          <button id="btn-info-mobile" class="btn-mobile-action" title="About &amp; Legal">ℹ️</button>
+          <button id="btn-share-mobile" class="btn-mobile-action" onclick="shareDriveWave()" title="Share">🔗</button>
+          <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" target="_blank" class="btn-mobile-action" style="color: #FFC439;" title="Support">☕</a>
+          <button id="btn-driving-mobile" class="btn-mobile-dm" title="Driving Mode Cockpit">🚘</button>
+        </div>
+      </div>
+
+      <!-- Top Bar / Search -->
       <header class="top-bar">
         <div class="search-box">
           <span class="search-icon">🔍</span>
@@ -175,6 +189,19 @@
           </button>
         </div>
       </header>
+
+      <!-- Mobile Moods Bar (Horizontal scrolling pills for categories) -->
+      <div class="mobile-moods-bar" id="mobile-moods-bar">
+        <div class="mood-pill active" data-mood="ALL">🔥 All</div>
+        <div class="mood-pill" data-mood="POP_HITS">⭐ Pop Hits</div>
+        <div class="mood-pill" data-mood="LATIN_SPANISH">💃 Latin &amp; Spanish</div>
+        <div class="mood-pill" data-mood="LONG_DRIVE">🛣️ Long Drive</div>
+        <div class="mood-pill" data-mood="FUN_ENERGY">⚡ Energy</div>
+        <div class="mood-pill" data-mood="CALM_CHILL">☕ Chill</div>
+        <div class="mood-pill" data-mood="ROCK">🎸 Rock</div>
+        <div class="mood-pill" data-mood="NEWS_COMMUTE">📰 News</div>
+        <div class="mood-pill" data-mood="FAVORITES">⭐ Favs <span id="mobile-fav-badge" class="mood-pill-badge">0</span></div>
+      </div>
 
       <!-- Shelf Banner -->
       <section class="shelf-header">

@@ -159,6 +159,11 @@
         badge.textContent = count;
       }
     });
+
+    const mobileFavBadge = document.getElementById('mobile-fav-badge');
+    if (mobileFavBadge) {
+      mobileFavBadge.textContent = favorites.size;
+    }
   }
 
   /** Filter stations based on mood, country, and search query */
@@ -616,15 +621,55 @@
       });
     }
 
-    // Nav Items (Moods)
+    // Nav Items (Desktop Sidebar Moods)
     navItems.forEach(item => {
       item.addEventListener('click', () => {
+        const mood = item.getAttribute('data-mood') || 'ALL';
+        currentMood = mood;
         navItems.forEach(n => n.classList.remove('active'));
         item.classList.add('active');
-        currentMood = item.getAttribute('data-mood') || 'ALL';
+
+        // Sync mobile mood pills
+        document.querySelectorAll('.mood-pill').forEach(p => {
+          p.classList.toggle('active', p.getAttribute('data-mood') === mood);
+        });
+
         applyFilter();
       });
     });
+
+    // Mobile Mood Pills
+    const mobileMoodPills = document.querySelectorAll('.mood-pill');
+    mobileMoodPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const mood = pill.getAttribute('data-mood') || 'ALL';
+        currentMood = mood;
+        mobileMoodPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        // Sync desktop sidebar nav items
+        navItems.forEach(n => {
+          n.classList.toggle('active', n.getAttribute('data-mood') === mood);
+        });
+
+        applyFilter();
+      });
+    });
+
+    // Mobile Header Actions
+    const btnInfoMobile = document.getElementById('btn-info-mobile');
+    if (btnInfoMobile) {
+      btnInfoMobile.addEventListener('click', () => {
+        if (infoModal) infoModal.classList.add('active');
+      });
+    }
+
+    const btnDrivingMobile = document.getElementById('btn-driving-mobile');
+    if (btnDrivingMobile) {
+      btnDrivingMobile.addEventListener('click', () => {
+        if (drivingModeOverlay) drivingModeOverlay.classList.add('active');
+      });
+    }
 
     // Country Pills
     if (countryFilters) {
