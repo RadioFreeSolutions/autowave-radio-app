@@ -370,28 +370,38 @@
         <img src="play_store_icon_512.png" alt="DriveWave Icon" class="logo-img" />
         <span class="logo-text">DriveWave</span>
       </a>
-      <a href="https://github.com/bambadooma-star/drivewave-app" class="nav-btn" target="_blank">GitHub</a>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button onclick="shareLanding()" class="nav-btn" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          <span>🔗</span> Share
+        </button>
+        <a href="https://github.com/bambadooma-star/drivewave-app" class="nav-btn" target="_blank">GitHub</a>
+      </div>
     </header>
 
     <main>
       <!-- Hero -->
       <section class="hero">
         <div class="badge-pill">
-          <span>⚡</span> v3.1.0 Ready for Android & Android Auto
+          <span>⚡</span> v3.2.0 Ready for Android & Android Auto
         </div>
         <h1 class="hero-title">
           Pure Driving Radio.<br/>
           <span>Zero Distractions.</span>
         </h1>
+        <div style="margin-bottom: 22px;">
+          <span style="display: inline-block; background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 20px; padding: 6px 16px; font-size: 14px; font-weight: 600; color: #E0F7FA;">
+            ✨ No Ads. No Payments, Android Auto support. Free Forever.
+          </span>
+        </div>
         <p class="hero-subtitle">
-          The ultimate live radio streaming player built exclusively for the road. 6 Spotify-inspired driving moods, seamless steering wheel integration, and 100% ad-free English live radio.
+          The ultimate live radio streaming player built exclusively for the road. Curated driving moods, Latin & Spanish hits, seamless steering wheel integration, and 100% ad-free live radio.
         </p>
 
         <div class="cta-group">
-          <a href="drivewave-v3.1.0-release.apk" class="btn-download" download>
+          <a href="drivewave-v3.2.0-release.apk" class="btn-download" download>
             <span>⬇️</span> Download APK (3.6 MB)
           </a>
-          <p class="meta-tagline">Direct install for any Android phone or tablet • Version 3.1.0</p>
+          <p class="meta-tagline">Direct install for any Android phone or tablet • Version 3.2.0</p>
         </div>
       </section>
 
@@ -401,21 +411,30 @@
         <div class="feature-badge">🎛️ Steering Wheel Controls (Next/Prev)</div>
         <div class="feature-badge">🎙️ Gemini & Google Assistant Voice</div>
         <div class="feature-badge">🚫 Zero Ads & Zero Tracking</div>
-        <div class="feature-badge">📻 171 Live English Stations</div>
+        <div class="feature-badge">📻 186 Live Curated Stations</div>
       </div>
 
       <!-- Mood Shelves Section -->
-      <h2 class="section-title">6 Curated Driving Moods</h2>
+      <h2 class="section-title">Curated Driving Moods & Categories</h2>
       <p class="section-desc">Hand-picked Spotify-style shelves engineered to match your road trip state of mind.</p>
 
       <div class="moods-grid">
+        <div class="mood-card">
+          <div class="mood-header">
+            <div class="mood-icon">💃</div>
+            <div class="mood-title">Latin & Spanish</div>
+          </div>
+          <p class="mood-text">Top Latin hits, Reggaeton, Bachata, and Spanish pop favorites from Madrid, Miami, Mexico & Latin America.</p>
+          <div class="mood-tags">LOS40 • Cadena Dial • Mega 97.9 NY • Mega 96.3 LA</div>
+        </div>
+
         <div class="mood-card">
           <div class="mood-header">
             <div class="mood-icon">🛣️</div>
             <div class="mood-title">Long Drive</div>
           </div>
           <p class="mood-text">Highway cruising rhythms, driving melodic beats, and road trip classics that keep your tempo steady.</p>
-          <div class="mood-tags">Capital FM • BBC Radio 1 • Heart UK</div>
+          <div class="mood-tags">BBC Radio 1 • Capital FM • Heart UK</div>
         </div>
 
         <div class="mood-card">
@@ -460,7 +479,7 @@
             <div class="mood-title">Pop Hits</div>
           </div>
           <p class="mood-text">The biggest Top 40 chart-toppers from London and New York, updated live with fresh number-one hits.</p>
-          <div class="mood-tags">KIIS FM • BBC 1Xtra • Hits Radio</div>
+          <div class="mood-tags">BBC Radio 1 • KIIS FM • Hits Radio</div>
         </div>
       </div>
 
@@ -473,7 +492,7 @@
           <div class="step-item">
             <div class="step-num">1</div>
             <div class="step-title">Download APK</div>
-            <div class="step-desc">Tap the download button above to get <code>drivewave-v3.1.0-release.apk</code> (only 3.6 MB).</div>
+            <div class="step-desc">Tap the download button above to get <code>drivewave-v3.2.0-release.apk</code> (only 3.6 MB).</div>
           </div>
 
           <div class="step-item">
@@ -499,14 +518,31 @@
         <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" class="btn-paypal" target="_blank">
           ☕ Support Developer via PayPal
         </a>
+        <p style="margin-top: 18px; font-size: 14px; color: var(--text-muted);">
+          📩 Contact / Copyright Takedown: <a href="mailto:Bambadooma@gmail.com" style="color: var(--accent); text-decoration: underline; font-weight: 600;">Bambadooma@gmail.com</a>
+        </p>
       </div>
     </main>
 
     <footer>
       <p>DriveWave is an independent radio streaming client aggregating publicly available streams.</p>
-      <p style="margin-top: 6px;">Drive safely. Always keep your attention on the road.</p>
+      <p style="margin-top: 6px;">Contact: <a href="mailto:Bambadooma@gmail.com" style="color: var(--text-muted);">Bambadooma@gmail.com</a> • Drive safely. Always keep your attention on the road.</p>
     </footer>
   </div>
 
+  <script>
+    function shareLanding() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'DriveWave - Pure Driving Radio',
+          text: 'Listen to live driving radio with DriveWave (No Ads, Free Forever, Android Auto support):',
+          url: window.location.href
+        }).catch(function() {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard! Share it with your friends.');
+      }
+    }
+  </script>
 </body>
 </html>
