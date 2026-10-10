@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>DriveWave Web - Pure Driving Radio for Any Screen</title>
-  <meta name="description" content="182 curated live hit radio stations with driving moods, Latin hits, steering wheel controls & zero ads. Runs on desktop, tablet, mobile and car screens." />
+  <title>DriveWave Web Player | 182 Free Live Hit Radio Stations (Zero Ads)</title>
+  <meta name="description" content="Listen to 182 curated live radio stations online with zero ads. Pop hits, Latin, Rock, Chill, and commute radio. Free web player with driving mode and steering-wheel controls." />
+  <meta name="keywords" content="web radio, online radio player, free internet radio, live radio stations, driving music, ad-free radio, bbc radio live, pop hits radio, latin radio, car web radio, drivewave" />
+  <meta name="author" content="RadioFreeSolutions" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://radiofreesolutions.github.io/drivewave-app/web/" />
+
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="icon-512.png" />
   <link rel="manifest" href="manifest.json" />
@@ -13,9 +18,59 @@
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="DriveWave Web - Pure Driving Radio" />
-  <meta property="og:description" content="182 curated live hit radio stations for your drive. Free forever, no ads." />
-  <meta property="og:image" content="icon-512.png" />
+  <meta property="og:type" content="music.radio_station" />
+  <meta property="og:site_name" content="DriveWave Web Player" />
+  <meta property="og:title" content="DriveWave Web Player | 182 Free Live Hit Radio Stations (Zero Ads)" />
+  <meta property="og:description" content="Instant live radio streaming across Pop, Latin, Rock, and Chill. Zero ads, free forever, steering wheel & media key control." />
+  <meta property="og:url" content="https://radiofreesolutions.github.io/drivewave-app/web/" />
+  <meta property="og:image" content="https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DriveWave Web Player | 182 Free Live Hit Radio Stations" />
+  <meta name="twitter:description" content="Instant live radio streaming with zero ads and driving mode. 182 curated hit stations." />
+  <meta name="twitter:image" content="https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://radiofreesolutions.github.io/drivewave-app/web/#app",
+        "name": "DriveWave Web Player",
+        "url": "https://radiofreesolutions.github.io/drivewave-app/web/",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All (Web Browser, Windows, macOS, Android, iOS, Linux, In-Car Browsers)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Free web radio player featuring 182 curated hit stations, zero ads, driving mode, and steering-wheel media key control.",
+        "image": "https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png",
+        "creator": {
+          "@type": "Organization",
+          "name": "RadioFreeSolutions",
+          "url": "https://github.com/RadioFreeSolutions"
+        }
+      },
+      {
+        "@type": "RadioStation",
+        "@id": "https://radiofreesolutions.github.io/drivewave-app/web/#radio",
+        "name": "DriveWave Radio Network",
+        "url": "https://radiofreesolutions.github.io/drivewave-app/web/",
+        "logo": "https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png",
+        "genre": ["Pop", "Latin", "Rock", "Chillout", "News", "Electronic"],
+        "description": "Curated collection of 182 premier broadcast stations from the UK, US, Spain, and Latin America."
+      }
+    ]
+  }
+  </script>
 
   <!-- HLS.js for .m3u8 live streams (e.g. BBC Radio, RTVE, etc.) -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -76,12 +131,16 @@
         </li>
       </ul>
 
-      <div class="sidebar-heading">Library</div>
+      <div class="sidebar-heading">Library &amp; About</div>
       <ul class="nav-list">
         <li class="nav-item" data-mood="FAVORITES">
           <span>⭐</span>
           <span>Favorites</span>
           <span class="nav-badge" id="fav-count">0</span>
+        </li>
+        <li class="nav-item" id="nav-info-btn">
+          <span>ℹ️</span>
+          <span>About &amp; Legal</span>
         </li>
       </ul>
 
@@ -102,6 +161,9 @@
         </div>
 
         <div class="top-actions">
+          <button id="btn-info-top" class="btn-top-action" title="About DriveWave, Copyright &amp; Contact">
+            <span>ℹ️</span> Info
+          </button>
           <button id="btn-share-top" class="btn-top-action" onclick="shareDriveWave()">
             <span>🔗</span> Share
           </button>
@@ -192,8 +254,114 @@
           <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.85" />
           <span id="volume-percent" class="volume-percent">85%</span>
         </div>
+
+        <button id="btn-toggle-mini" class="btn-player-action" title="Floating Corner Mini Player / Picture-in-Picture">
+          <span>🗗</span>
+        </button>
       </div>
     </footer>
+
+    <!-- Floating Corner Mini Widget (Quick Controls & Auto Tab-Switch popup) -->
+    <div id="corner-mini-widget" class="corner-mini-widget hidden" aria-label="Quick Mini Player">
+      <button id="btn-mini-close" class="btn-mini-close" title="Close Mini Player" aria-label="Close">✕</button>
+      <div class="mini-widget-content">
+        <div class="mini-art-box">
+          <img id="mini-art" class="mini-art-img" src="icon-512.png" alt="Mini Station Artwork" />
+        </div>
+        <div class="mini-info-box">
+          <div id="mini-title" class="mini-title">Select a station</div>
+          <div id="mini-sub" class="mini-sub">DriveWave Live</div>
+        </div>
+        <div class="mini-controls">
+          <button id="btn-mini-prev" class="btn-mini-control" title="Previous Station (Left Arrow)">⏮</button>
+          <button id="btn-mini-play" class="btn-mini-control btn-mini-play" title="Play / Pause (Spacebar)">
+            <span id="mini-play-icon">▶</span>
+            <span id="mini-pause-icon" style="display: none;">⏸</span>
+          </button>
+          <button id="btn-mini-next" class="btn-mini-control" title="Next Station (Right Arrow)">⏭</button>
+          <button id="btn-mini-pip" class="btn-mini-control" title="Pop-out Window (Picture-in-Picture)" style="font-size: 12px;">⧉</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Information & Legal Modal -->
+    <div id="info-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <img src="icon-512.png" alt="DriveWave Logo" class="modal-logo" />
+            <div>
+              <div class="modal-title" id="info-modal-title">DriveWave Web</div>
+              <div class="modal-subtitle">Pure Driving Radio • Free Forever</div>
+            </div>
+          </div>
+          <button id="btn-info-close" class="modal-close-btn" title="Close">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-badge-free">
+            <span>🛡️</span> 100% Free • Zero Ads • No Subscription
+          </div>
+
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <span>📻</span> About DriveWave
+            </div>
+            <p>
+              DriveWave delivers 182 curated, high-bitrate live radio stations engineered for uninterrupted listening.
+              Featuring quick mood filtering (Pop Hits, Latin &amp; Spanish, Long Drive, Rock, Chillout), high-contrast Cockpit Driving Mode, and steering-wheel controls via standard MediaSession keys.
+            </p>
+          </div>
+
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <span>⚖️</span> Copyright &amp; DMCA Disclaimer
+            </div>
+            <p>
+              DriveWave is a free audio directory and player interface. We do not broadcast, host, re-encode, or store any audio streams on our servers. All streams are direct, publicly accessible links provided by the respective radio broadcasters.
+            </p>
+            <p style="margin-top: 8px;">
+              All radio station names, trademarks, audio broadcasts, and logos belong to their respective copyright owners.
+            </p>
+          </div>
+
+          <div class="modal-section">
+            <div class="modal-section-title">
+              <span>📬</span> Contact &amp; DMCA Takedown Notice
+            </div>
+            <p>
+              If you are a copyright owner, station administrator, or legal representative wishing to update station metadata or request stream removal:
+            </p>
+            <p style="margin-top: 6px;">
+              Email: <a href="mailto:Bambadooma@gmail.com" class="modal-contact-link">Bambadooma@gmail.com</a>
+            </p>
+            <p style="margin-top: 4px; font-size: 12px; color: var(--text-dim);">
+              Requests are verified and resolved promptly.
+            </p>
+          </div>
+
+          <div class="modal-section" style="background: rgba(0, 229, 255, 0.05); border-color: rgba(0, 229, 255, 0.2);">
+            <div class="modal-section-title" style="color: var(--accent);">
+              <span>🚗</span> Android Companion App
+            </div>
+            <p>
+              Driving with Android Auto? Download the native DriveWave APK with automotive dashboard integration, zero battery drain, and offline caching.
+            </p>
+            <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="../" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;">
+                <span>📱</span> Get Android App
+              </a>
+              <a href="../privacy.html" class="btn-top-action" target="_blank">
+                <span>🛡️</span> Privacy Policy
+              </a>
+              <a href="https://github.com/RadioFreeSolutions/drivewave-app" target="_blank" class="btn-top-action">
+                <span>⭐</span> GitHub Project
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Driving Mode Cockpit Overlay -->
     <div id="driving-mode-overlay">

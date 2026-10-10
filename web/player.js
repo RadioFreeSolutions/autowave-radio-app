@@ -74,6 +74,26 @@
   const dmPrevBtn = document.getElementById('dm-btn-prev');
   const dmNextBtn = document.getElementById('dm-btn-next');
 
+  // Floating Corner Mini Widget Elements
+  const cornerMiniWidget = document.getElementById('corner-mini-widget');
+  const btnMiniClose = document.getElementById('btn-mini-close');
+  const miniArt = document.getElementById('mini-art');
+  const miniTitle = document.getElementById('mini-title');
+  const miniSub = document.getElementById('mini-sub');
+  const btnMiniPrev = document.getElementById('btn-mini-prev');
+  const btnMiniPlay = document.getElementById('btn-mini-play');
+  const miniPlayIcon = document.getElementById('mini-play-icon');
+  const miniPauseIcon = document.getElementById('mini-pause-icon');
+  const btnMiniNext = document.getElementById('btn-mini-next');
+  const btnMiniPip = document.getElementById('btn-mini-pip');
+  const btnToggleMini = document.getElementById('btn-toggle-mini');
+
+  // Information & Legal Modal Elements
+  const infoModal = document.getElementById('info-modal');
+  const btnInfoTop = document.getElementById('btn-info-top');
+  const navInfoBtn = document.getElementById('nav-info-btn');
+  const btnInfoClose = document.getElementById('btn-info-close');
+
   const volumePercent = document.getElementById('volume-percent');
 
   function updateVolumeTrack(val) {
@@ -250,9 +270,11 @@
     const artUrl = station.favicon || 'icon-512.png';
     if (playerArt) playerArt.src = artUrl;
     if (dmArtwork) dmArtwork.src = artUrl;
+    if (miniArt) miniArt.src = artUrl;
 
     if (playerTrack) playerTrack.textContent = station.name;
     if (dmTrackTitle) dmTrackTitle.textContent = station.name;
+    if (miniTitle) miniTitle.textContent = station.name;
 
     const subtitleText = `${station.flag} ${station.country || 'Live'} • Live Stream`;
     if (playerStation) {
@@ -260,6 +282,9 @@
     }
     if (dmStationName) {
       dmStationName.textContent = subtitleText;
+    }
+    if (miniSub) {
+      miniSub.textContent = subtitleText;
     }
 
     if (favPlayerBtn) {
@@ -270,6 +295,9 @@
 
     if (shouldPlay) {
       startAudio(station);
+      if (!miniManuallyClosed) {
+        showMiniWidget();
+      }
     }
   }
 
@@ -397,6 +425,114 @@
     }
   }
 
+  let miniManuallyClosed = false;
+  let pipWindow = null;
+  const canonicalTitle = document.title;
+
+  function updateTabTitle() {
+    if (document.hidden) {
+      if (isPlaying && currentStation) {
+        document.title = `▶ ${currentStation.name} | DriveWave`;
+      } else {
+        document.title = `⏸ DriveWave Web`;
+      }
+    } else {
+      document.title = canonicalTitle;
+    }
+  }
+
+  function showMiniWidget() {
+    if (cornerMiniWidget) {
+      cornerMiniWidget.classList.remove('hidden');
+    }
+  }
+
+  function hideMiniWidget() {
+    if (cornerMiniWidget) {
+      cornerMiniWidget.classList.add('hidden');
+    }
+  }
+
+  function toggleMiniWidget() {
+    if (!cornerMiniWidget) return;
+    if (cornerMiniWidget.classList.contains('hidden')) {
+      miniManuallyClosed = false;
+      showMiniWidget();
+    } else {
+      miniManuallyClosed = true;
+      hideMiniWidget();
+    }
+  }
+
+  async function openDocumentPiP() {
+    if (!('documentPictureInPicture' in window)) {
+      showMiniWidget();
+      return;
+    }
+
+    if (pipWindow) {
+      pipWindow.close();
+      pipWindow = null;
+      return;
+    }
+
+    try {
+      pipWindow = await window.documentPictureInPicture.requestWindow({
+        width: 360,
+        height: 150,
+      });
+
+      const style = pipWindow.document.createElement('style');
+      style.textContent = `
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: #070A10; color: #FFF; display: flex; align-items: center; justify-content: space-between; padding: 14px; height: 100vh; overflow: hidden; }
+        .pip-card { display: flex; align-items: center; gap: 12px; width: 100%; }
+        .pip-art { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; background: #121826; }
+        .pip-info { flex: 1; min-width: 0; }
+        .pip-title { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #FFF; }
+        .pip-sub { font-size: 12px; color: #00E5FF; margin-top: 2px; }
+        .pip-controls { display: flex; align-items: center; gap: 8px; }
+        .pip-btn { background: rgba(255,255,255,0.1); border: none; color: #FFF; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; }
+        .pip-play { background: #00E5FF; color: #000; width: 40px; height: 40px; font-size: 16px; }
+      `;
+      pipWindow.document.head.appendChild(style);
+
+      function renderPip() {
+        if (!pipWindow) return;
+        const art = currentStation ? (currentStation.favicon || 'icon-512.png') : 'icon-512.png';
+        const title = currentStation ? currentStation.name : 'DriveWave Radio';
+        const sub = currentStation ? `${currentStation.flag || '📻'} Live Stream` : 'Pure Driving Radio';
+        pipWindow.document.body.innerHTML = `
+          <div class="pip-card">
+            <img class="pip-art" src="${art}" alt="Artwork" />
+            <div class="pip-info">
+              <div class="pip-title">${title}</div>
+              <div class="pip-sub">${sub}</div>
+            </div>
+            <div class="pip-controls">
+              <button id="pip-prev" class="pip-btn" title="Previous">⏮</button>
+              <button id="pip-play" class="pip-btn pip-play" title="Play/Pause">${isPlaying ? '⏸' : '▶'}</button>
+              <button id="pip-next" class="pip-btn" title="Next">⏭</button>
+            </div>
+          </div>
+        `;
+
+        pipWindow.document.getElementById('pip-prev')?.addEventListener('click', () => { playPrevious(); renderPip(); });
+        pipWindow.document.getElementById('pip-play')?.addEventListener('click', () => { togglePlayPause(); renderPip(); });
+        pipWindow.document.getElementById('pip-next')?.addEventListener('click', () => { playNext(); renderPip(); });
+      }
+
+      renderPip();
+
+      pipWindow.addEventListener('pagehide', () => {
+        pipWindow = null;
+      });
+    } catch (err) {
+      console.warn('PiP window failed to open:', err);
+      showMiniWidget();
+    }
+  }
+
   /** Update playback button and equalizer UI */
   function updatePlaybackState(playing) {
     isPlaying = playing;
@@ -407,10 +543,14 @@
     if (dmPlayIcon) dmPlayIcon.style.display = playing ? 'none' : 'inline-block';
     if (dmPauseIcon) dmPauseIcon.style.display = playing ? 'inline-block' : 'none';
 
+    if (miniPlayIcon) miniPlayIcon.style.display = playing ? 'none' : 'inline-block';
+    if (miniPauseIcon) miniPauseIcon.style.display = playing ? 'inline-block' : 'none';
+
     if (equalizer) {
       equalizer.style.opacity = playing ? '1' : '0.2';
     }
 
+    updateTabTitle();
     renderStations();
   }
 
@@ -516,7 +656,55 @@
     if (dmPrevBtn) dmPrevBtn.addEventListener('click', playPrevious);
     if (dmNextBtn) dmNextBtn.addEventListener('click', playNext);
 
-    // Keyboard navigation (Space: Play/Pause, ArrowLeft: Prev, ArrowRight: Next)
+    // Corner Mini Widget controls
+    if (btnMiniClose) {
+      btnMiniClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        miniManuallyClosed = true;
+        hideMiniWidget();
+      });
+    }
+    if (btnMiniPlay) btnMiniPlay.addEventListener('click', togglePlayPause);
+    if (btnMiniPrev) btnMiniPrev.addEventListener('click', playPrevious);
+    if (btnMiniNext) btnMiniNext.addEventListener('click', playNext);
+    if (btnMiniPip) btnMiniPip.addEventListener('click', openDocumentPiP);
+    if (btnToggleMini) btnToggleMini.addEventListener('click', toggleMiniWidget);
+
+    // Tab visibility automation (Dynamic Tab title & Mini Player)
+    document.addEventListener('visibilitychange', () => {
+      updateTabTitle();
+      if (document.hidden) {
+        if (isPlaying && !miniManuallyClosed) {
+          showMiniWidget();
+        }
+      }
+    });
+
+    // Information & Legal Modal controls
+    if (btnInfoTop) {
+      btnInfoTop.addEventListener('click', () => {
+        if (infoModal) infoModal.classList.add('active');
+      });
+    }
+    if (navInfoBtn) {
+      navInfoBtn.addEventListener('click', () => {
+        if (infoModal) infoModal.classList.add('active');
+      });
+    }
+    if (btnInfoClose) {
+      btnInfoClose.addEventListener('click', () => {
+        if (infoModal) infoModal.classList.remove('active');
+      });
+    }
+    if (infoModal) {
+      infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) {
+          infoModal.classList.remove('active');
+        }
+      });
+    }
+
+    // Keyboard navigation (Space: Play/Pause, ArrowLeft: Prev, ArrowRight: Next, Escape: Close modal/cockpit)
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT') return;
       if (e.code === 'Space') {
@@ -531,6 +719,9 @@
       } else if (e.code === 'Escape') {
         if (drivingModeOverlay && drivingModeOverlay.classList.contains('active')) {
           drivingModeOverlay.classList.remove('active');
+        }
+        if (infoModal && infoModal.classList.contains('active')) {
+          infoModal.classList.remove('active');
         }
       }
     });
