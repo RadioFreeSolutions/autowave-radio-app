@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>DriveWave Web - Pure Driving Radio for Any Screen</title>
+  <meta name="description" content="182 curated live hit radio stations with driving moods, Latin hits, steering wheel controls & zero ads. Runs on desktop, tablet, mobile and car screens." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="icon-512.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#070A10" />
+  <!-- Upgrade all insecure requests to HTTPS to prevent mixed content warnings and blocked audio -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DriveWave Web - Pure Driving Radio" />
+  <meta property="og:description" content="182 curated live hit radio stations for your drive. Free forever, no ads." />
+  <meta property="og:image" content="icon-512.png" />
+
+  <!-- HLS.js for .m3u8 live streams (e.g. BBC Radio, RTVE, etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="#" class="brand">
+        <img src="icon-512.png" alt="DriveWave" class="brand-icon" />
+        <span class="brand-name">DriveWave</span>
+      </a>
+
+      <div class="sidebar-heading">Driving Moods</div>
+      <ul class="nav-list">
+        <li class="nav-item active" data-mood="ALL">
+          <span>🔥</span>
+          <span>All Stations</span>
+          <span class="nav-badge">182</span>
+        </li>
+        <li class="nav-item" data-mood="POP_HITS">
+          <span>⭐</span>
+          <span>Pop Hits</span>
+          <span class="nav-badge">0</span>
+        </li>
+        <li class="nav-item" data-mood="LATIN_SPANISH">
+          <span>💃</span>
+          <span>Latin & Spanish</span>
+          <span class="nav-badge">0</span>
+        </li>
+        <li class="nav-item" data-mood="LONG_DRIVE">
+          <span>🛣️</span>
+          <span>Long Drive</span>
+          <span class="nav-badge">0</span>
+        </li>
+        <li class="nav-item" data-mood="FUN_ENERGY">
+          <span>⚡</span>
+          <span>Fun & Energy</span>
+          <span class="nav-badge">0</span>
+        </li>
+        <li class="nav-item" data-mood="CALM_CHILL">
+          <span>☕</span>
+          <span>Calm & Chill</span>
+          <span class="nav-badge">0</span>
+        </li>
+        <li class="nav-item" data-mood="ROCK">
+          <span>🎸</span>
+          <span>Rock Anthems</span>
+          <span class="nav-badge">0</span>
+        </li>
+        <li class="nav-item" data-mood="NEWS_COMMUTE">
+          <span>📰</span>
+          <span>News & Commute</span>
+          <span class="nav-badge">0</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-heading">Library</div>
+      <ul class="nav-list">
+        <li class="nav-item" data-mood="FAVORITES">
+          <span>⭐</span>
+          <span>Favorites</span>
+          <span class="nav-badge" id="fav-count">0</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <a href="../" class="btn-apk-sidebar">
+          <span>📱</span> Get Android App (v3.4.0)
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Area -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search 182 stations, genres, or artists..." autocomplete="off" />
+        </div>
+
+        <div class="top-actions">
+          <button id="btn-share-top" class="btn-top-action" onclick="shareDriveWave()">
+            <span>🔗</span> Share
+          </button>
+          <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" target="_blank" class="btn-top-action" style="color: #FFC439;">
+            <span>☕</span> Support
+          </a>
+          <button id="btn-driving-mode" class="btn-driving-mode" title="Fullscreen Car Dashboard View">
+            <span>🚘</span> Driving Mode
+          </button>
+        </div>
+      </header>
+
+      <!-- Shelf Banner -->
+      <section class="shelf-header">
+        <h1 class="shelf-title" id="shelf-title">🔥 All Stations</h1>
+        <p class="shelf-subtitle" id="shelf-subtitle">182 hand-picked live radio broadcasts.</p>
+      </section>
+
+      <!-- Country Filters -->
+      <div class="country-filters" id="country-filters">
+        <div class="filter-pill active" data-country="ALL">🌐 All Countries</div>
+        <div class="filter-pill" data-country="GB">🇬🇧 United Kingdom</div>
+        <div class="filter-pill" data-country="US">🇺🇸 United States</div>
+        <div class="filter-pill" data-country="ES">🇪🇸 Spain</div>
+        <div class="filter-pill" data-country="MX">🇲🇽 Mexico</div>
+      </div>
+
+      <!-- Station Grid -->
+      <div class="station-grid" id="stations-grid">
+        <!-- Rendered by player.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="empty-icon">📻</div>
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">No stations found</h3>
+        <p style="font-size: 14px;">Try searching for a different keyword or switch categories.</p>
+      </div>
+    </main>
+
+    <!-- Persistent Bottom Player Bar -->
+    <footer class="player-bar">
+      <!-- Left: Station Info -->
+      <div class="player-left">
+        <div class="player-art-box">
+          <img id="player-art" class="player-art-img" src="icon-512.png" alt="Current Station" />
+        </div>
+        <div class="player-info">
+          <div class="player-track" id="player-track">Select a station to play</div>
+          <div class="player-station" id="player-station">
+            <div class="live-dot"></div>
+            <span>DriveWave Web</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center: Controls -->
+      <div class="player-center">
+        <div class="controls-row">
+          <button id="btn-prev" class="btn-control" title="Previous Station (Left Arrow)">⏮</button>
+          <button id="btn-play-pause" class="btn-play-pause" title="Play / Pause (Spacebar)">
+            <span id="play-icon">▶</span>
+            <span id="pause-icon" style="display: none;">⏸</span>
+          </button>
+          <button id="btn-next" class="btn-control" title="Next Station (Right Arrow)">⏭</button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            <span>LIVE</span>
+          </div>
+          <div class="equalizer" id="equalizer" style="opacity: 0.2;">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Extra Controls & Volume -->
+      <div class="player-right">
+        <button id="btn-player-fav" class="card-fav-btn" title="Save to Favorites" style="font-size: 20px;">★</button>
+
+        <div class="volume-container">
+          <span style="font-size: 15px; color: var(--text-muted);">🔊</span>
+          <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.85" />
+          <span id="volume-percent" class="volume-percent">85%</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Driving Mode Cockpit Overlay -->
+    <div id="driving-mode-overlay">
+      <div class="dm-top">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="icon-512.png" style="width: 32px; height: 32px; border-radius: 8px;" alt="Logo" />
+          <span style="font-weight: 800; font-size: 18px; color: var(--accent);">DriveWave Cockpit</span>
+        </div>
+        <button id="btn-exit-dm" class="btn-dm-exit">✕ Exit Driving Mode</button>
+      </div>
+
+      <div class="dm-content">
+        <img id="dm-artwork" class="dm-artwork" src="icon-512.png" alt="Artwork" />
+        <div id="dm-track-title" class="dm-track-title">DriveWave Radio</div>
+        <div id="dm-station-name" class="dm-station-name">Live Driving Radio</div>
+
+        <div class="dm-controls">
+          <button id="dm-btn-prev" class="dm-btn" title="Previous">⏮</button>
+          <button id="dm-btn-play" class="dm-btn dm-btn-play" title="Play / Pause">
+            <span id="dm-play-icon">▶</span>
+            <span id="dm-pause-icon" style="display: none;">⏸</span>
+          </button>
+          <button id="dm-btn-next" class="dm-btn" title="Next">⏭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function shareDriveWave() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'DriveWave Web - Pure Driving Radio',
+          text: 'Listen to 182 ad-free live radio hit stations (Pop, Latin, Rock, Chill):',
+          url: window.location.href
+        }).catch(function() {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Web Player link copied to clipboard! Share it with your friends.');
+      }
+    }
+  </script>
+
+  <!-- Shipped Stations Catalog -->
+  <script src="stations.js"></script>
+  <!-- Player Core Script -->
+  <script src="player.js"></script>
+
+</body>
+</html>
