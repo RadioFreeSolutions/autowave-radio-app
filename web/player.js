@@ -300,9 +300,6 @@
 
     if (shouldPlay) {
       startAudio(station);
-      if (!miniManuallyClosed) {
-        showMiniWidget();
-      }
     }
   }
 
@@ -447,25 +444,29 @@
   }
 
   function showMiniWidget() {
+    // Mini corner widget is only for desktop screens
+    if (window.innerWidth <= 768) return;
+    document.body.classList.add('mini-player-active');
     if (cornerMiniWidget) {
       cornerMiniWidget.classList.remove('hidden');
     }
   }
 
   function hideMiniWidget() {
+    document.body.classList.remove('mini-player-active');
     if (cornerMiniWidget) {
       cornerMiniWidget.classList.add('hidden');
     }
   }
 
   function toggleMiniWidget() {
-    if (!cornerMiniWidget) return;
-    if (cornerMiniWidget.classList.contains('hidden')) {
-      miniManuallyClosed = false;
-      showMiniWidget();
-    } else {
+    if (window.innerWidth <= 768) return;
+    if (document.body.classList.contains('mini-player-active')) {
       miniManuallyClosed = true;
       hideMiniWidget();
+    } else {
+      miniManuallyClosed = false;
+      showMiniWidget();
     }
   }
 
@@ -715,13 +716,24 @@
     if (btnMiniPip) btnMiniPip.addEventListener('click', openDocumentPiP);
     if (btnToggleMini) btnToggleMini.addEventListener('click', toggleMiniWidget);
 
-    // Tab visibility automation (Dynamic Tab title & Mini Player)
+    // Clicking mini widget card (outside control buttons) restores full player bar
+    if (cornerMiniWidget) {
+      cornerMiniWidget.addEventListener('click', (e) => {
+        if (!e.target.closest('button')) {
+          hideMiniWidget();
+        }
+      });
+    }
+
+    // Dynamic Tab title on visibility change
     document.addEventListener('visibilitychange', () => {
       updateTabTitle();
-      if (document.hidden) {
-        if (isPlaying && !miniManuallyClosed) {
-          showMiniWidget();
-        }
+    });
+
+    // Auto-restore on resize to mobile
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768 && document.body.classList.contains('mini-player-active')) {
+        hideMiniWidget();
       }
     });
 
