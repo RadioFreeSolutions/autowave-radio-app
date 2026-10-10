@@ -9,6 +9,8 @@
   <link rel="apple-touch-icon" href="icon-512.png" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#070A10" />
+  <!-- Upgrade all insecure requests to HTTPS to prevent mixed content warnings and blocked audio -->
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="DriveWave Web - Pure Driving Radio" />
@@ -84,7 +86,7 @@
       </ul>
 
       <div class="sidebar-footer">
-        <a href="https://bambadooma-star.github.io/drivewave-app/" class="btn-apk-sidebar" target="_blank">
+        <a href="../" class="btn-apk-sidebar">
           <span>📱</span> Get Android App (v3.4.0)
         </a>
       </div>
@@ -100,6 +102,12 @@
         </div>
 
         <div class="top-actions">
+          <button id="btn-share-top" class="btn-top-action" onclick="shareDriveWave()">
+            <span>🔗</span> Share
+          </button>
+          <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" target="_blank" class="btn-top-action" style="color: #FFC439;">
+            <span>☕</span> Support
+          </a>
           <button id="btn-driving-mode" class="btn-driving-mode" title="Fullscreen Car Dashboard View">
             <span>🚘</span> Driving Mode
           </button>
@@ -182,6 +190,7 @@
         <div class="volume-container">
           <span style="font-size: 15px; color: var(--text-muted);">🔊</span>
           <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="0.85" />
+          <span id="volume-percent" class="volume-percent">85%</span>
         </div>
       </div>
     </footer>
@@ -212,6 +221,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function shareDriveWave() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'DriveWave Web - Pure Driving Radio',
+          text: 'Listen to 182 ad-free live radio hit stations (Pop, Latin, Rock, Chill):',
+          url: window.location.href
+        }).catch(function() {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Web Player link copied to clipboard! Share it with your friends.');
+      }
+    }
+  </script>
 
   <!-- Shipped Stations Catalog -->
   <script src="stations.js"></script>

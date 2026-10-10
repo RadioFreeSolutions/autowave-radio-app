@@ -74,9 +74,22 @@
   const dmPrevBtn = document.getElementById('dm-btn-prev');
   const dmNextBtn = document.getElementById('dm-btn-next');
 
+  const volumePercent = document.getElementById('volume-percent');
+
+  function updateVolumeTrack(val) {
+    const pct = Math.round(val * 100);
+    if (volumeSlider) {
+      volumeSlider.style.background = `linear-gradient(to right, var(--accent) 0%, var(--accent) ${pct}%, rgba(255, 255, 255, 0.2) ${pct}%, rgba(255, 255, 255, 0.2) 100%)`;
+    }
+    if (volumePercent) {
+      volumePercent.textContent = `${pct}%`;
+    }
+  }
+
   // Set initial volume slider
   if (volumeSlider) {
     volumeSlider.value = audio.volume;
+    updateVolumeTrack(audio.volume);
   }
 
   // Mood Descriptions
@@ -450,6 +463,7 @@
       volumeSlider.addEventListener('input', (e) => {
         const val = parseFloat(e.target.value);
         audio.volume = val;
+        updateVolumeTrack(val);
         localStorage.setItem(LS_VOLUME, val);
       });
     }
