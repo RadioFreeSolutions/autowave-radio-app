@@ -1,6 +1,6 @@
 {
-  "versionCode": 9,
-  "versionName": "3.5.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/drivewave-app/main/drivewave-v3.5.0-release.apk",
-  "releaseNotes": "15 תחנות מובילות בעולם (14 באנגלית ו-1 בספרדית), מיון פופולריות עולמית בכל הקטגוריות, סינון תחנות בעייתיות ומנגנון התאוששות חלק בעת נפילת שידור"
+  "versionCode": 10,
+  "versionName": "3.6.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/drivewave-app/main/drivewave-v3.6.0-release.apk",
+  "releaseNotes": "זיהוי שירים חי ב-Android Auto, מעבר אוטומטי לקטגוריה הבאה בלחיצה על Next בסוף קטגוריה, ובידוד מוחלט של תחנות חדשות לקטגוריה ייעודית בלבד"
 }
