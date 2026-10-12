@@ -1,6 +1,6 @@
 {
-  "versionCode": 8,
-  "versionName": "3.4.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/drivewave-app/main/drivewave-v3.4.0-release.apk",
-  "releaseNotes": "זיהוי שירים בזמן אמת (ICY Metadata) ומנגנון עדכונים אוטומטיים ישירות מתוך האפליקציה!"
+  "versionCode": 9,
+  "versionName": "3.5.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/drivewave-app/main/drivewave-v3.5.0-release.apk",
+  "releaseNotes": "15 תחנות מובילות בעולם (14 באנגלית ו-1 בספרדית), מיון פופולריות עולמית בכל הקטגוריות, סינון תחנות בעייתיות ומנגנון התאוששות חלק בעת נפילת שידור"
 }

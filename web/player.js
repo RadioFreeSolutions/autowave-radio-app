@@ -19,6 +19,8 @@
   let searchQuery = '';
   let hlsInstance = null;
   let retryCount = 0;
+  let consecutiveAutoSkips = 0;
+  const MAX_AUTO_SKIPS = 3;
 
   // LocalStorage keys
   const LS_FAVS = 'drivewave_web_favorites';
@@ -115,7 +117,7 @@
   // Mood Descriptions
   const MOOD_META = {
     ALL: { title: '🔥 All Stations', subtitle: '182 hand-picked live radio broadcasts from the UK, US, Spain & worldwide.' },
-    POP_HITS: { title: '⭐ Pop Hits', subtitle: 'The biggest chart-topping number 1 hits and Top 40 favorites.' },
+    POP_HITS: { title: '⭐ Top Rated', subtitle: 'The 15 most listened pop radio stations in the world (14 English, 1 Spanish).' },
     LATIN_SPANISH: { title: '💃 Latin & Spanish', subtitle: 'Reggaeton, Bachata, Salsa, and Spanish pop from Madrid, Miami, Mexico & Latin America.' },
     LONG_DRIVE: { title: '🛣️ Long Drive', subtitle: 'Highway cruising rhythms, road trip classics, and steady tempo hits.' },
     FUN_ENERGY: { title: '⚡ Fun & Energy', subtitle: 'Dance hits, electronic energy, and party anthems to keep your drive energized.' },
@@ -360,14 +362,24 @@
     updatePlaybackState(false);
   }
 
-  /** Handle fatal stream failure with fallback URL retry */
+  /** Handle fatal stream failure with fallback URL retry and smooth auto-advance */
   function handleFatalStreamError(station) {
     if (retryCount === 0 && station.fallbackUrl && station.fallbackUrl !== station.streamUrl) {
       console.log('Retrying station with fallback URL...');
       retryCount++;
       startAudio(station);
+      return;
+    }
+
+    console.warn('Stream unavailable:', station.name);
+    // Smooth auto-fallback: advance to next station so driver is never left in silence
+    if (consecutiveAutoSkips < MAX_AUTO_SKIPS && filteredStations.length > 1) {
+      consecutiveAutoSkips++;
+      if (playerTrack) playerTrack.textContent = `${station.name} (Connecting next...)`;
+      setTimeout(() => {
+        playNext();
+      }, 800);
     } else {
-      console.error('Stream unavailable:', station.name);
       updatePlaybackState(false);
       if (playerTrack) playerTrack.textContent = `${station.name} (Stream Offline)`;
     }
