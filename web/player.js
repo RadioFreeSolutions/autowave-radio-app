@@ -323,19 +323,69 @@
   function cleanStreamTitle(raw) {
     if (!raw) return "";
     let title = raw.trim();
-    const match = title.match(/^StreamTitle='(.*?)'(?:;.*)?$/);
+    // Handle StreamTitle='...' or StreamTitle="..." or StreamTitle=...
+    const match = title.match(/^StreamTitle=['"]?(.*?)['"]?(?:;.*)?$/i);
     if (match) title = match[1].trim();
+
+    // Handle artist=...;title=...
+    const atMatch = title.match(/^artist=['"]?(.*?)['"]?[;,]\s*title=['"]?(.*?)['"]?$/i);
+    if (atMatch) {
+      const a = atMatch[1].trim();
+      const t = atMatch[2].trim();
+      title = (a && t) ? `${a} - ${t}` : (t || a);
+    }
+
+    // Strip TITLE=... prefix
+    title = title.replace(/^title[:=]\s*['"]?(.*?)['"]?$/i, '$1').trim();
+
+    // Strip trailing key=value pairs after semicolon
     const semiIdx = title.indexOf(';');
-    if (semiIdx > 0) title = title.substring(0, semiIdx).trim();
+    if (semiIdx > 0) {
+      const after = title.substring(semiIdx + 1);
+      if (/^\s*[a-zA-Z0-9_-]+=/i.test(after)) {
+        title = title.substring(0, semiIdx).trim();
+      }
+    }
+
+    // Strip known ICY keys
+    ['song_spot=', 'MediaBaseId=', 'itunesTrackId=', 'amgTrackId=', 'amgArtistId=', 'StreamUrl='].forEach(k => {
+      const idx = title.toLowerCase().indexOf(k.toLowerCase());
+      if (idx > 0) title = title.substring(0, idx).trim();
+    });
+
+    title = title.replace(/^text=['"]?(.*?)['"]?$/i, '$1');
     title = title.replace(/\s*-\s*AD\s*BREAK\s*$/i, '');
     title = title.replace(/\s*-\s*COMMERCIAL\s*$/i, '');
     title = title.replace(/\s*-\s*STATION\s*ID\s*$/i, '');
-    title = title.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE):\s*/i, '');
-    return title.trim();
+    title = title.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE|NP):\s*/i, '');
+    return title.trim().replace(/^['"`\s-]+|['"`\s-;]+$/g, '');
+  }
+
+  let adBlockEnabled = localStorage.getItem('drivewave_ad_block') !== 'false';
+  let lastAdSkipTime = 0;
+
+  function isAdBreak(title) {
+    if (!title) return false;
+    return /(?:\bAD\b|\bAD_BREAK\b|\bADBREAK\b|\bCOMMERCIAL\b|\bADVERT\b|\bADVERTISEMENT\b|\bSPONSOR\b|^AD\s*[-:]|[-:]\s*AD$)/i.test(title);
   }
 
   function onNewTrackInfo(track, station) {
-    if (!track || track === currentTrackTitle) return;
+    if (!track) return;
+
+    if (adBlockEnabled && isAdBreak(track)) {
+      const now = Date.now();
+      if (now - lastAdSkipTime > 3000) {
+        lastAdSkipTime = now;
+        console.log(`[Ad Block] Ad detected ('${track}') - skipping to next station`);
+        if (playerTrack) {
+          playerTrack.textContent = '🛡️ Ad Detected — Skipping...';
+        }
+        setTimeout(() => playNext(), 600);
+        return;
+      }
+    }
+
+    if (track === currentTrackTitle) return;
     currentTrackTitle = track;
 
     // Update Player Bar
