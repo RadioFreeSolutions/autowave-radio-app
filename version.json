@@ -1,6 +1,7 @@
 {
-  "versionCode": 10,
-  "versionName": "3.6.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/drivewave-app/main/drivewave-v3.6.0-release.apk",
-  "releaseNotes": "זיהוי שירים חי ב-Android Auto, מעבר אוטומטי לקטגוריה הבאה בלחיצה על Next בסוף קטגוריה, ובידוד מוחלט של תחנות חדשות לקטגוריה ייעודית בלבד"
+  "versionCode": 11,
+  "versionName": "3.7.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/drivewave-app/main/drivewave-v3.7.0-release.apk",
+  "releaseNotes": "BBC Radio 1 & BBC Radio 2 חזרו ל-Top Rated, תיקון תצוגת מטאדאטה ב-Android Auto (שם שיר וזמר), תיקון היעלמות האפליקציה מ-Android Auto לאחר עדכון, הסרת כפתור התמיכה"
 }
+

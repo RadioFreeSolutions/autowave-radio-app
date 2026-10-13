@@ -1,12 +1,64 @@
-// DriveWave Shipped Web Stations Catalog (88 verified live stations)
+// DriveWave Shipped Web Stations Catalog (90 verified live stations)
 window.DRIVEWAVE_STATIONS = [
+  {
+    "id": "a740cc4c-9563-4fbe-a13f-e7f9e89b7441",
+    "name": "BBC Radio 1",
+    "fullName": "BBC Radio 1",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d128000.norewind.m3u8",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s24939q.png",
+    "country": "The United Kingdom Of Great Britain And Northern Ireland",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop",
+      "pop music",
+      "top 40",
+      "bbc",
+      "bbc radio 1",
+      "hits",
+      "chr"
+    ],
+    "isHls": true,
+    "codec": "AAC",
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS"
+    ]
+  },
+  {
+    "id": "3606ef8c-cd58-4440-8c47-dbf1e0cacdac",
+    "name": "BBC Radio 2",
+    "fullName": "BBC Radio 2",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_74208725/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_74208725/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d128000.norewind.m3u8",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s24940q.png",
+    "country": "The United Kingdom Of Great Britain And Northern Ireland",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "adult contemporary",
+      "pop",
+      "bbc",
+      "bbc radio 2",
+      "classic hits",
+      "80s",
+      "90s"
+    ],
+    "isHls": true,
+    "codec": "AAC",
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS"
+    ]
+  },
   {
     "id": "96200095-0601-11e8-ae97-52543be04c81",
     "name": "Capital FM",
     "fullName": "Capital FM",
-    "streamUrl": "https://media-ice.musicradio.com/CapitalMP3",
-    "fallbackUrl": "https://media-ice.musicradio.com/CapitalMP3",
-    "favicon": "https://assets6.capitalfm.com/2016/11/capital-3d-network-logo-large-canvas-1458228638-herowidev4-0.jpg",
+    "streamUrl": "http://media-ice.musicradio.com/CapitalMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/CapitalMP3",
+    "favicon": "http://assets6.capitalfm.com/2016/11/capital-3d-network-logo-large-canvas-1458228638-herowidev4-0.jpg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -24,8 +76,8 @@ window.DRIVEWAVE_STATIONS = [
     "id": "9608ade8-0601-11e8-ae97-52543be04c81",
     "name": "Heart UK",
     "fullName": "Heart UK",
-    "streamUrl": "https://ice-sov.musicradio.com/HeartLondonMP3",
-    "fallbackUrl": "https://ice-sov.musicradio.com/HeartLondonMP3",
+    "streamUrl": "http://ice-sov.musicradio.com/HeartLondonMP3",
+    "fallbackUrl": "http://ice-sov.musicradio.com/HeartLondonMP3",
     "favicon": "https://cdn-profiles.tunein.com/s2846/images/logoq.jpg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
@@ -39,8 +91,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 352,
     "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -115,7 +166,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Hits Radio UK",
     "streamUrl": "https://stream-al.hellorayo.co.uk/key.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
     "fallbackUrl": "https://stream-al.hellorayo.co.uk/key.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "favicon": "",
+    "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1678797505/brand_manager/stations/hits_radio_uk.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -148,8 +199,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 329,
     "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -176,18 +226,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 189,
     "moods": [
-      "POP_HITS",
-      "CALM_CHILL",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9617bbd8-0601-11e8-ae97-52543be04c81",
     "name": "Radio X",
     "fullName": "Radio X",
-    "streamUrl": "https://media-the.musicradio.com/RadioXUK",
-    "fallbackUrl": "https://media-the.musicradio.com/RadioXUK",
-    "favicon": "https://www.radiox.co.uk/assets_v4r/xfm/img/favicon-196x196.png",
+    "streamUrl": "http://media-the.musicradio.com/RadioXUK",
+    "fallbackUrl": "http://media-the.musicradio.com/RadioXUK",
+    "favicon": "http://www.radiox.co.uk/assets_v4r/xfm/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -199,8 +247,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 133,
     "moods": [
-      "POP_HITS",
-      "ROCK"
+      "POP_HITS"
     ]
   },
   {
@@ -224,8 +271,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 357,
     "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
@@ -249,8 +295,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 365,
     "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -298,17 +343,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 89,
     "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
     "id": "9612358a-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Power 181",
     "fullName": "181.FM - Power 181",
-    "streamUrl": "https://listen.181fm.com/181-power_128k.mp3",
-    "fallbackUrl": "https://listen.181fm.com/181-power_128k.mp3",
-    "favicon": "",
+    "streamUrl": "http://listen.181fm.com/181-power_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-power_128k.mp3",
+    "favicon": "http://www.181.fm/images/playerlanding/181.FM.jpg",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -346,8 +390,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "POP_HITS",
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
@@ -371,7 +414,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "NEWS_COMMUTE"
+      "POP_HITS"
     ]
   },
   {
@@ -395,7 +438,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "NEWS_COMMUTE"
+      "POP_HITS"
     ]
   },
   {
@@ -420,7 +463,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 96,
     "moods": [
-      "NEWS_COMMUTE"
+      "POP_HITS"
     ]
   },
   {
@@ -438,7 +481,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 82,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -462,15 +505,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "NEWS_COMMUTE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9608ade8-0601-11e8-ae97-smoothradiou",
     "name": "Smooth Radio",
     "fullName": "Smooth Radio",
-    "streamUrl": "https://media-ice.musicradio.com/SmoothUKMP3",
-    "fallbackUrl": "https://media-ice.musicradio.com/SmoothUKMP3",
+    "streamUrl": "http://media-ice.musicradio.com/SmoothUKMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/SmoothUKMP3",
     "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Smooth_Radio_logo.svg/300px-Smooth_Radio_logo.svg.png",
     "country": "United Kingdom",
     "countryCode": "GB",
@@ -487,8 +530,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "CALM_CHILL",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -513,15 +555,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
     "id": "fa76f16f-dc31-11e9-a8ba-chillradiouk",
     "name": "Chill Radio",
     "fullName": "Chill Radio",
-    "streamUrl": "https://media-ice.musicradio.com/ChillMP3",
-    "fallbackUrl": "https://media-ice.musicradio.com/ChillMP3",
+    "streamUrl": "http://media-ice.musicradio.com/ChillMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/ChillMP3",
     "favicon": "https://media.info/m/c/f/4/3/2/chill-logo-original.png",
     "country": "United Kingdom",
     "countryCode": "GB",
@@ -539,7 +581,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "CALM_CHILL"
+      "POP_HITS"
     ]
   },
   {
@@ -563,7 +605,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
@@ -587,15 +629,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
     "id": "es-cadena-100-005",
     "name": "Cadena 100",
     "fullName": "Cadena 100",
-    "streamUrl": "https://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
-    "fallbackUrl": "https://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
+    "streamUrl": "http://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
+    "fallbackUrl": "http://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
     "favicon": "https://cadena100.es/favicon.ico",
     "country": "Spain",
     "countryCode": "ES",
@@ -611,7 +653,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
@@ -635,7 +677,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
@@ -659,8 +701,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH",
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
@@ -669,7 +710,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Heart 70s",
     "streamUrl": "https://media-ssl.musicradio.com/Heart70sMP3",
     "fallbackUrl": "https://media-ssl.musicradio.com/Heart70sMP3",
-    "favicon": "",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -684,7 +725,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 355,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -708,7 +749,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
@@ -732,8 +773,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -742,7 +782,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Heart 00s",
     "streamUrl": "https://media-ssl.musicradio.com/Heart00sMP3",
     "fallbackUrl": "https://media-ssl.musicradio.com/Heart00sMP3",
-    "favicon": "",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -753,7 +793,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 356,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -776,7 +816,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 128,
     "moods": [
-      "LATIN_SPANISH"
+      "POP_HITS"
     ]
   },
   {
@@ -785,7 +825,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Heart 10s",
     "streamUrl": "https://media-ice.musicradio.com/Heart10sMP3",
     "fallbackUrl": "https://media-ice.musicradio.com/Heart10sMP3",
-    "favicon": "",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -798,7 +838,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 358,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -825,15 +865,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 240,
     "moods": [
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
     "id": "76ad00ee-219f-4a47-9403-9d62ba311b6f",
     "name": "KISS 108 WXKS FM 107.9 Boston",
     "fullName": "KISS 108 WXKS FM 107.9 Boston",
-    "streamUrl": "https://stream.revma.ihrhls.com/zc1097",
-    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1097",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc1097",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc1097",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5e5ee49ea6114875b0bda028?ops=gravity(%22center%22),contain(360,360)&quality=80",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -848,7 +888,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 152,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -869,7 +909,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 155,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -890,15 +930,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 145,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "c08d22c3-497c-4ced-8de9-fafb7297977f",
     "name": "Y100 Miami",
     "fullName": "Y100 Miami",
-    "streamUrl": "https://stream.revma.ihrhls.com/zc561",
-    "fallbackUrl": "https://stream.revma.ihrhls.com/zc561",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc561",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc561",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/595280b976e0f91570a4e614?ops=gravity(%22center%22),contain(360,360)&quality=80",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -913,7 +953,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 111,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -934,15 +974,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 147,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "5acefb90-15c1-4ace-b7ed-e595cc907b1e",
     "name": "93.3 FLZ",
     "fullName": "93.3 FLZ",
-    "streamUrl": "https://stream.revma.ihrhls.com/zc681",
-    "fallbackUrl": "https://stream.revma.ihrhls.com/zc681",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc681",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc681",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5ed155c799eec49de34e1023?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -954,7 +994,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 154,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -963,7 +1003,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "93.9 LITE FM Chicago",
     "streamUrl": "https://stream.revma.ihrhls.com/zc853",
     "fallbackUrl": "https://stream.revma.ihrhls.com/zc853",
-    "favicon": "",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/593da8dee7970b302d32a0f8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -974,7 +1014,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 138,
     "moods": [
-      "CALM_CHILL"
+      "POP_HITS"
     ]
   },
   {
@@ -995,7 +1035,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 153,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1022,7 +1062,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 143,
     "moods": [
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
@@ -1031,7 +1071,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Gold Radio",
     "streamUrl": "https://media-ice.musicradio.com/GoldMP3",
     "fallbackUrl": "https://media-ice.musicradio.com/GoldMP3",
-    "favicon": "",
+    "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Gold_Radio_logo.svg/300px-Gold_Radio_logo.svg.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -1043,7 +1083,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 358,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1063,7 +1103,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 249,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1090,7 +1130,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 247,
     "moods": [
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
@@ -1111,15 +1151,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 366,
     "moods": [
-      "ROCK"
+      "POP_HITS"
     ]
   },
   {
     "id": "b87ddc6a-b153-4275-94dc-18cb612138d6",
     "name": "Radio X 90s",
     "fullName": "Radio X 90s",
-    "streamUrl": "https://media-ice.musicradio.com/RadioX90sMP3",
-    "fallbackUrl": "https://media-ice.musicradio.com/RadioX90sMP3",
+    "streamUrl": "http://media-ice.musicradio.com/RadioX90sMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/RadioX90sMP3",
     "favicon": "https://assets.radiox.co.uk/2024/36/radio-x-90s-1726064624-editorial-short-form-0.jpg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
@@ -1136,16 +1176,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 371,
     "moods": [
-      "ROCK",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9859afb8-d110-4373-b29d-96dc3e981a4d",
     "name": "Radio X Chilled",
     "fullName": "Radio X Chilled",
-    "streamUrl": "https://media-ice.musicradio.com/RadioXChilledMP3",
-    "fallbackUrl": "https://media-ice.musicradio.com/RadioXChilledMP3",
+    "streamUrl": "http://media-ice.musicradio.com/RadioXChilledMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/RadioXChilledMP3",
     "favicon": "https://assets.radiox.co.uk/2024/36/radio-x-chilled-1726064662-editorial-short-form-0.jpg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
@@ -1163,8 +1202,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 356,
     "moods": [
-      "ROCK",
-      "CALM_CHILL"
+      "POP_HITS"
     ]
   },
   {
@@ -1185,7 +1223,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 129,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1206,16 +1244,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 153,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "e820a644-98e4-4961-8349-80e29ae16948",
     "name": "101.3 WKRD",
     "fullName": "101.3 WKRD",
-    "streamUrl": "https://ice24.securenetsystems.net/WRKD",
-    "fallbackUrl": "https://ice24.securenetsystems.net/WRKD",
-    "favicon": "",
+    "streamUrl": "http://ice24.securenetsystems.net/WRKD",
+    "fallbackUrl": "http://ice24.securenetsystems.net/WRKD",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/5ec7d6d71bc97c6c79635634?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1231,8 +1269,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 93,
     "moods": [
-      "ROCK",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1254,7 +1291,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 153,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1274,15 +1311,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 153,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "db96248d-670c-4f3d-80c2-56c7ad626443",
     "name": "My 99.9 Colorado",
     "fullName": "My 99.9 Colorado",
-    "streamUrl": "https://stream.revma.ihrhls.com/zc361",
-    "fallbackUrl": "https://stream.revma.ihrhls.com/zc361",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc361",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc361",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/60537048751ecf4947ed836f?ops=gravity(%22center%22),contain(600,600)&quality=80",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -1295,7 +1332,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 156,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1304,7 +1341,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Mix 103.1",
     "streamUrl": "https://ice10.securenetsystems.net/KURR",
     "fallbackUrl": "https://ice10.securenetsystems.net/KURR",
-    "favicon": "",
+    "favicon": "https://mix1031.fm/wp-content/uploads/2021/04/mix-logo-final-1.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1316,15 +1353,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 109,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "801f1ac1-7cf1-4fe6-befc-cce8a9263d9c",
     "name": "100hitz - Top 40",
     "fullName": "100hitz - Top 40",
-    "streamUrl": "https://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
-    "fallbackUrl": "https://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
+    "streamUrl": "http://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
+    "fallbackUrl": "http://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
     "favicon": "https://100hitz.com/favicon.ico",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -1337,16 +1374,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 333,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "960d4bdc-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Kickin' Country",
     "fullName": "181.FM - Kickin' Country",
-    "streamUrl": "https://listen.181fm.com/181-kickincountry_128k.mp3",
-    "fallbackUrl": "https://listen.181fm.com/181-kickincountry_128k.mp3",
-    "favicon": "",
+    "streamUrl": "http://listen.181fm.com/181-kickincountry_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-kickincountry_128k.mp3",
+    "favicon": "http://www.181.fm/images/playerlanding/181.FM.jpg",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1360,7 +1397,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 2067,
     "moods": [
-      "ROCK"
+      "POP_HITS"
     ]
   },
   {
@@ -1369,7 +1406,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "181.FM - Beatles",
     "streamUrl": "https://listen.181fm.com/181-beatles_128k.mp3",
     "fallbackUrl": "https://listen.181fm.com/181-beatles_128k.mp3",
-    "favicon": "https://www.181.fm/images/playerlanding/181.FM.jpg",
+    "favicon": "http://www.181.fm/images/playerlanding/181.FM.jpg",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1384,17 +1421,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 1749,
     "moods": [
-      "ROCK",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9620898c-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - The Mix",
     "fullName": "181.FM - The Mix",
-    "streamUrl": "https://listen.181fm.com/181-themix_128k.mp3",
-    "fallbackUrl": "https://listen.181fm.com/181-themix_128k.mp3",
-    "favicon": "https://www.181.fm/favicon.ico",
+    "streamUrl": "http://listen.181fm.com/181-themix_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-themix_128k.mp3",
+    "favicon": "http://www.181.fm/favicon.ico",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1407,16 +1443,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 2271,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9638a79d-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - UK Top 40",
     "fullName": "181.FM - UK Top 40",
-    "streamUrl": "https://listen.181fm.com/181-uktop40_128k.mp3",
-    "fallbackUrl": "https://listen.181fm.com/181-uktop40_128k.mp3",
-    "favicon": "https://www.181.fm/favicon.ico",
+    "streamUrl": "http://listen.181fm.com/181-uktop40_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-uktop40_128k.mp3",
+    "favicon": "http://www.181.fm/favicon.ico",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1429,16 +1465,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 2361,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9638aa32-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Party 181",
     "fullName": "181.FM - Party 181",
-    "streamUrl": "https://listen.181fm.com/181-party_128k.mp3",
-    "fallbackUrl": "https://listen.181fm.com/181-party_128k.mp3",
-    "favicon": "https://www.181.fm/favicon.ico",
+    "streamUrl": "http://listen.181fm.com/181-party_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-party_128k.mp3",
+    "favicon": "http://www.181.fm/favicon.ico",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1452,16 +1488,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 2250,
     "moods": [
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
     "id": "96288fcc-0601-11e8-ae97-52543be04c81",
     "name": "Big R Radio - 80s/90s Pop",
     "fullName": "Big R Radio - 80s/90s Pop",
-    "streamUrl": "https://bigrradio.cdnstream1.com/5183_128",
-    "fallbackUrl": "https://bigrradio.cdnstream1.com/5183_128",
-    "favicon": "https://www.bigrradio.com/image/favicon/apple-touch-icon.png",
+    "streamUrl": "http://bigrradio.cdnstream1.com/5183_128",
+    "fallbackUrl": "http://bigrradio.cdnstream1.com/5183_128",
+    "favicon": "http://www.bigrradio.com/image/favicon/apple-touch-icon.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1475,7 +1511,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 254,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1497,7 +1533,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 184,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1506,7 +1542,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Classic Hits Radio (70s/80s)",
     "streamUrl": "https://radiopanther.radiolebowski.com/play",
     "fallbackUrl": "https://radiopanther.radiolebowski.com/play",
-    "favicon": "",
+    "favicon": "https://classichits.radio/wp-content/uploads/2020/09/cropped-CHR-Logo-Icon-512x512-1-192x192.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1524,8 +1560,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 183,
     "moods": [
-      "FUN_ENERGY",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1546,7 +1581,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 223,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1568,16 +1603,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 568,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "175684b7-3b41-4fe9-ab92-513d2b543b89",
     "name": "Sun FM",
     "fullName": "Sun FM",
-    "streamUrl": "https://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
-    "fallbackUrl": "https://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
-    "favicon": "",
+    "streamUrl": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
+    "fallbackUrl": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
+    "favicon": "https://sun-fm.com/wp-content/uploads/2022/03/sun-fm-logo.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -1588,15 +1623,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 94,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "aa03434e-e002-4d61-9581-2812ea5a1a90",
     "name": "kmfm (Canterbury)",
     "fullName": "kmfm (Canterbury)",
-    "streamUrl": "https://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
-    "fallbackUrl": "https://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
+    "streamUrl": "http://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
+    "fallbackUrl": "http://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
     "favicon": "https://mm.aiircdn.com/541/5c09697b213aa.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
@@ -1609,7 +1644,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 247,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1618,7 +1653,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Forth1",
     "streamUrl": "https://stream-al.hellorayo.co.uk/forth1.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&aw_0_1st.bauer_listenerid=undefined",
     "fallbackUrl": "https://stream-al.hellorayo.co.uk/forth1.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&aw_0_1st.bauer_listenerid=undefined",
-    "favicon": "",
+    "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1678797505/brand_manager/stations/forth_1.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -1630,7 +1665,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 89,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1654,16 +1689,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 185,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "9628a2d4-0601-11e8-ae97-52543be04c81",
     "name": "2000 FM - Top 40",
     "fullName": "2000 FM - Top 40",
-    "streamUrl": "https://bigrradio.cdnstream1.com/5106_128",
-    "fallbackUrl": "https://bigrradio.cdnstream1.com/5106_128",
-    "favicon": "https://2000fm.net/images/logo.png",
+    "streamUrl": "http://bigrradio.cdnstream1.com/5106_128",
+    "fallbackUrl": "http://bigrradio.cdnstream1.com/5106_128",
+    "favicon": "http://2000fm.net/images/logo.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1674,16 +1709,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 261,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "658e103a-ed12-41d7-be75-e3dd6b55902b",
     "name": "Joy Hits UK",
     "fullName": "Joy Hits UK",
-    "streamUrl": "https://joyhits.online/joyhitshq.mp3",
-    "fallbackUrl": "https://joyhits.online/joyhitshq.mp3",
-    "favicon": "",
+    "streamUrl": "http://joyhits.online/joyhitshq.mp3",
+    "fallbackUrl": "http://joyhits.online/joyhitshq.mp3",
+    "favicon": "https://joyhits.online/wp-content/uploads/2021/11/joyhits-logo.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -1696,15 +1731,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 473,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "589949be-60a2-411e-b6c4-86b3bede2f01",
     "name": "Urban Radio - The Greatest R&B Hits",
     "fullName": "Urban Radio - The Greatest R&B Hits",
-    "streamUrl": "https://hydra.cdnstream.com/1534_backup",
-    "fallbackUrl": "https://hydra.cdnstream.com/1534_backup",
+    "streamUrl": "http://hydra.cdnstream.com/1534_backup",
+    "fallbackUrl": "http://hydra.cdnstream.com/1534_backup",
     "favicon": "https://super-radio-mobile.devhub.top/images/logo.png",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -1718,7 +1753,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 2156,
     "moods": [
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
@@ -1727,7 +1762,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "Neon Radio - 80s & 90s Pop & Dance",
     "streamUrl": "https://live.flashbackcentral.co.uk/radio/8050/tunein.mp3",
     "fallbackUrl": "https://live.flashbackcentral.co.uk/radio/8050/tunein.mp3",
-    "favicon": "",
+    "favicon": "https://www.neonradio.co.uk/wp-content/uploads/2020/07/neon-radio-logo.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
     "flag": "🇬🇧",
@@ -1740,8 +1775,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 180,
     "moods": [
-      "FUN_ENERGY",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1760,9 +1794,9 @@ window.DRIVEWAVE_STATIONS = [
     ],
     "isHls": true,
     "codec": "AAC",
-    "bitrate": 128,
+    "bitrate": 0,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1782,7 +1816,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 558,
     "moods": [
-      "FUN_ENERGY"
+      "POP_HITS"
     ]
   },
   {
@@ -1808,8 +1842,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 452,
     "moods": [
-      "ROCK",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1831,15 +1864,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 232,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "bdf84bc3-df90-443a-8107-2fab9af0cc5e",
     "name": "HD Radio - Hot 100",
     "fullName": "HD Radio - Hot 100",
-    "streamUrl": "https://hdradiohot100-rfritschka.radioca.st/;",
-    "fallbackUrl": "https://hdradiohot100-rfritschka.radioca.st/;",
+    "streamUrl": "http://hdradiohot100-rfritschka.radioca.st/;",
+    "fallbackUrl": "http://hdradiohot100-rfritschka.radioca.st/;",
     "favicon": "https://www.hd-radio.net/favicon.ico",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -1853,15 +1886,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 370,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
     "id": "8a15bdc8-b41e-4e29-9862-4aaeebd1b8f4",
     "name": "Box UK (Dance & Pop)",
     "fullName": "Box UK (Dance & Pop)",
-    "streamUrl": "https://boxstream.danceradiouk.com/stream/",
-    "fallbackUrl": "https://boxstream.danceradiouk.com/stream/",
+    "streamUrl": "http://boxstream.danceradiouk.com/stream/",
+    "fallbackUrl": "http://boxstream.danceradiouk.com/stream/",
     "favicon": "https://danceradiouk.com/players/files/images/albumart/13040-BoxUK-300.jpg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
     "countryCode": "GB",
@@ -1878,9 +1911,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 363,
     "moods": [
-      "ROCK",
-      "FUN_ENERGY",
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1901,7 +1932,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 138,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1910,7 +1941,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "011.FM - Cruise Control",
     "streamUrl": "https://listen.011fm.com/stream30",
     "fallbackUrl": "https://listen.011fm.com/stream30",
-    "favicon": "",
+    "favicon": "https://011fm.com/images/011fm-logo.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1928,7 +1959,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 2217,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1937,7 +1968,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "POP! 93.3",
     "streamUrl": "https://ice10.securenetsystems.net/WBHV",
     "fallbackUrl": "https://ice10.securenetsystems.net/WBHV",
-    "favicon": "",
+    "favicon": "https://itspopradio.com/wp-content/uploads/2020/01/pop-logo.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1948,7 +1979,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 94,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   },
   {
@@ -1957,7 +1988,7 @@ window.DRIVEWAVE_STATIONS = [
     "fullName": "KRKO 1380AM 95.3FM",
     "streamUrl": "https://www.ophanim.net:8444/s/9400",
     "fallbackUrl": "https://www.ophanim.net:8444/s/9400",
-    "favicon": "",
+    "favicon": "https://www.everettpost.com/wp-content/uploads/2020/02/KRKO-Logo-95.3-Square.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1970,16 +2001,16 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "MP3",
     "bitrate": 346,
     "moods": [
-      "ROCK"
+      "POP_HITS"
     ]
   },
   {
     "id": "319001a5-dedc-42b3-8537-25c82ef689b3",
     "name": "Yes.fm (Toledo,oh) 89.7",
     "fullName": "Yes.fm (Toledo,oh) 89.7",
-    "streamUrl": "https://ice24.securenetsystems.net/YESFM",
-    "fallbackUrl": "https://ice24.securenetsystems.net/YESFM",
-    "favicon": "",
+    "streamUrl": "http://ice24.securenetsystems.net/YESFM",
+    "fallbackUrl": "http://ice24.securenetsystems.net/YESFM",
+    "favicon": "https://www.yeshome.com/wp-content/uploads/2020/03/yesfm-square-logo.png",
     "country": "The United States Of America",
     "countryCode": "US",
     "flag": "🇺🇸",
@@ -1993,15 +2024,15 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 92,
     "moods": [
-      "ROCK"
+      "POP_HITS"
     ]
   },
   {
     "id": "6ff1a632-edf1-4d00-ae05-660db1e8e02a",
     "name": "WDJQ FM 92.5 Alliance, Ohio",
     "fullName": "WDJQ FM 92.5 Alliance, Ohio",
-    "streamUrl": "https://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
-    "fallbackUrl": "https://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
+    "streamUrl": "http://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
+    "fallbackUrl": "http://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
     "favicon": "https://www.q92radio.com/favicon.ico",
     "country": "The United States Of America",
     "countryCode": "US",
@@ -2013,7 +2044,7 @@ window.DRIVEWAVE_STATIONS = [
     "codec": "AAC",
     "bitrate": 134,
     "moods": [
-      "LONG_DRIVE"
+      "POP_HITS"
     ]
   }
 ];

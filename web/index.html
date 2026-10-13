@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>DriveWave Web Player | 182 Free Live Hit Radio Stations (Zero Ads)</title>
-  <meta name="description" content="Listen to 182 curated live radio stations online with zero ads. Pop hits, Latin, Rock, Chill, and commute radio. Free web player with driving mode and steering-wheel controls." />
+  <title>DriveWave Web Player | Pure Live Hit Radio (Zero Ads, No Paywalls)</title>
+  <meta name="description" content="Listen to curated high-bitrate live radio stations online with zero ads. Pop hits, Latin, Rock, Chill, and commute radio. Free web player with driving mode and steering-wheel controls." />
   <meta name="keywords" content="web radio, online radio player, free internet radio, live radio stations, driving music, ad-free radio, bbc radio live, pop hits radio, latin radio, car web radio, drivewave" />
   <meta name="author" content="RadioFreeSolutions" />
   <meta name="robots" content="index, follow" />
@@ -20,7 +20,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="music.radio_station" />
   <meta property="og:site_name" content="DriveWave Web Player" />
-  <meta property="og:title" content="DriveWave Web Player | 182 Free Live Hit Radio Stations (Zero Ads)" />
+  <meta property="og:title" content="DriveWave Web Player | Pure Live Hit Radio (Zero Ads, No Paywalls)" />
   <meta property="og:description" content="Instant live radio streaming across Pop, Latin, Rock, and Chill. Zero ads, free forever, steering wheel & media key control." />
   <meta property="og:url" content="https://radiofreesolutions.github.io/drivewave-app/web/" />
   <meta property="og:image" content="https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png" />
@@ -30,8 +30,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DriveWave Web Player | 182 Free Live Hit Radio Stations" />
-  <meta name="twitter:description" content="Instant live radio streaming with zero ads and driving mode. 182 curated hit stations." />
+  <meta name="twitter:title" content="DriveWave Web Player | Pure Live Hit Radio" />
+  <meta name="twitter:description" content="Instant live radio streaming with zero ads and driving mode. Curated hit stations." />
   <meta name="twitter:image" content="https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png" />
 
   <!-- Schema.org JSON-LD -->
@@ -51,7 +51,7 @@
           "price": "0",
           "priceCurrency": "USD"
         },
-        "description": "Free web radio player featuring 182 curated hit stations, zero ads, driving mode, and steering-wheel media key control.",
+        "description": "Free web radio player featuring curated hit stations, zero ads, driving mode, and steering-wheel media key control.",
         "image": "https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png",
         "creator": {
           "@type": "Organization",
@@ -66,7 +66,7 @@
         "url": "https://radiofreesolutions.github.io/drivewave-app/web/",
         "logo": "https://radiofreesolutions.github.io/drivewave-app/web/icon-512.png",
         "genre": ["Pop", "Latin", "Rock", "Chillout", "News", "Electronic"],
-        "description": "Curated collection of 182 premier broadcast stations from the UK, US, Spain, and Latin America."
+        "description": "Curated collection of premier broadcast stations from the UK, US, Spain, and Latin America."
       }
     ]
   }
@@ -92,12 +92,12 @@
         <li class="nav-item active" data-mood="ALL">
           <span>🔥</span>
           <span>All Stations</span>
-          <span class="nav-badge">182</span>
+          <span class="nav-badge">90</span>
         </li>
         <li class="nav-item" data-mood="POP_HITS">
           <span>⭐</span>
           <span>Top Rated</span>
-          <span class="nav-badge">15</span>
+          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="LATIN_SPANISH">
           <span>💃</span>
@@ -131,7 +131,7 @@
         </li>
       </ul>
 
-      <div class="sidebar-heading">Library &amp; About</div>
+      <div class="sidebar-heading">Library</div>
       <ul class="nav-list">
         <li class="nav-item" data-mood="FAVORITES">
           <span>⭐</span>
@@ -146,7 +146,7 @@
 
       <div class="sidebar-footer">
         <a href="../" class="btn-apk-sidebar">
-          <span>📱</span> Get Android App (v3.6.0)
+          <span>📱</span> Get Android App (v3.7.0)
         </a>
       </div>
     </aside>
@@ -162,7 +162,9 @@
         <div class="mobile-top-actions">
           <button id="btn-info-mobile" class="btn-mobile-action" title="About &amp; Legal">ℹ️</button>
           <button id="btn-share-mobile" class="btn-mobile-action" onclick="shareDriveWave()" title="Share">🔗</button>
+          <!-- Support button disabled until 100K downloads
           <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" target="_blank" class="btn-mobile-action" style="color: #FFC439;" title="Support">☕</a>
+          -->
           <button id="btn-driving-mobile" class="btn-mobile-dm" title="Driving Mode Cockpit">🚘</button>
         </div>
       </div>
@@ -171,19 +173,18 @@
       <header class="top-bar">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" class="search-input" placeholder="Search 182 stations, genres, or artists..." autocomplete="off" />
+          <input type="text" id="search-input" class="search-input" placeholder="Search stations, genres, or artists..." autocomplete="off" />
         </div>
 
         <div class="top-actions">
-          <button id="btn-info-top" class="btn-top-action" title="About DriveWave, Copyright &amp; Contact">
-            <span>ℹ️</span> Info
-          </button>
           <button id="btn-share-top" class="btn-top-action" onclick="shareDriveWave()">
             <span>🔗</span> Share
           </button>
+          <!-- Support button disabled until 100K downloads
           <a href="https://www.paypal.com/ncp/payment/QUWBYM2LFLTYS" target="_blank" class="btn-top-action" style="color: #FFC439;">
             <span>☕</span> Support
           </a>
+          -->
           <button id="btn-driving-mode" class="btn-driving-mode" title="Fullscreen Car Dashboard View">
             <span>🚘</span> Driving Mode
           </button>
@@ -206,17 +207,8 @@
       <!-- Shelf Banner -->
       <section class="shelf-header">
         <h1 class="shelf-title" id="shelf-title">🔥 All Stations</h1>
-        <p class="shelf-subtitle" id="shelf-subtitle">182 hand-picked live radio broadcasts.</p>
+        <p class="shelf-subtitle" id="shelf-subtitle">Hand-picked high-bitrate live radio broadcasts.</p>
       </section>
-
-      <!-- Country Filters -->
-      <div class="country-filters" id="country-filters">
-        <div class="filter-pill active" data-country="ALL">🌐 All Countries</div>
-        <div class="filter-pill" data-country="GB">🇬🇧 United Kingdom</div>
-        <div class="filter-pill" data-country="US">🇺🇸 United States</div>
-        <div class="filter-pill" data-country="ES">🇪🇸 Spain</div>
-        <div class="filter-pill" data-country="MX">🇲🇽 Mexico</div>
-      </div>
 
       <!-- Station Grid -->
       <div class="station-grid" id="stations-grid">
@@ -282,9 +274,11 @@
           <span id="volume-percent" class="volume-percent">85%</span>
         </div>
 
-        <button id="btn-toggle-mini" class="btn-player-action" title="Pop-out Mini Player (Picture-in-Picture)">
-          <span>⧉</span>
+        <button id="btn-toggle-mini" class="btn-toggle-mini-prominent" title="Pop-out Mini Floating Player (Picture-in-Picture)">
+          <span class="mini-icon">⧉</span>
+          <span class="mini-text">MINI PLAYER</span>
         </button>
+
       </div>
     </footer>
 
@@ -342,7 +336,7 @@
               <span>📻</span> About DriveWave
             </div>
             <p>
-              DriveWave delivers 182 curated, high-bitrate live radio stations engineered for uninterrupted listening.
+              DriveWave delivers curated, high-bitrate live radio stations engineered for uninterrupted listening.
               Featuring quick mood filtering (Pop Hits, Latin &amp; Spanish, Long Drive, Rock, Chillout), high-contrast Cockpit Driving Mode, and steering-wheel controls via standard MediaSession keys.
             </p>
           </div>
@@ -381,8 +375,8 @@
             <p>
               Driving with Android Auto? Download the native DriveWave APK with automotive dashboard integration, zero battery drain, and offline caching.
             </p>
-              <a href="../" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;">
-                <span>📱</span> Get Android App
+              <a href="../drivewave-v3.7.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
+                <span>⬇️</span> Download APK (v3.7.0)
               </a>
               <a href="../" class="btn-top-action">
                 <span>🏠</span> Homepage
@@ -428,7 +422,7 @@
       if (navigator.share) {
         navigator.share({
           title: 'DriveWave Web - Pure Driving Radio',
-          text: 'Listen to 182 ad-free live radio hit stations (Pop, Latin, Rock, Chill):',
+          text: 'Listen to live hit radio stations with zero ads (Pop, Latin, Rock, Chill):',
           url: window.location.href
         }).catch(function() {});
       } else {

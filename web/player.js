@@ -15,7 +15,6 @@
   let isPlaying = false;
   let isBuffering = false;
   let currentMood = 'ALL';
-  let currentCountry = 'ALL';
   let searchQuery = '';
   let hlsInstance = null;
   let retryCount = 0;
@@ -47,7 +46,6 @@
   const searchInput = document.getElementById('search-input');
   const shelfTitle = document.getElementById('shelf-title');
   const shelfSubtitle = document.getElementById('shelf-subtitle');
-  const countryFilters = document.getElementById('country-filters');
   const navItems = document.querySelectorAll('.nav-item');
 
   // Player DOM Elements
@@ -92,7 +90,6 @@
 
   // Information & Legal Modal Elements
   const infoModal = document.getElementById('info-modal');
-  const btnInfoTop = document.getElementById('btn-info-top');
   const navInfoBtn = document.getElementById('nav-info-btn');
   const btnInfoClose = document.getElementById('btn-info-close');
 
@@ -116,9 +113,9 @@
 
   // Mood Descriptions
   const MOOD_META = {
-    ALL: { title: '🔥 All Stations', subtitle: '182 hand-picked live radio broadcasts from the UK, US, Spain & worldwide.' },
-    POP_HITS: { title: '⭐ Top Rated', subtitle: 'The 15 most listened pop radio stations in the world (14 English, 1 Spanish).' },
-    LATIN_SPANISH: { title: '💃 Latin & Spanish', subtitle: 'Reggaeton, Bachata, Salsa, and Spanish pop from Madrid, Miami, Mexico & Latin America.' },
+    ALL: { title: '🔥 All Stations', subtitle: 'Curated high-bitrate live radio broadcasts from around the world.' },
+    POP_HITS: { title: '⭐ Top Rated', subtitle: 'World-famous pop hit music stations and chart-toppers.' },
+    LATIN_SPANISH: { title: '💃 Latin & Spanish', subtitle: 'Reggaeton, Bachata, Salsa, and Latin pop hits.' },
     LONG_DRIVE: { title: '🛣️ Long Drive', subtitle: 'Highway cruising rhythms, road trip classics, and steady tempo hits.' },
     FUN_ENERGY: { title: '⚡ Fun & Energy', subtitle: 'Dance hits, electronic energy, and party anthems to keep your drive energized.' },
     CALM_CHILL: { title: '☕ Calm & Chill', subtitle: 'Relaxed acoustics, soft vocals, and ambient companions for night cruising.' },
@@ -133,6 +130,10 @@
     applyFilter();
     setupEventListeners();
     setupMediaSession();
+
+    if (searchInput) {
+      searchInput.placeholder = `Search ${stations.length} stations, genres, or artists...`;
+    }
 
     // Restore last station if saved
     const lastId = localStorage.getItem(LS_LAST_STATION);
@@ -168,7 +169,7 @@
     }
   }
 
-  /** Filter stations based on mood, country, and search query */
+  /** Filter stations based on mood and search query */
   function applyFilter() {
     filteredStations = stations.filter(s => {
       // Mood match
@@ -176,11 +177,6 @@
         if (!favorites.has(s.id)) return false;
       } else if (currentMood !== 'ALL') {
         if (!s.moods || !s.moods.includes(currentMood)) return false;
-      }
-
-      // Country match
-      if (currentCountry !== 'ALL') {
-        if (s.countryCode !== currentCountry) return false;
       }
 
       // Search match
@@ -193,10 +189,16 @@
       return true;
     });
 
-    // Update shelf title
+    // Update shelf title and subtitle dynamically
     const meta = MOOD_META[currentMood] || MOOD_META.ALL;
     if (shelfTitle) shelfTitle.innerHTML = meta.title + ` <span style="font-size: 16px; color: var(--accent); font-weight: 600;">(${filteredStations.length})</span>`;
-    if (shelfSubtitle) shelfSubtitle.textContent = meta.subtitle;
+    if (shelfSubtitle) {
+      if (currentMood === 'ALL' && !searchQuery) {
+        shelfSubtitle.textContent = `${stations.length} hand-picked, verified live radio broadcasts.`;
+      } else {
+        shelfSubtitle.textContent = meta.subtitle;
+      }
+    }
 
     renderStations();
   }
@@ -315,6 +317,138 @@
     renderStations();
   }
 
+  let icyAbortController = null;
+  let currentTrackTitle = '';
+
+  function cleanStreamTitle(raw) {
+    if (!raw) return "";
+    let title = raw.trim();
+    const match = title.match(/^StreamTitle='(.*?)'(?:;.*)?$/);
+    if (match) title = match[1].trim();
+    const semiIdx = title.indexOf(';');
+    if (semiIdx > 0) title = title.substring(0, semiIdx).trim();
+    title = title.replace(/\s*-\s*AD\s*BREAK\s*$/i, '');
+    title = title.replace(/\s*-\s*COMMERCIAL\s*$/i, '');
+    title = title.replace(/\s*-\s*STATION\s*ID\s*$/i, '');
+    title = title.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE):\s*/i, '');
+    return title.trim();
+  }
+
+  function onNewTrackInfo(track, station) {
+    if (!track || track === currentTrackTitle) return;
+    currentTrackTitle = track;
+
+    // Update Player Bar
+    if (playerTrack) {
+      playerTrack.textContent = track;
+      playerTrack.title = track;
+    }
+    if (playerStation && station) {
+      playerStation.innerHTML = `<span>📻</span> <span>${station.name} • Live</span>`;
+    }
+
+    // Update Cockpit Driving Mode
+    if (dmTrackTitle) dmTrackTitle.textContent = track;
+    if (dmStationName && station) dmStationName.textContent = station.name;
+
+    // Update Mini Player
+    if (miniTitle) miniTitle.textContent = track;
+    if (miniSub && station) miniSub.textContent = station.name;
+
+    // Update MediaSession
+    updateMediaSession(station, track);
+
+    // Update PiP and Tab Title
+    updateDocumentPipUI();
+    renderVideoPipFrame();
+    updateTabTitle();
+  }
+
+  function startMetadataStream(station) {
+    if (icyAbortController) {
+      try { icyAbortController.abort(); } catch (e) {}
+      icyAbortController = null;
+    }
+    currentTrackTitle = '';
+
+    const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
+    if (!streamUrl || station.isHls || streamUrl.includes('.m3u8')) return;
+
+    try {
+      icyAbortController = new AbortController();
+      const signal = icyAbortController.signal;
+
+      fetch(streamUrl, {
+        headers: { 'Icy-MetaData': '1' },
+        signal: signal,
+        mode: 'cors'
+      }).then(response => {
+        const metaint = parseInt(response.headers.get('icy-metaint'), 10);
+        if (!metaint || !response.body) return;
+
+        const reader = response.body.getReader();
+        let byteCounter = 0;
+        let readingMeta = false;
+        let metaLength = 0;
+        let metaBuffer = [];
+
+        function pump() {
+          return reader.read().then(({ done, value }) => {
+            if (done || signal.aborted) return;
+            const chunk = value;
+            let offset = 0;
+
+            while (offset < chunk.length) {
+              if (!readingMeta) {
+                const remaining = metaint - byteCounter;
+                if (offset + remaining <= chunk.length) {
+                  offset += remaining;
+                  byteCounter = 0;
+                  readingMeta = true;
+                  if (offset < chunk.length) {
+                    metaLength = chunk[offset] * 16;
+                    offset += 1;
+                    metaBuffer = [];
+                    if (metaLength === 0) readingMeta = false;
+                  }
+                } else {
+                  byteCounter += (chunk.length - offset);
+                  offset = chunk.length;
+                }
+              } else {
+                if (metaBuffer.length < metaLength) {
+                  const need = metaLength - metaBuffer.length;
+                  const available = chunk.length - offset;
+                  const take = Math.min(need, available);
+                  for (let i = 0; i < take; i++) {
+                    metaBuffer.push(chunk[offset + i]);
+                  }
+                  offset += take;
+                  if (metaBuffer.length >= metaLength) {
+                    readingMeta = false;
+                    byteCounter = 0;
+                    try {
+                      const rawStr = new TextDecoder('utf-8').decode(new Uint8Array(metaBuffer));
+                      const match = rawStr.match(/StreamTitle='(.*?)';/);
+                      if (match && match[1]) {
+                        const cleaned = cleanStreamTitle(match[1]);
+                        if (cleaned && cleaned.toLowerCase() !== station.name.toLowerCase()) {
+                          onNewTrackInfo(cleaned, station);
+                        }
+                      }
+                    } catch (e) {}
+                  }
+                }
+              }
+            }
+            return pump();
+          }).catch(() => {});
+        }
+        return pump();
+      }).catch(() => {});
+    } catch (e) {}
+  }
+
   /** Start HTML5 / HLS Audio playback */
   function startAudio(station) {
     if (!station) return;
@@ -342,6 +476,21 @@
       hlsInstance.on(window.Hls.Events.MANIFEST_PARSED, () => {
         audio.play().catch(handlePlayError);
       });
+      hlsInstance.on(window.Hls.Events.FRAG_PARSING_METADATA, (event, data) => {
+        if (data && data.samples) {
+          for (const sample of data.samples) {
+            if (sample.data) {
+              try {
+                const str = new TextDecoder('utf-8').decode(sample.data);
+                const cleaned = cleanStreamTitle(str);
+                if (cleaned && cleaned !== currentTrackTitle && cleaned.toLowerCase() !== station.name.toLowerCase()) {
+                  onNewTrackInfo(cleaned, station);
+                }
+              } catch (e) {}
+            }
+          }
+        }
+      });
       hlsInstance.on(window.Hls.Events.ERROR, (event, data) => {
         if (data.fatal) {
           handleFatalStreamError(station);
@@ -353,6 +502,7 @@
       audio.play().catch(handlePlayError);
     }
 
+    startMetadataStream(station);
     updateMediaSession(station);
   }
 
@@ -453,7 +603,8 @@
   function updateTabTitle() {
     if (document.hidden) {
       if (isPlaying && currentStation) {
-        document.title = `▶ ${currentStation.name} | DriveWave`;
+        const title = currentTrackTitle ? `${currentTrackTitle} - ${currentStation.name}` : currentStation.name;
+        document.title = `▶ ${title} | DriveWave`;
       } else {
         document.title = `⏸ DriveWave Web`;
       }
@@ -742,12 +893,14 @@
     }
   }
 
-  function updateMediaSession(station) {
+  function updateMediaSession(station, track = '') {
     if ('mediaSession' in navigator && station) {
+      const displayTitle = track || station.name;
+      const displayArtist = track ? `${station.name} • DriveWave` : `DriveWave • ${station.country || 'Live Radio'}`;
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: station.name,
-        artist: `DriveWave • ${station.country || 'Live Radio'}`,
-        album: 'DriveWave Web',
+        title: displayTitle,
+        artist: displayArtist,
+        album: station.name,
         artwork: [
           { src: station.favicon || 'icon-512.png', sizes: '512x512', type: 'image/png' }
         ]
@@ -844,18 +997,6 @@
       });
     }
 
-    // Country Pills
-    if (countryFilters) {
-      countryFilters.querySelectorAll('.filter-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-          countryFilters.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          currentCountry = pill.getAttribute('data-country') || 'ALL';
-          applyFilter();
-        });
-      });
-    }
-
     // Driving Mode Open / Close
     if (btnDrivingMode) {
       btnDrivingMode.addEventListener('click', () => {
@@ -915,11 +1056,6 @@
     });
 
     // Information & Legal Modal controls
-    if (btnInfoTop) {
-      btnInfoTop.addEventListener('click', () => {
-        if (infoModal) infoModal.classList.add('active');
-      });
-    }
     if (navInfoBtn) {
       navInfoBtn.addEventListener('click', () => {
         if (infoModal) infoModal.classList.add('active');

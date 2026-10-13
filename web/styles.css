@@ -172,23 +172,29 @@ aside.sidebar {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  padding: 10px;
-  background: rgba(0, 229, 255, 0.08);
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  border-radius: 10px;
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 700;
+  padding: 13px 14px;
+  background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  color: #050811;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 18px rgba(0, 229, 255, 0.45);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
 }
 
 .btn-apk-sidebar:hover {
-  background: rgba(0, 229, 255, 0.16);
-  border-color: var(--accent);
+  background: linear-gradient(135deg, #33E9FF 0%, #00B0FF 100%);
+  box-shadow: 0 6px 26px rgba(0, 229, 255, 0.7);
+  transform: translateY(-2px);
+  color: #000;
 }
+
 
 /* Main Content Area */
 main.main-content {
@@ -1451,6 +1457,43 @@ body:not(.mini-player-active) .pip-restore-bar {
   color: var(--accent);
   border-color: var(--accent);
 }
+
+/* Prominent Pop-out Mini Player Button */
+.btn-toggle-mini-prominent {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.18) 0%, rgba(139, 92, 246, 0.22) 100%);
+  border: 1.5px solid var(--accent);
+  color: #FFF;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 16px var(--accent-glow);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-toggle-mini-prominent .mini-icon {
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.btn-toggle-mini-prominent:hover {
+  background: linear-gradient(135deg, var(--accent) 0%, #8B5CF6 100%);
+  color: #050811;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.85);
+  transform: scale(1.05);
+}
+
+.btn-toggle-mini-prominent:hover .mini-icon {
+  color: #050811;
+}
+
 
 /* Information & Legal Modal */
 .modal-overlay {
