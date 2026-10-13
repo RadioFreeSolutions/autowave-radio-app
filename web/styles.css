@@ -1504,12 +1504,10 @@ body:not(.mini-player-active) .pip-restore-bar {
   background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%);
   color: #050811;
   font-weight: 850;
-  font-size: 12.5px;
+  font-size: 12px;
   border-radius: 10px;
   text-decoration: none;
   box-shadow: 0 2px 14px rgba(0, 229, 255, 0.55);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   transition: all 0.2s ease;
 }
 
@@ -1517,6 +1515,53 @@ body:not(.mini-player-active) .pip-restore-bar {
   background: linear-gradient(135deg, #33E9FF 0%, #00B0FF 100%);
   box-shadow: 0 4px 20px rgba(0, 229, 255, 0.8);
   transform: scale(1.03);
+}
+
+/* Top Bar Desktop GET APP Button */
+.btn-get-app-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%);
+  color: #050811;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 3px 18px rgba(0, 229, 255, 0.55);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-get-app-top:hover {
+  background: linear-gradient(135deg, #33E9FF 0%, #00B0FF 100%);
+  box-shadow: 0 5px 26px rgba(0, 229, 255, 0.85);
+  transform: translateY(-2px) scale(1.03);
+  color: #000;
+}
+
+.get-app-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.get-app-labels {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.get-app-title {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.get-app-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  opacity: 0.88;
 }
 
 
