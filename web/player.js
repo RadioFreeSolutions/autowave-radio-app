@@ -220,11 +220,14 @@
       const isCurr = currentStation && currentStation.id === st.id;
       const activeClass = isCurr ? 'active-playing' : '';
       const favClass = isFav ? 'favorited' : '';
-      const genre = (st.tags && st.tags[0]) ? st.tags[0] : (st.country || 'Live');
+      const flag = st.flag || '📻';
+      const tagList = Array.isArray(st.tags) ? st.tags : (st.tags ? String(st.tags).split(',') : []);
+      const rawGenre = tagList[0] ? tagList[0].trim() : (st.country || 'Live');
+      const genre = rawGenre ? (rawGenre.charAt(0).toUpperCase() + rawGenre.slice(1)) : 'Live';
 
       const artHtml = st.favicon
         ? `<img class="card-art-img" src="${st.favicon}" alt="${st.name}" onerror="this.onerror=null; this.src='icon-512.png';">`
-        : `<span class="card-art-fallback">${st.flag || '📻'}</span>`;
+        : `<span class="card-art-fallback">${flag}</span>`;
 
       return `
         <div class="station-card ${activeClass}" data-id="${st.id}" data-idx="${idx}">
@@ -237,7 +240,7 @@
           <div class="card-details">
             <div class="card-title">${st.name}</div>
             <div class="card-meta">
-              <span>${st.flag}</span>
+              <span>${flag}</span>
               <span>•</span>
               <span>${genre}</span>
             </div>

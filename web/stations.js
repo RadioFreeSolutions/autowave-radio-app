@@ -1,3414 +1,4673 @@
+// DriveWave Web Stations Catalog (200 verified live stations)
 window.DRIVEWAVE_STATIONS = [
   {
-    "stationuuid": "a740cc4c-9563-4fbe-a13f-e7f9e89b7441",
+    "id": "a740cc4c-9563-4fbe-a13f-e7f9e89b7441",
     "name": "BBC Radio 1 (128k)",
-    "url": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d128000.norewind.m3u8",
-    "url_resolved": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d128000.norewind.m3u8",
-    "homepage": "https://www.bbc.co.uk/radio1",
+    "fullName": "BBC Radio 1 (128k)",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d128000.norewind.m3u8",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s24939q.png",
-    "tags": "pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": true,
     "codec": "AAC",
-    "bitrate": 0,
-    "votes": 458,
-    "clickcount": 25000000,
-    "hls": 1,
-    "lastcheckok": 1
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "3606ef8c-cd58-4440-8c47-dbf1e0cacdac",
+    "id": "3606ef8c-cd58-4440-8c47-dbf1e0cacdac",
     "name": "BBC Radio 2 (128k)",
-    "url": "http://as-hls-ww-live.akamaized.net/pool_74208725/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d128000.norewind.m3u8",
-    "url_resolved": "http://as-hls-ww-live.akamaized.net/pool_74208725/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d128000.norewind.m3u8",
-    "homepage": "https://www.bbc.co.uk/radio2",
+    "fullName": "BBC Radio 2 (128k)",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_74208725/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_74208725/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d128000.norewind.m3u8",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s24940q.png",
-    "tags": "adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "adult contemporary"
+    ],
+    "isHls": true,
     "codec": "AAC",
-    "bitrate": 0,
-    "votes": 3448,
-    "clickcount": 14000000,
-    "hls": 1,
-    "lastcheckok": 1
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "9608ade8-0601-11e8-ae97-52543be04c81",
+    "id": "9608ade8-0601-11e8-ae97-52543be04c81",
     "name": "Heart London 106.2 [MP3]",
-    "url": "http://ice-sov.musicradio.com/HeartLondonMP3",
-    "url_resolved": "http://ice-sov.musicradio.com/HeartLondonMP3",
-    "homepage": "http://www.heart.co.uk/london",
+    "fullName": "Heart London 106.2 [MP3]",
+    "streamUrl": "http://ice-sov.musicradio.com/HeartLondonMP3",
+    "fallbackUrl": "http://ice-sov.musicradio.com/HeartLondonMP3",
     "favicon": "https://cdn-profiles.tunein.com/s2846/images/logoq.jpg",
-    "tags": "commercial,hot adult contemporary,london",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "commercial",
+      "hot adult contemporary",
+      "london"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 352,
-    "votes": 34647,
-    "clickcount": 12000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "283402b5-dc2e-11e9-a8ba-52543be04c81",
+    "id": "283402b5-dc2e-11e9-a8ba-52543be04c81",
     "name": "Heart UK",
-    "url": "http://media-ice.musicradio.com/HeartUKMP3",
-    "url_resolved": "http://media-ice.musicradio.com/HeartUKMP3",
-    "homepage": "https://www.heart.co.uk/",
-    "favicon": "",
-    "tags": "adult contemporary,national,pop,public radio,variety",
+    "fullName": "Heart UK",
+    "streamUrl": "http://media-ice.musicradio.com/HeartUKMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/HeartUKMP3",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "adult contemporary",
+      "national",
+      "pop",
+      "public radio",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 365,
-    "votes": 6436,
-    "clickcount": 12000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "963c8518-0601-11e8-ae97-52543be04c81",
+    "id": "963c8518-0601-11e8-ae97-52543be04c81",
     "name": "Heart",
-    "url": "http://media-the.musicradio.com/HeartNorthLancsCumbria",
-    "url_resolved": "http://media-the.musicradio.com/HeartNorthLancsCumbria",
-    "homepage": "http://www.heart.co.uk/northlancs/",
+    "fullName": "Heart",
+    "streamUrl": "http://media-the.musicradio.com/HeartNorthLancsCumbria",
+    "fallbackUrl": "http://media-the.musicradio.com/HeartNorthLancsCumbria",
     "favicon": "http://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "oldies,pop,public radio,variety",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "oldies",
+      "pop",
+      "public radio",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 130,
-    "votes": 2024,
-    "clickcount": 12000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "42679ed6-49cb-428e-9b74-94af62ad8a0a",
+    "id": "42679ed6-49cb-428e-9b74-94af62ad8a0a",
     "name": "Heart FM",
-    "url": "https://media-ssl.musicradio.com/HeartUK",
-    "url_resolved": "https://media-ssl.musicradio.com/HeartUK",
-    "homepage": "https://www.heart.co.uk/london/radio/",
+    "fullName": "Heart FM",
+    "streamUrl": "https://media-ssl.musicradio.com/HeartUK",
+    "fallbackUrl": "https://media-ssl.musicradio.com/HeartUK",
     "favicon": "https://cdn-profiles.tunein.com/s320841/images/logod.jpg?t=638651487420000000",
-    "tags": "",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 126,
-    "votes": 128,
-    "clickcount": 12000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "changeuuid": "bbc-ws-01",
-    "stationuuid": "3606ef8c-cd58-4440-8c47-bbcworldserv",
+    "id": "3606ef8c-cd58-4440-8c47-bbcworldserv",
     "name": "BBC World Service",
-    "url": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
-    "url_resolved": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
-    "homepage": "https://www.bbc.co.uk/worldserviceradio",
+    "fullName": "BBC World Service",
+    "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+    "fallbackUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
     "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/BBC_World_Service_2022.svg/300px-BBC_World_Service_2022.svg.png",
-    "tags": "news,talk,world service,current affairs,english",
     "country": "United Kingdom",
-    "countrycode": "GB",
-    "state": "London",
-    "language": "english",
-    "votes": 5200,
-    "lastchangetime": "2026-10-08 20:00:00",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "news",
+      "talk",
+      "world service",
+      "current affairs",
+      "english"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "lastcheckok": 1,
-    "lastchecktime": "2026-10-08 20:00:00",
-    "clickcount": 12000000
+    "moods": [
+      "NEWS_COMMUTE"
+    ]
   },
   {
-    "stationuuid": "96200095-0601-11e8-ae97-52543be04c81",
+    "id": "96200095-0601-11e8-ae97-52543be04c81",
     "name": "Capital FM London",
-    "url": "http://media-ice.musicradio.com/CapitalMP3",
-    "url_resolved": "http://media-ice.musicradio.com/CapitalMP3",
-    "homepage": "http://www.capitalfm.com/london/",
+    "fullName": "Capital FM London",
+    "streamUrl": "http://media-ice.musicradio.com/CapitalMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/CapitalMP3",
     "favicon": "http://assets6.capitalfm.com/2016/11/capital-3d-network-logo-large-canvas-1458228638-herowidev4-0.jpg",
-    "tags": "pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 365,
-    "votes": 39831,
-    "clickcount": 11500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "57a76f0a-8f41-419e-9001-ecdbb19886e0",
+    "id": "57a76f0a-8f41-419e-9001-ecdbb19886e0",
     "name": "Capital UK",
-    "url": "http://icecast.thisisdax.com/CapitalUKMP3",
-    "url_resolved": "http://icecast.thisisdax.com/CapitalUKMP3",
-    "homepage": "https://www.capitalfm.com/digital/",
+    "fullName": "Capital UK",
+    "streamUrl": "http://icecast.thisisdax.com/CapitalUKMP3",
+    "fallbackUrl": "http://icecast.thisisdax.com/CapitalUKMP3",
     "favicon": "https://i.imgur.com/xCTMNrl.jpg",
-    "tags": "pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 367,
-    "votes": 158,
-    "clickcount": 11500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "ba3ad919-0516-485c-bce6-b27c4492ab14",
+    "id": "ba3ad919-0516-485c-bce6-b27c4492ab14",
     "name": "Z100 - New York's #1 Hit Music Station WHTZ",
-    "url": "https://stream.revma.ihrhls.com/zc1469",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1469",
-    "homepage": "https://z100.iheart.com/",
-    "favicon": "https://external-content.duckduckgo.com/ip3/z100.iheart.com.ico",
-    "tags": "iheart,liberal,pop",
+    "fullName": "Z100 - New York's #1 Hit Music Station WHTZ",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1469",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1469",
+    "favicon": "logos/z100.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "iheart",
+      "liberal",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 148,
-    "votes": 2984,
-    "clickcount": 11000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "c76686ca-a8b9-4db9-9839-1470c9599623",
+    "id": "c76686ca-a8b9-4db9-9839-1470c9599623",
     "name": "102.7 KIIS FM",
-    "url": "https://stream.revma.ihrhls.com/zc185",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc185",
-    "homepage": "https://kiisfm.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/2ebe753539305728784b0f3b178eae45?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "102.7 KIIS FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc185",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc185",
+    "favicon": "logos/kiis_fm.svg",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 147,
-    "votes": 2785,
-    "clickcount": 10500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "changeuuid": "bbc-r4-02",
-    "stationuuid": "3606ef8c-cd58-4440-8c47-bbcradiofour",
+    "id": "3606ef8c-cd58-4440-8c47-bbcradiofour",
     "name": "BBC Radio 4 (News)",
-    "url": "https://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm",
-    "url_resolved": "https://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm",
-    "homepage": "https://www.bbc.co.uk/radio4",
+    "fullName": "BBC Radio 4 (News)",
+    "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm",
+    "fallbackUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm",
     "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/BBC_Radio_4_2022.svg/300px-BBC_Radio_4_2022.svg.png",
-    "tags": "news,talk,current affairs,bbc,english",
     "country": "United Kingdom",
-    "countrycode": "GB",
-    "state": "London",
-    "language": "english",
-    "votes": 4800,
-    "lastchangetime": "2026-10-08 20:00:00",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "news",
+      "talk",
+      "current affairs",
+      "bbc",
+      "english"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "lastcheckok": 1,
-    "lastchecktime": "2026-10-08 20:00:00",
-    "clickcount": 10500000
+    "moods": [
+      "NEWS_COMMUTE"
+    ]
   },
   {
-    "stationuuid": "5984167a-b25e-4eec-a878-ff9253ee0c4a",
+    "id": "5984167a-b25e-4eec-a878-ff9253ee0c4a",
     "name": "KISS UK",
-    "url": "https://live-kiss.sharp-stream.com/kiss100.mp3",
-    "url_resolved": "https://live-kiss.sharp-stream.com/kiss100.mp3",
-    "homepage": "https://kissfmuk.com/",
+    "fullName": "KISS UK",
+    "streamUrl": "https://live-kiss.sharp-stream.com/kiss100.mp3",
+    "fallbackUrl": "https://live-kiss.sharp-stream.com/kiss100.mp3",
     "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1678797505/brand_manager/stations/mahvph4fqjmnp4y8d6wt.png",
-    "tags": "bauer radio,kiss,kiss fm,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "bauer radio",
+      "kiss",
+      "kiss fm",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 211,
-    "votes": 507,
-    "clickcount": 9500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "0f1a8621-d35a-4073-83d3-7ee14207a9a9",
+    "id": "0f1a8621-d35a-4073-83d3-7ee14207a9a9",
     "name": "KISS - The Best Vibes & Energy",
-    "url": "https://live-bauerkiss.sharp-stream.com/kissnational.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "url_resolved": "https://live-bauerkiss.sharp-stream.com/kissnational.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "homepage": "https://www.hellorayo.co.uk/kiss",
+    "fullName": "KISS - The Best Vibes & Energy",
+    "streamUrl": "https://live-bauerkiss.sharp-stream.com/kissnational.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
+    "fallbackUrl": "https://live-bauerkiss.sharp-stream.com/kissnational.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
     "favicon": "https://cdn-profiles.tunein.com/s6004/images/logod.png",
-    "tags": "dab,dance,dance music,digital radio,edm,england,entertainment,europe",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "dab",
+      "dance",
+      "dance music",
+      "digital radio",
+      "edm",
+      "england",
+      "entertainment",
+      "europe"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 93,
-    "votes": 77,
-    "clickcount": 9500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "changeuuid": "npr-24-03",
-    "stationuuid": "960d4bdc-0601-11e8-ae97-npr24program",
+    "id": "960d4bdc-0601-11e8-ae97-npr24program",
     "name": "NPR 24 Hour Program Stream",
-    "url": "https://npr-ice.streamguys1.com/live.mp3",
-    "url_resolved": "https://npr-ice.streamguys1.com/live.mp3",
-    "homepage": "https://www.npr.org",
+    "fullName": "NPR 24 Hour Program Stream",
+    "streamUrl": "https://npr-ice.streamguys1.com/live.mp3",
+    "fallbackUrl": "https://npr-ice.streamguys1.com/live.mp3",
     "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/National_Public_Radio_logo.svg/300px-National_Public_Radio_logo.svg.png",
-    "tags": "news,talk,public radio,npr,current affairs,english",
     "country": "United States",
-    "countrycode": "US",
-    "state": "Washington D.C.",
-    "language": "english",
-    "votes": 4500,
-    "lastchangetime": "2026-10-08 20:00:00",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "news",
+      "talk",
+      "public radio",
+      "npr",
+      "current affairs",
+      "english"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 96,
-    "hls": 0,
-    "lastcheckok": 1,
-    "lastchecktime": "2026-10-08 20:00:00",
-    "clickcount": 9500000
+    "moods": [
+      "NEWS_COMMUTE"
+    ]
   },
   {
-    "stationuuid": "1bfae443-4fa5-45ed-92a5-8aecd6a70756",
+    "id": "1bfae443-4fa5-45ed-92a5-8aecd6a70756",
     "name": "Greatest Hits Radio",
-    "url": "https://stream-mz.hellorayo.co.uk/net2westmidlands.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "url_resolved": "https://stream-mz.hellorayo.co.uk/net2westmidlands.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "homepage": "https://www.hellorayo.co.uk/greatest-hits/west-midlands",
+    "fullName": "Greatest Hits Radio",
+    "streamUrl": "https://stream-mz.hellorayo.co.uk/net2westmidlands.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
+    "fallbackUrl": "https://stream-mz.hellorayo.co.uk/net2westmidlands.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
     "favicon": "https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/381.svg?ver=1545132394",
-    "tags": "",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 82,
-    "votes": 97,
-    "clickcount": 9000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "changeuuid": "lbc-uk-04",
-    "stationuuid": "96200095-0601-11e8-ae97-lbcnewstalk0",
+    "id": "96200095-0601-11e8-ae97-lbcnewstalk0",
     "name": "LBC News & Talk",
-    "url": "https://media-ice.musicradio.com/LBCUKMP3",
-    "url_resolved": "https://media-ice.musicradio.com/LBCUKMP3",
-    "homepage": "https://www.lbc.co.uk",
+    "fullName": "LBC News & Talk",
+    "streamUrl": "https://media-ice.musicradio.com/LBCUKMP3",
+    "fallbackUrl": "https://media-ice.musicradio.com/LBCUKMP3",
     "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/LBC_logo.svg/300px-LBC_logo.svg.png",
-    "tags": "news,talk,lbc,london,english",
     "country": "United Kingdom",
-    "countrycode": "GB",
-    "state": "London",
-    "language": "english",
-    "votes": 3900,
-    "lastchangetime": "2026-10-08 20:00:00",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "news",
+      "talk",
+      "lbc",
+      "london",
+      "english"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "lastcheckok": 1,
-    "lastchecktime": "2026-10-08 20:00:00",
-    "clickcount": 8500000
+    "moods": [
+      "NEWS_COMMUTE"
+    ]
   },
   {
-    "stationuuid": "53733e08-7728-40ee-b968-59e71f0281b6",
+    "id": "53733e08-7728-40ee-b968-59e71f0281b6",
     "name": "KISSTORY: Non-Stop Old Skool & Anthems",
-    "url": "https://live-bauerkiss.sharp-stream.com/kisstory.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
-    "url_resolved": "https://live-bauerkiss.sharp-stream.com/kisstory.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
-    "homepage": "https://www.hellorayo.co.uk/kisstory",
+    "fullName": "KISSTORY: Non-Stop Old Skool & Anthems",
+    "streamUrl": "https://live-bauerkiss.sharp-stream.com/kisstory.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
+    "fallbackUrl": "https://live-bauerkiss.sharp-stream.com/kisstory.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
     "favicon": "https://cdn-profiles.tunein.com/s77960/images/logod.png",
-    "tags": "anthems,bauer radio,classics,dance anthems,dance classics,england,europa,inglaterra",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "anthems",
+      "bauer radio",
+      "classics",
+      "dance anthems",
+      "dance classics",
+      "england",
+      "europa",
+      "inglaterra"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 89,
-    "votes": 96,
-    "clickcount": 8000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "FUN_ENERGY"
+    ]
   },
   {
-    "changeuuid": "smooth-uk-05",
-    "stationuuid": "9608ade8-0601-11e8-ae97-smoothradiou",
+    "id": "9608ade8-0601-11e8-ae97-smoothradiou",
     "name": "Smooth Radio UK",
-    "url": "http://media-ice.musicradio.com/SmoothUKMP3",
-    "url_resolved": "http://media-ice.musicradio.com/SmoothUKMP3",
-    "homepage": "https://www.smoothradio.com",
+    "fullName": "Smooth Radio UK",
+    "streamUrl": "http://media-ice.musicradio.com/SmoothUKMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/SmoothUKMP3",
     "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Smooth_Radio_logo.svg/300px-Smooth_Radio_logo.svg.png",
-    "tags": "calm,chill,smooth,relaxing,adult contemporary,english",
     "country": "United Kingdom",
-    "countrycode": "GB",
-    "state": "London",
-    "language": "english",
-    "votes": 4100,
-    "lastchangetime": "2026-10-08 20:00:00",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "calm",
+      "chill",
+      "smooth",
+      "relaxing",
+      "adult contemporary",
+      "english"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "lastcheckok": 1,
-    "lastchecktime": "2026-10-08 20:00:00",
-    "clickcount": 7800000
+    "moods": [
+      "CALM_CHILL",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "c4077677-dc2f-11e9-a8ba-52543be04c81",
+    "id": "c4077677-dc2f-11e9-a8ba-52543be04c81",
     "name": "Heart 80s",
-    "url": "https://media-ssl.musicradio.com/Heart80sMP3",
-    "url_resolved": "https://media-ssl.musicradio.com/Heart80sMP3",
-    "homepage": "https://www.heart.co.uk/80s",
+    "fullName": "Heart 80s",
+    "streamUrl": "https://media-ssl.musicradio.com/Heart80sMP3",
+    "fallbackUrl": "https://media-ssl.musicradio.com/Heart80sMP3",
     "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "80s,national,pop,public radio,variety",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "80s",
+      "national",
+      "pop",
+      "public radio",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 329,
-    "votes": 35875,
-    "clickcount": 7500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "172d8c95-fecd-40b7-af6f-9cdf4e8829e4",
+    "id": "172d8c95-fecd-40b7-af6f-9cdf4e8829e4",
     "name": "Magic Radio UK",
-    "url": "https://stream-mz.hellorayo.co.uk/magicnational.mp3?direct=true&aw_0_1st.playerid=BMUK_TuneIn&aw_0_1st.skey=7374499933&stationCode=mag",
-    "url_resolved": "https://stream-mz.hellorayo.co.uk/magicnational.mp3?direct=true&aw_0_1st.playerid=BMUK_TuneIn&aw_0_1st.skey=7374499933&stationCode=mag",
-    "homepage": "https://hellorayo.co.uk/magic/play/",
+    "fullName": "Magic Radio UK",
+    "streamUrl": "https://stream-mz.hellorayo.co.uk/magicnational.mp3?direct=true&aw_0_1st.playerid=BMUK_TuneIn&aw_0_1st.skey=7374499933&stationCode=mag",
+    "fallbackUrl": "https://stream-mz.hellorayo.co.uk/magicnational.mp3?direct=true&aw_0_1st.playerid=BMUK_TuneIn&aw_0_1st.skey=7374499933&stationCode=mag",
     "favicon": "https://www.celsoazevedo.com/files/2025/magic.png",
-    "tags": "00s,70s,80s,90s,adult,adult hits,calm,classic hits",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "00s",
+      "70s",
+      "80s",
+      "90s",
+      "adult",
+      "adult hits",
+      "calm",
+      "classic hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 189,
-    "votes": 1126,
-    "clickcount": 7000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "CALM_CHILL",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "942218e4-32f2-4131-8a73-e3432a8cf4d0",
+    "id": "942218e4-32f2-4131-8a73-e3432a8cf4d0",
     "name": "Absolute Radio",
-    "url": "http://stream-ar.planetradio.co.uk/absoluteradiohigh.aac??direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
-    "url_resolved": "http://stream-ar.planetradio.co.uk/absoluteradiohigh.aac??direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
-    "homepage": "https://www.hellorayo.co.uk/absolute-radio",
+    "fullName": "Absolute Radio",
+    "streamUrl": "http://stream-ar.planetradio.co.uk/absoluteradiohigh.aac??direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
+    "fallbackUrl": "http://stream-ar.planetradio.co.uk/absoluteradiohigh.aac??direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
     "favicon": "https://www.radioportal.ecatolico.com/images/stations/absoluteradio.webp",
-    "tags": "adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 251,
-    "votes": 129,
-    "clickcount": 6500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "changeuuid": "chill-uk-06",
-    "stationuuid": "fa76f16f-dc31-11e9-a8ba-chillradiouk",
+    "id": "fa76f16f-dc31-11e9-a8ba-chillradiouk",
     "name": "Chill Radio UK",
-    "url": "http://media-ice.musicradio.com/ChillMP3",
-    "url_resolved": "http://media-ice.musicradio.com/ChillMP3",
-    "homepage": "https://www.chill.fm",
+    "fullName": "Chill Radio UK",
+    "streamUrl": "http://media-ice.musicradio.com/ChillMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/ChillMP3",
     "favicon": "https://media.info/m/c/f/4/3/2/chill-logo-original.png",
-    "tags": "chill,calm,ambient,lofi,chillout,relaxing,english",
     "country": "United Kingdom",
-    "countrycode": "GB",
-    "state": "London",
-    "language": "english",
-    "votes": 3600,
-    "lastchangetime": "2026-10-08 20:00:00",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "chill",
+      "calm",
+      "ambient",
+      "lofi",
+      "chillout",
+      "relaxing",
+      "english"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "lastcheckok": 1,
-    "lastchecktime": "2026-10-08 20:00:00",
-    "clickcount": 6200000
+    "moods": [
+      "CALM_CHILL"
+    ]
   },
   {
-    "stationuuid": "9617bbd8-0601-11e8-ae97-52543be04c81",
+    "id": "9617bbd8-0601-11e8-ae97-52543be04c81",
     "name": "Radio X",
-    "url": "http://media-the.musicradio.com/RadioXUK",
-    "url_resolved": "http://media-the.musicradio.com/RadioXUK",
-    "homepage": "http://www.radiox.co.uk/",
+    "fullName": "Radio X",
+    "streamUrl": "http://media-the.musicradio.com/RadioXUK",
+    "fallbackUrl": "http://media-the.musicradio.com/RadioXUK",
     "favicon": "http://www.radiox.co.uk/assets_v4r/xfm/img/favicon-196x196.png",
-    "tags": "indie,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "indie",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 133,
-    "votes": 5180,
-    "clickcount": 6000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "0f8f58d2-07e3-4ddb-af14-918a3e90369a",
+    "id": "0f8f58d2-07e3-4ddb-af14-918a3e90369a",
     "name": "Hits Radio UK",
-    "url": "https://stream-al.hellorayo.co.uk/key.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "url_resolved": "https://stream-al.hellorayo.co.uk/key.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "homepage": "https://www.hellorayo.co.uk/hits-radio",
-    "favicon": "",
-    "tags": "",
+    "fullName": "Hits Radio UK",
+    "streamUrl": "https://stream-al.hellorayo.co.uk/key.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
+    "fallbackUrl": "https://stream-al.hellorayo.co.uk/key.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
+    "favicon": "https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/379.svg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 88,
-    "votes": 18,
-    "clickcount": 5500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "f2547182-2dab-4ad2-b4d8-bb03533c2e9c",
+    "id": "f2547182-2dab-4ad2-b4d8-bb03533c2e9c",
     "name": "BBC Radio 1 Dance (128k)",
-    "url": "http://as-hls-ww-live.akamaized.net/pool_62063831/live/ww/bbc_radio_one_dance/bbc_radio_one_dance.isml/bbc_radio_one_dance-audio%3d128000.norewind.m3u8",
-    "url_resolved": "http://as-hls-ww-live.akamaized.net/pool_62063831/live/ww/bbc_radio_one_dance/bbc_radio_one_dance.isml/bbc_radio_one_dance-audio%3d128000.norewind.m3u8",
-    "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_one_dance",
+    "fullName": "BBC Radio 1 Dance (128k)",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_62063831/live/ww/bbc_radio_one_dance/bbc_radio_one_dance.isml/bbc_radio_one_dance-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_62063831/live/ww/bbc_radio_one_dance/bbc_radio_one_dance.isml/bbc_radio_one_dance-audio%3d128000.norewind.m3u8",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s24939q.png",
-    "tags": "dance,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "dance",
+      "pop"
+    ],
+    "isHls": true,
     "codec": "AAC",
-    "bitrate": 0,
-    "votes": 1054,
-    "clickcount": 5000000,
-    "hls": 1,
-    "lastcheckok": 1
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "308d38c6-e8a4-41e9-8ffe-9be2623826a4",
+    "id": "308d38c6-e8a4-41e9-8ffe-9be2623826a4",
     "name": "BBC Radio 1Xtra (128k)",
-    "url": "http://as-hls-ww-live.akamaized.net/pool_92079267/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d128000.norewind.m3u8",
-    "url_resolved": "http://as-hls-ww-live.akamaized.net/pool_92079267/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d128000.norewind.m3u8",
-    "homepage": "https://www.bbc.co.uk/1xtra",
+    "fullName": "BBC Radio 1Xtra (128k)",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_92079267/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_92079267/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d128000.norewind.m3u8",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s20277q.png",
-    "tags": "black music,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "black music",
+      "pop"
+    ],
+    "isHls": true,
     "codec": "AAC",
-    "bitrate": 0,
-    "votes": 947,
-    "clickcount": 4800000,
-    "hls": 1,
-    "lastcheckok": 1
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "52bb00fe-dc31-11e9-a8ba-52543be04c81",
+    "id": "52bb00fe-dc31-11e9-a8ba-52543be04c81",
     "name": "Heart 90s",
-    "url": "https://media-ssl.musicradio.com/Heart90sMP3",
-    "url_resolved": "https://media-ssl.musicradio.com/Heart90sMP3",
-    "homepage": "https://www.heart.co.uk/90s",
+    "fullName": "Heart 90s",
+    "streamUrl": "https://media-ssl.musicradio.com/Heart90sMP3",
+    "fallbackUrl": "https://media-ssl.musicradio.com/Heart90sMP3",
     "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "90s,national,pop,public radio,variety",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "90s",
+      "national",
+      "pop",
+      "public radio",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 365,
-    "votes": 12298,
-    "clickcount": 4500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "e7205cd4-dc30-11e9-a8ba-52543be04c81",
+    "id": "e7205cd4-dc30-11e9-a8ba-52543be04c81",
     "name": "Heart 70s",
-    "url": "https://media-ssl.musicradio.com/Heart70sMP3",
-    "url_resolved": "https://media-ssl.musicradio.com/Heart70sMP3",
-    "homepage": "https://www.heart.co.uk/70s",
-    "favicon": "",
-    "tags": "70s,national,pop,public radio,variety",
+    "fullName": "Heart 70s",
+    "streamUrl": "https://media-ssl.musicradio.com/Heart70sMP3",
+    "fallbackUrl": "https://media-ssl.musicradio.com/Heart70sMP3",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "70s",
+      "national",
+      "pop",
+      "public radio",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 355,
-    "votes": 18715,
-    "clickcount": 4300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "fa76f16f-dc31-11e9-a8ba-52543be04c81",
+    "id": "fa76f16f-dc31-11e9-a8ba-52543be04c81",
     "name": "Heart Dance",
-    "url": "https://media-ssl.musicradio.com/HeartDanceMP3",
-    "url_resolved": "https://media-ssl.musicradio.com/HeartDanceMP3",
-    "homepage": "https://www.heart.co.uk/dance",
+    "fullName": "Heart Dance",
+    "streamUrl": "https://media-ssl.musicradio.com/HeartDanceMP3",
+    "fallbackUrl": "https://media-ssl.musicradio.com/HeartDanceMP3",
     "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "dance,national,pop,public radio,variety",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "dance",
+      "national",
+      "pop",
+      "public radio",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 357,
-    "votes": 12568,
-    "clickcount": 4200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "ea5d9964-6b60-4f75-a95d-2bc5217d245b",
+    "id": "ea5d9964-6b60-4f75-a95d-2bc5217d245b",
     "name": "Heart 00s",
-    "url": "https://media-ssl.musicradio.com/Heart00sMP3",
-    "url_resolved": "https://media-ssl.musicradio.com/Heart00sMP3",
-    "homepage": "https://media-ssl.musicradio.com/Heart00sMP3",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "Heart 00s",
+    "streamUrl": "https://media-ssl.musicradio.com/Heart00sMP3",
+    "fallbackUrl": "https://media-ssl.musicradio.com/Heart00sMP3",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 356,
-    "votes": 121,
-    "clickcount": 4000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "f45705b5-0410-46a7-bf0e-cbb83d4315d2",
+    "id": "f45705b5-0410-46a7-bf0e-cbb83d4315d2",
     "name": "Heart 10s",
-    "url": "https://media-ice.musicradio.com/Heart10sMP3",
-    "url_resolved": "https://media-ice.musicradio.com/Heart10sMP3",
-    "homepage": "https://www.heart.co.uk/10s/",
-    "favicon": "",
-    "tags": "10s,2010s,adult contemporary",
+    "fullName": "Heart 10s",
+    "streamUrl": "https://media-ice.musicradio.com/Heart10sMP3",
+    "fallbackUrl": "https://media-ice.musicradio.com/Heart10sMP3",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "10s",
+      "2010s",
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 358,
-    "votes": 32,
-    "clickcount": 3800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "9c8f6141-f8e8-4779-bfed-5a79e14ed4dd",
+    "id": "9c8f6141-f8e8-4779-bfed-5a79e14ed4dd",
     "name": "KISS DANCE: The Biggest Dance Anthems 24/7",
-    "url": "https://stream-kiss.hellorayo.co.uk/kissdance.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "url_resolved": "https://stream-kiss.hellorayo.co.uk/kissdance.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "homepage": "https://www.hellorayo.co.uk/kiss-dance",
+    "fullName": "KISS DANCE: The Biggest Dance Anthems 24/7",
+    "streamUrl": "https://stream-kiss.hellorayo.co.uk/kissdance.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
+    "fallbackUrl": "https://stream-kiss.hellorayo.co.uk/kissdance.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
     "favicon": "https://cdn-profiles.tunein.com/s321341/images/logod.png",
-    "tags": "anthems,bauer radio,club dance,dab,dab+,dance,dance anthems,dance music",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "anthems",
+      "bauer radio",
+      "club dance",
+      "dab",
+      "dab+",
+      "dance",
+      "dance anthems",
+      "dance music"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 240,
-    "votes": 57,
-    "clickcount": 3700000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "c78f16b7-2e96-4560-912c-0fd2313e3d2f",
+    "id": "c78f16b7-2e96-4560-912c-0fd2313e3d2f",
     "name": "BBC Radio 1 Anthems (128k)",
-    "url": "http://as-hls-ww-live.akamaized.net/pool_11351741/live/ww/bbc_radio_one_anthems/bbc_radio_one_anthems.isml/bbc_radio_one_anthems-audio%3d128000.norewind.m3u8",
-    "url_resolved": "http://as-hls-ww-live.akamaized.net/pool_11351741/live/ww/bbc_radio_one_anthems/bbc_radio_one_anthems.isml/bbc_radio_one_anthems-audio%3d128000.norewind.m3u8",
-    "homepage": "https://www.bbc.co.uk/radio1anthems",
+    "fullName": "BBC Radio 1 Anthems (128k)",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_11351741/live/ww/bbc_radio_one_anthems/bbc_radio_one_anthems.isml/bbc_radio_one_anthems-audio%3d128000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_11351741/live/ww/bbc_radio_one_anthems/bbc_radio_one_anthems.isml/bbc_radio_one_anthems-audio%3d128000.norewind.m3u8",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s24939q.png",
-    "tags": "anthems,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "anthems",
+      "pop"
+    ],
+    "isHls": true,
     "codec": "AAC",
-    "bitrate": 0,
-    "votes": 196,
-    "clickcount": 3500000,
-    "hls": 1,
-    "lastcheckok": 1
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "e3be401b-96d2-42b2-bbcd-a5d9591941b7",
+    "id": "e3be401b-96d2-42b2-bbcd-a5d9591941b7",
     "name": "103.5 KISS FM - WKSC-FM Chicago",
-    "url": "https://stream.revma.ihrhls.com/zc849",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc849",
-    "homepage": "https://1035kissfm.iheart.com/",
+    "fullName": "103.5 KISS FM - WKSC-FM Chicago",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc849",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc849",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/6040110a9538edc2d6937e84?ops=gravity(%22center%22),contain(360,360)&quality=80",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 147,
-    "votes": 152,
-    "clickcount": 3400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "76ad00ee-219f-4a47-9403-9d62ba311b6f",
+    "id": "76ad00ee-219f-4a47-9403-9d62ba311b6f",
     "name": "KISS 108 WXKS FM 107.9 Boston",
-    "url": "http://stream.revma.ihrhls.com/zc1097",
-    "url_resolved": "http://stream.revma.ihrhls.com/zc1097",
-    "homepage": "https://kiss108.iheart.com/",
+    "fullName": "KISS 108 WXKS FM 107.9 Boston",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc1097",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc1097",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5e5ee49ea6114875b0bda028?ops=gravity(%22center%22),contain(360,360)&quality=80",
-    "tags": "hits,hot adult contemporary,pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "hot adult contemporary",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 152,
-    "votes": 73,
-    "clickcount": 3300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "7b5d8958-1d82-4538-af1b-7db760ba87af",
+    "id": "7b5d8958-1d82-4538-af1b-7db760ba87af",
     "name": "Q102 - WIOQ-FM 102.1 Philladelphia",
-    "url": "https://stream.revma.ihrhls.com/zc1997",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1997",
-    "homepage": "https://q102.iheart.com/",
+    "fullName": "Q102 - WIOQ-FM 102.1 Philladelphia",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1997",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1997",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5a85a4332763a77576a7f57a?ops=gravity(%22center%22),contain(360,360)&quality=80",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 155,
-    "votes": 17,
-    "clickcount": 3200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "58aa2d3d-77be-4b16-bb70-71caf25d810d",
+    "id": "58aa2d3d-77be-4b16-bb70-71caf25d810d",
     "name": "Channel 955",
-    "url": "https://stream.revma.ihrhls.com/zc1145",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1145",
-    "homepage": "https://channel955.iheart.com/",
+    "fullName": "Channel 955",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1145",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1145",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5f696817a443e1ddcde543a0?ops=gravity(%22center%22),contain(32,32),quality(65)",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 145,
-    "votes": 118,
-    "clickcount": 3100000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "c08d22c3-497c-4ced-8de9-fafb7297977f",
+    "id": "c08d22c3-497c-4ced-8de9-fafb7297977f",
     "name": "Y100 WHYI FM 100.7 Miami",
-    "url": "http://stream.revma.ihrhls.com/zc561",
-    "url_resolved": "http://stream.revma.ihrhls.com/zc561",
-    "homepage": "https://y100.iheart.com/",
+    "fullName": "Y100 WHYI FM 100.7 Miami",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc561",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc561",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/595280b976e0f91570a4e614?ops=gravity(%22center%22),contain(360,360)&quality=80",
-    "tags": "hits,hot adult contemporary,pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "hot adult contemporary",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 111,
-    "votes": 330,
-    "clickcount": 3000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "dbeea354-e9ed-43dc-b7e6-e83c1955e5a7",
+    "id": "dbeea354-e9ed-43dc-b7e6-e83c1955e5a7",
     "name": "106.1 KISS FM Seattle",
-    "url": "https://stream.revma.ihrhls.com/zc4257",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc4257",
-    "homepage": "https://kissfmseattle.iheart.com/",
+    "fullName": "106.1 KISS FM Seattle",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc4257",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc4257",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5f3e24545eacd47f0c407f1b?ops=gravity(%22center%22),contain(32,32),quality(65)",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 147,
-    "votes": 886,
-    "clickcount": 2900000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "5acefb90-15c1-4ace-b7ed-e595cc907b1e",
+    "id": "5acefb90-15c1-4ace-b7ed-e595cc907b1e",
     "name": "93.3 FLZ",
-    "url": "http://stream.revma.ihrhls.com/zc681",
-    "url_resolved": "http://stream.revma.ihrhls.com/zc681",
-    "homepage": "https://933flz.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/5ed155c799eec49de34e1023?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "top 40",
+    "fullName": "93.3 FLZ",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc681",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc681",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/5ed155c799eec49de34e1023?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 154,
-    "votes": 75,
-    "clickcount": 2800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "e03dd1dd-49b6-4afd-8579-f18bcb9eeab6",
+    "id": "e03dd1dd-49b6-4afd-8579-f18bcb9eeab6",
     "name": "93.9 WLIT-FM LITE FM",
-    "url": "https://stream.revma.ihrhls.com/zc853",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc853",
-    "homepage": "https://939litefm.iheart.com/",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "93.9 WLIT-FM LITE FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc853",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc853",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 138,
-    "votes": 126,
-    "clickcount": 2700000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "CALM_CHILL"
+    ]
   },
   {
-    "stationuuid": "a5b9da01-b675-4ecc-9e2a-435b00a1b886",
+    "id": "a5b9da01-b675-4ecc-9e2a-435b00a1b886",
     "name": "HITS 96.1",
-    "url": "https://stream.revma.ihrhls.com/zc1601",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1601",
-    "homepage": "https://hits961.iheart.com/",
+    "fullName": "HITS 96.1",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1601",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1601",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5dbc332486bfbe65f2da1237?ops=gravity(%22center%22),contain(32,32),quality(65)",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 153,
-    "votes": 80,
-    "clickcount": 2600000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "9a05abfa-5013-4a9b-aa21-befce068cbcf",
+    "id": "9a05abfa-5013-4a9b-aa21-befce068cbcf",
     "name": "100.3 KISS FM",
-    "url": "https://stream.revma.ihrhls.com/zc1629",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1629",
-    "homepage": "https://1003kissfm.iheart.com/",
+    "fullName": "100.3 KISS FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1629",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1629",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/603e5a2a4bb413272bf15fca?ops=gravity(%22center%22),contain(32,32),quality(65)",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 150,
-    "votes": 741,
-    "clickcount": 2500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "cacf6613-10e5-483f-ba98-17c15bb823b9",
+    "id": "cacf6613-10e5-483f-ba98-17c15bb823b9",
     "name": "101.9 KISS FM",
-    "url": "https://stream.revma.ihrhls.com/zc4864",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc4864",
-    "homepage": "https://1019kissfm.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/64550dbc69b3a602416192b8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "101.9 KISS FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc4864",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc4864",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/64550dbc69b3a602416192b8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 149,
-    "votes": 489,
-    "clickcount": 2400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "c3d8d912-fe80-4620-88b8-ea4abd7122c6",
+    "id": "c3d8d912-fe80-4620-88b8-ea4abd7122c6",
     "name": "107.5 KISS FM",
-    "url": "https://stream.revma.ihrhls.com/zc2740",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc2740",
-    "homepage": "https://1075kissfm.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/5c251d5a6395ee2ae15bf8f8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "107.5 KISS FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc2740",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc2740",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/5c251d5a6395ee2ae15bf8f8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 148,
-    "votes": 429,
-    "clickcount": 2400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "edf46093-7150-4e7a-81ee-27662665ae56",
+    "id": "edf46093-7150-4e7a-81ee-27662665ae56",
     "name": "96.1 KISS FM",
-    "url": "https://stream.revma.ihrhls.com/zc1333",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1333",
-    "homepage": "https://961kissonline.iheart.com/",
+    "fullName": "96.1 KISS FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1333",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1333",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/609980bbc5876abd3347a3b9?ops=gravity(%22center%22),contain(32,32),quality(65)",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 151,
-    "votes": 201,
-    "clickcount": 2400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "46e7c646-4581-4af8-9ed5-6810ab42852c",
+    "id": "46e7c646-4581-4af8-9ed5-6810ab42852c",
     "name": "98.9 KISS-FM",
-    "url": "https://stream.revma.ihrhls.com/zc3387",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc3387",
-    "homepage": "https://kisslouisville.iheart.com/",
+    "fullName": "98.9 KISS-FM",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc3387",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc3387",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5e1e38c8a5c5b9a85dbf29f6?ops=gravity(%22center%22),contain(32,32),quality(65)",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 153,
-    "votes": 110,
-    "clickcount": 2300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "95a0d825-58c3-44b7-8bb0-f304f1b573f1",
+    "id": "95a0d825-58c3-44b7-8bb0-f304f1b573f1",
     "name": "96.7 KISS FM - KHFI-FM Austin",
-    "url": "https://stream.revma.ihrhls.com/zc2173",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc2173",
-    "homepage": "https://967kissfm.iheart.com/",
+    "fullName": "96.7 KISS FM - KHFI-FM Austin",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc2173",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc2173",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/633c3a4382d1a3695a106c61?ops=gravity(%22center%22),contain(360,360)&quality=80",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 149,
-    "votes": 88,
-    "clickcount": 2300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "68107adc-b7db-4df1-9af4-271ff8b6fa45",
+    "id": "68107adc-b7db-4df1-9af4-271ff8b6fa45",
     "name": "95.9 KISS FM",
-    "url": "https://woodward-radio.streamb.live/SB00132?args=web_01&starttime=1702970697",
-    "url_resolved": "https://woodward-radio.streamb.live/SB00132?args=web_01&starttime=1702970697",
-    "homepage": "https://www.959kissfm.com/",
-    "favicon": "",
-    "tags": "pop,pop dance,pop music",
+    "fullName": "95.9 KISS FM",
+    "streamUrl": "https://woodward-radio.streamb.live/SB00132?args=web_01&starttime=1702970697",
+    "fallbackUrl": "https://woodward-radio.streamb.live/SB00132?args=web_01&starttime=1702970697",
+    "favicon": "https://cdn-profiles.tunein.com/s6004/images/logod.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "pop dance",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 248,
-    "votes": 28,
-    "clickcount": 2300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "690f07e6-1331-4610-b09a-29ac642af0f2",
+    "id": "690f07e6-1331-4610-b09a-29ac642af0f2",
     "name": "102.7 KISS FM WEGR Memphis",
-    "url": "http://stream.revma.ihrhls.com/zc2133",
-    "url_resolved": "http://stream.revma.ihrhls.com/zc2133",
-    "homepage": "https://1027kissfm.iheart.com/",
+    "fullName": "102.7 KISS FM WEGR Memphis",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc2133",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc2133",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/64550dbc69b3a602416192b8?ops=gravity(%22center%22),contain(360,360)&quality=80",
-    "tags": "hits,hot adult contemporary,pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "hot adult contemporary",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 149,
-    "votes": 166,
-    "clickcount": 2200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "a8b79496-59dc-4de2-8d4f-be856b877a77",
+    "id": "a8b79496-59dc-4de2-8d4f-be856b877a77",
     "name": "103.5 KISSFM Boise",
-    "url": "https://live.amperwave.net/direct/townsquare-ksasfmaac-ibc3",
-    "url_resolved": "https://live.amperwave.net/direct/townsquare-ksasfmaac-ibc3",
-    "homepage": "https://1035kissfmboise.com/",
+    "fullName": "103.5 KISSFM Boise",
+    "streamUrl": "https://live.amperwave.net/direct/townsquare-ksasfmaac-ibc3",
+    "fallbackUrl": "https://live.amperwave.net/direct/townsquare-ksasfmaac-ibc3",
     "favicon": "https://townsquare.media/site/737/files/2018/08/ksasfm-logo-v2.png",
-    "tags": "boise,commercial,contemporary hit radio,contemporary hits radio,hip hop,hip-hop,hiphop,pop",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "boise",
+      "commercial",
+      "contemporary hit radio",
+      "contemporary hits radio",
+      "hip hop",
+      "hip-hop",
+      "hiphop",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 143,
-    "votes": 5,
-    "clickcount": 2200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "9b3a5084-91ba-4d90-ac06-3e0ba8c50d67",
+    "id": "9b3a5084-91ba-4d90-ac06-3e0ba8c50d67",
     "name": "Gold Radio UK",
-    "url": "https://media-ice.musicradio.com/GoldMP3",
-    "url_resolved": "https://media-ice.musicradio.com/GoldMP3",
-    "homepage": "https://www.goldradio.com/?page=2",
-    "favicon": "",
-    "tags": "golden oldies,pop",
+    "fullName": "Gold Radio UK",
+    "streamUrl": "https://media-ice.musicradio.com/GoldMP3",
+    "fallbackUrl": "https://media-ice.musicradio.com/GoldMP3",
+    "favicon": "https://www.mygoldmusic.co.uk/assets_v4r/gold/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "golden oldies",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 358,
-    "votes": 152,
-    "clickcount": 2100000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "961796d7-0601-11e8-ae97-52543be04c81",
+    "id": "961796d7-0601-11e8-ae97-52543be04c81",
     "name": "Radio X Manchester",
-    "url": "http://media-the.musicradio.com/RadioXManchester",
-    "url_resolved": "http://media-the.musicradio.com/RadioXManchester",
-    "homepage": "http://www.radiox.co.uk/",
+    "fullName": "Radio X Manchester",
+    "streamUrl": "http://media-the.musicradio.com/RadioXManchester",
+    "fallbackUrl": "http://media-the.musicradio.com/RadioXManchester",
     "favicon": "http://www.radiox.co.uk/assets_v4r/xfm/img/favicon-196x196.png",
-    "tags": "",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 139,
-    "votes": 4640,
-    "clickcount": 2000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "9605383a-0601-11e8-ae97-52543be04c81",
+    "id": "9605383a-0601-11e8-ae97-52543be04c81",
     "name": "Radio X London",
-    "url": "http://media-the.musicradio.com/RadioXLondon",
-    "url_resolved": "http://media-the.musicradio.com/RadioXLondon",
-    "homepage": "http://www.radiox.co.uk/",
+    "fullName": "Radio X London",
+    "streamUrl": "http://media-the.musicradio.com/RadioXLondon",
+    "fallbackUrl": "http://media-the.musicradio.com/RadioXLondon",
     "favicon": "http://www.radiox.co.uk/assets_v4r/xfm/img/favicon-196x196.png",
-    "tags": "guitar rock,london",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "guitar rock",
+      "london"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 134,
-    "votes": 1103,
-    "clickcount": 2000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "b2ad284d-bef1-4f68-8bbd-14195092ea5f",
+    "id": "b2ad284d-bef1-4f68-8bbd-14195092ea5f",
     "name": "Greatest Hits Radio 60s",
-    "url": "https://stream-al.hellorayo.co.uk/ghr60s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "url_resolved": "https://stream-al.hellorayo.co.uk/ghr60s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "homepage": "https://www.hellorayo.co.uk/greatest-hits-60s",
+    "fullName": "Greatest Hits Radio 60s",
+    "streamUrl": "https://stream-al.hellorayo.co.uk/ghr60s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
+    "fallbackUrl": "https://stream-al.hellorayo.co.uk/ghr60s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
     "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1725015216/brand_manager/stations/pqnbvpmvgj7jnsopgpix.svg",
-    "tags": "greatest hits",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "greatest hits"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 92,
-    "votes": 51,
-    "clickcount": 1900000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "4cb7a690-b0cc-4259-8aac-4674c69da10e",
+    "id": "4cb7a690-b0cc-4259-8aac-4674c69da10e",
     "name": "Greatest Hits Radio 80s",
-    "url": "https://stream-al.hellorayo.co.uk/ghr80s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "url_resolved": "https://stream-al.hellorayo.co.uk/ghr80s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "homepage": "https://www.hellorayo.co.uk/greatest-hits-radio-80s",
+    "fullName": "Greatest Hits Radio 80s",
+    "streamUrl": "https://stream-al.hellorayo.co.uk/ghr80s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
+    "fallbackUrl": "https://stream-al.hellorayo.co.uk/ghr80s.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
     "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1741162714/brand_manager/stations/tmeuw7bt9gwnbkuxpjab.png",
-    "tags": "80s,greatest hits",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "80s",
+      "greatest hits"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 90,
-    "votes": 31,
-    "clickcount": 1900000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "7f7e3c30-08f0-4f52-a0a0-653d5a184800",
+    "id": "7f7e3c30-08f0-4f52-a0a0-653d5a184800",
     "name": "Absolute Radio 90s",
-    "url": "http://stream-ar.planetradio.co.uk/absolute90shigh.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
-    "url_resolved": "http://stream-ar.planetradio.co.uk/absolute90shigh.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
-    "homepage": "https://www.hellorayo.co.uk/absolute-radio-90s",
+    "fullName": "Absolute Radio 90s",
+    "streamUrl": "http://stream-ar.planetradio.co.uk/absolute90shigh.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
+    "fallbackUrl": "http://stream-ar.planetradio.co.uk/absolute90shigh.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992&aw_0_1st.bauer_loggedin=true",
     "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1678796943/brand_manager/stations/ptydn13uvtcw7aa0t3cx.png",
-    "tags": "90s radio",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "90s radio"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 249,
-    "votes": 92,
-    "clickcount": 1800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "c6c204d3-3ffd-4e85-b0f9-29bf6de7ddf4",
+    "id": "c6c204d3-3ffd-4e85-b0f9-29bf6de7ddf4",
     "name": "Absolute Radio 80s",
-    "url": "https://stream-ar.hellorayo.co.uk/absolute80shigh.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "url_resolved": "https://stream-ar.hellorayo.co.uk/absolute80shigh.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
-    "homepage": "https://www.hellorayo.co.uk/absolute-80s",
+    "fullName": "Absolute Radio 80s",
+    "streamUrl": "https://stream-ar.hellorayo.co.uk/absolute80shigh.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
+    "fallbackUrl": "https://stream-ar.hellorayo.co.uk/absolute80shigh.aac?aw_0_1st.skey=1602676850&direct=true&rp_source=1",
     "favicon": "https://media.bauerradio.com/image/upload/c_crop,g_custom/v1717682143/brand_manager/stations/d8fpii0yfv7fimdhxqp1.png",
-    "tags": "80s",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "80s"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 249,
-    "votes": 37,
-    "clickcount": 1800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "18853cb8-0c81-4bb8-959c-545c115af7d7",
+    "id": "18853cb8-0c81-4bb8-959c-545c115af7d7",
     "name": "Absolute Radio 10s",
-    "url": "https://stream-ar.hellorayo.co.uk/absolute10s.aac?direct=true&aw_0_1st.skey=1602676850&aw_0_awz.listenerid=~LSID~&aw_0_1st.platform=~PLATFORM~&aw_0_1st.playerid=~PLAYER_ID~&aw_0_awz.appVers=~APPVERSION~&aw_0_1st.bauer_preroll=~REQUEST_PREROLL~&aw_0_1st.in_car=~IN_CAR~&lat=~LAT~&lon=~LONG~&aw_0_req.userConsentV2=~TCSTRING~&=&&___cb=850509090209086",
-    "url_resolved": "https://stream-ar.hellorayo.co.uk/absolute10s.aac?direct=true&aw_0_1st.skey=1602676850&aw_0_awz.listenerid=~LSID~&aw_0_1st.platform=~PLATFORM~&aw_0_1st.playerid=~PLAYER_ID~&aw_0_awz.appVers=~APPVERSION~&aw_0_1st.bauer_preroll=~REQUEST_PREROLL~&aw_0_1st.in_car=~IN_CAR~&lat=~LAT~&lon=~LONG~&aw_0_req.userConsentV2=~TCSTRING~&=&&___cb=850509090209086",
-    "homepage": "https://radioplayer.planetradio.co.uk/ab1",
+    "fullName": "Absolute Radio 10s",
+    "streamUrl": "https://stream-ar.hellorayo.co.uk/absolute10s.aac?direct=true&aw_0_1st.skey=1602676850&aw_0_awz.listenerid=~LSID~&aw_0_1st.platform=~PLATFORM~&aw_0_1st.playerid=~PLAYER_ID~&aw_0_awz.appVers=~APPVERSION~&aw_0_1st.bauer_preroll=~REQUEST_PREROLL~&aw_0_1st.in_car=~IN_CAR~&lat=~LAT~&lon=~LONG~&aw_0_req.userConsentV2=~TCSTRING~&=&&___cb=850509090209086",
+    "fallbackUrl": "https://stream-ar.hellorayo.co.uk/absolute10s.aac?direct=true&aw_0_1st.skey=1602676850&aw_0_awz.listenerid=~LSID~&aw_0_1st.platform=~PLATFORM~&aw_0_1st.playerid=~PLAYER_ID~&aw_0_awz.appVers=~APPVERSION~&aw_0_1st.bauer_preroll=~REQUEST_PREROLL~&aw_0_1st.in_car=~IN_CAR~&lat=~LAT~&lon=~LONG~&aw_0_req.userConsentV2=~TCSTRING~&=&&___cb=850509090209086",
     "favicon": "https://radioplayer.planetradio.co.uk/assets/favicon.png",
-    "tags": "10s,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "10s",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 90,
-    "votes": 8,
-    "clickcount": 1800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "19b250fe-9027-4caf-b6ea-33022f0b6392",
+    "id": "19b250fe-9027-4caf-b6ea-33022f0b6392",
     "name": "KISSTORY R&B: The Hottest R&B tracks from KISSTORY",
-    "url": "https://live-bauerkiss.sharp-stream.com/kisstoryrb.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
-    "url_resolved": "https://live-bauerkiss.sharp-stream.com/kisstoryrb.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
-    "homepage": "https://www.hellorayo.co.uk/kisstory-rnb",
+    "fullName": "KISSTORY R&B: The Hottest R&B tracks from KISSTORY",
+    "streamUrl": "https://live-bauerkiss.sharp-stream.com/kisstoryrb.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
+    "fallbackUrl": "https://live-bauerkiss.sharp-stream.com/kisstoryrb.aac?direct=true&aw_0_1st.playerid=BMUK_Airable&aw_0_1st.skey=6778249992",
     "favicon": "https://cdn-profiles.tunein.com/s333201/images/logod.png",
-    "tags": "anthems,bauer radio,black music,classics,england,europe,kiss,kiss fm",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "anthems",
+      "bauer radio",
+      "black music",
+      "classics",
+      "england",
+      "europe",
+      "kiss",
+      "kiss fm"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 247,
-    "votes": 39,
-    "clickcount": 1700000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "abb48ea5-7aaf-460c-bf04-7fe3b7f10bb7",
+    "id": "abb48ea5-7aaf-460c-bf04-7fe3b7f10bb7",
     "name": "KISS XTRA: Black Music & Culture",
-    "url": "https://live-bauerkiss.sharp-stream.com/kissfresh.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "url_resolved": "https://live-bauerkiss.sharp-stream.com/kissfresh.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "homepage": "https://www.hellorayo.co.uk/kiss-xtra",
+    "fullName": "KISS XTRA: Black Music & Culture",
+    "streamUrl": "https://live-bauerkiss.sharp-stream.com/kissfresh.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
+    "fallbackUrl": "https://live-bauerkiss.sharp-stream.com/kissfresh.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
     "favicon": "https://cdn-profiles.tunein.com/s198663/images/logod.png",
-    "tags": "bauer radio,contemporary r&b,dab,digital radio,england,entertainment,europe,hip hop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "bauer radio",
+      "contemporary r&b",
+      "dab",
+      "digital radio",
+      "england",
+      "entertainment",
+      "europe",
+      "hip hop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 92,
-    "votes": 12,
-    "clickcount": 1700000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "9610b29f-0601-11e8-ae97-52543be04c81",
+    "id": "9610b29f-0601-11e8-ae97-52543be04c81",
     "name": "Capital FM Manchester",
-    "url": "http://ice-the.musicradio.com/CapitalManchester",
-    "url_resolved": "http://ice-the.musicradio.com/CapitalManchester",
-    "homepage": "http://www.capitalfm.com/manchester/",
+    "fullName": "Capital FM Manchester",
+    "streamUrl": "http://ice-the.musicradio.com/CapitalManchester",
+    "fallbackUrl": "http://ice-the.musicradio.com/CapitalManchester",
     "favicon": "http://www.capitalfm.com/assets_v4r/capital/img/favicon-196x196.png",
-    "tags": "manchester,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "manchester",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 128,
-    "votes": 436,
-    "clickcount": 1600000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "963d0626-0601-11e8-ae97-52543be04c81",
+    "id": "963d0626-0601-11e8-ae97-52543be04c81",
     "name": "Capital FM AAC",
-    "url": "http://ice-the.musicradio.com/Capital",
-    "url_resolved": "http://ice-the.musicradio.com/Capital",
-    "homepage": "http://www.capitalfm.com/",
+    "fullName": "Capital FM AAC",
+    "streamUrl": "http://ice-the.musicradio.com/Capital",
+    "fallbackUrl": "http://ice-the.musicradio.com/Capital",
     "favicon": "http://www.capitalfm.com/assets_v4r/capital/img/favicon-196x196.png",
-    "tags": "top 40",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 133,
-    "votes": 220,
-    "clickcount": 1600000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "9610b35a-0601-11e8-ae97-52543be04c81",
+    "id": "9610b35a-0601-11e8-ae97-52543be04c81",
     "name": "Capital FM Edinburgh",
-    "url": "http://ice-sov.musicradio.com/CapitalEdinburghMP3",
-    "url_resolved": "http://ice-sov.musicradio.com/CapitalEdinburghMP3",
-    "homepage": "http://www.capitalfm.com/edinburgh/",
-    "favicon": "",
-    "tags": "edinburgh,pop",
+    "fullName": "Capital FM Edinburgh",
+    "streamUrl": "http://ice-sov.musicradio.com/CapitalEdinburghMP3",
+    "fallbackUrl": "http://ice-sov.musicradio.com/CapitalEdinburghMP3",
+    "favicon": "http://assets6.capitalfm.com/2016/11/capital-3d-network-logo-large-canvas-1458228638-herowidev4-0.jpg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "edinburgh",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 355,
-    "votes": 146,
-    "clickcount": 1600000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "3ef1064d-ecaf-4786-aa35-25d7bb752402",
+    "id": "3ef1064d-ecaf-4786-aa35-25d7bb752402",
     "name": "Capital FM Nottinghamshire",
-    "url": "http://icecast.thisisdax.com/CapitalNottinghamshire",
-    "url_resolved": "http://icecast.thisisdax.com/CapitalNottinghamshire",
-    "homepage": "https://www.capitalfm.com/nottinghamshire",
+    "fullName": "Capital FM Nottinghamshire",
+    "streamUrl": "http://icecast.thisisdax.com/CapitalNottinghamshire",
+    "fallbackUrl": "http://icecast.thisisdax.com/CapitalNottinghamshire",
     "favicon": "https://www.capitalfm.com/assets_v4r/capital/img/favicon-196x196.png",
-    "tags": "charts,english,hits,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "charts",
+      "english",
+      "hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 133,
-    "votes": 33,
-    "clickcount": 1600000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "961bffaf-0601-11e8-ae97-52543be04c81",
+    "id": "961bffaf-0601-11e8-ae97-52543be04c81",
     "name": "Heart Essex 96.3 & 102.6",
-    "url": "http://ice-sov.musicradio.com/HeartEssexMP3",
-    "url_resolved": "http://ice-sov.musicradio.com/HeartEssexMP3",
-    "homepage": "http://heart.co.uk/essex",
+    "fullName": "Heart Essex 96.3 & 102.6",
+    "streamUrl": "http://ice-sov.musicradio.com/HeartEssexMP3",
+    "fallbackUrl": "http://ice-sov.musicradio.com/HeartEssexMP3",
     "favicon": "http://heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "hot adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "hot adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 365,
-    "votes": 919,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "961540dd-0601-11e8-ae97-52543be04c81",
+    "id": "961540dd-0601-11e8-ae97-52543be04c81",
     "name": "Heart Suffolk",
-    "url": "http://ice-sov.musicradio.com/HeartSuffolkMP3",
-    "url_resolved": "http://ice-sov.musicradio.com/HeartSuffolkMP3",
-    "homepage": "http://heart.co.uk/suffolk",
-    "favicon": "",
-    "tags": "",
+    "fullName": "Heart Suffolk",
+    "streamUrl": "http://ice-sov.musicradio.com/HeartSuffolkMP3",
+    "fallbackUrl": "http://ice-sov.musicradio.com/HeartSuffolkMP3",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 350,
-    "votes": 573,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "96231a86-0601-11e8-ae97-52543be04c81",
+    "id": "96231a86-0601-11e8-ae97-52543be04c81",
     "name": "Heart Sussex 102.4 &103.5",
-    "url": "http://media-ice.musicradio.com/HeartSussexMP3?.mp3",
-    "url_resolved": "http://media-ice.musicradio.com/HeartSussexMP3?.mp3",
-    "homepage": "http://www.heart.co.uk/sussex/",
+    "fullName": "Heart Sussex 102.4 &103.5",
+    "streamUrl": "http://media-ice.musicradio.com/HeartSussexMP3?.mp3",
+    "fallbackUrl": "http://media-ice.musicradio.com/HeartSussexMP3?.mp3",
     "favicon": "http://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "commercial,hot adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "commercial",
+      "hot adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 364,
-    "votes": 240,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "96231826-0601-11e8-ae97-52543be04c81",
+    "id": "96231826-0601-11e8-ae97-52543be04c81",
     "name": "Heart Oxfordshire 102.6 & 97.4",
-    "url": "http://media-sov.musicradio.com/HeartOxfordshireMP3",
-    "url_resolved": "http://media-sov.musicradio.com/HeartOxfordshireMP3",
-    "homepage": "http://www.heart.co.uk/oxfordshire/",
+    "fullName": "Heart Oxfordshire 102.6 & 97.4",
+    "streamUrl": "http://media-sov.musicradio.com/HeartOxfordshireMP3",
+    "fallbackUrl": "http://media-sov.musicradio.com/HeartOxfordshireMP3",
     "favicon": "http://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "commercial,hot adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "commercial",
+      "hot adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 369,
-    "votes": 172,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "361b47fb-4f34-11e9-a4d7-52543be04c81",
+    "id": "361b47fb-4f34-11e9-a4d7-52543be04c81",
     "name": "Heart Yorkshire",
-    "url": "http://media-sov.musicradio.com/HeartYorkshire",
-    "url_resolved": "http://media-sov.musicradio.com/HeartYorkshire",
-    "homepage": "https://www.heart.co.uk/yorkshire/radio/player/",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "Heart Yorkshire",
+    "streamUrl": "http://media-sov.musicradio.com/HeartYorkshire",
+    "fallbackUrl": "http://media-sov.musicradio.com/HeartYorkshire",
+    "favicon": "https://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 124,
-    "votes": 148,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "96166556-0601-11e8-ae97-52543be04c81",
+    "id": "96166556-0601-11e8-ae97-52543be04c81",
     "name": "Heart South Coast 96.7 & 97.5",
-    "url": "http://media-sov.musicradio.com/HeartHampshire",
-    "url_resolved": "http://media-sov.musicradio.com/HeartHampshire",
-    "homepage": "http://www.heart.co.uk/southcoast/",
+    "fullName": "Heart South Coast 96.7 & 97.5",
+    "streamUrl": "http://media-sov.musicradio.com/HeartHampshire",
+    "fallbackUrl": "http://media-sov.musicradio.com/HeartHampshire",
     "favicon": "http://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "hot adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "hot adult contemporary"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 136,
-    "votes": 108,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "962314c7-0601-11e8-ae97-52543be04c81",
+    "id": "962314c7-0601-11e8-ae97-52543be04c81",
     "name": "Heart Bristol 96.3",
-    "url": "http://ice-sov.musicradio.com/HeartBristolMP3",
-    "url_resolved": "http://ice-sov.musicradio.com/HeartBristolMP3",
-    "homepage": "http://www.heart.co.uk/bristol/",
+    "fullName": "Heart Bristol 96.3",
+    "streamUrl": "http://ice-sov.musicradio.com/HeartBristolMP3",
+    "fallbackUrl": "http://ice-sov.musicradio.com/HeartBristolMP3",
     "favicon": "http://www.heart.co.uk/assets_v4r/heart/img/favicon-196x196.png",
-    "tags": "hot adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "hot adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 348,
-    "votes": 77,
-    "clickcount": 1500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "83bb028f-9cd6-489d-a9e0-6dc0821a071b",
+    "id": "83bb028f-9cd6-489d-a9e0-6dc0821a071b",
     "name": "Radio X Classic Rock",
-    "url": "https://media-ice.musicradio.com/RadioXClassicRockMP3",
-    "url_resolved": "https://media-ice.musicradio.com/RadioXClassicRockMP3",
-    "homepage": "https://www.radiox.co.uk/",
+    "fullName": "Radio X Classic Rock",
+    "streamUrl": "https://media-ice.musicradio.com/RadioXClassicRockMP3",
+    "fallbackUrl": "https://media-ice.musicradio.com/RadioXClassicRockMP3",
     "favicon": "https://i.imgur.com/eBIsjQw.jpg",
-    "tags": "classic rock,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "classic rock",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 366,
-    "votes": 1047,
-    "clickcount": 1400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "b87ddc6a-b153-4275-94dc-18cb612138d6",
+    "id": "b87ddc6a-b153-4275-94dc-18cb612138d6",
     "name": "Radio X 90s",
-    "url": "http://media-ice.musicradio.com/RadioX90sMP3",
-    "url_resolved": "http://media-ice.musicradio.com/RadioX90sMP3",
-    "homepage": "https://www.radiox.co.uk/90s/",
+    "fullName": "Radio X 90s",
+    "streamUrl": "http://media-ice.musicradio.com/RadioX90sMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/RadioX90sMP3",
     "favicon": "https://assets.radiox.co.uk/2024/36/radio-x-90s-1726064624-editorial-short-form-0.jpg",
-    "tags": "alternative,alternative rock,global,indie,indie rock,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "alternative",
+      "alternative rock",
+      "global",
+      "indie",
+      "indie rock",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 371,
-    "votes": 831,
-    "clickcount": 1400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "9859afb8-d110-4373-b29d-96dc3e981a4d",
+    "id": "9859afb8-d110-4373-b29d-96dc3e981a4d",
     "name": "Radio X Chilled",
-    "url": "http://media-ice.musicradio.com/RadioXChilledMP3",
-    "url_resolved": "http://media-ice.musicradio.com/RadioXChilledMP3",
-    "homepage": "https://www.radiox.co.uk/chilled/",
+    "fullName": "Radio X Chilled",
+    "streamUrl": "http://media-ice.musicradio.com/RadioXChilledMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/RadioXChilledMP3",
     "favicon": "https://assets.radiox.co.uk/2024/36/radio-x-chilled-1726064662-editorial-short-form-0.jpg",
-    "tags": "alternative,alternative rock,chilled,global,indie,indie rock,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "alternative",
+      "alternative rock",
+      "chilled",
+      "global",
+      "indie",
+      "indie rock",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 356,
-    "votes": 405,
-    "clickcount": 1400000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "ROCK",
+      "CALM_CHILL"
+    ]
   },
   {
-    "stationuuid": "6beb8be7-c4ec-40fb-99be-b27d03f43d24",
+    "id": "6beb8be7-c4ec-40fb-99be-b27d03f43d24",
     "name": "Heart Xmas",
-    "url": "http://media-ice.musicradio.com/HeartXmasMP3",
-    "url_resolved": "http://media-ice.musicradio.com/HeartXmasMP3",
-    "homepage": "https://www.globalplayer.com/live/heartxmas/uk/",
+    "fullName": "Heart Xmas",
+    "streamUrl": "http://media-ice.musicradio.com/HeartXmasMP3",
+    "fallbackUrl": "http://media-ice.musicradio.com/HeartXmasMP3",
     "favicon": "https://herald.musicradio.com/media/865c3499-1d80-41a8-a5c7-174177e46666.png",
-    "tags": "",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 358,
-    "votes": 120,
-    "clickcount": 1300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "dac6ad1e-cddf-4998-978c-8334804217d3",
+    "id": "dac6ad1e-cddf-4998-978c-8334804217d3",
     "name": "102.3 The Beat",
-    "url": "https://stream.revma.ihrhls.com/zc2169",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc2169",
-    "homepage": "https://thebeatatx.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/593da8dee7970b302d32a0f8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "102.3 The Beat",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc2169",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc2169",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/593da8dee7970b302d32a0f8?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 129,
-    "votes": 275,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "ef7dc083-ea59-471f-a732-f926af05cc30",
+    "id": "ef7dc083-ea59-471f-a732-f926af05cc30",
     "name": "96.1 NOW",
-    "url": "https://stream.revma.ihrhls.com/zc2357",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc2357",
-    "homepage": "https://961now.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/5956a84d119bce55968b6240?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "96.1 NOW",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc2357",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc2357",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/5956a84d119bce55968b6240?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 153,
-    "votes": 144,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "e820a644-98e4-4961-8349-80e29ae16948",
+    "id": "e820a644-98e4-4961-8349-80e29ae16948",
     "name": "101.3 WKRD - Rockford's Best Mix",
-    "url": "http://ice24.securenetsystems.net/WRKD",
-    "url_resolved": "http://ice24.securenetsystems.net/WRKD",
-    "homepage": "https://www.mix1013wrkd.com/",
-    "favicon": "",
-    "tags": "00s,70s,80s,90s,pop,rock",
+    "fullName": "101.3 WKRD - Rockford's Best Mix",
+    "streamUrl": "http://ice24.securenetsystems.net/WRKD",
+    "fallbackUrl": "http://ice24.securenetsystems.net/WRKD",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "00s",
+      "70s",
+      "80s",
+      "90s",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 93,
-    "votes": 82,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "61283c1b-46ca-4e34-93fb-625ce3253612",
+    "id": "61283c1b-46ca-4e34-93fb-625ce3253612",
     "name": "KC101 - Connecticut's #1 Hit Music Station",
-    "url": "https://stream.revma.ihrhls.com/zc457",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc457",
-    "homepage": "https://kc101.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/5ec7d6d71bc97c6c79635634?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "contemporary hits,pop,top 40",
+    "fullName": "KC101 - Connecticut's #1 Hit Music Station",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc457",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc457",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/5ec7d6d71bc97c6c79635634?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "contemporary hits",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 153,
-    "votes": 26,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "ecdeee4d-d922-45d8-ab21-124e9d8322b5",
+    "id": "ecdeee4d-d922-45d8-ab21-124e9d8322b5",
     "name": "94.1 ZBQ - WZBQ - Carrollton/Tuscaloosa, AL",
-    "url": "https://stream.revma.ihrhls.com/zc3077",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc3077",
-    "homepage": "https://941zbq.iheart.com/",
+    "fullName": "94.1 ZBQ - WZBQ - Carrollton/Tuscaloosa, AL",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc3077",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc3077",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/5d3b0df9db555ce8a623988a?.png",
-    "tags": "top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 153,
-    "votes": 12,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "db96248d-670c-4f3d-80c2-56c7ad626443",
+    "id": "db96248d-670c-4f3d-80c2-56c7ad626443",
     "name": "KVUU My 99.9 Colorado Springs Colorado",
-    "url": "http://stream.revma.ihrhls.com/zc361",
-    "url_resolved": "http://stream.revma.ihrhls.com/zc361",
-    "homepage": "https://my999radio.iheart.com/",
+    "fullName": "KVUU My 99.9 Colorado Springs Colorado",
+    "streamUrl": "http://stream.revma.ihrhls.com/zc361",
+    "fallbackUrl": "http://stream.revma.ihrhls.com/zc361",
     "favicon": "https://i.iheart.com/v3/re/assets.brands/60537048751ecf4947ed836f?ops=gravity(%22center%22),contain(600,600)&quality=80",
-    "tags": "pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 156,
-    "votes": 5,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "38078950-2e61-479b-8560-48d59be21f53",
+    "id": "38078950-2e61-479b-8560-48d59be21f53",
     "name": "Mix 103.1",
-    "url": "https://ice10.securenetsystems.net/KURR",
-    "url_resolved": "https://ice10.securenetsystems.net/KURR",
-    "homepage": "https://mix1031.fm/",
-    "favicon": "",
-    "tags": "pop,pop music",
+    "fullName": "Mix 103.1",
+    "streamUrl": "https://ice10.securenetsystems.net/KURR",
+    "fallbackUrl": "https://ice10.securenetsystems.net/KURR",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 109,
-    "votes": 1,
-    "clickcount": 1200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "9606ceae-0601-11e8-ae97-52543be04c81",
+    "id": "9606ceae-0601-11e8-ae97-52543be04c81",
     "name": "Radio Caroline",
-    "url": "http://78.129.202.200:8040/;",
-    "url_resolved": "http://78.129.202.200:8040/;",
-    "homepage": "http://www.radiocaroline.co.uk/",
-    "favicon": "http://www.radiocaroline.co.uk/favicon.ico",
-    "tags": "country,pop,rock",
+    "fullName": "Radio Caroline",
+    "streamUrl": "http://78.129.202.200:8040/;",
+    "fallbackUrl": "http://78.129.202.200:8040/;",
+    "favicon": "https://www.radiocaroline.co.uk/images/logo_top.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "country",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 361,
-    "votes": 47057,
-    "clickcount": 1000000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "1a8ae079-d15a-4309-9df0-55590df8e3c2",
+    "id": "1a8ae079-d15a-4309-9df0-55590df8e3c2",
     "name": "Radio Caroline Flashback",
-    "url": "http://sc2.radiocaroline.net:10558/;",
-    "url_resolved": "http://sc2.radiocaroline.net:10558/;",
-    "homepage": "http://www.carolineflashback.co.uk/#home.html",
-    "favicon": "",
-    "tags": "60s,70s,pop,pop rock",
+    "fullName": "Radio Caroline Flashback",
+    "streamUrl": "http://sc2.radiocaroline.net:10558/;",
+    "fallbackUrl": "http://sc2.radiocaroline.net:10558/;",
+    "favicon": "https://www.radiocaroline.co.uk/images/logo_top.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "60s",
+      "70s",
+      "pop",
+      "pop rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 349,
-    "votes": 1543,
-    "clickcount": 900000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "2982e72e-6e80-4fe3-b119-0f44d8f1f789",
+    "id": "2982e72e-6e80-4fe3-b119-0f44d8f1f789",
     "name": "Radio Caroline North (Ross Revenge live broadcasts)",
-    "url": "http://sc2.radiocaroline.net:8100/;",
-    "url_resolved": "http://sc2.radiocaroline.net:8100/;",
-    "homepage": "https://radiocaroline.co.uk/#manx_info.html",
+    "fullName": "Radio Caroline North (Ross Revenge live broadcasts)",
+    "streamUrl": "http://sc2.radiocaroline.net:8100/;",
+    "fallbackUrl": "http://sc2.radiocaroline.net:8100/;",
     "favicon": "https://radiocaroline.co.uk/images/logos/caroline_north_logo.svg",
-    "tags": "60s,70s,80s,heritage,nostalgia,oldies,pop,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "60s",
+      "70s",
+      "80s",
+      "heritage",
+      "nostalgia",
+      "oldies",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 371,
-    "votes": 90,
-    "clickcount": 900000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "34135e58-c4b4-4aaa-89b3-c42254ba7307",
+    "id": "34135e58-c4b4-4aaa-89b3-c42254ba7307",
     "name": "Classic Hits 109",
-    "url": "https://broadcast.classichits109.com/70s-90s",
-    "url_resolved": "https://broadcast.classichits109.com/70s-90s",
-    "homepage": "https://www.classichits109.com/",
+    "fullName": "Classic Hits 109",
+    "streamUrl": "https://broadcast.classichits109.com/70s-90s",
+    "fallbackUrl": "https://broadcast.classichits109.com/70s-90s",
     "favicon": "https://cdn-profiles.tunein.com/s297004/images/logog.png",
-    "tags": "70s,80s,90s,classic hits,disco,pop,rock",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "70s",
+      "80s",
+      "90s",
+      "classic hits",
+      "disco",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 330,
-    "votes": 682,
-    "clickcount": 850000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "d7224f73-554e-4c99-8d42-f6b3432c2358",
+    "id": "d7224f73-554e-4c99-8d42-f6b3432c2358",
     "name": "Classic Hits 109 - Soft Rock",
-    "url": "https://broadcast.classichits109.com/softrock",
-    "url_resolved": "https://broadcast.classichits109.com/softrock",
-    "homepage": "https://www.classichits109.com/",
+    "fullName": "Classic Hits 109 - Soft Rock",
+    "streamUrl": "https://broadcast.classichits109.com/softrock",
+    "fallbackUrl": "https://broadcast.classichits109.com/softrock",
     "favicon": "https://cdn.onlineradiobox.com/img/l/8/83758.v15.png",
-    "tags": "00s,10s,70s,80s,90s,easy listening,hits,pop",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "00s",
+      "10s",
+      "70s",
+      "80s",
+      "90s",
+      "easy listening",
+      "hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 354,
-    "votes": 25,
-    "clickcount": 850000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "CALM_CHILL",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "801f1ac1-7cf1-4fe6-befc-cce8a9263d9c",
+    "id": "801f1ac1-7cf1-4fe6-befc-cce8a9263d9c",
     "name": "100hitz - Top 40",
-    "url": "http://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
-    "url_resolved": "http://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
-    "homepage": "https://100hitz.com/",
-    "favicon": "https://100hitz.com/favicon.ico",
-    "tags": "top 40,us",
+    "fullName": "100hitz - Top 40",
+    "streamUrl": "http://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
+    "fallbackUrl": "http://pureplay.cdnstream1.com/6025_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYzMzk1NTI4MSwiaXNzIjoidGlzcnYifQ.cUMfsrk262BNjQXnfXkKBefQOqoRn2nweLrx5obNPhM",
+    "favicon": "https://cdn-profiles.tunein.com/s24991/images/logod.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "top 40",
+      "us"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 333,
-    "votes": 6113,
-    "clickcount": 800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "960d4bdc-0601-11e8-ae97-52543be04c81",
+    "id": "960d4bdc-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Kickin' Country",
-    "url": "http://listen.181fm.com/181-kickincountry_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-kickincountry_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "",
-    "tags": "country,pop,rock,waynesboro",
+    "fullName": "181.FM - Kickin' Country",
+    "streamUrl": "http://listen.181fm.com/181-kickincountry_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-kickincountry_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "country",
+      "pop",
+      "rock",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2067,
-    "votes": 8643,
-    "clickcount": 586430,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "960be1b7-0601-11e8-ae97-52543be04c81",
+    "id": "960be1b7-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Beatles",
-    "url": "https://listen.181fm.com/181-beatles_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-beatles_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "http://www.181.fm/images/playerlanding/181.FM.jpg",
-    "tags": "beat,oldies,pop,rock,waynesboro",
+    "fullName": "181.FM - Beatles",
+    "streamUrl": "https://listen.181fm.com/181-beatles_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-beatles_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "beat",
+      "oldies",
+      "pop",
+      "rock",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 1749,
-    "votes": 3777,
-    "clickcount": 537770,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "9620898c-0601-11e8-ae97-52543be04c81",
+    "id": "9620898c-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - The Mix",
-    "url": "http://listen.181fm.com/181-themix_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-themix_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "http://www.181.fm/favicon.ico",
-    "tags": "classic hits,pop,waynesboro",
+    "fullName": "181.FM - The Mix",
+    "streamUrl": "http://listen.181fm.com/181-themix_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-themix_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "classic hits",
+      "pop",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2271,
-    "votes": 1779,
-    "clickcount": 517790,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "9612358a-0601-11e8-ae97-52543be04c81",
+    "id": "9612358a-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Power 181 (Top 40)",
-    "url": "http://listen.181fm.com/181-power_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-power_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "",
-    "tags": "pop,top 40,waynesboro",
+    "fullName": "181.FM - Power 181 (Top 40)",
+    "streamUrl": "http://listen.181fm.com/181-power_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-power_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 1761,
-    "votes": 1487,
-    "clickcount": 514870,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "9638a79d-0601-11e8-ae97-52543be04c81",
+    "id": "9638a79d-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - UK top 40",
-    "url": "http://listen.181fm.com/181-uktop40_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-uktop40_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "http://www.181.fm/favicon.ico",
-    "tags": "pop,top 40,waynesboro",
+    "fullName": "181.FM - UK top 40",
+    "streamUrl": "http://listen.181fm.com/181-uktop40_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-uktop40_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2361,
-    "votes": 1441,
-    "clickcount": 514410,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "96376e0b-0601-11e8-ae97-52543be04c81",
+    "id": "96376e0b-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - The Office",
-    "url": "https://listen.181fm.com/181-office_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-office_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "http://www.181.fm/favicon.ico",
-    "tags": "pop,waynesboro",
+    "fullName": "181.FM - The Office",
+    "streamUrl": "https://listen.181fm.com/181-office_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-office_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2110,
-    "votes": 457,
-    "clickcount": 504570,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "9638a8de-0601-11e8-ae97-52543be04c81",
+    "id": "9638a8de-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - The Vibe of Vegas",
-    "url": "https://listen.181fm.com/181-vibe_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-vibe_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "https://www.181.fm/favicon.ico",
-    "tags": "dance,edm,electro,pop,waynesboro",
+    "fullName": "181.FM - The Vibe of Vegas",
+    "streamUrl": "https://listen.181fm.com/181-vibe_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-vibe_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "dance",
+      "edm",
+      "electro",
+      "pop",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2064,
-    "votes": 449,
-    "clickcount": 504490,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "9638aa32-0601-11e8-ae97-52543be04c81",
+    "id": "9638aa32-0601-11e8-ae97-52543be04c81",
     "name": "181.FM - Party 181",
-    "url": "http://listen.181fm.com/181-party_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-party_128k.mp3",
-    "homepage": "http://www.181.fm/",
-    "favicon": "http://www.181.fm/favicon.ico",
-    "tags": "party,pop,top 40,waynesboro",
+    "fullName": "181.FM - Party 181",
+    "streamUrl": "http://listen.181fm.com/181-party_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-party_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "party",
+      "pop",
+      "top 40",
+      "waynesboro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2250,
-    "votes": 315,
-    "clickcount": 503150,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "a51b79dd-68e6-44ce-8ebe-2fb5d909c318",
+    "id": "a51b79dd-68e6-44ce-8ebe-2fb5d909c318",
     "name": "181.FM Power Explicit",
-    "url": "http://listen.livestreamingservice.com/181-powerexplicit_128k.mp3",
-    "url_resolved": "http://listen.livestreamingservice.com/181-powerexplicit_128k.mp3",
-    "homepage": "http://181.fm/",
-    "favicon": "http://www.181.fm/images/playerlanding/181.FM.jpg",
-    "tags": "explicit,pop,top 40",
+    "fullName": "181.FM Power Explicit",
+    "streamUrl": "http://listen.livestreamingservice.com/181-powerexplicit_128k.mp3",
+    "fallbackUrl": "http://listen.livestreamingservice.com/181-powerexplicit_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "explicit",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 1689,
-    "votes": 20,
-    "clickcount": 500200,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "96288fcc-0601-11e8-ae97-52543be04c81",
+    "id": "96288fcc-0601-11e8-ae97-52543be04c81",
     "name": "Big R Radio - 80s and 90s Pop Mix",
-    "url": "http://bigrradio.cdnstream1.com/5183_128",
-    "url_resolved": "http://bigrradio.cdnstream1.com/5183_128",
-    "homepage": "http://www.bigrradio.com/",
+    "fullName": "Big R Radio - 80s and 90s Pop Mix",
+    "streamUrl": "http://bigrradio.cdnstream1.com/5183_128",
+    "fallbackUrl": "http://bigrradio.cdnstream1.com/5183_128",
     "favicon": "http://www.bigrradio.com/image/favicon/apple-touch-icon.png",
-    "tags": "80s,90s,classic hits,pop",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "80s",
+      "90s",
+      "classic hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 254,
-    "votes": 2279,
-    "clickcount": 422790,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "96288f00-0601-11e8-ae97-52543be04c81",
+    "id": "96288f00-0601-11e8-ae97-52543be04c81",
     "name": "Big R Radio - 70s and 80s Pop Mix",
-    "url": "http://bigrradio.cdnstream1.com/5181_128",
-    "url_resolved": "http://bigrradio.cdnstream1.com/5181_128",
-    "homepage": "http://www.bigrradio.com/",
+    "fullName": "Big R Radio - 70s and 80s Pop Mix",
+    "streamUrl": "http://bigrradio.cdnstream1.com/5181_128",
+    "fallbackUrl": "http://bigrradio.cdnstream1.com/5181_128",
     "favicon": "http://www.bigrradio.com/image/favicon/apple-touch-icon.png",
-    "tags": "classic hits,pop",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "classic hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 261,
-    "votes": 1451,
-    "clickcount": 414510,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "cd477c35-d625-11e8-a54a-52543be04c81",
+    "id": "cd477c35-d625-11e8-a54a-52543be04c81",
     "name": "Miami Beach Radio",
-    "url": "https://streaming.radiostreamlive.com/miamibeachradio_devices",
-    "url_resolved": "https://streaming.radiostreamlive.com/miamibeachradio_devices",
-    "homepage": "https://www.miamibeachradio.com/",
-    "favicon": "https://cdn-elements.radiostreamlive.com/v1/images/favicon.ico",
-    "tags": "hits,ocean drive,rsl",
+    "fullName": "Miami Beach Radio",
+    "streamUrl": "https://streaming.radiostreamlive.com/miamibeachradio_devices",
+    "fallbackUrl": "https://streaming.radiostreamlive.com/miamibeachradio_devices",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "ocean drive",
+      "rsl"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 184,
-    "votes": 15424,
-    "clickcount": 350000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "c93f9c76-2ad4-464d-bff4-7f46e95f2601",
+    "id": "c93f9c76-2ad4-464d-bff4-7f46e95f2601",
     "name": "CLASSIC HITS RADIO 70 80 DiscoFunk ModernSoul Boogie",
-    "url": "https://radiopanther.radiolebowski.com/play",
-    "url_resolved": "https://radiopanther.radiolebowski.com/play",
-    "homepage": "http://classichits.radio/",
-    "favicon": "",
-    "tags": "1970s,1980s,70's,70s,70s disco,80,80's,80s",
+    "fullName": "CLASSIC HITS RADIO 70 80 DiscoFunk ModernSoul Boogie",
+    "streamUrl": "https://radiopanther.radiolebowski.com/play",
+    "fallbackUrl": "https://radiopanther.radiolebowski.com/play",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "1970s",
+      "1980s",
+      "70's",
+      "70s",
+      "70s disco",
+      "80",
+      "80's",
+      "80s"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 183,
-    "votes": 58686,
-    "clickcount": 300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "963f9bfc-0601-11e8-ae97-52543be04c81",
+    "id": "963f9bfc-0601-11e8-ae97-52543be04c81",
     "name": "PulseEDM Dance Music Radio",
-    "url": "http://pulseedm.cdnstream1.com:8124/1373_128",
-    "url_resolved": "http://pulseedm.cdnstream1.com:8124/1373_128",
-    "homepage": "http://www.pulseedm.com/",
-    "favicon": "",
-    "tags": "dubstep,edm,electro,electronic,pop,techno,trance",
+    "fullName": "PulseEDM Dance Music Radio",
+    "streamUrl": "http://pulseedm.cdnstream1.com:8124/1373_128",
+    "fallbackUrl": "http://pulseedm.cdnstream1.com:8124/1373_128",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "dubstep",
+      "edm",
+      "electro",
+      "electronic",
+      "pop",
+      "techno",
+      "trance"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 359,
-    "votes": 4538,
-    "clickcount": 300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "a509502d-1ba7-4d51-9791-0be5a7d5ec34",
+    "id": "a509502d-1ba7-4d51-9791-0be5a7d5ec34",
     "name": "KEXP 90.3 FM Seattle, WA",
-    "url": "http://live-mp3-128.kexp.org/kexp128.mp3",
-    "url_resolved": "http://live-mp3-128.kexp.org/kexp128.mp3",
-    "homepage": "https://www.kexp.org/",
+    "fullName": "KEXP 90.3 FM Seattle, WA",
+    "streamUrl": "http://live-mp3-128.kexp.org/kexp128.mp3",
+    "fallbackUrl": "http://live-mp3-128.kexp.org/kexp128.mp3",
     "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/KEXP_logo_%28black_on_orange%29.svg/1890px-KEXP_logo_%28black_on_orange%29.svg.png",
-    "tags": "alternative,electronic,hip hop,indie,jazz,live,pop,public radio",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "alternative",
+      "electronic",
+      "hip hop",
+      "indie",
+      "jazz",
+      "live",
+      "pop",
+      "public radio"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 237,
-    "votes": 507,
-    "clickcount": 280000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "c6eed7cb-e3c9-4b3a-a627-f7df928a19e0",
+    "id": "c6eed7cb-e3c9-4b3a-a627-f7df928a19e0",
     "name": "Radio Disney Country FM 99.1",
-    "url": "https://listen.radioking.com/radio/453221/stream/508076",
-    "url_resolved": "https://listen.radioking.com/radio/453221/stream/508076",
-    "homepage": "https://www.radiodisney.com/",
-    "favicon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiSNzAYoI5Femhuri7WV9SNYheO4GO_Ovr_MUzgWIWYg&s/favicon.ico",
-    "tags": "county music,pop",
+    "fullName": "Radio Disney Country FM 99.1",
+    "streamUrl": "https://listen.radioking.com/radio/453221/stream/508076",
+    "fallbackUrl": "https://listen.radioking.com/radio/453221/stream/508076",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "county music",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 223,
-    "votes": 174,
-    "clickcount": 250000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "b7925a87-ce5d-48f1-b0df-fb30d75aa2c4",
+    "id": "b7925a87-ce5d-48f1-b0df-fb30d75aa2c4",
     "name": "Radio Essex",
-    "url": "https://stream.aiir.com/ujzy590c3stvv",
-    "url_resolved": "https://stream.aiir.com/ujzy590c3stvv",
-    "homepage": "https://www.radioessex.com/",
+    "fullName": "Radio Essex",
+    "streamUrl": "https://stream.aiir.com/ujzy590c3stvv",
+    "fallbackUrl": "https://stream.aiir.com/ujzy590c3stvv",
     "favicon": "https://mmo.aiircdn.com/339/67698698b4c61.png",
-    "tags": "contemporary hits radio,pop,top 40 hits",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "contemporary hits radio",
+      "pop",
+      "top 40 hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 568,
-    "votes": 503,
-    "clickcount": 220000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "175684b7-3b41-4fe9-ab92-513d2b543b89",
+    "id": "175684b7-3b41-4fe9-ab92-513d2b543b89",
     "name": "Sun FM",
-    "url": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
-    "url_resolved": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
-    "homepage": "https://sun-fm.com/",
-    "favicon": "",
-    "tags": "pop music",
+    "fullName": "Sun FM",
+    "streamUrl": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
+    "fallbackUrl": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 94,
-    "votes": 132,
-    "clickcount": 220000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "aa03434e-e002-4d61-9581-2812ea5a1a90",
+    "id": "aa03434e-e002-4d61-9581-2812ea5a1a90",
     "name": "kmfm (Canterbury)",
-    "url": "http://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
-    "url_resolved": "http://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
-    "homepage": "http://kmfm.co.uk/",
+    "fullName": "kmfm (Canterbury)",
+    "streamUrl": "http://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
+    "fallbackUrl": "http://listen-kmfm.sharp-stream.com/kmfmcanterbury.mp3?ref=RB",
     "favicon": "https://mm.aiircdn.com/541/5c09697b213aa.png",
-    "tags": "local radio,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "local radio",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 247,
-    "votes": 72,
-    "clickcount": 220000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "2bf8ecb6-51ee-4c2d-a9ee-b8753ded0624",
+    "id": "2bf8ecb6-51ee-4c2d-a9ee-b8753ded0624",
     "name": "Forth1",
-    "url": "https://stream-al.hellorayo.co.uk/forth1.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&aw_0_1st.bauer_listenerid=undefined",
-    "url_resolved": "https://stream-al.hellorayo.co.uk/forth1.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&aw_0_1st.bauer_listenerid=undefined",
-    "homepage": "https://www.hellorayo.co.uk/forth",
-    "favicon": "",
-    "tags": "pop music,popular",
+    "fullName": "Forth1",
+    "streamUrl": "https://stream-al.hellorayo.co.uk/forth1.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&aw_0_1st.bauer_listenerid=undefined",
+    "fallbackUrl": "https://stream-al.hellorayo.co.uk/forth1.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&aw_0_1st.bauer_listenerid=undefined",
+    "favicon": "https://assets.planetradio.co.uk/img/ConfigWebHeaderLogoSVGImageUrl/397.svg",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop music",
+      "popular"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 89,
-    "votes": 17,
-    "clickcount": 220000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "b445d099-6958-11ea-b1cf-52543be04c81",
+    "id": "b445d099-6958-11ea-b1cf-52543be04c81",
     "name": "TruckersFM",
-    "url": "http://radio.truckers.fm/",
-    "url_resolved": "http://radio.truckers.fm/",
-    "homepage": "https://truckers.fm/",
-    "favicon": "https://truckers.fm/favicon.ico",
-    "tags": "pop music,top 40,variety",
+    "fullName": "TruckersFM",
+    "streamUrl": "http://radio.truckers.fm/",
+    "fallbackUrl": "http://radio.truckers.fm/",
+    "favicon": "https://truckers.fm/img/logo.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop music",
+      "top 40",
+      "variety"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 354,
-    "votes": 2154,
-    "clickcount": 30770,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "961f7778-0601-11e8-ae97-52543be04c81",
+    "id": "961f7778-0601-11e8-ae97-52543be04c81",
     "name": "Radio New York Live",
-    "url": "https://streaming.radiostreamlive.com/radionylive_devices",
-    "url_resolved": "https://streaming.radiostreamlive.com/radionylive_devices",
-    "homepage": "http://www.radionylive.com/",
-    "favicon": "https://cdn-elements.radiostreamlive.com/v1/images/favicon.ico",
-    "tags": "80s,90s,new york city,pop,rsl",
+    "fullName": "Radio New York Live",
+    "streamUrl": "https://streaming.radiostreamlive.com/radionylive_devices",
+    "fallbackUrl": "https://streaming.radiostreamlive.com/radionylive_devices",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "80s",
+      "90s",
+      "new york city",
+      "pop",
+      "rsl"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 185,
-    "votes": 1496,
-    "clickcount": 27480,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "9628a2d4-0601-11e8-ae97-52543be04c81",
+    "id": "9628a2d4-0601-11e8-ae97-52543be04c81",
     "name": "2000 FM - Top 40",
-    "url": "http://bigrradio.cdnstream1.com/5106_128",
-    "url_resolved": "http://bigrradio.cdnstream1.com/5106_128",
-    "homepage": "http://www.2000fm.net/",
+    "fullName": "2000 FM - Top 40",
+    "streamUrl": "http://bigrradio.cdnstream1.com/5106_128",
+    "fallbackUrl": "http://bigrradio.cdnstream1.com/5106_128",
     "favicon": "http://2000fm.net/images/logo.png",
-    "tags": "top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 261,
-    "votes": 1086,
-    "clickcount": 25430,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "10edd1ec-192b-40ff-aaf2-645471d04dfb",
+    "id": "10edd1ec-192b-40ff-aaf2-645471d04dfb",
     "name": "CruiseOne Radio",
-    "url": "https://solid24.streamupsolutions.com/proxy/cmxicxxx?mp=/256kbps",
-    "url_resolved": "https://solid24.streamupsolutions.com/proxy/cmxicxxx?mp=/256kbps",
-    "homepage": "https://cruiseoneradio.net/",
+    "fullName": "CruiseOne Radio",
+    "streamUrl": "https://solid24.streamupsolutions.com/proxy/cmxicxxx?mp=/256kbps",
+    "fallbackUrl": "https://solid24.streamupsolutions.com/proxy/cmxicxxx?mp=/256kbps",
     "favicon": "https://i1.sndcdn.com/avatars-000037533466-mgfbsp-t500x500.jpg",
-    "tags": "electronic,indie,indie rock,pop,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "electronic",
+      "indie",
+      "indie rock",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 480,
-    "votes": 509,
-    "clickcount": 22545,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "658e103a-ed12-41d7-be75-e3dd6b55902b",
+    "id": "658e103a-ed12-41d7-be75-e3dd6b55902b",
     "name": "Joy Hits UK",
-    "url": "http://joyhits.online/joyhitshq.mp3",
-    "url_resolved": "http://joyhits.online/joyhitshq.mp3",
-    "homepage": "https://joyhits.online/",
-    "favicon": "",
-    "tags": "commercial free,pop,pop music",
+    "fullName": "Joy Hits UK",
+    "streamUrl": "http://joyhits.online/joyhitshq.mp3",
+    "fallbackUrl": "http://joyhits.online/joyhitshq.mp3",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "commercial free",
+      "pop",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 473,
-    "votes": 406,
-    "clickcount": 22030,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "589949be-60a2-411e-b6c4-86b3bede2f01",
+    "id": "589949be-60a2-411e-b6c4-86b3bede2f01",
     "name": "Urban Radio - The Greatest R&B Hits",
-    "url": "http://hydra.cdnstream.com/1534_backup",
-    "url_resolved": "http://hydra.cdnstream.com/1534_backup",
-    "homepage": "https://superradio.cc/",
+    "fullName": "Urban Radio - The Greatest R&B Hits",
+    "streamUrl": "http://hydra.cdnstream.com/1534_backup",
+    "fallbackUrl": "http://hydra.cdnstream.com/1534_backup",
     "favicon": "https://super-radio-mobile.devhub.top/images/logo.png",
-    "tags": "hits,music,r&b",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "music",
+      "r&b"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2156,
-    "votes": 392,
-    "clickcount": 21960,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "1f2f0072-dfb1-42e1-9c5c-f4d4db9eda89",
+    "id": "1f2f0072-dfb1-42e1-9c5c-f4d4db9eda89",
     "name": "Joyhits UK FLAC",
-    "url": "https://joyhits.online/joyhits.flac.ogg",
-    "url_resolved": "https://joyhits.online/joyhits.flac.ogg",
-    "homepage": "https://joyhits.online/",
-    "favicon": "",
-    "tags": "dance hits,pop,pop hits",
+    "fullName": "Joyhits UK FLAC",
+    "streamUrl": "https://joyhits.online/joyhits.flac.ogg",
+    "fallbackUrl": "https://joyhits.online/joyhits.flac.ogg",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "dance hits",
+      "pop",
+      "pop hits"
+    ],
+    "isHls": false,
     "codec": "OGG",
     "bitrate": 2602,
-    "votes": 373,
-    "clickcount": 21865,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "b61fbabb-b1c5-4fb9-92ea-8336911ee04d",
+    "id": "b61fbabb-b1c5-4fb9-92ea-8336911ee04d",
     "name": "Urban Radio - Hip Hop Hits",
-    "url": "http://hydra.cdnstream.com/1525_128",
-    "url_resolved": "http://hydra.cdnstream.com/1525_128",
-    "homepage": "https://superradio.cc/",
-    "favicon": "",
-    "tags": "hip hop,hits,music",
+    "fullName": "Urban Radio - Hip Hop Hits",
+    "streamUrl": "http://hydra.cdnstream.com/1525_128",
+    "fallbackUrl": "http://hydra.cdnstream.com/1525_128",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hip hop",
+      "hits",
+      "music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 1983,
-    "votes": 317,
-    "clickcount": 21585,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "72e3e855-4a87-43f5-a431-5b5aba8ee5da",
+    "id": "72e3e855-4a87-43f5-a431-5b5aba8ee5da",
     "name": "Beatles Radio (MP3)",
-    "url": "http://www.beatlesradio.com:8000/;",
-    "url_resolved": "http://www.beatlesradio.com:8000/;",
-    "homepage": "https://www.beatlesradio.com/",
+    "fullName": "Beatles Radio (MP3)",
+    "streamUrl": "http://www.beatlesradio.com:8000/;",
+    "fallbackUrl": "http://www.beatlesradio.com:8000/;",
     "favicon": "https://i.ibb.co/tJKGkdJ/s54174d.webp",
-    "tags": "1960s,classic rock,hits,oldies,the beatles,various",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "1960s",
+      "classic rock",
+      "hits",
+      "oldies",
+      "the beatles",
+      "various"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 317,
-    "votes": 276,
-    "clickcount": 21380,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "d5698481-5c1f-4123-8dc3-1983a491ccc1",
+    "id": "d5698481-5c1f-4123-8dc3-1983a491ccc1",
     "name": "Urban Radio - All The Hip Hop Hits",
-    "url": "http://hydra.cdnstream.com/1537_128",
-    "url_resolved": "http://hydra.cdnstream.com/1537_128",
-    "homepage": "https://superradio.cc/",
+    "fullName": "Urban Radio - All The Hip Hop Hits",
+    "streamUrl": "http://hydra.cdnstream.com/1537_128",
+    "fallbackUrl": "http://hydra.cdnstream.com/1537_128",
     "favicon": "https://super-radio-mobile.devhub.top/images/logo.png",
-    "tags": "hip hop,hits,music",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hip hop",
+      "hits",
+      "music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2108,
-    "votes": 259,
-    "clickcount": 21295,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "5df5fc8a-3259-4d29-988d-814ab6332ece",
+    "id": "5df5fc8a-3259-4d29-988d-814ab6332ece",
     "name": "Gen X Radio",
-    "url": "https://s2.radio.co/sf25229e16/listen",
-    "url_resolved": "https://s2.radio.co/sf25229e16/listen",
-    "homepage": "https://genxradio.co.uk/",
+    "fullName": "Gen X Radio",
+    "streamUrl": "https://s2.radio.co/sf25229e16/listen",
+    "fallbackUrl": "https://s2.radio.co/sf25229e16/listen",
     "favicon": "https://genxradio.co.uk/wp-content/uploads/2021/11/cropped-GenXAsset-9-192x192.png",
-    "tags": "00s,10s,20s,60s,70s,80s,90s,adult contemporary",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "00s",
+      "10s",
+      "20s",
+      "60s",
+      "70s",
+      "80s",
+      "90s",
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 340,
-    "votes": 207,
-    "clickcount": 21035,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "04bd267f-046a-4275-b7c5-c29f9e25efc9",
+    "id": "04bd267f-046a-4275-b7c5-c29f9e25efc9",
     "name": "Neon Radio - 80s & 90s Pop & Dance",
-    "url": "https://live.flashbackcentral.co.uk/radio/8050/tunein.mp3",
-    "url_resolved": "https://live.flashbackcentral.co.uk/radio/8050/tunein.mp3",
-    "homepage": "https://www.neonradio.co.uk/",
-    "favicon": "",
-    "tags": "hits 80s,hits 90s,pop music",
+    "fullName": "Neon Radio - 80s & 90s Pop & Dance",
+    "streamUrl": "https://live.flashbackcentral.co.uk/radio/8050/tunein.mp3",
+    "fallbackUrl": "https://live.flashbackcentral.co.uk/radio/8050/tunein.mp3",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "hits 80s",
+      "hits 90s",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 180,
-    "votes": 188,
-    "clickcount": 20940,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "6749ce2d-15b6-47f1-a6ec-bcd32b49ffd1",
+    "id": "6749ce2d-15b6-47f1-a6ec-bcd32b49ffd1",
     "name": "80s 90s",
-    "url": "http://radioradio.ddns.net:8000/8090",
-    "url_resolved": "http://radioradio.ddns.net:8000/8090",
-    "homepage": "",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "80s 90s",
+    "streamUrl": "http://radioradio.ddns.net:8000/8090",
+    "fallbackUrl": "http://radioradio.ddns.net:8000/8090",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC+",
     "bitrate": 241,
-    "votes": 164,
-    "clickcount": 20820,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "d2c47bae-8c82-4c1d-b8f1-641c7816a455",
+    "id": "d2c47bae-8c82-4c1d-b8f1-641c7816a455",
     "name": "WiLD 95.5",
-    "url": "https://ample.revma.ihrhls.com/zc713/62_1clkf4vaz443602/playlist.m3u8",
-    "url_resolved": "https://ample.revma.ihrhls.com/zc713/62_1clkf4vaz443602/playlist.m3u8",
-    "homepage": "https://wild955.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/new_assets/a66506ea-b6a0-4d15-af5c-6885547e8f1e?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "WiLD 95.5",
+    "streamUrl": "https://ample.revma.ihrhls.com/zc713/62_1clkf4vaz443602/playlist.m3u8",
+    "fallbackUrl": "https://ample.revma.ihrhls.com/zc713/62_1clkf4vaz443602/playlist.m3u8",
+    "favicon": "https://i.iheart.com/v3/re/new_assets/a66506ea-b6a0-4d15-af5c-6885547e8f1e?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": true,
     "codec": "AAC",
-    "bitrate": 0,
-    "votes": 107,
-    "clickcount": 20535,
-    "hls": 1,
-    "lastcheckok": 1
+    "bitrate": 128,
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "f08421c8-c3ec-4419-ab78-bdbec5e71fa3",
+    "id": "f08421c8-c3ec-4419-ab78-bdbec5e71fa3",
     "name": "Radio Euro Disco",
-    "url": "https://broadcast.miami/proxy/eurodisco?mp=/stream/;",
-    "url_resolved": "https://broadcast.miami/proxy/eurodisco?mp=/stream/;",
-    "homepage": "https://broadcast.miami/",
+    "fullName": "Radio Euro Disco",
+    "streamUrl": "https://broadcast.miami/proxy/eurodisco?mp=/stream/;",
+    "fallbackUrl": "https://broadcast.miami/proxy/eurodisco?mp=/stream/;",
     "favicon": "https://top-radio.ru/assets/image/radio/180/radio-euro-disco.png",
-    "tags": "pop music",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 558,
-    "votes": 101,
-    "clickcount": 20505,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "34ad4426-32e6-4358-801b-25c7c13bd5bb",
+    "id": "34ad4426-32e6-4358-801b-25c7c13bd5bb",
     "name": "EarGlow Radio",
-    "url": "https://cast1.asurahosting.com/proxy/earglowr/stream",
-    "url_resolved": "https://cast1.asurahosting.com/proxy/earglowr/stream",
-    "homepage": "https://earglowradio.com/",
-    "favicon": "",
-    "tags": "americana,folk,indie pop,indie rock,pop,pop rock,rock,synth pop",
+    "fullName": "EarGlow Radio",
+    "streamUrl": "https://cast1.asurahosting.com/proxy/earglowr/stream",
+    "fallbackUrl": "https://cast1.asurahosting.com/proxy/earglowr/stream",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "americana",
+      "folk",
+      "indie pop",
+      "indie rock",
+      "pop",
+      "pop rock",
+      "rock",
+      "synth pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 358,
-    "votes": 100,
-    "clickcount": 20500,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "72fe5798-bf1e-4df9-b4d9-aa4712a189f4",
+    "id": "72fe5798-bf1e-4df9-b4d9-aa4712a189f4",
     "name": "The Mix Radio 80s",
-    "url": "https://tmr80s.radioca.st/stream",
-    "url_resolved": "https://tmr80s.radioca.st/stream",
-    "homepage": "https://www.themixradio.co.uk/",
+    "fullName": "The Mix Radio 80s",
+    "streamUrl": "https://tmr80s.radioca.st/stream",
+    "fallbackUrl": "https://tmr80s.radioca.st/stream",
     "favicon": "https://static.mytuner.mobi/media/tvos_radios/390/the-mix-radio-80s.dd4413ea.png",
-    "tags": "1980s,80s,classic rock,pop,pop music,pop rock,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "1980s",
+      "80s",
+      "classic rock",
+      "pop",
+      "pop music",
+      "pop rock",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 452,
-    "votes": 99,
-    "clickcount": 20495,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "01042cd5-5fa0-4667-a023-283cb8aafc92",
+    "id": "01042cd5-5fa0-4667-a023-283cb8aafc92",
     "name": "Top Hits",
-    "url": "https://api.onlyhit.us/tophits",
-    "url_resolved": "https://api.onlyhit.us/tophits",
-    "homepage": "https://onlyhit.us/",
+    "fullName": "Top Hits",
+    "streamUrl": "https://api.onlyhit.us/tophits",
+    "fallbackUrl": "https://api.onlyhit.us/tophits",
     "favicon": "https://tophits.onlyhit.us/logo.png",
-    "tags": "hits,top 40,top hits",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "top 40",
+      "top hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 232,
-    "votes": 90,
-    "clickcount": 20450,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "e2678020-6b6f-4a67-be14-756ada217702",
+    "id": "e2678020-6b6f-4a67-be14-756ada217702",
     "name": "Scifi Radio",
-    "url": "https://station.kryptonradio.com:8080/stream",
-    "url_resolved": "https://station.kryptonradio.com:8080/stream",
-    "homepage": "https://scifi.radio/",
+    "fullName": "Scifi Radio",
+    "streamUrl": "https://station.kryptonradio.com:8080/stream",
+    "fallbackUrl": "https://station.kryptonradio.com:8080/stream",
     "favicon": "https://i0.wp.com/scifi.radio/wp-content/uploads/2022/10/scifiradio-8bit-480x491-1.png?w=1113&ssl=1",
-    "tags": "fantasy,pop,rock,soundtracks",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "fantasy",
+      "pop",
+      "rock",
+      "soundtracks"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 177,
-    "votes": 86,
-    "clickcount": 20430,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "2d964e70-1462-46e3-9b33-72bd4f8a5b45",
+    "id": "2d964e70-1462-46e3-9b33-72bd4f8a5b45",
     "name": "Newtown Radio",
-    "url": "https://streaming.radio.co/s0d090ee43/listen",
-    "url_resolved": "https://streaming.radio.co/s0d090ee43/listen",
-    "homepage": "https://newtownradio.com/",
-    "favicon": "https://newtownradio.flywheelstaging.com/wp-content/uploads/2019/07/favicon.ico",
-    "tags": "dance,disco,electronic,experimental,hip-hop,house,metal,pop",
+    "fullName": "Newtown Radio",
+    "streamUrl": "https://streaming.radio.co/s0d090ee43/listen",
+    "fallbackUrl": "https://streaming.radio.co/s0d090ee43/listen",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "dance",
+      "disco",
+      "electronic",
+      "experimental",
+      "hip-hop",
+      "house",
+      "metal",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 223,
-    "votes": 74,
-    "clickcount": 20370,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "bdf84bc3-df90-443a-8107-2fab9af0cc5e",
+    "id": "bdf84bc3-df90-443a-8107-2fab9af0cc5e",
     "name": "HD Radio - Hot 100 (USA) 128k mp3",
-    "url": "http://hdradiohot100-rfritschka.radioca.st/;",
-    "url_resolved": "http://hdradiohot100-rfritschka.radioca.st/;",
-    "homepage": "https://www.hd-radio.net/",
-    "favicon": "https://www.hd-radio.net/favicon.ico",
-    "tags": "commercial-free,hits,pop",
+    "fullName": "HD Radio - Hot 100 (USA) 128k mp3",
+    "streamUrl": "http://hdradiohot100-rfritschka.radioca.st/;",
+    "fallbackUrl": "http://hdradiohot100-rfritschka.radioca.st/;",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "commercial-free",
+      "hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 370,
-    "votes": 73,
-    "clickcount": 20365,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "1d110b47-b10e-4839-af42-dea9a83bcbd6",
+    "id": "1d110b47-b10e-4839-af42-dea9a83bcbd6",
     "name": "90sRadio (MRG.fm)",
-    "url": "http://listen.mrg.fm:8050/stream",
-    "url_resolved": "http://listen.mrg.fm:8050/stream",
-    "homepage": "https://www.mrg.fm/",
+    "fullName": "90sRadio (MRG.fm)",
+    "streamUrl": "http://listen.mrg.fm:8050/stream",
+    "fallbackUrl": "http://listen.mrg.fm:8050/stream",
     "favicon": "https://mrg.fm/img/90sradio125.jpg",
-    "tags": "1990s,90's,90s,best of the nineties,classic rock,nineties,pop music",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "1990s",
+      "90's",
+      "90s",
+      "best of the nineties",
+      "classic rock",
+      "nineties",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 370,
-    "votes": 73,
-    "clickcount": 20365,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "8a15bdc8-b41e-4e29-9862-4aaeebd1b8f4",
+    "id": "8a15bdc8-b41e-4e29-9862-4aaeebd1b8f4",
     "name": "Box UK (danceradiouk.com) 128k MP3",
-    "url": "http://boxstream.danceradiouk.com/stream/",
-    "url_resolved": "http://boxstream.danceradiouk.com/stream/",
-    "homepage": "https://danceradiouk.com/",
+    "fullName": "Box UK (danceradiouk.com) 128k MP3",
+    "streamUrl": "http://boxstream.danceradiouk.com/stream/",
+    "fallbackUrl": "http://boxstream.danceradiouk.com/stream/",
     "favicon": "https://danceradiouk.com/players/files/images/albumart/13040-BoxUK-300.jpg",
-    "tags": "80s,90s,no ads,pop,rock,top 40",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "80s",
+      "90s",
+      "no ads",
+      "pop",
+      "rock",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 363,
-    "votes": 67,
-    "clickcount": 20335,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "cb9e32a8-f9ff-4660-8222-3e1ab7bff2e1",
+    "id": "cb9e32a8-f9ff-4660-8222-3e1ab7bff2e1",
     "name": "Alice 95.5",
-    "url": "https://stream.revma.ihrhls.com/zc1269",
-    "url_resolved": "https://stream.revma.ihrhls.com/zc1269",
-    "homepage": "https://alice955.iheart.com/",
-    "favicon": "https://i.iheart.com/v3/re/assets.brands/5e568a8d83a65dcadefb1061?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(167,167),quality(80),format(%22png%22)",
-    "tags": "pop,top 40",
+    "fullName": "Alice 95.5",
+    "streamUrl": "https://stream.revma.ihrhls.com/zc1269",
+    "fallbackUrl": "https://stream.revma.ihrhls.com/zc1269",
+    "favicon": "https://i.iheart.com/v3/re/assets.brands/5e568a8d83a65dcadefb1061?ops=new(),flood(%22white%22),swap(),merge(%22over%22),gravity(%22center%22),contain(500,500),quality(95),format(%22png%22)",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 138,
-    "votes": 66,
-    "clickcount": 20330,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "339553b3-3e86-466e-b340-d0bd84353122",
+    "id": "339553b3-3e86-466e-b340-d0bd84353122",
     "name": "Dragon Radio",
-    "url": "https://listen-nation.sharp-stream.com/tcnationdigital.mp3",
-    "url_resolved": "https://listen-nation.sharp-stream.com/tcnationdigital.mp3",
-    "homepage": "https://www.nationplayer.com/dragon-radio/",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "Dragon Radio",
+    "streamUrl": "https://listen-nation.sharp-stream.com/tcnationdigital.mp3",
+    "fallbackUrl": "https://listen-nation.sharp-stream.com/tcnationdigital.mp3",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 238,
-    "votes": 65,
-    "clickcount": 20325,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "f2a3a51f-e0cb-4b3a-b7dd-b7bc91f8ee3a",
+    "id": "f2a3a51f-e0cb-4b3a-b7dd-b7bc91f8ee3a",
     "name": "Simulator Radio",
-    "url": "https://simulatorradio.stream/stream.mp3",
-    "url_resolved": "https://simulatorradio.stream/stream.mp3",
-    "homepage": "https://simulatorradio.com/",
-    "favicon": "",
-    "tags": "commercial free,community,gaming,top 40",
+    "fullName": "Simulator Radio",
+    "streamUrl": "https://simulatorradio.stream/stream.mp3",
+    "fallbackUrl": "https://simulatorradio.stream/stream.mp3",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "commercial free",
+      "community",
+      "gaming",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 331,
-    "votes": 64,
-    "clickcount": 20320,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "1844f409-fab3-4f5e-b917-6e27d99d266b",
+    "id": "1844f409-fab3-4f5e-b917-6e27d99d266b",
     "name": "Radio Northsea UK",
-    "url": "https://listentomystream.com:8008/;",
-    "url_resolved": "https://listentomystream.com:8008/;",
-    "homepage": "https://www.rniradio.net/",
+    "fullName": "Radio Northsea UK",
+    "streamUrl": "https://listentomystream.com:8008/;",
+    "fallbackUrl": "https://listentomystream.com:8008/;",
     "favicon": "https://i1.sndcdn.com/artworks-000172944490-2m076q-t500x500.jpg",
-    "tags": "60s,70s,80s,90s,offshore,pop,top 40",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "60s",
+      "70s",
+      "80s",
+      "90s",
+      "offshore",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 557,
-    "votes": 57,
-    "clickcount": 20285,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "cf06f7eb-500f-44b8-a8a0-1461d490421e",
+    "id": "cf06f7eb-500f-44b8-a8a0-1461d490421e",
     "name": "011.FM - Cruise Control - Road Trip Radio",
-    "url": "https://listen.011fm.com/stream30",
-    "url_resolved": "https://listen.011fm.com/stream30",
-    "homepage": "https://011fm.com/",
-    "favicon": "",
-    "tags": "classic hits,contemporary hits,family,hits,hot adult contemporary,oldies,pop,pop music",
+    "fullName": "011.FM - Cruise Control - Road Trip Radio",
+    "streamUrl": "https://listen.011fm.com/stream30",
+    "fallbackUrl": "https://listen.011fm.com/stream30",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "classic hits",
+      "contemporary hits",
+      "family",
+      "hits",
+      "hot adult contemporary",
+      "oldies",
+      "pop",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2217,
-    "votes": 45,
-    "clickcount": 20225,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "771b2def-3c8d-4a60-86bc-9f4dbd9090f1",
+    "id": "771b2def-3c8d-4a60-86bc-9f4dbd9090f1",
     "name": "Amazing Radio",
-    "url": "http://amazingradio.stream.laut.fm/amazingradio?t302=2023-11-01_18-04-38&uuid=9dc21e5d-5102-400a-b0a3-acf860947777",
-    "url_resolved": "http://amazingradio.stream.laut.fm/amazingradio?t302=2023-11-01_18-04-38&uuid=9dc21e5d-5102-400a-b0a3-acf860947777",
-    "homepage": "https://amazingradio.com/",
+    "fullName": "Amazing Radio",
+    "streamUrl": "http://amazingradio.stream.laut.fm/amazingradio?t302=2023-11-01_18-04-38&uuid=9dc21e5d-5102-400a-b0a3-acf860947777",
+    "fallbackUrl": "http://amazingradio.stream.laut.fm/amazingradio?t302=2023-11-01_18-04-38&uuid=9dc21e5d-5102-400a-b0a3-acf860947777",
     "favicon": "https://amazingradio.com/assets/icons/favicon64.png",
-    "tags": "electronica,hip hop,indie,jazz,new music,pop,rock",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "electronica",
+      "hip hop",
+      "indie",
+      "jazz",
+      "new music",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 326,
-    "votes": 43,
-    "clickcount": 20215,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "89199933-8a91-4afb-879f-0c4cd72c769e",
+    "id": "89199933-8a91-4afb-879f-0c4cd72c769e",
     "name": "Treehouse Radio",
-    "url": "http://s6.autopo.st:8515/live",
-    "url_resolved": "http://s6.autopo.st:8515/live",
-    "homepage": "http://www.treehouseradio.com/",
-    "favicon": "",
-    "tags": "classic hits,hits,oldies,pop",
+    "fullName": "Treehouse Radio",
+    "streamUrl": "http://s6.autopo.st:8515/live",
+    "fallbackUrl": "http://s6.autopo.st:8515/live",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "classic hits",
+      "hits",
+      "oldies",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 170,
-    "votes": 41,
-    "clickcount": 20205,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "5a07c4d7-4dd4-4cec-ae02-3d923c3f73ef",
+    "id": "5a07c4d7-4dd4-4cec-ae02-3d923c3f73ef",
     "name": "POP! 93.3",
-    "url": "https://ice10.securenetsystems.net/WBHV",
-    "url_resolved": "https://ice10.securenetsystems.net/WBHV",
-    "homepage": "https://itspopradio.com/",
-    "favicon": "",
-    "tags": "pop music",
+    "fullName": "POP! 93.3",
+    "streamUrl": "https://ice10.securenetsystems.net/WBHV",
+    "fallbackUrl": "https://ice10.securenetsystems.net/WBHV",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 94,
-    "votes": 37,
-    "clickcount": 20185,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "e2902246-f69a-4c9f-9091-716605e1112b",
+    "id": "e2902246-f69a-4c9f-9091-716605e1112b",
     "name": "KRKO 1380AM 95.3FM",
-    "url": "https://www.ophanim.net:8444/s/9400",
-    "url_resolved": "https://www.ophanim.net:8444/s/9400",
-    "homepage": "https://www.everettpost.com/krko",
-    "favicon": "",
-    "tags": "hits,music,rock",
+    "fullName": "KRKO 1380AM 95.3FM",
+    "streamUrl": "https://www.ophanim.net:8444/s/9400",
+    "fallbackUrl": "https://www.ophanim.net:8444/s/9400",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "hits",
+      "music",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 346,
-    "votes": 35,
-    "clickcount": 20175,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "22256540-0fc5-4dc2-a3ed-de8085377ef7",
+    "id": "22256540-0fc5-4dc2-a3ed-de8085377ef7",
     "name": "Radio Gibraltar Plus",
-    "url": "http://s2.myradiostream.com:32910/;",
-    "url_resolved": "http://s2.myradiostream.com:32910/;",
-    "homepage": "http://radiogibraltarplus.co.uk/",
-    "favicon": "",
-    "tags": "classic hits,hits,pop",
+    "fullName": "Radio Gibraltar Plus",
+    "streamUrl": "http://s2.myradiostream.com:32910/;",
+    "fallbackUrl": "http://s2.myradiostream.com:32910/;",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "classic hits",
+      "hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 433,
-    "votes": 26,
-    "clickcount": 20130,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "d7ffa49f-ffac-4e62-bfce-7b4964601b67",
+    "id": "d7ffa49f-ffac-4e62-bfce-7b4964601b67",
     "name": "KGAY 106.5 Radio Palm Springs, Pride of the Valley",
-    "url": "https://ice9.securenetsystems.net/KGAY",
-    "url_resolved": "https://ice9.securenetsystems.net/KGAY",
-    "homepage": "https://kgaypalmsprings.com/",
-    "favicon": "",
-    "tags": "dance,electronic,pop,vintage",
+    "fullName": "KGAY 106.5 Radio Palm Springs, Pride of the Valley",
+    "streamUrl": "https://ice9.securenetsystems.net/KGAY",
+    "fallbackUrl": "https://ice9.securenetsystems.net/KGAY",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "dance",
+      "electronic",
+      "pop",
+      "vintage"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 96,
-    "votes": 24,
-    "clickcount": 20120,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "319001a5-dedc-42b3-8537-25c82ef689b3",
+    "id": "319001a5-dedc-42b3-8537-25c82ef689b3",
     "name": "Yes.fm (Toledo,oh) 89.7",
-    "url": "http://ice24.securenetsystems.net/YESFM",
-    "url_resolved": "http://ice24.securenetsystems.net/YESFM",
-    "homepage": "https://radio.securenetsystems.net/cwa/index.cfm?stationCallSign=YESFM",
-    "favicon": "",
-    "tags": "christian,hip-hop,pop,rock",
+    "fullName": "Yes.fm (Toledo,oh) 89.7",
+    "streamUrl": "http://ice24.securenetsystems.net/YESFM",
+    "fallbackUrl": "http://ice24.securenetsystems.net/YESFM",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "christian",
+      "hip-hop",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 92,
-    "votes": 22,
-    "clickcount": 20110,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "6ff1a632-edf1-4d00-ae05-660db1e8e02a",
+    "id": "6ff1a632-edf1-4d00-ae05-660db1e8e02a",
     "name": "WDJQ FM 92.5 Alliance, Ohio",
-    "url": "http://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
-    "url_resolved": "http://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
-    "homepage": "https://www.q92radio.com/",
-    "favicon": "https://www.q92radio.com/favicon.ico",
-    "tags": "pop",
+    "fullName": "WDJQ FM 92.5 Alliance, Ohio",
+    "streamUrl": "http://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
+    "fallbackUrl": "http://stream.abacast.net/direct/dapeterson-wdjqfmaac-ibc4",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 134,
-    "votes": 20,
-    "clickcount": 20100,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "5dbecac9-5aba-4158-913f-d134f7ee92ec",
+    "id": "5dbecac9-5aba-4158-913f-d134f7ee92ec",
     "name": "DOC Radio: Contemporary Christian Music",
-    "url": "https://streaming.live365.com/a08828",
-    "url_resolved": "https://streaming.live365.com/a08828",
-    "homepage": "https://docradio.org/",
-    "favicon": "https://docradio.org/favicon.ico",
-    "tags": "christian,pop,religious",
+    "fullName": "DOC Radio: Contemporary Christian Music",
+    "streamUrl": "https://streaming.live365.com/a08828",
+    "fallbackUrl": "https://streaming.live365.com/a08828",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "christian",
+      "pop",
+      "religious"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 1645,
-    "votes": 16,
-    "clickcount": 20080,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "25eb5fbc-2282-4558-bd0a-a85cab10d15d",
+    "id": "25eb5fbc-2282-4558-bd0a-a85cab10d15d",
     "name": "KLTG-FM \"The Beach 96.5\" Corpus Christi, TX",
-    "url": "https://ice42.securenetsystems.net/KLTGFM",
-    "url_resolved": "https://ice42.securenetsystems.net/KLTGFM",
-    "homepage": "https://beach965.com/",
-    "favicon": "",
-    "tags": "adult top 40,pop music,top 40",
+    "fullName": "KLTG-FM \"The Beach 96.5\" Corpus Christi, TX",
+    "streamUrl": "https://ice42.securenetsystems.net/KLTGFM",
+    "fallbackUrl": "https://ice42.securenetsystems.net/KLTGFM",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "adult top 40",
+      "pop music",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 98,
-    "votes": 13,
-    "clickcount": 20065,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "d7ada165-3f96-4cd8-bda7-a116d744063f",
+    "id": "d7ada165-3f96-4cd8-bda7-a116d744063f",
     "name": "Throwback 103 (Z103 [KFTZ] Web Radio)",
-    "url": "https://ice26.securenetsystems.net/KFTZ2?playSessionID=CB1B7298-D80B-E801-181EA80344ED131A",
-    "url_resolved": "https://ice26.securenetsystems.net/KFTZ2?playSessionID=CB1B7298-D80B-E801-181EA80344ED131A",
-    "homepage": "https://streamdb4web.securenetsystems.net/cirrusencore/KFTZ2",
+    "fullName": "Throwback 103 (Z103 [KFTZ] Web Radio)",
+    "streamUrl": "https://ice26.securenetsystems.net/KFTZ2?playSessionID=CB1B7298-D80B-E801-181EA80344ED131A",
+    "fallbackUrl": "https://ice26.securenetsystems.net/KFTZ2?playSessionID=CB1B7298-D80B-E801-181EA80344ED131A",
     "favicon": "https://s3.amazonaws.com/i.snag.gy/ofFNGr.jpg",
-    "tags": "contemporary hits radio,flashback,oldies,pop,top 40",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "contemporary hits radio",
+      "flashback",
+      "oldies",
+      "pop",
+      "top 40"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 73,
-    "votes": 12,
-    "clickcount": 20060,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "3eba571c-a1ac-4632-ae3a-810c659b2cfd",
+    "id": "3eba571c-a1ac-4632-ae3a-810c659b2cfd",
     "name": "Like Radio - CHILL (MP3)",
-    "url": "http://likeradiostream.com/likechill",
-    "url_resolved": "http://likeradiostream.com/likechill",
-    "homepage": "https://like.radio/likechill/",
+    "fullName": "Like Radio - CHILL (MP3)",
+    "streamUrl": "http://likeradiostream.com/likechill",
+    "fallbackUrl": "http://likeradiostream.com/likechill",
     "favicon": "https://i.ibb.co/sJrSjYY/chill.png",
-    "tags": "chill,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "chill",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 263,
-    "votes": 9,
-    "clickcount": 20045,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "CALM_CHILL"
+    ]
   },
   {
-    "stationuuid": "d08917dc-72da-4f72-b580-821e6a4661d6",
+    "id": "d08917dc-72da-4f72-b580-821e6a4661d6",
     "name": "Pop! 93.1 - 95.9 WQYX",
-    "url": "https://ice10.securenetsystems.net/WQYX",
-    "url_resolved": "https://ice10.securenetsystems.net/WQYX",
-    "homepage": "https://popradiopa.com/",
+    "fullName": "Pop! 93.1 - 95.9 WQYX",
+    "streamUrl": "https://ice10.securenetsystems.net/WQYX",
+    "fallbackUrl": "https://ice10.securenetsystems.net/WQYX",
     "favicon": "https://popradiopa.com/wp-content/uploads/sites/4/2023/09/Group-115-300x300.png",
-    "tags": "2000s,2010s,2020s,90s,pop",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "2000s",
+      "2010s",
+      "2020s",
+      "90s",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 163,
-    "votes": 9,
-    "clickcount": 20045,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "74e8b53d-10ac-4879-b27b-c93c4955ed1d",
+    "id": "74e8b53d-10ac-4879-b27b-c93c4955ed1d",
     "name": "The Big Top 40 Show (SUNDAYS 4 - 7PM)",
-    "url": "https://icecast.thisisdax.com/BigTop40",
-    "url_resolved": "https://icecast.thisisdax.com/BigTop40",
-    "homepage": "https://www.bigtop40.com/",
+    "fullName": "The Big Top 40 Show (SUNDAYS 4 - 7PM)",
+    "streamUrl": "https://icecast.thisisdax.com/BigTop40",
+    "fallbackUrl": "https://icecast.thisisdax.com/BigTop40",
     "favicon": "https://www.bigtop40.com/assets_v4r/bigtop40/img/logos/large.png",
-    "tags": "music,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "music",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 124,
-    "votes": 9,
-    "clickcount": 20045,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "67bd3b00-512a-4177-913b-2c4524062f3e",
+    "id": "67bd3b00-512a-4177-913b-2c4524062f3e",
     "name": "93.1 KATO",
-    "url": "https://ice24.securenetsystems.net/KATO",
-    "url_resolved": "https://ice24.securenetsystems.net/KATO",
-    "homepage": "https://radiomankato.com/kato/",
+    "fullName": "93.1 KATO",
+    "streamUrl": "https://ice24.securenetsystems.net/KATO",
+    "fallbackUrl": "https://ice24.securenetsystems.net/KATO",
     "favicon": "https://radiomankato.com/wp-content/uploads/2025/04/KatoChristmasWlogo.png",
-    "tags": "80s,90s,pop,pop music,popular",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "80s",
+      "90s",
+      "pop",
+      "pop music",
+      "popular"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 103,
-    "votes": 9,
-    "clickcount": 20045,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "0889023f-a0bd-4f9e-a4b7-eeac923705b4",
+    "id": "0889023f-a0bd-4f9e-a4b7-eeac923705b4",
     "name": "Hereme 2010s pop",
-    "url": "https://radio.hearme.fm:8000/stream",
-    "url_resolved": "https://radio.hearme.fm:8000/stream",
-    "homepage": "https://hearme.fm/",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "Hereme 2010s pop",
+    "streamUrl": "https://radio.hearme.fm:8000/stream",
+    "fallbackUrl": "https://radio.hearme.fm:8000/stream",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 366,
-    "votes": 8,
-    "clickcount": 20040,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "824b1a6a-660f-4902-8a01-fe54aa27e24f",
+    "id": "824b1a6a-660f-4902-8a01-fe54aa27e24f",
     "name": "East London Radio",
-    "url": "http://188.165.215.64:8123/stream",
-    "url_resolved": "http://188.165.215.64:8123/stream",
-    "homepage": "https://eastlondonradio.org.uk/",
+    "fullName": "East London Radio",
+    "streamUrl": "http://188.165.215.64:8123/stream",
+    "fallbackUrl": "http://188.165.215.64:8123/stream",
     "favicon": "https://eastlondonradio.org.uk/wp-content/uploads/2015/09/ELR-title-new2.png",
-    "tags": "classic hits,community radio,hits,hot adult contemporary,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "classic hits",
+      "community radio",
+      "hits",
+      "hot adult contemporary",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 434,
-    "votes": 7,
-    "clickcount": 20035,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "ea828a1e-aec3-4004-b7bb-f5fd1b2a44ef",
+    "id": "ea828a1e-aec3-4004-b7bb-f5fd1b2a44ef",
     "name": "V.100 99.9 WVAF",
-    "url": "https://live.amperwave.net/direct/wvradio-wvaffmaac-imc2",
-    "url_resolved": "https://live.amperwave.net/direct/wvradio-wvaffmaac-imc2",
-    "homepage": "https://v100.fm/",
+    "fullName": "V.100 99.9 WVAF",
+    "streamUrl": "https://live.amperwave.net/direct/wvradio-wvaffmaac-imc2",
+    "fallbackUrl": "https://live.amperwave.net/direct/wvradio-wvaffmaac-imc2",
     "favicon": "https://v100.fm/wp-content/uploads/2025/12/v100_newlogo.png",
-    "tags": "80s,90s,classic hits,hits,pop,top hits",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "80s",
+      "90s",
+      "classic hits",
+      "hits",
+      "pop",
+      "top hits"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 297,
-    "votes": 5,
-    "clickcount": 20025,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "643ae915-1d25-467d-9472-d2ffa49df825",
+    "id": "643ae915-1d25-467d-9472-d2ffa49df825",
     "name": "KEOM 88.5 - Mesquite Schools Radio",
-    "url": "http://live.amperwave.net/direct/mesquite-keomfmaac-ibc4",
-    "url_resolved": "http://live.amperwave.net/direct/mesquite-keomfmaac-ibc4",
-    "homepage": "http://keom.fm/",
-    "favicon": "",
-    "tags": "pop",
+    "fullName": "KEOM 88.5 - Mesquite Schools Radio",
+    "streamUrl": "http://live.amperwave.net/direct/mesquite-keomfmaac-ibc4",
+    "fallbackUrl": "http://live.amperwave.net/direct/mesquite-keomfmaac-ibc4",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 98,
-    "votes": 5,
-    "clickcount": 20025,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "18078cac-f5ea-4922-930c-974b935da7cd",
+    "id": "18078cac-f5ea-4922-930c-974b935da7cd",
     "name": "Vibe 1",
-    "url": "https://stream3.themediasite.co.uk:8106/stream",
-    "url_resolved": "https://stream3.themediasite.co.uk:8106/stream",
-    "homepage": "https://www.vibe1.uk/",
+    "fullName": "Vibe 1",
+    "streamUrl": "https://stream3.themediasite.co.uk:8106/stream",
+    "fallbackUrl": "https://stream3.themediasite.co.uk:8106/stream",
     "favicon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX-73EE6UPXYWRfGsZ6WkesAy6ef2fwE3pSA&s",
-    "tags": "classic hits,hits,hot adult contemporary,local radio,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "classic hits",
+      "hits",
+      "hot adult contemporary",
+      "local radio",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 423,
-    "votes": 4,
-    "clickcount": 20020,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "35fa4258-0bb6-46f8-a315-906f3af37bf4",
+    "id": "35fa4258-0bb6-46f8-a315-906f3af37bf4",
     "name": "Love 92.1",
-    "url": "https://stream.zeno.fm/skbas6cdawctv",
-    "url_resolved": "https://stream.zeno.fm/skbas6cdawctv",
-    "homepage": "https://love921.my.canva.site/",
+    "fullName": "Love 92.1",
+    "streamUrl": "https://stream.zeno.fm/skbas6cdawctv",
+    "fallbackUrl": "https://stream.zeno.fm/skbas6cdawctv",
     "favicon": "https://i.ibb.co/JRpmrhXP/Love-92-1-Square.jpg",
-    "tags": "britney spears,classic hits,electronic,electronic dance music,hits,katy perry,lady gaga,madonna",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "britney spears",
+      "classic hits",
+      "electronic",
+      "electronic dance music",
+      "hits",
+      "katy perry",
+      "lady gaga",
+      "madonna"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 247,
-    "votes": 4,
-    "clickcount": 20020,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "0c717d90-2baf-4c11-89fa-d761756f2488",
+    "id": "0c717d90-2baf-4c11-89fa-d761756f2488",
     "name": "KCWU-FM 88.1 The 'Burg",
-    "url": "https://live.amperwave.net/direct/kcwu-kcwufmmp3-ibc1",
-    "url_resolved": "https://live.amperwave.net/direct/kcwu-kcwufmmp3-ibc1",
-    "homepage": "https://www.881theburg.com/",
-    "favicon": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.iheart.com%2Fv3%2Fre%2Fnew_assets%2F62e029010f421de8a77c1bd0&f=1&nofb=1&ipt=64059e356ae8fc58e01056ae23aab776bfbab2516c7840a86a24712f642020c4",
-    "tags": "alternative,country,indie,pop",
+    "fullName": "KCWU-FM 88.1 The 'Burg",
+    "streamUrl": "https://live.amperwave.net/direct/kcwu-kcwufmmp3-ibc1",
+    "fallbackUrl": "https://live.amperwave.net/direct/kcwu-kcwufmmp3-ibc1",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "alternative",
+      "country",
+      "indie",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 159,
-    "votes": 4,
-    "clickcount": 20020,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "6b70865c-17b2-43de-bd1b-f3d23513b8a3",
+    "id": "6b70865c-17b2-43de-bd1b-f3d23513b8a3",
     "name": "Green Coast Radio",
-    "url": "https://ais-edge103-live365-dal02.cdnstream.com/a49866",
-    "url_resolved": "https://ais-edge103-live365-dal02.cdnstream.com/a49866",
-    "homepage": "https://www.greencoastradio.com/",
-    "favicon": "",
-    "tags": "classic hits,hits,pop,top40",
+    "fullName": "Green Coast Radio",
+    "streamUrl": "https://ais-edge103-live365-dal02.cdnstream.com/a49866",
+    "fallbackUrl": "https://ais-edge103-live365-dal02.cdnstream.com/a49866",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "classic hits",
+      "hits",
+      "pop",
+      "top40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2179,
-    "votes": 3,
-    "clickcount": 20015,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "57e56681-7402-48d6-ab46-01e29497bbca",
+    "id": "57e56681-7402-48d6-ab46-01e29497bbca",
     "name": "StrobeFM",
-    "url": "https://icy.strobefm.com/high",
-    "url_resolved": "https://icy.strobefm.com/high",
-    "homepage": "https://strobefm.com/",
+    "fullName": "StrobeFM",
+    "streamUrl": "https://icy.strobefm.com/high",
+    "fallbackUrl": "https://icy.strobefm.com/high",
     "favicon": "https://strobefm.com/assets/images/logo/icon.png",
-    "tags": "chr,dance,hits,pop,popular,throwbacks,top 40,top hits",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "chr",
+      "dance",
+      "hits",
+      "pop",
+      "popular",
+      "throwbacks",
+      "top 40",
+      "top hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 389,
-    "votes": 3,
-    "clickcount": 20015,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "0231aca1-4e0c-41e4-9b17-74538f1d3c25",
+    "id": "0231aca1-4e0c-41e4-9b17-74538f1d3c25",
     "name": "New Release Underground",
-    "url": "https://stream.zeno.fm/reuzn5i4c6cuv",
-    "url_resolved": "https://stream.zeno.fm/reuzn5i4c6cuv",
-    "homepage": "https://zeno.fm/radio/new-release-underground/",
-    "favicon": "",
-    "tags": "electronic,metal,pop,rock",
+    "fullName": "New Release Underground",
+    "streamUrl": "https://stream.zeno.fm/reuzn5i4c6cuv",
+    "fallbackUrl": "https://stream.zeno.fm/reuzn5i4c6cuv",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "electronic",
+      "metal",
+      "pop",
+      "rock"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 267,
-    "votes": 3,
-    "clickcount": 20015,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "76bea234-d802-4830-b8a3-84b2a2375cfb",
+    "id": "76bea234-d802-4830-b8a3-84b2a2375cfb",
     "name": "SLS Digital Music",
-    "url": "https://slsdigitalradio.com:8000/radio.mp3",
-    "url_resolved": "https://slsdigitalradio.com:8000/radio.mp3",
-    "homepage": "https://slsdigitalmusic.com/",
+    "fullName": "SLS Digital Music",
+    "streamUrl": "https://slsdigitalradio.com:8000/radio.mp3",
+    "fallbackUrl": "https://slsdigitalradio.com:8000/radio.mp3",
     "favicon": "https://slsdigitalmusic.com/assets/logo7.png",
-    "tags": "ambient pop,lofi,pop,trapsoul",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "ambient pop",
+      "lofi",
+      "pop",
+      "trapsoul"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 118,
-    "votes": 3,
-    "clickcount": 20015,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "CALM_CHILL"
+    ]
   },
   {
-    "stationuuid": "fc8ba7fc-045b-4d48-abbd-e0ca8af95ae9",
+    "id": "fc8ba7fc-045b-4d48-abbd-e0ca8af95ae9",
     "name": "6 Towns Radio",
-    "url": "https://stream-14.aiir.com/z7drhoivbpbuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ6N2RyaG9pdmJwYnV2IiwiaG9zdCI6InN0cmVhbS0xNC5haWlyLmNvbSIsInJ0dGwiOjUsImp0aSI6IjhROHpmZWlKVE1hWi1pdnUxdGRtVXciLCJpYXQiOjE3NjkwMzIxOTcsImV4cCI6MTc2OTAzMjI1N30.Lw7Duueb_YYvm7nI82EU1lRAlrd9NHH1ahB4WANmiaU",
-    "url_resolved": "https://stream-14.aiir.com/z7drhoivbpbuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ6N2RyaG9pdmJwYnV2IiwiaG9zdCI6InN0cmVhbS0xNC5haWlyLmNvbSIsInJ0dGwiOjUsImp0aSI6IjhROHpmZWlKVE1hWi1pdnUxdGRtVXciLCJpYXQiOjE3NjkwMzIxOTcsImV4cCI6MTc2OTAzMjI1N30.Lw7Duueb_YYvm7nI82EU1lRAlrd9NHH1ahB4WANmiaU",
-    "homepage": "https://www.6towns.co.uk/",
+    "fullName": "6 Towns Radio",
+    "streamUrl": "https://stream-14.aiir.com/z7drhoivbpbuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ6N2RyaG9pdmJwYnV2IiwiaG9zdCI6InN0cmVhbS0xNC5haWlyLmNvbSIsInJ0dGwiOjUsImp0aSI6IjhROHpmZWlKVE1hWi1pdnUxdGRtVXciLCJpYXQiOjE3NjkwMzIxOTcsImV4cCI6MTc2OTAzMjI1N30.Lw7Duueb_YYvm7nI82EU1lRAlrd9NHH1ahB4WANmiaU",
+    "fallbackUrl": "https://stream-14.aiir.com/z7drhoivbpbuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ6N2RyaG9pdmJwYnV2IiwiaG9zdCI6InN0cmVhbS0xNC5haWlyLmNvbSIsInJ0dGwiOjUsImp0aSI6IjhROHpmZWlKVE1hWi1pdnUxdGRtVXciLCJpYXQiOjE3NjkwMzIxOTcsImV4cCI6MTc2OTAzMjI1N30.Lw7Duueb_YYvm7nI82EU1lRAlrd9NHH1ahB4WANmiaU",
     "favicon": "https://mmo.aiircdn.com/1209/656101b604916.png",
-    "tags": "adult contemporary,classic hits,local radio,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "adult contemporary",
+      "classic hits",
+      "local radio",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 244,
-    "votes": 2,
-    "clickcount": 20010,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "db4d04f8-f024-4923-9a59-6e727f171e19",
+    "id": "db4d04f8-f024-4923-9a59-6e727f171e19",
     "name": "KIXY 94.7 FM - San Angelo",
-    "url": "https://ice42.securenetsystems.net/KIXY",
-    "url_resolved": "https://ice42.securenetsystems.net/KIXY",
-    "homepage": "https://www.kixyfm.com/",
-    "favicon": "",
-    "tags": "adult contemporary,hot adult contemporary,pop music",
+    "fullName": "KIXY 94.7 FM - San Angelo",
+    "streamUrl": "https://ice42.securenetsystems.net/KIXY",
+    "fallbackUrl": "https://ice42.securenetsystems.net/KIXY",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "adult contemporary",
+      "hot adult contemporary",
+      "pop music"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 75,
-    "votes": 2,
-    "clickcount": 20010,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "43e8caec-0d61-43ec-b0df-d65f7ce4d4cd",
+    "id": "43e8caec-0d61-43ec-b0df-d65f7ce4d4cd",
     "name": "America's Greatest 80s Hits",
-    "url": "https://ais-sa2.cdnstream1.com/2281_128.mp3",
-    "url_resolved": "https://ais-sa2.cdnstream1.com/2281_128.mp3",
-    "homepage": "https://www.americasgreatest80s.com/",
+    "fullName": "America's Greatest 80s Hits",
+    "streamUrl": "https://ais-sa2.cdnstream1.com/2281_128.mp3",
+    "fallbackUrl": "https://ais-sa2.cdnstream1.com/2281_128.mp3",
     "favicon": "https://media.live365.com/download/7c5b7daf-ac25-49f0-aca8-b94df6d8d527.png",
-    "tags": "80s,classic hits,pop",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "80s",
+      "classic hits",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 2154,
-    "votes": 1,
-    "clickcount": 20005,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "c9f73172-12ce-493b-93be-8b07d8b4ed0e",
+    "id": "c9f73172-12ce-493b-93be-8b07d8b4ed0e",
     "name": "Shropshire Live",
-    "url": "http://stream.aiir.com/iahhslxolv3uv",
-    "url_resolved": "http://stream.aiir.com/iahhslxolv3uv",
-    "homepage": "https://www.shropshirelive.com/radio/",
+    "fullName": "Shropshire Live",
+    "streamUrl": "http://stream.aiir.com/iahhslxolv3uv",
+    "fallbackUrl": "http://stream.aiir.com/iahhslxolv3uv",
     "favicon": "https://mmo.aiircdn.com/1149/6a3293eecef767e4339.png",
-    "tags": "adult contemporary,classic hits,hits,local radio,pop",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "adult contemporary",
+      "classic hits",
+      "hits",
+      "local radio",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 261,
-    "votes": 1,
-    "clickcount": 20005,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "074d4810-cd95-4bd4-bec4-8d54fb1cd692",
+    "id": "074d4810-cd95-4bd4-bec4-8d54fb1cd692",
     "name": "KSPX Sparkx Radio Network",
-    "url": "http://s1.free-shoutcast.com:18180/;",
-    "url_resolved": "http://s1.free-shoutcast.com:18180/;",
-    "homepage": "https://www.sparkx24.com/",
-    "favicon": "https://www.sparkx24.com/favicon.ico",
-    "tags": "country,hip hop,oldies,pop,rnb,smooth jazz",
+    "fullName": "KSPX Sparkx Radio Network",
+    "streamUrl": "http://s1.free-shoutcast.com:18180/;",
+    "fallbackUrl": "http://s1.free-shoutcast.com:18180/;",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "country",
+      "hip hop",
+      "oldies",
+      "pop",
+      "rnb",
+      "smooth jazz"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 600,
-    "votes": 0,
-    "clickcount": 20000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "CALM_CHILL",
+      "FUN_ENERGY",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "f7d74ba0-f7b1-47c5-99c7-c02c869210c2",
+    "id": "f7d74ba0-f7b1-47c5-99c7-c02c869210c2",
     "name": "Poze Radio",
-    "url": "https://panel.radiocast.net/listen/poze-radio-120/radio.mp3",
-    "url_resolved": "https://panel.radiocast.net/listen/poze-radio-120/radio.mp3",
-    "homepage": "https://pozeproductions.com/",
-    "favicon": "",
-    "tags": "pop,electronic",
+    "fullName": "Poze Radio",
+    "streamUrl": "https://panel.radiocast.net/listen/poze-radio-120/radio.mp3",
+    "fallbackUrl": "https://panel.radiocast.net/listen/poze-radio-120/radio.mp3",
+    "favicon": "https://radiofreesolutions.github.io/drivewave-app/play_store_icon_512.png",
     "country": "The United States Of America",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "electronic"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 243,
-    "votes": 0,
-    "clickcount": 20000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "4ead8c2a-ac97-4dbf-83d6-1fdb68ef8b0f",
+    "id": "4ead8c2a-ac97-4dbf-83d6-1fdb68ef8b0f",
     "name": "Penistone FM",
-    "url": "http://radio.canstream.co.uk:8021/live.mp3",
-    "url_resolved": "http://radio.canstream.co.uk:8021/live.mp3",
-    "homepage": "https://penistonefm.co.uk/",
+    "fullName": "Penistone FM",
+    "streamUrl": "http://radio.canstream.co.uk:8021/live.mp3",
+    "fallbackUrl": "http://radio.canstream.co.uk:8021/live.mp3",
     "favicon": "https://penistonefm.co.uk/wp-content/uploads/2023/07/penfm-logo-new-local-radio-on-white.jpg",
-    "tags": "community radio,pop,rock,varied",
     "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "community radio",
+      "pop",
+      "rock",
+      "varied"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 187,
-    "votes": 0,
-    "clickcount": 20000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "es-los40-spain-001",
+    "id": "es-los40-spain-001",
     "name": "LOS40 España",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
-    "url_resolved": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
-    "homepage": "https://los40.com",
-    "favicon": "https://los40.com/favicon.ico",
-    "tags": "pop,top40,latin,spanish,los40,hits",
+    "fullName": "LOS40 España",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
+    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s31274q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "pop",
+      "top40",
+      "latin",
+      "spanish",
+      "los40",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 1250,
-    "clickcount": 5500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "es-cadena-dial-002",
+    "id": "es-cadena-dial-002",
     "name": "Cadena Dial (Música en Español)",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CADENADIAL.mp3",
-    "url_resolved": "https://playerservices.streamtheworld.com/api/livestream-redirect/CADENADIAL.mp3",
-    "homepage": "https://cadenadial.com",
-    "favicon": "https://cadenadial.com/favicon.ico",
-    "tags": "pop,latin,spanish,pop latino,cadena",
+    "fullName": "Cadena Dial (Música en Español)",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CADENADIAL.mp3",
+    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CADENADIAL.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s11933q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "pop",
+      "latin",
+      "spanish",
+      "pop latino",
+      "cadena"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 980,
-    "clickcount": 5200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "us-mega-979-ny-003",
+    "id": "us-mega-979-ny-003",
     "name": "Mega 97.9 FM (New York - La Mega)",
-    "url": "https://liveaudio.lamusica.com/NY_WSKQ_icy",
-    "url_resolved": "https://liveaudio.lamusica.com/NY_WSKQ_icy",
-    "homepage": "https://lamega.lamusica.com",
+    "fullName": "Mega 97.9 FM (New York - La Mega)",
+    "streamUrl": "https://liveaudio.lamusica.com/NY_WSKQ_icy",
+    "fallbackUrl": "https://liveaudio.lamusica.com/NY_WSKQ_icy",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s27663q.png",
-    "tags": "latin,reggaeton,salsa,bachata,spanish,mega 97.9",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "latin",
+      "reggaeton",
+      "salsa",
+      "bachata",
+      "spanish",
+      "mega 97.9"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 2100,
-    "clickcount": 6800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "us-mega-963-la-004",
+    "id": "us-mega-963-la-004",
     "name": "Mega 96.3 FM (Los Angeles)",
-    "url": "https://liveaudio.lamusica.com/LA_KXOL_icy",
-    "url_resolved": "https://liveaudio.lamusica.com/LA_KXOL_icy",
-    "homepage": "https://mega963.lamusica.com",
+    "fullName": "Mega 96.3 FM (Los Angeles)",
+    "streamUrl": "https://liveaudio.lamusica.com/LA_KXOL_icy",
+    "fallbackUrl": "https://liveaudio.lamusica.com/LA_KXOL_icy",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s33842q.png",
-    "tags": "latin,reggaeton,urban,spanish,mega 96.3",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "latin",
+      "reggaeton",
+      "urban",
+      "spanish",
+      "mega 96.3"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 1850,
-    "clickcount": 6100000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "es-cadena-100-005",
+    "id": "es-cadena-100-005",
     "name": "Cadena 100",
-    "url": "http://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
-    "url_resolved": "http://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
-    "homepage": "https://cadena100.es",
-    "favicon": "https://cadena100.es/favicon.ico",
-    "tags": "pop,variety,spanish,hits,cadena",
+    "fullName": "Cadena 100",
+    "streamUrl": "http://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
+    "fallbackUrl": "http://cadena100-streamers-mp3.flumotion.com/cope/cadena100.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s8032q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "pop",
+      "variety",
+      "spanish",
+      "hits",
+      "cadena"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 890,
-    "clickcount": 4800000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "es-los40-classic-006",
+    "id": "es-los40-classic-006",
     "name": "LOS40 Classic España",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
-    "url_resolved": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
-    "homepage": "https://los40classic.com",
-    "favicon": "https://los40classic.com/favicon.ico",
-    "tags": "80s,90s,classic hits,spanish,pop",
+    "fullName": "LOS40 Classic España",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
+    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s31274q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "80s",
+      "90s",
+      "classic hits",
+      "spanish",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 750,
-    "clickcount": 4200000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "es-los40-urban-007",
+    "id": "es-los40-urban-007",
     "name": "LOS40 Urban (Reggaeton & Trap)",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_URBAN.mp3",
-    "url_resolved": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_URBAN.mp3",
-    "homepage": "https://los40urban.com",
-    "favicon": "https://los40urban.com/favicon.ico",
-    "tags": "reggaeton,urban,latin,trap,spanish",
+    "fullName": "LOS40 Urban (Reggaeton & Trap)",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_URBAN.mp3",
+    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_URBAN.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s31274q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "reggaeton",
+      "urban",
+      "latin",
+      "trap",
+      "spanish"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 910,
-    "clickcount": 4600000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "us-el-zol-1079-008",
+    "id": "us-el-zol-1079-008",
     "name": "El Zol 106.7 FM (Miami Latino Hits)",
-    "url": "https://liveaudio.lamusica.com/MIA_WXDJ_icy",
-    "url_resolved": "https://liveaudio.lamusica.com/MIA_WXDJ_icy",
-    "homepage": "https://elzol.lamusica.com",
+    "fullName": "El Zol 106.7 FM (Miami Latino Hits)",
+    "streamUrl": "https://liveaudio.lamusica.com/MIA_WXDJ_icy",
+    "fallbackUrl": "https://liveaudio.lamusica.com/MIA_WXDJ_icy",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s27986q.png",
-    "tags": "latin,reggaeton,el zol,spanish,pop",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "latin",
+      "reggaeton",
+      "el zol",
+      "spanish",
+      "pop"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 820,
-    "clickcount": 4300000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "us-amor-931-ny-009",
+    "id": "us-amor-931-ny-009",
     "name": "Amor 93.1 FM (Bachata & Romántica)",
-    "url": "https://liveaudio.lamusica.com/NY_WPAT_icy",
-    "url_resolved": "https://liveaudio.lamusica.com/NY_WPAT_icy",
-    "homepage": "https://931amor.lamusica.com",
+    "fullName": "Amor 93.1 FM (Bachata & Romántica)",
+    "streamUrl": "https://liveaudio.lamusica.com/NY_WPAT_icy",
+    "fallbackUrl": "https://liveaudio.lamusica.com/NY_WPAT_icy",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s27664q.png",
-    "tags": "romantic,pop latino,bachata,spanish",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "romantic",
+      "pop latino",
+      "bachata",
+      "spanish"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 770,
-    "clickcount": 3900000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "es-flaixbac-010",
+    "id": "es-flaixbac-010",
     "name": "FlaixBAC (Hits España)",
-    "url": "https://stream.flaixbac.cat/icecast",
-    "url_resolved": "https://stream.flaixbac.cat/icecast",
-    "homepage": "https://flaixbac.cat",
-    "favicon": "https://flaixbac.cat/favicon.ico",
-    "tags": "pop,top40,dance,spanish,hits",
+    "fullName": "FlaixBAC (Hits España)",
+    "streamUrl": "https://stream.flaixbac.cat/icecast",
+    "fallbackUrl": "https://stream.flaixbac.cat/icecast",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s11929q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "pop",
+      "top40",
+      "dance",
+      "spanish",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 840,
-    "clickcount": 4500000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "mx-los40-mexico-011",
+    "id": "mx-los40-mexico-011",
     "name": "LOS40 México",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_MEXICO.mp3",
-    "url_resolved": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_MEXICO.mp3",
-    "homepage": "https://los40.com.mx",
-    "favicon": "https://los40.com.mx/favicon.ico",
-    "tags": "pop,latin,mexico,spanish,top40",
+    "fullName": "LOS40 México",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_MEXICO.mp3",
+    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_MEXICO.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s31274q.png",
     "country": "Mexico",
-    "countrycode": "MX",
+    "countryCode": "MX",
+    "flag": "🇲🇽",
+    "tags": [
+      "pop",
+      "latin",
+      "mexico",
+      "spanish",
+      "top40"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "votes": 950,
-    "clickcount": 5100000,
-    "hls": 0,
-    "lastcheckok": 1
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "new-virgin-radio-uk-01",
+    "id": "new-virgin-radio-uk-01",
     "name": "Virgin Radio UK",
-    "url": "https://radio.virginradio.co.uk/stream",
-    "url_resolved": "https://radio.virginradio.co.uk/stream",
-    "homepage": "https://virginradio.co.uk",
+    "fullName": "Virgin Radio UK",
+    "streamUrl": "https://radio.virginradio.co.uk/stream",
+    "fallbackUrl": "https://radio.virginradio.co.uk/stream",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s38407q.png",
-    "tags": "pop,rock,hits,adult contemporary",
     "country": "United Kingdom",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop",
+      "rock",
+      "hits",
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 520,
-    "clickcount": 245000
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "new-bbc-6music-02",
+    "id": "new-bbc-6music-02",
     "name": "BBC Radio 6 Music",
-    "url": "http://as-hls-ww-live.akamaized.net/pool_81827798/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio=320000.norewind.m3u8",
-    "url_resolved": "http://as-hls-ww-live.akamaized.net/pool_81827798/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio=320000.norewind.m3u8",
-    "homepage": "https://www.bbc.co.uk/6music",
+    "fullName": "BBC Radio 6 Music",
+    "streamUrl": "http://as-hls-ww-live.akamaized.net/pool_81827798/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio=320000.norewind.m3u8",
+    "fallbackUrl": "http://as-hls-ww-live.akamaized.net/pool_81827798/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio=320000.norewind.m3u8",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s24943q.png",
-    "tags": "pop,alternative,indie,rock",
     "country": "United Kingdom",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop",
+      "alternative",
+      "indie",
+      "rock"
+    ],
+    "isHls": true,
     "codec": "AAC",
     "bitrate": 320,
-    "hls": 1,
-    "votes": 890,
-    "clickcount": 380000
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "new-capital-dance-03",
+    "id": "new-capital-dance-03",
     "name": "Capital Dance UK",
-    "url": "https://media-ssl.musicradio.com/CapitalDance",
-    "url_resolved": "https://media-ssl.musicradio.com/CapitalDance",
-    "homepage": "https://www.capitalfm.com/dance",
+    "fullName": "Capital Dance UK",
+    "streamUrl": "https://media-ssl.musicradio.com/CapitalDance",
+    "fallbackUrl": "https://media-ssl.musicradio.com/CapitalDance",
     "favicon": "https://images.capitalfm.com/images/474149?crop=16_9&width=660&relax=1&signature=5f9e20eb5f334d72bc13d59e",
-    "tags": "pop,dance,edm,electronic,hits",
     "country": "United Kingdom",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop",
+      "dance",
+      "edm",
+      "electronic",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 420,
-    "clickcount": 210000
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   },
   {
-    "stationuuid": "new-capital-xtra-04",
+    "id": "new-capital-xtra-04",
     "name": "Capital XTRA UK",
-    "url": "http://media-the.musicradio.com/CapitalXTRALondonMP3",
-    "url_resolved": "http://media-the.musicradio.com/CapitalXTRALondonMP3",
-    "homepage": "https://www.capitalxtra.com",
+    "fullName": "Capital XTRA UK",
+    "streamUrl": "http://media-the.musicradio.com/CapitalXTRALondonMP3",
+    "fallbackUrl": "http://media-the.musicradio.com/CapitalXTRALondonMP3",
     "favicon": "https://www.capitalfm.com/assets_v4r/capital/img/favicon-196x196.png",
-    "tags": "pop,hiphop,urban,hits",
     "country": "United Kingdom",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop",
+      "hiphop",
+      "urban",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 390,
-    "clickcount": 195000
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "new-classic-fm-05",
+    "id": "new-classic-fm-05",
     "name": "Classic FM UK",
-    "url": "http://ice-the.musicradio.com/ClassicFMMP3",
-    "url_resolved": "http://ice-the.musicradio.com/ClassicFMMP3",
-    "homepage": "https://www.classicfm.com",
+    "fullName": "Classic FM UK",
+    "streamUrl": "http://ice-the.musicradio.com/ClassicFMMP3",
+    "fallbackUrl": "http://ice-the.musicradio.com/ClassicFMMP3",
     "favicon": "https://cdn-profiles.tunein.com/s9439/images/logoq.jpg",
-    "tags": "calm,classical,relax,adult contemporary",
     "country": "United Kingdom",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "calm",
+      "classical",
+      "relax",
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 750,
-    "clickcount": 320000
+    "moods": [
+      "CALM_CHILL",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "new-smooth-chill-06",
+    "id": "new-smooth-chill-06",
     "name": "Smooth Chill UK",
-    "url": "https://media-ssl.musicradio.com/SmoothChill",
-    "url_resolved": "https://media-ssl.musicradio.com/SmoothChill",
-    "homepage": "https://www.smoothradio.com/chill",
+    "fullName": "Smooth Chill UK",
+    "streamUrl": "https://media-ssl.musicradio.com/SmoothChill",
+    "fallbackUrl": "https://media-ssl.musicradio.com/SmoothChill",
     "favicon": "https://cdn-profiles.tunein.com/s45448/images/logod.png",
-    "tags": "pop,calm,chill,ambient,relax,adult contemporary",
     "country": "United Kingdom",
-    "countrycode": "GB",
+    "countryCode": "GB",
+    "flag": "🇬🇧",
+    "tags": [
+      "pop",
+      "calm",
+      "chill",
+      "ambient",
+      "relax",
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 620,
-    "clickcount": 280000
+    "moods": [
+      "POP_HITS",
+      "CALM_CHILL",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "new-cadena-ser-07",
+    "id": "new-cadena-ser-07",
     "name": "Cadena SER España",
-    "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3",
-    "url_resolved": "http://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3",
-    "homepage": "https://cadenaser.com",
+    "fullName": "Cadena SER España",
+    "streamUrl": "http://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3",
+    "fallbackUrl": "http://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3",
     "favicon": "https://cadenaser.com/pf/resources/img/favicon.png?d=889",
-    "tags": "latin,spanish,news,talk,cadena",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "latin",
+      "spanish",
+      "news",
+      "talk",
+      "cadena"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 980,
-    "clickcount": 450000
+    "moods": [
+      "NEWS_COMMUTE"
+    ]
   },
   {
-    "stationuuid": "new-kiss-fm-spain-08",
+    "id": "new-kiss-fm-spain-08",
     "name": "KISS FM España",
-    "url": "https://bbkissfm.kissfmradio.cires21.com/bbkissfm.mp3",
-    "url_resolved": "https://bbkissfm.kissfmradio.cires21.com/bbkissfm.mp3",
-    "homepage": "https://kissfm.es",
-    "favicon": "https://sipseplay.com/favicon.ico",
-    "tags": "pop,latin,spanish,hits",
+    "fullName": "KISS FM España",
+    "streamUrl": "https://bbkissfm.kissfmradio.cires21.com/bbkissfm.mp3",
+    "fallbackUrl": "https://bbkissfm.kissfmradio.cires21.com/bbkissfm.mp3",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s10634q.png",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "pop",
+      "latin",
+      "spanish",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 410,
-    "clickcount": 220000
+    "moods": [
+      "POP_HITS",
+      "LATIN_SPANISH"
+    ]
   },
   {
-    "stationuuid": "new-rac1-spain-09",
+    "id": "new-rac1-spain-09",
     "name": "RAC1 Catalunya",
-    "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3",
-    "url_resolved": "https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3",
-    "homepage": "https://rac1.cat",
+    "fullName": "RAC1 Catalunya",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3",
+    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s13304q.png",
-    "tags": "latin,spanish,catalan,news,talk",
     "country": "Spain",
-    "countrycode": "ES",
+    "countryCode": "ES",
+    "flag": "🇪🇸",
+    "tags": [
+      "latin",
+      "spanish",
+      "catalan",
+      "news",
+      "talk"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 350,
-    "clickcount": 180000
+    "moods": [
+      "NEWS_COMMUTE"
+    ]
   },
   {
-    "stationuuid": "new-kexp-seattle-10",
+    "id": "new-kexp-seattle-10",
     "name": "KEXP 90.3 Seattle",
-    "url": "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
-    "url_resolved": "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
-    "homepage": "https://kexp.org",
+    "fullName": "KEXP 90.3 Seattle",
+    "streamUrl": "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
+    "fallbackUrl": "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s32537q.png",
-    "tags": "pop,alternative,indie,rock,hits",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "alternative",
+      "indie",
+      "rock",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 950,
-    "clickcount": 420000
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "new-radio-paradise-11",
+    "id": "new-radio-paradise-11",
     "name": "Radio Paradise Main",
-    "url": "http://stream-uk1.radioparadise.com/aac-320",
-    "url_resolved": "http://stream-uk1.radioparadise.com/aac-320",
-    "homepage": "https://radioparadise.com",
+    "fullName": "Radio Paradise Main",
+    "streamUrl": "http://stream-uk1.radioparadise.com/aac-320",
+    "fallbackUrl": "http://stream-uk1.radioparadise.com/aac-320",
     "favicon": "https://cdn-radiotime-logos.tunein.com/s13606q.png",
-    "tags": "pop,eclectic,rock,chill,hits",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "eclectic",
+      "rock",
+      "chill",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "AAC",
     "bitrate": 320,
-    "hls": 0,
-    "votes": 1100,
-    "clickcount": 510000
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "CALM_CHILL"
+    ]
   },
   {
-    "stationuuid": "new-181-awesome80s-12",
+    "id": "new-181-awesome80s-12",
     "name": "181.FM Awesome 80s",
-    "url": "https://listen.181fm.com/181-awesome80s_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-awesome80s_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45558q.png",
-    "tags": "pop,hits,80s,retro",
+    "fullName": "181.FM Awesome 80s",
+    "streamUrl": "https://listen.181fm.com/181-awesome80s_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-awesome80s_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "hits",
+      "80s",
+      "retro"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 680,
-    "clickcount": 310000
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "new-181-the-eagle-13",
+    "id": "new-181-the-eagle-13",
     "name": "181.FM The Eagle Classic Rock",
-    "url": "https://listen.181fm.com/181-eagle_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-eagle_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45564q.png",
-    "tags": "rock,classic rock,hits",
+    "fullName": "181.FM The Eagle Classic Rock",
+    "streamUrl": "https://listen.181fm.com/181-eagle_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-eagle_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "rock",
+      "classic rock",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 720,
-    "clickcount": 340000
+    "moods": [
+      "POP_HITS",
+      "ROCK"
+    ]
   },
   {
-    "stationuuid": "new-181-the-beat-14",
+    "id": "new-181-the-beat-14",
     "name": "181.FM The Beat HipHop",
-    "url": "https://listen.181fm.com/181-beat_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-beat_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45561q.png",
-    "tags": "pop,hiphop,rnb,hits,urban",
+    "fullName": "181.FM The Beat HipHop",
+    "streamUrl": "https://listen.181fm.com/181-beat_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-beat_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "hiphop",
+      "rnb",
+      "hits",
+      "urban"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 540,
-    "clickcount": 260000
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "new-181-mellow-gold-15",
+    "id": "new-181-mellow-gold-15",
     "name": "181.FM Mellow Gold Soft Rock",
-    "url": "https://listen.181fm.com/181-mellow_128k.mp3",
-    "url_resolved": "https://listen.181fm.com/181-mellow_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45563q.png",
-    "tags": "pop,soft rock,calm,chill,adult contemporary",
+    "fullName": "181.FM Mellow Gold Soft Rock",
+    "streamUrl": "https://listen.181fm.com/181-mellow_128k.mp3",
+    "fallbackUrl": "https://listen.181fm.com/181-mellow_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "soft rock",
+      "calm",
+      "chill",
+      "adult contemporary"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 490,
-    "clickcount": 230000
+    "moods": [
+      "POP_HITS",
+      "ROCK",
+      "CALM_CHILL",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "new-181-90s-country-16",
+    "id": "new-181-90s-country-16",
     "name": "181.FM 90s Country",
-    "url": "http://listen.181fm.com/181-90scountry_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-90scountry_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45558q.png",
-    "tags": "country,90s,hits",
+    "fullName": "181.FM 90s Country",
+    "streamUrl": "http://listen.181fm.com/181-90scountry_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-90scountry_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "country",
+      "90s",
+      "hits"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 460,
-    "clickcount": 215000
+    "moods": [
+      "POP_HITS",
+      "LONG_DRIVE"
+    ]
   },
   {
-    "stationuuid": "new-181-highway-17",
+    "id": "new-181-highway-17",
     "name": "181.FM Highway 181 Country",
-    "url": "http://listen.181fm.com/181-highway_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-highway_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45558q.png",
-    "tags": "country,hits,long drive",
+    "fullName": "181.FM Highway 181 Country",
+    "streamUrl": "http://listen.181fm.com/181-highway_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-highway_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "country",
+      "hits",
+      "long drive"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 430,
-    "clickcount": 198000
+    "moods": [
+      "POP_HITS"
+    ]
   },
   {
-    "stationuuid": "new-181-energy98-18",
+    "id": "new-181-energy98-18",
     "name": "181.FM Energy 98 Dance",
-    "url": "http://listen.181fm.com/181-energy98_128k.mp3",
-    "url_resolved": "http://listen.181fm.com/181-energy98_128k.mp3",
-    "homepage": "https://181.fm",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s45561q.png",
-    "tags": "pop,dance,electronic,hits,energy",
+    "fullName": "181.FM Energy 98 Dance",
+    "streamUrl": "http://listen.181fm.com/181-energy98_128k.mp3",
+    "fallbackUrl": "http://listen.181fm.com/181-energy98_128k.mp3",
+    "favicon": "https://cdn-profiles.tunein.com/s6706/images/logog.png?t=1",
     "country": "United States",
-    "countrycode": "US",
+    "countryCode": "US",
+    "flag": "🇺🇸",
+    "tags": [
+      "pop",
+      "dance",
+      "electronic",
+      "hits",
+      "energy"
+    ],
+    "isHls": false,
     "codec": "MP3",
     "bitrate": 128,
-    "hls": 0,
-    "votes": 510,
-    "clickcount": 240000
+    "moods": [
+      "POP_HITS",
+      "FUN_ENERGY"
+    ]
   }
 ];
