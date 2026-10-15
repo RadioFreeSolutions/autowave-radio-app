@@ -1,5 +1,5 @@
 /**
- * DriveWave Web Player
+ * AutoWave Radio Web Player
  * High-performance, zero-dependency streaming radio engine with HLS fallback,
  * MediaSession steering-wheel integration, and driving mode.
  */
@@ -699,9 +699,9 @@
     if (document.hidden) {
       if (isPlaying && currentStation) {
         const title = currentTrackTitle ? `${currentTrackTitle} - ${currentStation.name}` : currentStation.name;
-        document.title = `▶ ${title} | DriveWave`;
+        document.title = `▶ ${title} | AutoWave Radio`;
       } else {
-        document.title = `⏸ DriveWave Web`;
+        document.title = `⏸ AutoWave Radio Web`;
       }
     } else {
       document.title = canonicalTitle;
@@ -738,7 +738,7 @@
     if (!pipWindow || pipWindow.closed) return;
     try {
       const art = currentStation ? (currentStation.favicon || 'icon-512.png') : 'icon-512.png';
-      const title = currentStation ? currentStation.name : 'DriveWave Radio';
+      const title = currentStation ? currentStation.name : 'AutoWave Radio';
       const sub = currentStation ? `${currentStation.flag || '📻'} Live Stream` : 'Pure Driving Radio';
 
       const artEl = pipWindow.document.querySelector('.pip-art');
@@ -762,7 +762,7 @@
     ctx.fillRect(0, 0, w, h);
 
     const grad = ctx.createRadialGradient(w / 2, h / 2, 50, w / 2, h / 2, 250);
-    grad.addColorStop(0, 'rgba(0, 229, 255, 0.15)');
+    grad.addColorStop(0, 'rgba(0, 255, 127, 0.15)');
     grad.addColorStop(1, 'rgba(7, 10, 16, 0.98)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
@@ -770,10 +770,10 @@
     ctx.fillStyle = '#FFFFFF';
     ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.textAlign = 'center';
-    const name = currentStation ? currentStation.name : 'DriveWave Radio';
+    const name = currentStation ? currentStation.name : 'AutoWave Radio';
     ctx.fillText(name, w / 2, 75);
 
-    ctx.fillStyle = '#00E5FF';
+    ctx.fillStyle = '#00FF7F';
     ctx.font = '600 17px -apple-system, BlinkMacSystemFont, sans-serif';
     const sub = currentStation ? `${currentStation.flag || '📻'} Live Broadcast` : 'Pure Driving Radio';
     ctx.fillText(sub, w / 2, 108);
@@ -796,7 +796,7 @@
     }
 
     if (isPlaying) {
-      ctx.fillStyle = '#00E5FF';
+      ctx.fillStyle = '#00FF7F';
       for (let i = 0; i < 5; i++) {
         const barH = 10 + Math.random() * 24;
         ctx.fillRect(w / 2 - 40 + i * 18, 430 - barH, 10, barH);
@@ -871,20 +871,20 @@
       * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
       body { background: #070A10; color: #FFF; display: flex; align-items: center; justify-content: space-between; padding: 14px; height: 100vh; overflow: hidden; user-select: none; }
       .pip-card { display: flex; align-items: center; gap: 12px; width: 100%; }
-      .pip-art { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; background: #121826; flex-shrink: 0; border: 1px solid rgba(0, 229, 255, 0.3); }
+      .pip-art { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; background: #121826; flex-shrink: 0; border: 1px solid rgba(0, 255, 127, 0.3); }
       .pip-info { flex: 1; min-width: 0; overflow: hidden; }
       .pip-title { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #FFF; }
-      .pip-sub { font-size: 12px; color: #00E5FF; font-weight: 600; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pip-sub { font-size: 12px; color: #00FF7F; font-weight: 600; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .pip-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
       .pip-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #FFF; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s; }
       .pip-btn:hover { background: rgba(255,255,255,0.2); }
-      .pip-play { background: linear-gradient(135deg, #00E5FF 0%, #00B0FF 100%); color: #000; width: 40px; height: 40px; font-size: 16px; border: none; font-weight: bold; }
+      .pip-play { background: linear-gradient(135deg, #00FF7F 0%, #00B0FF 100%); color: #000; width: 40px; height: 40px; font-size: 16px; border: none; font-weight: bold; }
       .pip-play:hover { transform: scale(1.05); }
     `;
     pipWindow.document.head.appendChild(style);
 
     const art = currentStation ? (currentStation.favicon || 'icon-512.png') : 'icon-512.png';
-    const title = currentStation ? currentStation.name : 'DriveWave Radio';
+    const title = currentStation ? currentStation.name : 'AutoWave Radio';
     const sub = currentStation ? `${currentStation.flag || '📻'} Live Stream` : 'Pure Driving Radio';
 
     pipWindow.document.body.innerHTML = `
@@ -991,7 +991,7 @@
   function updateMediaSession(station, track = '') {
     if ('mediaSession' in navigator && station) {
       const displayTitle = track || station.name;
-      const displayArtist = track ? `${station.name} • DriveWave` : `DriveWave • ${station.country || 'Live Radio'}`;
+      const displayArtist = track ? `${station.name} • AutoWave Radio` : `AutoWave Radio • ${station.country || 'Live Radio'}`;
       navigator.mediaSession.metadata = new MediaMetadata({
         title: displayTitle,
         artist: displayArtist,

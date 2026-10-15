@@ -1,5 +1,5 @@
-// DriveWave Private Edition (215 Stations)
-window.DRIVEWAVE_STATIONS = [
+// AutoWave Radio Stations Catalog (185 curated live stations)
+window.AUTOWAVE_STATIONS = [
   {
     "stationuuid": "il-galgalatz-001",
     "id": "il-galgalatz-001",
@@ -415,29 +415,6 @@ window.DRIVEWAVE_STATIONS = [
     ]
   },
   {
-    "id": "9608ade8-0601-11e8-ae97-52543be04c81",
-    "name": "Heart London 106.2 [MP3]",
-    "fullName": "Heart London 106.2 [MP3]",
-    "streamUrl": "http://ice-sov.musicradio.com/HeartLondonMP3",
-    "fallbackUrl": "http://ice-sov.musicradio.com/HeartLondonMP3",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "commercial",
-      "hot adult contemporary",
-      "london"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 352,
-    "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
-    ]
-  },
-  {
     "id": "283402b5-dc2e-11e9-a8ba-52543be04c81",
     "name": "Heart UK",
     "fullName": "Heart UK",
@@ -460,48 +437,6 @@ window.DRIVEWAVE_STATIONS = [
     "moods": [
       "POP_HITS",
       "LONG_DRIVE"
-    ]
-  },
-  {
-    "id": "963c8518-0601-11e8-ae97-52543be04c81",
-    "name": "Heart",
-    "fullName": "Heart",
-    "streamUrl": "http://media-the.musicradio.com/HeartNorthLancsCumbria",
-    "fallbackUrl": "http://media-the.musicradio.com/HeartNorthLancsCumbria",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "oldies",
-      "pop",
-      "public radio",
-      "variety"
-    ],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 130,
-    "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
-    ]
-  },
-  {
-    "id": "42679ed6-49cb-428e-9b74-94af62ad8a0a",
-    "name": "Heart FM",
-    "fullName": "Heart FM",
-    "streamUrl": "https://media-ssl.musicradio.com/HeartUK",
-    "fallbackUrl": "https://media-ssl.musicradio.com/HeartUK",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 126,
-    "moods": [
-      "POP_HITS"
     ]
   },
   {
@@ -608,34 +543,6 @@ window.DRIVEWAVE_STATIONS = [
     "bitrate": 211,
     "moods": [
       "POP_HITS"
-    ]
-  },
-  {
-    "id": "0f1a8621-d35a-4073-83d3-7ee14207a9a9",
-    "name": "KISS - The Best Vibes & Energy",
-    "fullName": "KISS - The Best Vibes & Energy",
-    "streamUrl": "https://live-bauerkiss.sharp-stream.com/kissnational.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "fallbackUrl": "https://live-bauerkiss.sharp-stream.com/kissnational.aac?direct=true&aw_0_1st.skey=1602676850&rp_source=1&=&&___cb=60456375243858",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "dab",
-      "dance",
-      "dance music",
-      "digital radio",
-      "edm",
-      "england",
-      "entertainment",
-      "europe"
-    ],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 93,
-    "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
     ]
   },
   {
@@ -1475,27 +1382,6 @@ window.DRIVEWAVE_STATIONS = [
     "isHls": false,
     "codec": "AAC",
     "bitrate": 139,
-    "moods": [
-      "ROCK"
-    ]
-  },
-  {
-    "id": "9605383a-0601-11e8-ae97-52543be04c81",
-    "name": "Radio X London",
-    "fullName": "Radio X London",
-    "streamUrl": "http://media-the.musicradio.com/RadioXLondon",
-    "fallbackUrl": "http://media-the.musicradio.com/RadioXLondon",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "guitar rock",
-      "london"
-    ],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 134,
     "moods": [
       "ROCK"
     ]
@@ -2377,56 +2263,6 @@ window.DRIVEWAVE_STATIONS = [
     ]
   },
   {
-    "id": "a509502d-1ba7-4d51-9791-0be5a7d5ec34",
-    "name": "KEXP 90.3 FM Seattle, WA",
-    "fullName": "KEXP 90.3 FM Seattle, WA",
-    "streamUrl": "http://live-mp3-128.kexp.org/kexp128.mp3",
-    "fallbackUrl": "http://live-mp3-128.kexp.org/kexp128.mp3",
-    "favicon": "",
-    "country": "The United States Of America",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "alternative",
-      "electronic",
-      "hip hop",
-      "indie",
-      "jazz",
-      "live",
-      "pop",
-      "public radio"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 237,
-    "moods": [
-      "POP_HITS",
-      "ROCK",
-      "FUN_ENERGY"
-    ]
-  },
-  {
-    "id": "c6eed7cb-e3c9-4b3a-a627-f7df928a19e0",
-    "name": "Radio Disney Country FM 99.1",
-    "fullName": "Radio Disney Country FM 99.1",
-    "streamUrl": "https://listen.radioking.com/radio/453221/stream/508076",
-    "fallbackUrl": "https://listen.radioking.com/radio/453221/stream/508076",
-    "favicon": "",
-    "country": "The United States Of America",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "county music",
-      "pop"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 223,
-    "moods": [
-      "POP_HITS"
-    ]
-  },
-  {
     "id": "b7925a87-ce5d-48f1-b0df-fb30d75aa2c4",
     "name": "Radio Essex",
     "fullName": "Radio Essex",
@@ -2651,29 +2487,6 @@ window.DRIVEWAVE_STATIONS = [
     ]
   },
   {
-    "id": "1f2f0072-dfb1-42e1-9c5c-f4d4db9eda89",
-    "name": "Joyhits UK FLAC",
-    "fullName": "Joyhits UK FLAC",
-    "streamUrl": "https://joyhits.online/joyhits.flac.ogg",
-    "fallbackUrl": "https://joyhits.online/joyhits.flac.ogg",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "dance hits",
-      "pop",
-      "pop hits"
-    ],
-    "isHls": false,
-    "codec": "OGG",
-    "bitrate": 2602,
-    "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
-    ]
-  },
-  {
     "id": "b61fbabb-b1c5-4fb9-92ea-8336911ee04d",
     "name": "Urban Radio - Hip Hop Hits",
     "fullName": "Urban Radio - Hip Hop Hits",
@@ -2721,29 +2534,6 @@ window.DRIVEWAVE_STATIONS = [
       "POP_HITS",
       "ROCK",
       "LONG_DRIVE"
-    ]
-  },
-  {
-    "id": "d5698481-5c1f-4123-8dc3-1983a491ccc1",
-    "name": "Urban Radio - All The Hip Hop Hits",
-    "fullName": "Urban Radio - All The Hip Hop Hits",
-    "streamUrl": "http://hydra.cdnstream.com/1537_128",
-    "fallbackUrl": "http://hydra.cdnstream.com/1537_128",
-    "favicon": "",
-    "country": "The United States Of America",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "hip hop",
-      "hits",
-      "music"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 2108,
-    "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
     ]
   },
   {
@@ -3487,27 +3277,6 @@ window.DRIVEWAVE_STATIONS = [
     "moods": [
       "POP_HITS",
       "LONG_DRIVE"
-    ]
-  },
-  {
-    "id": "74e8b53d-10ac-4879-b27b-c93c4955ed1d",
-    "name": "The Big Top 40 Show (SUNDAYS 4 - 7PM)",
-    "fullName": "The Big Top 40 Show (SUNDAYS 4 - 7PM)",
-    "streamUrl": "https://icecast.thisisdax.com/BigTop40",
-    "fallbackUrl": "https://icecast.thisisdax.com/BigTop40",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "music",
-      "pop"
-    ],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 124,
-    "moods": [
-      "POP_HITS"
     ]
   },
   {
@@ -4665,3 +4434,4 @@ window.DRIVEWAVE_STATIONS = [
     ]
   }
 ];
+window.DRIVEWAVE_STATIONS = window.AUTOWAVE_STATIONS;
