@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Terms of Service & Comprehensive Legal Disclaimers | AutoWave Radio</title>
+  <meta name="description" content="Comprehensive Terms of Service, Broadcaster Rights, Safe Harbor (DMCA), Driver Safety Disclaimer, and Limitation of Liability for AutoWave Radio & Web Player." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://radiofreesolutions.github.io/drivewave-app/terms.html" />
+  <link rel="icon" type="image/png" href="web/favicon.png" />
+  
+  <style>
+    :root {
+      --bg: #070A10;
+      --card-bg: #0E1424;
+      --card-alt: #131B30;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(0, 255, 127, 0.3);
+      --accent: #00FF7F;
+      --accent-glow: rgba(0, 255, 127, 0.25);
+      --text: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --text-dim: #6B7280;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 30px 16px 80px 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 920px;
+      width: 100%;
+    }
+
+    /* Top navigation bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #FFF;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-link {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      background: rgba(0, 255, 127, 0.12);
+      border-color: var(--accent);
+      color: #FFF;
+    }
+
+    /* Header banner */
+    .legal-hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .legal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 255, 127, 0.12);
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: #FFF;
+    }
+
+    .legal-meta {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Mandatory Assent Box (Hebrew + English) */
+    .mandatory-notice {
+      background: linear-gradient(180deg, rgba(14, 20, 36, 0.95) 0%, rgba(19, 27, 48, 0.95) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 36px;
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+
+    .mandatory-notice h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notice-hebrew {
+      direction: rtl;
+      text-align: right;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.7;
+      color: #FFF;
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .notice-english {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Table of Contents */
+    .toc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 26px;
+      margin-bottom: 36px;
+    }
+
+    .toc-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #FFF;
+      margin-bottom: 14px;
+    }
+
+    .toc-list {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 8px 16px;
+      font-size: 13.5px;
+    }
+
+    .toc-list li a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .toc-list li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Legal Sections */
+    .legal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .legal-card h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #FFF;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .legal-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 18px 0 8px 0;
+    }
+
+    .legal-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .legal-card ul {
+      margin-left: 22px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .legal-card li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .callout-box {
+      background: var(--card-alt);
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin: 16px 0;
+      font-size: 13.5px;
+      color: var(--text);
+    }
+
+    .callout-warning {
+      border-left-color: var(--warning);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .callout-danger {
+      border-left-color: var(--danger);
+      background: rgba(239, 68, 68, 0.08);
+    }
+
+    /* Print and back to top */
+    .footer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .btn-action {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Navigation Header -->
+    <header class="top-nav">
+      <a href="./" class="brand-group">
+        <img src="play_store_icon_512.png" alt="AutoWave Radio Logo" class="brand-icon" />
+        <span class="brand-title">AutoWave Radio</span>
+      </a>
+      <div class="nav-actions">
+        <a href="./" class="nav-link">🏠 Homepage</a>
+        <a href="web/" class="nav-link">🌐 Web Player</a>
+        <a href="privacy.html" class="nav-link">🛡️ Privacy Policy</a>
+        <a href="he.html" class="nav-link">עברית</a>
+      </div>
+    </header>
+
+    <!-- Header Section -->
+    <div class="legal-hero">
+      <div class="legal-badge">
+        <span>⚖️</span> Binding Terms, Safe Harbor &amp; Liability Waiver
+      </div>
+      <h1>Terms of Service &amp; Comprehensive Legal Disclaimers</h1>
+      <div class="legal-meta">
+        <strong>Application:</strong> AutoWave Radio (Native Android &amp; Android Auto Client, Package: <code>com.drivewave.autoradio</code>)<br />
+        <strong>Web Service:</strong> AutoWave Radio Web Player (HTML5 / Audio Web Interface)<br />
+        <strong>Effective Date:</strong> October 2026 • <strong>Entity / Developer:</strong> RadioFreeSolutions (Independent Open Audio Tuner Project)
+      </div>
+    </div>
+
+    <!-- MANDATORY NOTICE / הבהרה משפטית מרכזית -->
+    <div class="mandatory-notice">
+      <h3><span>⚠️</span> MANDATORY ASSENT &amp; LEGAL NOTICE / הצהרת הסכמה מחייבת</h3>
+      
+      <div class="notice-hebrew">
+        <strong>לתשומת לב המשתמש:</strong> שימוש באפליקציית AutoWave Radio (לרבות הורדה, התקנה, האזנה ברכב או בטלפון) ו/או בנגן ה-Web של AutoWave בדפדפן, <u>מהווה הסכמה מלאה, מפורשת ובלתי חוזרת</u> לכל תנאי השימוש, כתב הוויתור, הגבלת האחריות ונהלי זכויות היוצרים המפורטים בעמוד זה. אם אינך מסכים לתנאים אלו במלואם, הינך נדרש להפסיק מיד כל שימוש ולהסיר את האפליקציה ממכשירך.
+      </div>
+
+      <div class="notice-english">
+        <strong>IMPORTANT NOTICE TO ALL USERS:</strong> By downloading, installing, launching, accessing, browsing, or utilizing the AutoWave Radio software application (for Android smartphones, tablets, and Android Auto head units) or the AutoWave Web Player interface, <u>you unconditionally and irrevocably agree to be legally bound by every provision, covenant, warranty disclaimer, safe harbor clause, and limitation of liability set forth in this document</u>. If you do not agree with every single term herein, your sole and exclusive remedy is to immediately cease all access, terminate playback, and uninstall the application.
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc-card">
+      <div class="toc-title">📑 Table of Contents</div>
+      <ul class="toc-list">
+        <li><a href="#sec-1">1. Scope of Agreement &amp; Acceptance</a></li>
+        <li><a href="#sec-2">2. Architecture as "Mere Conduit" &amp; Tuner</a></li>
+        <li><a href="#sec-3">3. Broadcaster Rights &amp; Nominative Fair Use</a></li>
+        <li><a href="#sec-4">4. DMCA Notice &amp; Rapid Takedown Policy</a></li>
+        <li><a href="#sec-5">5. Motor Vehicle Safety &amp; Driver Waiver</a></li>
+        <li><a href="#sec-6">6. Third-Party Audio &amp; Defamation Disclaimer</a></li>
+        <li><a href="#sec-7">7. Cellular Data, Roaming &amp; Bandwidth Limits</a></li>
+        <li><a href="#sec-8">8. Total Disclaimer of Warranties ("AS IS")</a></li>
+        <li><a href="#sec-9">9. Comprehensive Limitation of Liability</a></li>
+        <li><a href="#sec-10">10. Zero Personal Data &amp; Regulatory Compliance</a></li>
+        <li><a href="#sec-11">11. Class Action Waiver &amp; Individual Arbitration</a></li>
+        <li><a href="#sec-12">12. Governing Law, Jurisdiction &amp; Severability</a></li>
+      </ul>
+    </div>
+
+    <!-- SECTION 1 -->
+    <section class="legal-card" id="sec-1">
+      <h2>1. Scope of Agreement &amp; Mandatory Acceptance</h2>
+      <p>
+        These Terms of Service and Legal Disclaimers ("Agreement", "Terms") constitute a legally binding agreement between you (the "User", "you", or "your") and <strong>RadioFreeSolutions</strong> (together with its developers, contributors, maintainers, authors, and affiliates, "AutoWave Radio", "we", "us", or "our"), governing your access to and use of the AutoWave Radio mobile application, automotive interface, and online web streaming player (collectively, the "Service" or "Software").
+      </p>
+      <p>
+        By accessing or using the Service in any capacity, whether on an Android mobile device, vehicular Android Auto infotainment screen, Android Automotive OS display, web browser, tablet, or secondary media client, you certify that:
+      </p>
+      <ul>
+        <li>You are of legal age in your jurisdiction to enter into binding legal agreements.</li>
+        <li>You have read, understood, and agreed to every provision of this Agreement without reservation.</li>
+        <li>You understand that AutoWave Radio is an independent software directory interface and not a broadcaster, producer, or commercial music vendor.</li>
+      </ul>
+      <div class="callout-box">
+        <strong>Unilateral Modification:</strong> We reserve the exclusive right to alter, modify, amend, or replace any portion of these Terms at our sole discretion at any time without prior individualized notice. Such updates become effective immediately upon being posted on this URL. Your continued use of the Software or Site following the posting of any revisions conclusively confirms your acceptance of such modifications.
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="legal-card" id="sec-2">
+      <h2>2. Architecture as "Mere Conduit", Directory &amp; Client Tuner</h2>
+      <p>
+        AutoWave Radio is engineered strictly as an independent, client-side, index-based software media player and directory browser. To clarify the technical, operational, and legal nature of the Software:
+      </p>
+      <ul>
+        <li><strong>No Audio Broadcasting or Re-transmission:</strong> AutoWave Radio does NOT broadcast, re-broadcast, syndicate, restream, re-encode, transcode, mirror, or relay any audio, radio frequency, or digital stream.</li>
+        <li><strong>No Central Media Storage or Caching:</strong> No audio bytes, musical tracks, audio clips, podcasts, or broadcasts are stored, hosted, cached, or buffered on servers owned, managed, or rented by AutoWave Radio.</li>
+        <li><strong>Direct Client-to-Source Socket Connections:</strong> When you tap or click a radio station, your client device (e.g., your smartphone or web browser) initiates a direct, unmediated, peer-to-broadcaster network request (HTTP, HTTPS, HLS, Shoutcast, Icecast) to the public streaming URL maintained and published by the respective broadcaster for public worldwide reception.</li>
+        <li><strong>No Circumvention of Technological Controls:</strong> AutoWave Radio does not circumvent, decrypt, crack, or bypass any DRM (Digital Rights Management), paywall, tokenized authentication, geographic IP-blocking (geo-fence), or subscription restriction. All included streams are openly published by broadcasters for public internet reception.</li>
+        <li><strong>Statutory Safe Harbor Eligibility:</strong> AutoWave Radio explicitly operates under the statutory safe harbor protections established by:
+          <ul>
+            <li><strong>United States:</strong> Digital Millennium Copyright Act (17 U.S.C. § 512(a) - Transitory Digital Network Communications; § 512(d) - Information Location Tools).</li>
+            <li><strong>European Union:</strong> Directive 2000/31/EC (E-Commerce Directive, Articles 12–15: "Mere Conduit", "Caching", and "Hosting" exclusions).</li>
+            <li><strong>State of Israel:</strong> Israeli Copyright Act 2007 (חוק זכות יוצרים, התשס"ח-2007) and established judicial doctrine governing electronic hyperlinks, directory services, and safe harbor protections for automated conduits.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="legal-card" id="sec-3">
+      <h2>3. Broadcaster Intellectual Property &amp; Nominative Fair Use</h2>
+      <p>
+        All copyright, trademark, trade name, brand identity, service mark, audio broadcast, sound recording, musical composition, spoken dialogue, commercial advertisement, and intellectual property rights embodied within any stream belong 100% exclusively to their respective radio stations, broadcast syndicates, media conglomerates, and copyright collection societies (such as ASCAP, BMI, SESAC, SoundExchange, PRS for Music, PPL, GEMA, SACEM, ACUM, or equivalent national entities).
+      </p>
+      <h3>3.1 Pure Nominative Fair Use of Textual Names</h3>
+      <p>
+        Station names, call letters, frequencies (e.g., "Z100", "BBC Radio 1", "KIIS FM", "Cadena Dial"), and country flags displayed within the Software are utilized strictly for <strong>nominative fair use</strong> (שימוש הוגן נקוב בשם) and descriptive reference purposes. They exist solely to inform the user of the identity of the public frequency or broadcast stream to which their device is connecting.
+      </p>
+      <h3>3.2 Absolute Independence &amp; Non-Affiliation</h3>
+      <p>
+        AutoWave Radio is completely independent. AutoWave Radio does NOT claim any endorsement, sponsorship, partnership, joint venture, agency, or commercial relationship with any radio station, broadcaster, artist, or record label. The mention of any broadcaster name does not imply any approval or association by the broadcaster with AutoWave Radio.
+      </p>
+      <h3>3.3 Advertising Inherent to Third-Party Streams</h3>
+      <p>
+        AutoWave Radio does not insert, inject, modify, or superimpose any advertisements of its own into the streams. However, users acknowledge that individual radio stations may broadcast commercials, station IDs, or promotional announcements as part of their live public feed. AutoWave Radio has no control over, receives no revenue from, and bears no responsibility for third-party commercial content.
+      </p>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="legal-card" id="sec-4">
+      <h2>4. DMCA Notice, Anti-Spam Takedown &amp; Broadcaster Removal Procedure</h2>
+      <p>
+        AutoWave Radio maintains the highest respect for intellectual property rights and adheres strictly to a swift, cooperative "Notice and Takedown" mechanism.
+      </p>
+      <p>
+        If you are an authorized copyright holder, station administrator, chief engineer, or official corporate representative of a radio broadcast network, and you wish to:
+      </p>
+      <ol style="margin-left: 24px; color: var(--text-muted); font-size: 14px; margin-bottom: 14px;">
+        <li>Update, refresh, or correct your station's stream URL, bitrate, or metadata; or</li>
+        <li>Request the immediate, permanent removal of your station's indexing from the AutoWave directory.</li>
+      </ol>
+      <p>
+        Please transmit an official takedown notification to our designated compliance channel:
+      </p>
+      <div class="callout-box">
+        <strong>Designated Compliance Officer:</strong> <code>legal.drivewave@gmail.com</code><br />
+        <strong>Subject Line:</strong> <code>[Broadcaster Rights Notice / Stream Removal] - [Station Name]</code>
+      </div>
+      <h3>4.1 Verification &amp; Anti-Spam Safeguards</h3>
+      <p>
+        To prevent fraudulent abuse, prank removals, competitor tampering, or unauthorized spoofing, all takedown requests must satisfy the following verification requirements:
+      </p>
+      <ul>
+        <li><strong>Official Corporate Email Domain:</strong> The notice must be sent from a verified domain belonging to the broadcaster (e.g., <code>@broadcaster.com</code>, <code>@station.fm</code>, or accredited legal counsel). Submissions from free webmail accounts (Gmail, Yahoo, Outlook, ProtonMail) without verifiable corporate proof cannot be authenticated and may be rejected.</li>
+        <li><strong>Identification of Work &amp; URL:</strong> Provide the exact station name and stream URL as indexed in AutoWave Radio.</li>
+        <li><strong>Statement of Authority:</strong> A formal representation, under penalty of perjury, that the sender is the rights holder or legally empowered agent of the broadcaster.</li>
+      </ul>
+      <p>
+        Upon receipt of an authenticated and verified request, AutoWave Radio will deactivate and remove the specified stream URL across all platforms within <strong>24 to 48 business hours</strong> via our centralized remote kill-switch catalog architecture.
+      </p>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="legal-card" id="sec-5">
+      <h2>5. Absolute Motor Vehicle Safety Warning &amp; Complete Liability Waiver</h2>
+      <div class="callout-box callout-danger">
+        <strong>CRITICAL SAFETY WARNING / אזהרת בטיחות קריטית בנהיגה:</strong> Safe motor vehicle operation is your exclusive personal, criminal, and civil legal responsibility. Never engage in any activity that diverts your attention from driving, the roadway, and surrounding traffic conditions.
+      </div>
+      <p>
+        AutoWave Radio is designed with automotive media sessions and Android Auto capabilities. However, you explicitly acknowledge, agree, and covenant:
+      </p>
+      <ul>
+        <li><strong>Strict Prohibition on Handheld Screen Interaction:</strong> You are strictly forbidden from manually touching, manipulating, typing on, or staring at your mobile device or infotainment screen while your motor vehicle is in gear or motion.</li>
+        <li><strong>Safe Hands-Free Controls Only:</strong> Station adjustments must be performed strictly via pre-programmed physical steering-wheel controls, hardware rotary knobs, or automated voice commands (e.g., Google Assistant), and only when road and traffic conditions allow safe execution without distraction.</li>
+        <li><strong>Pre-Drive Setup:</strong> Select your desired mood shelf or favorite station BEFORE putting the vehicle into gear. If you must adjust settings, pull over safely to a legal, stationary parking location.</li>
+        <li><strong>Compliance with Motor Vehicle Codes:</strong> You must strictly adhere to all applicable national, state, and municipal traffic ordinances, cellular telephone usage bans, and distracted driving laws across Israel, the United States, the European Union, the United Kingdom, and worldwide jurisdictions.</li>
+      </ul>
+      <h3>5.1 Unconditional Release from All Vehicle Accidents &amp; Damages</h3>
+      <p>
+        <strong>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW:</strong> You irrevocably release, waive, discharge, and hold harmless RadioFreeSolutions, its software developers, authors, contributors, maintainers, and distributors from ANY AND ALL claims, demands, liabilities, lawsuits, causes of action, damages, fines, traffic citations, penalties, collisions, vehicle breakdowns, property damage, bodily injuries, permanent disability, mental anguish, or wrongful death resulting directly or indirectly from the use, operation, volume level, distraction, or presence of AutoWave Radio while driving or operating any vehicle, machinery, or vessel.
+      </p>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section class="legal-card" id="sec-6">
+      <h2>6. Third-Party Audio Content, Lyrics &amp; Defamation Waiver</h2>
+      <p>
+        Because AutoWave Radio functions solely as an automated technical conduit to publicly accessible live radio streams:
+      </p>
+      <ul>
+        <li><strong>No Editorial Control or Pre-Screening:</strong> We do not monitor, pre-screen, censor, review, or curate the real-time audio payloads broadcast by third-party radio stations.</li>
+        <li><strong>Explicit Language &amp; Mature Content:</strong> Stations may broadcast uncensored musical lyrics, mature comedic banter, political commentary, religious sermonizing, sensitive news reports, or adult themes. You accept full responsibility for your exposure and the exposure of passengers (including minors) to such broadcasts.</li>
+        <li><strong>No Liability for Slander, Libel or Defamation:</strong> Under no circumstances shall AutoWave Radio be liable for any defamatory, slanderous, libellous, misleading, offensive, or unlawful statements, hate speech, or commercial claims aired by any third-party broadcaster.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section class="legal-card" id="sec-7">
+      <h2>7. Cellular Data, Bandwidth Limits &amp; Telecommunications Billing</h2>
+      <p>
+        Live digital audio streaming over cellular networks (4G, 5G, LTE) requires substantial data consumption (typically ranging from 40 MB to over 150 MB per hour, depending on bitrate codecs like MP3 or AAC).
+      </p>
+      <ul>
+        <li><strong>Sole Responsibility for Data Consumption:</strong> You are solely and exclusively responsible for all cellular data usage, bandwidth consumption, carrier overage surcharges, account throttling, and telecom billing fees incurred while using AutoWave Radio.</li>
+        <li><strong>International Roaming Caution:</strong> Streaming audio while traveling abroad or outside your domestic network footprint may incur extreme carrier roaming tariffs. You assume 100% of the risk and cost of all domestic and international data usage.</li>
+        <li><strong>Zero Developer Liability for Telecom Bills:</strong> In no event shall AutoWave Radio be liable for any cellular phone bills, carrier charges, or unexpected data fees whatsoever.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 8 -->
+    <section class="legal-card" id="sec-8">
+      <h2>8. Total Disclaimer of All Warranties ("AS IS" &amp; "AS AVAILABLE")</h2>
+      <div class="callout-box callout-warning">
+        THE AUTOWAVE RADIO APPLICATION, WEB PLAYER, DOCUMENTATION, AND ALL COMPONENT CODE ARE PROVIDED ON AN <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong> BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE.
+      </div>
+      <p>
+        To the maximum extent permitted by governing law, RadioFreeSolutions and its contributors explicitly disclaim all warranties, including but not limited to:
+      </p>
+      <ul>
+        <li>Any implied warranties of merchantability, fitness for a particular purpose, title, quiet enjoyment, and non-infringement.</li>
+        <li>Any warranty that the software will operate without interruption, delays, buffering, stuttering, packet loss, or runtime bugs.</li>
+        <li>Any guarantee regarding the longevity, continuous uptime, or ongoing availability of any third-party streaming URL or radio station. Broadcasters may change URLs, enforce geo-blocking, modify codecs, or terminate operations without notice.</li>
+        <li>Any warranty concerning the accuracy, completeness, or timeliness of metadata, song titles, artist names, album art, or genre labels.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 9 -->
+    <section class="legal-card" id="sec-9">
+      <h2>9. Exhaustive Limitation of Monetary Liability &amp; Damages Waiver</h2>
+      <p>
+        <strong>TO THE MAXIMUM EXTENT PERMITTED UNDER APPLICABLE LAW:</strong>
+      </p>
+      <p>
+        IN NO EVENT SHALL RADIOFREESOLUTIONS, ITS DEVELOPERS, ARCHITECTS, CONTRIBUTORS, DONORS, HOSTING PROVIDERS, OR AFFILIATES BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF PROFITS, LOSS OF REVENUE, LOSS OF DATA, DEVICE MALFUNCTION, BATTERY DAMAGE, CELLULAR DATA FEES, AUTOMOTIVE DAMAGE, PERSONAL INJURY, DRIVER DISTRACTION, FINES, OR TRAFFIC CITATIONS), ARISING OUT OF OR IN CONNECTION WITH THE USE, INABILITY TO USE, PERFORMANCE, OR RELIANCE ON THE SOFTWARE OR WEBSITE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+      </p>
+      <div class="callout-box">
+        <strong>Absolute Financial Liability Cap:</strong> Because AutoWave Radio is provided 100% free of charge without commercial subscription fees, the total cumulative financial liability of the developers and distributors for any and all claims arising out of or related to this Agreement or the Software shall be strictly capped at the exact amount you paid to use the Software, which is <strong>ZERO UNITED STATES DOLLARS ($0.00 USD)</strong> (or, where local mandatory law strictly prohibits zero liability, capped at a maximum of $1.00 USD).
+      </div>
+    </section>
+
+    <!-- SECTION 10 -->
+    <section class="legal-card" id="sec-10">
+      <h2>10. Zero Personal Data Privacy Guarantee &amp; Regulatory Compliance</h2>
+      <p>
+        AutoWave Radio operates on a strict, architecturally enforced principle of <strong>Zero Data Collection</strong>:
+      </p>
+      <ul>
+        <li><strong>No Accounts, No Tracking SDKs:</strong> We do not require registration, do not collect personal names, email addresses, or phone numbers, and embed zero advertising or telemetry SDKs (no Firebase Analytics, no Google Analytics, no Facebook Pixel, no AppsFlyer).</li>
+        <li><strong>Strict Local Storage:</strong> User favorites, recent stations, and volume preferences remain stored strictly locally within your device's private sandbox (Android Room database or HTML5 Web LocalStorage) and are never uploaded to any remote server.</li>
+        <li><strong>Full Regulatory Alignment:</strong> Our architecture strictly complies with:
+          <ul>
+            <li><strong>European Union:</strong> General Data Protection Regulation (GDPR - Regulation (EU) 2016/679).</li>
+            <li><strong>United States:</strong> California Consumer Privacy Act &amp; California Privacy Rights Act (CCPA/CPRA).</li>
+            <li><strong>State of Israel:</strong> Israeli Privacy Protection Law (חוק הגנת הפרטיות, התשמ"א-1981) and associated data security regulations.</li>
+          </ul>
+        </li>
+      </ul>
+      <p>
+        For full technical details, consult our complete <a href="privacy.html" style="color: var(--accent); font-weight: bold;">Privacy Policy Document</a>.
+      </p>
+    </section>
+
+    <!-- SECTION 11 -->
+    <section class="legal-card" id="sec-11">
+      <h2>11. Mandatory Individual Dispute Resolution &amp; Class Action Waiver</h2>
+      <p>
+        <strong>PLEASE READ THIS SECTION CAREFULLY. IT MATERIALLY AFFECTS YOUR LEGAL RIGHTS, INCLUDING WAIVING YOUR RIGHT TO FILE A CLASS ACTION LAWSUIT:</strong>
+      </p>
+      <ul>
+        <li><strong>Class Action Waiver (ויתור על תובענות ייצוגיות):</strong> You unequivocally agree that any dispute, claim, or controversy arising out of or relating to this Agreement or the Software must be conducted solely on an individual basis. You explicitly waive any right to bring, initiate, join, participate in, or act as a representative or class member in any class action lawsuit, consolidated action, collective proceeding, private attorney general claim, or representative arbitration against AutoWave Radio or its developers.</li>
+        <li><strong>Informal Resolution First:</strong> Prior to filing any formal legal claim, you agree to make a good-faith attempt to resolve the dispute informally by delivering written notice to <code>legal.drivewave@gmail.com</code> and allowing thirty (30) business days for resolution.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 12 -->
+    <section class="legal-card" id="sec-12">
+      <h2>12. Governing Law, Exclusive Jurisdiction, Severability &amp; Entirety</h2>
+      <p>
+        <strong>12.1 Governing Law:</strong> This Agreement, its interpretation, and all matters arising out of or related to your use of the Software shall be governed exclusively by and construed in accordance with the substantive laws of the <strong>State of Israel</strong>, without regard to conflict of laws principles or the United Nations Convention on Contracts for the International Sale of Goods (CISG).
+      </p>
+      <p>
+        <strong>12.2 Exclusive Forum &amp; Jurisdiction:</strong> You irrevocably agree that any dispute or legal claim that cannot be resolved through informal negotiations shall be subject to the exclusive personal and subject-matter jurisdiction of the competent courts located in the district of <strong>Tel Aviv - Jaffa, Israel</strong>. You irrevocably waive any objection to venue or convenience of forum.
+      </p>
+      <p>
+        <strong>12.3 Severability (הפרדת סעיפים):</strong> If any term, section, paragraph, or provision of this Agreement is held by a court of competent jurisdiction to be invalid, illegal, or unenforceable, such provision shall be enforced to the maximum extent permissible so as to effectuate the intent of the parties, and <u>the remaining provisions of this Agreement shall remain in full force and effect</u> without being impaired or invalidated in any way.
+      </p>
+      <p>
+        <strong>12.4 Entire Agreement:</strong> This Agreement, together with the Privacy Policy, represents the complete, integrated, and exclusive understanding between you and RadioFreeSolutions concerning the Service, superseding all prior oral or written discussions, representations, or understandings.
+      </p>
+    </section>
+
+    <!-- Bottom Actions -->
+    <div class="footer-actions">
+      <div>
+        &copy; 2026 RadioFreeSolutions • AutoWave Radio • All Rights Reserved.
+      </div>
+      <div>
+        <a href="#" class="btn-action" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">⬆️ Back to Top</a>
+        <a href="./" class="btn-action" style="background: rgba(255,255,255,0.1); color: #FFF; margin-left: 8px;">🏠 Home</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
