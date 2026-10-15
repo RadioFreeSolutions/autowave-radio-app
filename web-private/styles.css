@@ -405,16 +405,17 @@ main.main-content {
 
 .card-badge-monogram {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   color: #FFFFFF;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
   line-height: 1.1;
   max-width: 95%;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   white-space: nowrap;
+  display: block;
 }
 
 .card-badge-country {

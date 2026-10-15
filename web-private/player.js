@@ -205,31 +205,247 @@
 
   /** Generate a short, clean monogram from a station name */
   function getStationMonogram(name) {
-    if (!name) return 'DW';
+    if (!name) return 'AW';
     const clean = name.replace(/[\(\[\{].*?[\)\]\}]/g, '').trim();
-    
+
+    // Hebrew stations
     if (clean.includes('גלגלצ')) return 'גלגלצ';
     if (clean.includes('גלצ')) return 'גלצ';
     if (clean.includes('כאן')) {
       const part = clean.split('כאן')[1].trim();
+      if (part.includes('גימל') || part.includes('ג')) return 'כאן ג';
+      if (part.includes('ב') || part.includes('בת')) return 'כאן ב';
+      if (part.includes('תרבות')) return 'תרבות';
+      if (part.includes('88')) return 'כאן 88';
+      if (part.includes('מורשת')) return 'מורשת';
+      if (part.includes('קול המוסיקה')) return 'מוסיקה';
       return 'כאן ' + (part.length > 0 ? part[0] : 'ת');
     }
+    if (clean.includes('אקו 99') || clean.includes('eco99') || clean.includes('Eco 99')) return 'eco99';
+    if (clean.includes('100FM') || clean.includes('100 FM') || clean.includes('רדיוס')) return '100FM';
+    if (clean.includes('103FM') || clean.includes('103 FM')) return '103FM';
+    if (clean.includes('102FM') || clean.includes('102 FM') || clean.includes('תל אביב')) return '102FM';
+    if (clean.includes('לב המדינה') || clean.includes('91FM')) return '91FM';
+    if (clean.includes('צפון ללא הפסקה') || clean.includes('104.5')) return '104.5';
+    if (clean.includes('קול ברמה')) return 'ברמה';
+    if (clean.includes('קול חי')) return 'קול חי';
+    if (clean.includes('רדיו חיפה')) return 'חיפה';
+    if (clean.includes('רדיו ירושלים')) return 'י-ם';
+    if (clean.includes('רדיו דרום')) return 'דרום';
 
-    if (clean.toUpperCase().includes('BBC')) {
-      const bbcPart = clean.match(/BBC(?:\s+Radio)?\s*([0-9a-zA-Z]+)?/i);
-      return bbcPart && bbcPart[1] ? ('BBC ' + bbcPart[1].toUpperCase()) : 'BBC';
+    // Radio Paradise
+    if (clean.toLowerCase().includes('radio paradise')) {
+      if (/rock/i.test(clean)) return 'RP RCK';
+      if (/mellow/i.test(clean)) return 'RP MLW';
+      if (/world/i.test(clean)) return 'RP WLD';
+      return 'RP MAIN';
     }
 
+    // 181.FM
+    if (/181\.fm/i.test(clean)) {
+      const after = clean.replace(/181\.fm\s*[-–:]?\s*/i, '').trim();
+      if (/80/i.test(after)) return '80s';
+      if (/90/i.test(after)) return '90s';
+      if (/the\s*mix/i.test(after)) return 'MIX';
+      if (/the\s*office/i.test(after)) return 'OFFICE';
+      if (/uk\s*top/i.test(after)) return 'UK TOP';
+      if (/eagle/i.test(after)) return 'EAGLE';
+      if (/beatles/i.test(after)) return 'BEAT';
+      if (/beat/i.test(after)) return 'BEAT';
+      if (/gold/i.test(after)) return 'GOLD';
+      if (/highway|hwy/i.test(after)) return 'HWY 181';
+      if (/kickin/i.test(after)) return 'KICKIN';
+      if (/vibe/i.test(after)) return 'VIBE';
+      if (/power\s*explicit/i.test(after)) return 'PWR EXP';
+      if (/power/i.test(after)) return 'POWER';
+      if (/chilled/i.test(after)) return 'CHILL';
+      if (/classical/i.test(after)) return 'CLASSIC';
+      if (/front/i.test(after)) return 'FRONT';
+      if (/party/i.test(after)) return 'PARTY';
+      if (/rock/i.test(after)) return 'ROCK';
+      if (/jammin/i.test(after)) return 'JAMMIN';
+      if (/lite/i.test(after)) return 'LITE';
+      if (/soul/i.test(after)) return 'SOUL';
+      if (/energy|nrg/i.test(after)) return 'NRG 98';
+      const subWords = after.split(/\s+/).filter(w => !['the', 'a'].includes(w.toLowerCase()));
+      return (subWords[0] || '181').slice(0, 6).toUpperCase();
+    }
+
+    // BBC
+    if (/BBC/i.test(clean)) {
+      const bbcMatch = clean.match(/BBC(?:\s+Radio)?\s*([0-9a-zA-Z]+)?/i);
+      return bbcMatch && bbcMatch[1] ? ('BBC ' + bbcMatch[1].toUpperCase()) : 'BBC';
+    }
+
+    // Specific Brands & Series
+    if (/Greatest\s*Hits/i.test(clean)) {
+      if (/60/i.test(clean)) return 'GHR 60';
+      if (/70/i.test(clean)) return 'GHR 70';
+      if (/80/i.test(clean)) return 'GHR 80';
+      return 'GHR';
+    }
+    if (/Absolute\s*Radio/i.test(clean) || /Absolute/i.test(clean)) {
+      if (/60/i.test(clean)) return 'ABS 60';
+      if (/70/i.test(clean)) return 'ABS 70';
+      if (/80/i.test(clean)) return 'ABS 80';
+      if (/90/i.test(clean)) return 'ABS 90';
+      if (/00/i.test(clean)) return 'ABS 00';
+      if (/10/i.test(clean)) return 'ABS 10';
+      if (/classic/i.test(clean)) return 'ABS CR';
+      return 'ABS';
+    }
+    if (/Radio\s*X/i.test(clean)) {
+      if (/manchester/i.test(clean)) return 'RAD X';
+      if (/classic/i.test(clean)) return 'RAD X';
+      if (/90/i.test(clean)) return 'RAD 90';
+      if (/chill/i.test(clean)) return 'RAD X';
+      return 'RADIO X';
+    }
+    if (/Heart\s*Dance/i.test(clean)) return 'HRT DN';
+    if (/Heart\s*70/i.test(clean)) return 'HRT 70';
+    if (/Heart\s*80/i.test(clean)) return 'HRT 80';
+    if (/Heart\s*90/i.test(clean)) return 'HRT 90';
+    if (/Heart\s*00/i.test(clean)) return 'HRT 00';
+    if (/Heart\s*10/i.test(clean)) return 'HRT 10';
+    if (/Heart/i.test(clean)) return 'HEART';
+    if (/KISSTORY/i.test(clean)) {
+      if (/r&b|rnb/i.test(clean)) return 'KS R&B';
+      return 'KISSTOR';
+    }
+    if (/KISS\s*Dance/i.test(clean)) return 'KISS DN';
+    if (/KISS\s*XTRA/i.test(clean)) return 'KISS XT';
+    if (/KISS\s*108/i.test(clean)) return 'KISS 108';
+    if (/KISS/i.test(clean)) {
+      if (/espa/i.test(clean)) return 'KISS ES';
+      return 'KISS';
+    }
+    if (/Capital\s*Dance/i.test(clean)) return 'CAP DN';
+    if (/Capital\s*XTRA/i.test(clean)) return 'CAP XT';
+    if (/Capital/i.test(clean)) return 'CAPITAL';
+    if (/Smooth\s*Chill/i.test(clean)) return 'SMOOTH';
+    if (/Smooth/i.test(clean)) return 'SMOOTH';
+    if (/Classic\s*FM/i.test(clean)) return 'CLASSIC';
+    if (/Gold\s*Radio/i.test(clean) || clean === 'Gold') return 'GOLD';
+    if (/LBC/i.test(clean)) return 'LBC';
+    if (/Radio\s*Caroline/i.test(clean)) {
+      if (/flashback/i.test(clean)) return 'FLASH';
+      if (/north/i.test(clean)) return 'CAROL';
+      return 'CAROL';
+    }
+    if (/Big\s*R\s*Radio/i.test(clean)) {
+      if (/70/i.test(clean)) return 'BIG R 70';
+      if (/80/i.test(clean)) return 'BIG R 80';
+      return 'BIG R';
+    }
+    if (/Urban\s*Radio/i.test(clean)) {
+      if (/hip\s*hop/i.test(clean)) return 'URBAN HH';
+      if (/r&b/i.test(clean)) return 'URB R&B';
+      return 'URBAN';
+    }
+    if (/LOS40/i.test(clean) || /Los\s*40/i.test(clean)) {
+      if (/classic/i.test(clean)) return 'LOS40 CL';
+      if (/urban/i.test(clean)) return 'LOS40 UR';
+      if (/m[eé]xico/i.test(clean)) return 'LOS40 MX';
+      return 'LOS40';
+    }
+    if (/Classic\s*Hits\s*109/i.test(clean)) {
+      if (/soft/i.test(clean)) return 'CH109 SR';
+      return 'CH109';
+    }
+    if (/100hitz/i.test(clean)) return '100 HITZ';
+    if (/2000\s*FM/i.test(clean)) return '2000 FM';
+    if (/011\.FM/i.test(clean)) return '011.FM';
+    if (/KC101/i.test(clean)) return 'KC101';
+    if (/Z100/i.test(clean)) return 'Z100';
+    if (/KIIS/i.test(clean)) return 'KIIS';
+    if (/Virgin/i.test(clean)) return 'VIRGIN';
+    if (/KEXP/i.test(clean)) return 'KEXP';
+    if (/NPR/i.test(clean)) return 'NPR';
+    if (/WQXR/i.test(clean)) return 'WQXR';
+    if (/WNYC/i.test(clean)) return 'WNYC';
+    if (/WFUV/i.test(clean)) return 'WFUV';
+    if (/KCRW/i.test(clean)) return 'KCRW';
+    if (/Defected/i.test(clean)) return 'DEFECT';
+    if (/Ibiza\s*Global/i.test(clean)) return 'IBZ GLB';
+    if (/Ibiza\s*Sonica/i.test(clean)) return 'IBZ SON';
+    if (/SomaFM|Soma\s*FM/i.test(clean)) {
+      const after = clean.replace(/SomaFM\s*[-–:]?\s*/i, '').trim();
+      if (/groove/i.test(after)) return 'GROOVE';
+      if (/drone/i.test(after)) return 'DRONE';
+      if (/indie/i.test(after)) return 'INDIE';
+      if (/secret/i.test(after)) return 'SECRET';
+      if (/lush/i.test(after)) return 'LUSH';
+      return (after.slice(0, 6) || 'SOMA').toUpperCase();
+    }
+    if (/FIP/i.test(clean)) return 'FIP';
+    if (/TSF\s*Jazz/i.test(clean)) return 'TSF';
+    if (/Radio\s*Nova/i.test(clean)) return 'NOVA';
+    if (/Radio\s*Swiss\s*Jazz/i.test(clean)) return 'SWISS JZ';
+    if (/Radio\s*Swiss\s*Classic/i.test(clean)) return 'SWISS CL';
+    if (/Radio\s*Swiss\s*Pop/i.test(clean)) return 'SWISS PP';
+    if (/FluxFM|Flux\s*FM/i.test(clean)) return 'FLUX';
+    if (/EgoFM|egoFM/i.test(clean)) return 'EGO';
+    if (/Sunshine\s*Live/i.test(clean)) return 'SUNSHIN';
+    if (/Antenne\s*Bayern/i.test(clean)) return 'BAYERN';
+    if (/1Live|1\s*Live/i.test(clean)) return '1LIVE';
+    if (/WDR/i.test(clean)) return 'WDR';
+    if (/SWR3|SWR/i.test(clean)) return 'SWR3';
+    if (/Bayern\s*3/i.test(clean)) return 'BAYERN 3';
+    if (/RTL/i.test(clean)) return 'RTL';
+    if (/NRJ/i.test(clean)) return 'NRJ';
+    if (/Cherie|Chrie/i.test(clean)) return 'CHERIE';
+    if (/Nostalgie/i.test(clean)) return 'NOSTAL';
+    if (/Fun\s*Radio/i.test(clean)) return 'FUN RD';
+    if (/Skyrock/i.test(clean)) return 'SKYROCK';
+    if (/Cadena\s*SER|SER/i.test(clean)) return 'SER';
+    if (/Cadena\s*Dial|Dial/i.test(clean)) return 'DIAL';
+    if (/Cadena\s*100/i.test(clean)) return 'CAD 100';
+    if (/Radio\s*3/i.test(clean)) return 'RNE 3';
+    if (/Radio\s*1/i.test(clean)) return 'RNE 1';
+    if (/Onda\s*Cero/i.test(clean)) return 'ONDA';
+    if (/Cope/i.test(clean)) return 'COPE';
+    if (/Dance\s*Wave/i.test(clean)) return 'DANCE';
+    if (/Q102/i.test(clean)) return 'Q102';
+    if (/Y100/i.test(clean)) return 'Y100';
+    if (/Channel\s*955/i.test(clean)) return 'CH 955';
+    if (/Mega\s*97\.9/i.test(clean)) return 'MEGA';
+    if (/Mega\s*96\.3/i.test(clean)) return 'MEGA';
+    if (/El\s*Zol/i.test(clean)) return 'EL ZOL';
+    if (/Amor\s*93\.1/i.test(clean)) return 'AMOR';
+    if (/Neon\s*Radio/i.test(clean)) return 'NEON';
+    if (/Like\s*Radio/i.test(clean)) return 'LIKE';
+    if (/HITS\s*96\.1/i.test(clean)) return 'HITS 96';
+    if (/WiLD\s*95\.5/i.test(clean)) return 'WiLD';
+    if (/Alice\s*95\.5/i.test(clean)) return 'ALICE';
+    if (/POP!?\s*93\.3/i.test(clean)) return 'POP!';
+    if (/Pop!?\s*93\.1/i.test(clean)) return 'POP!';
+    if (/KGAY/i.test(clean)) return 'KGAY';
+    if (/WDJQ/i.test(clean)) return 'WDJQ';
+    if (/KLTG/i.test(clean)) return 'KLTG';
+    if (/KEOM/i.test(clean)) return 'KEOM';
+    if (/Love\s*92\.1/i.test(clean)) return 'LOVE';
+    if (/KCWU/i.test(clean)) return 'KCWU';
+    if (/KIXY/i.test(clean)) return 'KIXY';
+    if (/KVUU/i.test(clean)) return 'KVUU';
+    if (/The\s*Beat/i.test(clean)) return 'BEAT';
+    if (/WKRD/i.test(clean)) return 'WKRD';
+    if (/WZBQ|ZBQ/i.test(clean)) return 'ZBQ';
+    if (/NOW/i.test(clean)) return 'NOW';
+
+    // Generic frequency check
     const freqMatch = clean.match(/\b\d{2,3}(?:\.\d)?\b/);
-    const words = clean.split(/\s+/).filter(w => !['radio', 'the', 'of', 'uk', 'live', 'רדיו', 'שידור'].includes(w.toLowerCase()));
+    const words = clean.split(/\s+/).filter(w => !['radio', 'the', 'of', 'uk', 'fm', 'am', 'live', 'רדיו', 'שידור'].includes(w.toLowerCase()));
 
     if (freqMatch && words.length > 0 && !words[0].includes(freqMatch[0])) {
-      return words[0].slice(0, 5).toUpperCase() + ' ' + freqMatch[0];
+      return (words[0].slice(0, 4) + ' ' + freqMatch[0]).trim();
     }
     if (freqMatch) return freqMatch[0] + ' FM';
 
-    if (words.length === 0) return clean.slice(0, 7).toUpperCase();
-    return words[0].slice(0, 7).toUpperCase();
+    if (words.length >= 2) {
+      return (words[0].slice(0, 4) + ' ' + words[1].slice(0, 3)).trim().toUpperCase();
+    }
+    if (words.length === 1) return words[0].slice(0, 6).toUpperCase();
+    return clean.slice(0, 6).toUpperCase();
   }
 
   /** Generate an automotive-style gradient based on station name */
@@ -276,10 +492,11 @@
       const monogram = getStationMonogram(st.name);
       const bgGrad = getStationGradient(st.name);
       const subLabel = st.flag || st.countryCode || 'LIVE';
+      const monoFontSize = monogram.length > 5 ? '11px' : (monogram.length > 3 ? '12.5px' : '14px');
 
       const artHtml = `
         <div class="card-art-badge" style="background: ${bgGrad}">
-          <span class="card-badge-monogram">${monogram}</span>
+          <span class="card-badge-monogram" style="font-size: ${monoFontSize};">${monogram}</span>
           <span class="card-badge-country">${subLabel}</span>
         </div>
       `;
