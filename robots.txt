@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://radiofreesolutions.github.io/drivewave-app/sitemap.xml
+Sitemap: https://radiofreesolutions.github.io/autowave-radio-app/sitemap.xml

@@ -6,11 +6,11 @@
 ### **Pure Driving Radio. Zero Distractions.**
 **Live Hit Radio & Curated Driving Moods for Android & Android Auto**
 
-[![Android Auto](https://img.shields.io/badge/Android%20Auto-100%25%20Certified-00FF7F?style=for-the-badge&logo=androidauto&logoColor=black)](https://github.com/RadioFreeSolutions/drivewave-app)
-[![Version](https://img.shields.io/badge/Version-4.0.0-7C4DFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/RadioFreeSolutions/drivewave-app)
+[![Android Auto](https://img.shields.io/badge/Android%20Auto-100%25%20Certified-00FF7F?style=for-the-badge&logo=androidauto&logoColor=black)](https://github.com/RadioFreeSolutions/autowave-radio-app)
+[![Version](https://img.shields.io/badge/Version-4.0.0-7C4DFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/RadioFreeSolutions/autowave-radio-app)
 [![Size](https://img.shields.io/badge/APK%20Size-3.7%20MB-00FF7F?style=for-the-badge)](drivewave-v4.0.0-release.apk)
-[![Privacy](https://img.shields.io/badge/Privacy-100%25%20No%20Ads%20Added-FF9100?style=for-the-badge)](https://github.com/RadioFreeSolutions/drivewave-app)
-[![License](https://img.shields.io/badge/License-Free-blue?style=for-the-badge)](https://github.com/RadioFreeSolutions/drivewave-app)
+[![Privacy](https://img.shields.io/badge/Privacy-100%25%20No%20Ads%20Added-FF9100?style=for-the-badge)](https://github.com/RadioFreeSolutions/autowave-radio-app)
+[![License](https://img.shields.io/badge/License-Free-blue?style=for-the-badge)](https://github.com/RadioFreeSolutions/autowave-radio-app)
 
 <br/>
 
