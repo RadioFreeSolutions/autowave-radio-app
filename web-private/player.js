@@ -113,7 +113,6 @@
 
   // Mood Descriptions
   const MOOD_META = {
-    ISRAEL_MUSIC: { title: '🇮🇱 Israel Music (Private)', subtitle: 'תחנות המוזיקה הישראליות הפופולריות ביותר לנהיגה.' },
     ALL: { title: '🔥 All Stations', subtitle: 'Curated high-bitrate live radio broadcasts from around the world.' },
     POP_HITS: { title: '⭐ Top Rated', subtitle: 'World-famous pop hit music stations and chart-toppers.' },
     LATIN_SPANISH: { title: '💃 Latin & Spanish', subtitle: 'Reggaeton, Bachata, Salsa, and Latin pop hits.' },
@@ -204,6 +203,54 @@
     renderStations();
   }
 
+  /** Generate a short, clean monogram from a station name */
+  function getStationMonogram(name) {
+    if (!name) return 'DW';
+    const clean = name.replace(/[\(\[\{].*?[\)\]\}]/g, '').trim();
+    
+    if (clean.includes('גלגלצ')) return 'גלגלצ';
+    if (clean.includes('גלצ')) return 'גלצ';
+    if (clean.includes('כאן')) {
+      const part = clean.split('כאן')[1].trim();
+      return 'כאן ' + (part.length > 0 ? part[0] : 'ת');
+    }
+
+    if (clean.toUpperCase().includes('BBC')) {
+      const bbcPart = clean.match(/BBC(?:\s+Radio)?\s*([0-9a-zA-Z]+)?/i);
+      return bbcPart && bbcPart[1] ? ('BBC ' + bbcPart[1].toUpperCase()) : 'BBC';
+    }
+
+    const freqMatch = clean.match(/\b\d{2,3}(?:\.\d)?\b/);
+    const words = clean.split(/\s+/).filter(w => !['radio', 'the', 'of', 'uk', 'live', 'רדיו', 'שידור'].includes(w.toLowerCase()));
+
+    if (freqMatch && words.length > 0 && !words[0].includes(freqMatch[0])) {
+      return words[0].slice(0, 5).toUpperCase() + ' ' + freqMatch[0];
+    }
+    if (freqMatch) return freqMatch[0] + ' FM';
+
+    if (words.length === 0) return clean.slice(0, 7).toUpperCase();
+    return words[0].slice(0, 7).toUpperCase();
+  }
+
+  /** Generate an automotive-style gradient based on station name */
+  function getStationGradient(str) {
+    let hash = 0;
+    for (let i = 0; i < (str || '').length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const gradients = [
+      'linear-gradient(135deg, #1e3a8a, #0284c7)', // Cobalt / Cyan
+      'linear-gradient(135deg, #4c1d95, #7c3aed)', // Purple
+      'linear-gradient(135deg, #064e3b, #059669)', // Emerald
+      'linear-gradient(135deg, #78350f, #d97706)', // Amber / Gold
+      'linear-gradient(135deg, #831843, #db2777)', // Crimson / Rose
+      'linear-gradient(135deg, #0f766e, #06b6d4)', // Teal
+      'linear-gradient(135deg, #312e81, #4f46e5)', // Deep Indigo
+      'linear-gradient(135deg, #1e293b, #475569)', // Carbon Slate
+    ];
+    return gradients[Math.abs(hash) % gradients.length];
+  }
+
   /** Render station cards in grid */
   function renderStations() {
     if (!stationsGrid) return;
@@ -226,9 +273,16 @@
       const rawGenre = tagList[0] ? tagList[0].trim() : (st.country || 'Live');
       const genre = rawGenre ? (rawGenre.charAt(0).toUpperCase() + rawGenre.slice(1)) : 'Live';
 
-      const artHtml = st.favicon
-        ? `<img class="card-art-img" src="${st.favicon}" alt="${st.name}" onerror="this.onerror=null; this.src='icon-512.png';">`
-        : `<span class="card-art-fallback">${flag}</span>`;
+      const monogram = getStationMonogram(st.name);
+      const bgGrad = getStationGradient(st.name);
+      const subLabel = st.flag || st.countryCode || 'LIVE';
+
+      const artHtml = `
+        <div class="card-art-badge" style="background: ${bgGrad}">
+          <span class="card-badge-monogram">${monogram}</span>
+          <span class="card-badge-country">${subLabel}</span>
+        </div>
+      `;
 
       return `
         <div class="station-card ${activeClass}" data-id="${st.id}" data-idx="${idx}">
@@ -326,16 +380,27 @@
 
   function cleanStreamTitle(raw) {
     if (!raw) return "";
-    let title = raw.trim();
-    // Handle StreamTitle='...' or StreamTitle="..." or StreamTitle=...
-    const match = title.match(/^StreamTitle=['"]?(.*?)['"]?(?:;.*)?$/i);
-    if (match) title = match[1].trim();
+    let title = raw.trim().replace(/^['"\s`]+|['"\s`]+$/g, '');
+
+    // Loop to strip nested wrappers like StreamTitle=, TEXT=, TITLE=, etc.
+    let changed = true;
+    let loops = 0;
+    while (changed && loops < 5) {
+      loops++;
+      const prev = title;
+      title = title.replace(/^StreamTitle\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      title = title.replace(/^TEXT\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      title = title.replace(/^TITLE\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      title = title.replace(/^(?:SONG|TRACK)\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      title = title.replace(/^['"\s`;]+|['"\s`;]+$/g, '');
+      changed = (title !== prev);
+    }
 
     // Handle artist=...;title=...
     const atMatch = title.match(/^artist=['"]?(.*?)['"]?[;,]\s*title=['"]?(.*?)['"]?$/i);
     if (atMatch) {
-      const a = atMatch[1].trim();
-      const t = atMatch[2].trim();
+      const a = atMatch[1].trim().replace(/^['"]+|['"]+$/g, '');
+      const t = atMatch[2].trim().replace(/^['"]+|['"]+$/g, '');
       title = (a && t) ? `${a} - ${t}` : (t || a);
     }
 
@@ -352,42 +417,18 @@
     }
 
     // Strip known ICY keys
-    ['song_spot=', 'MediaBaseId=', 'itunesTrackId=', 'amgTrackId=', 'amgArtistId=', 'StreamUrl='].forEach(k => {
+    ['song_spot=', 'MediaBaseId=', 'itunesTrackId=', 'amgTrackId=', 'amgArtistId=', 'StreamUrl=', 'text='].forEach(k => {
       const idx = title.toLowerCase().indexOf(k.toLowerCase());
       if (idx > 0) title = title.substring(0, idx).trim();
     });
 
-    title = title.replace(/^text=['"]?(.*?)['"]?$/i, '$1');
-    title = title.replace(/\s*-\s*AD\s*BREAK\s*$/i, '');
-    title = title.replace(/\s*-\s*COMMERCIAL\s*$/i, '');
-    title = title.replace(/\s*-\s*STATION\s*ID\s*$/i, '');
     title = title.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE|NP):\s*/i, '');
+    title = title.replace(/^\s*(?:text|title|song|track)\s*[:=]\s*/i, '');
     return title.trim().replace(/^['"`\s-]+|['"`\s-;]+$/g, '');
-  }
-
-  let adBlockEnabled = localStorage.getItem('drivewave_ad_block') !== 'false';
-  let lastAdSkipTime = 0;
-
-  function isAdBreak(title) {
-    if (!title) return false;
-    return /(?:\bAD\b|\bAD_BREAK\b|\bADBREAK\b|\bCOMMERCIAL\b|\bADVERT\b|\bADVERTISEMENT\b|\bSPONSOR\b|^AD\s*[-:]|[-:]\s*AD$)/i.test(title);
   }
 
   function onNewTrackInfo(track, station) {
     if (!track) return;
-
-    if (adBlockEnabled && isAdBreak(track)) {
-      const now = Date.now();
-      if (now - lastAdSkipTime > 3000) {
-        lastAdSkipTime = now;
-        console.log(`[Ad Block] Ad detected ('${track}') - skipping to next station`);
-        if (playerTrack) {
-          playerTrack.textContent = '🛡️ Ad Detected — Skipping...';
-        }
-        setTimeout(() => playNext(), 600);
-        return;
-      }
-    }
 
     if (track === currentTrackTitle) return;
     currentTrackTitle = track;
