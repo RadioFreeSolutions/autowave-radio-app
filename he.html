@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AutoWave Radio - רדיו טהור לנהיגה | Android &amp; Android Auto</title>
   <meta name="description" content="אפליקציית רדיו חי לנהיגה ברכב ול-Android Auto. 170 תחנות להיטים באיכות גבוהה, שמות שירים בזמן אמת, ללא תוספת פרסומות וחינם לתמיד." />
   <link rel="icon" type="image/png" href="play_store_icon_512.png" />
@@ -67,6 +67,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 0 32px 0;
+      gap: 16px;
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .logo-container {
@@ -91,23 +98,39 @@
       background: linear-gradient(135deg, #FFF 60%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
     }
 
     .nav-btn {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: 10px;
       font-size: 13.5px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
 
     .nav-btn:hover {
       background: rgba(255, 255, 255, 0.12);
       border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-btn-accent {
+      border-color: rgba(0, 255, 127, 0.4);
+      color: var(--accent);
     }
 
     /* Language Switcher */
@@ -185,7 +208,9 @@
 
     .cta-group {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
       gap: 14px;
     }
@@ -374,29 +399,227 @@
       border-top: 1px solid var(--card-border);
       padding-top: 30px;
     }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 680px) {
+      .container {
+        padding: 16px 14px 60px 14px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 10px 0 20px 0;
+      }
+
+      .header-main {
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .logo-img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-text {
+        font-size: 20px;
+      }
+
+      .nav-actions {
+        width: 100%;
+        gap: 6px;
+        justify-content: space-between;
+      }
+
+      .nav-actions .nav-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 6px;
+        font-size: 12px;
+        gap: 4px;
+      }
+
+      .hero {
+        padding: 16px 0 28px 0;
+      }
+
+      .badge-pill {
+        font-size: 11.5px;
+        padding: 5px 12px;
+        margin-bottom: 14px;
+      }
+
+      .hero-title {
+        font-size: clamp(28px, 8.5vw, 40px);
+        letter-spacing: -0.8px;
+        margin-bottom: 14px;
+      }
+
+      .hero-feature-pill {
+        font-size: 12px !important;
+        padding: 6px 12px !important;
+        line-height: 1.4 !important;
+      }
+
+      .hero-subtitle {
+        font-size: 14.5px;
+        line-height: 1.55;
+        margin-bottom: 22px;
+        padding: 0 4px;
+      }
+
+      .cta-group {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100%;
+        max-width: 100% !important;
+        gap: 10px;
+      }
+
+      .btn-download {
+        max-width: 100%;
+        width: 100%;
+        padding: 15px 16px;
+        font-size: 16px;
+        border-radius: 14px;
+      }
+
+      .badges-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 24px 0;
+      }
+
+      .feature-badge {
+        padding: 10px 8px;
+        font-size: 11.5px;
+        justify-content: center;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      .feature-badge:last-child:nth-child(odd) {
+        grid-column: span 2;
+      }
+
+      .section-title {
+        font-size: 22px;
+        margin: 36px 0 8px 0;
+      }
+
+      .section-desc {
+        font-size: 13.5px;
+        margin-bottom: 20px;
+        padding: 0 4px;
+      }
+
+      .moods-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .mood-card {
+        padding: 16px 14px;
+        border-radius: 16px;
+      }
+
+      .mood-title {
+        font-size: 16.5px;
+      }
+
+      .mood-text {
+        font-size: 13px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+
+      .mood-tags {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+
+      .steps-container {
+        padding: 20px 14px;
+        border-radius: 18px;
+        margin-top: 32px;
+      }
+
+      .step-list {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .step-item {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .step-num {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        border-radius: 8px;
+      }
+
+      .step-title {
+        font-size: 15px;
+      }
+
+      .step-desc {
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        font-size: 11.5px;
+        line-height: 1.6;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-title {
+        font-size: 26px;
+      }
+      .badges-bar {
+        grid-template-columns: 1fr;
+      }
+      .feature-badge:last-child:nth-child(odd) {
+        grid-column: span 1;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
     <header>
-      <a href="he.html" class="logo-container">
-        <img src="play_store_icon_512.png" alt="AutoWave Radio Icon" class="logo-img" />
-        <span class="logo-text">AutoWave Radio</span>
-      </a>
-      <div style="display: flex; gap: 10px; align-items: center;">
+      <div class="header-main">
+        <a href="he.html" class="logo-container">
+          <img src="play_store_icon_512.png" alt="AutoWave Radio Icon" class="logo-img" />
+          <span class="logo-text">AutoWave Radio</span>
+        </a>
         <div class="lang-switch">
           <a href="index.html" class="lang-item" title="Switch to English">EN</a>
           <span class="lang-divider">/</span>
           <span class="lang-item active">IL</span>
         </div>
-        <a href="privacy.html" class="nav-btn" style="border-color: rgba(0, 255, 127, 0.4); color: var(--accent); display: inline-flex; align-items: center; gap: 6px;">
-          <span>🛡️</span> פרטיות ותנאים
-        </a>
-        <a href="web/" class="nav-btn" style="border-color: rgba(0, 255, 127, 0.4); color: var(--accent); display: inline-flex; align-items: center; gap: 6px;">
+      </div>
+      <div class="nav-actions">
+        <a href="web/" class="nav-btn nav-btn-accent">
           <span>🌐</span> נגן ה-Web
         </a>
-        <button onclick="shareLanding()" class="nav-btn" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+        <a href="privacy.html" class="nav-btn">
+          <span>🛡️</span> פרטיות ותנאים
+        </a>
+        <button onclick="shareLanding()" class="nav-btn" style="cursor: pointer;">
           <span>🔗</span> שתף
         </button>
       </div>
@@ -406,14 +629,14 @@
       <!-- Hero -->
       <section class="hero">
         <div class="badge-pill">
-          <span>⚡</span> גרסה 4.0.0 מוכנה ל-Android ול-Android Auto
+          <span>⚡</span> גרסה 4.0.1 מוכנה ל-Android ול-Android Auto
         </div>
         <h1 class="hero-title">
           רדיו טהור לנסיעה.<br/>
           <span>אפס הסחות דעת.</span>
         </h1>
         <div style="margin-bottom: 22px;">
-          <span style="display: inline-block; background: rgba(0, 255, 127, 0.08); border: 1px solid rgba(0, 255, 127, 0.25); border-radius: 20px; padding: 6px 16px; font-size: 14px; font-weight: 600; color: #E0F7FA;">
+          <span class="hero-feature-pill" style="display: inline-block; background: rgba(0, 255, 127, 0.08); border: 1px solid rgba(0, 255, 127, 0.25); border-radius: 20px; padding: 6px 16px; font-size: 14px; font-weight: 600; color: #E0F7FA;">
             ✨ ללא תוספת פרסומות • ללא תשלום • תמיכה ב-Android Auto • חינם לתמיד
           </span>
         </div>
@@ -421,8 +644,8 @@
           נגן רדיו חי מהמתקדמים בעולם, שתוכנן ונבנה במיוחד עבור הנהג. 170 תחנות רדיו מובחרות ומאומתות, שמות שירים בזמן אמת, קטגוריות מצב רוח מותאמות לכביש, שליטה מלאה מההגה, ביצועים מהירים וצליל מושלם.
         </p>
 
-        <div class="cta-group" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 14px;">
-          <a href="drivewave-v4.0.0-release.apk" class="btn-download" download>
+        <div class="cta-group">
+          <a href="drivewave-v4.0.1-release.apk" class="btn-download" download>
             <span>⬇️</span> הורדת APK לאנדרואיד (3.7 MB)
           </a>
           <a href="web/" class="btn-download" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); color: #FFF; box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);">
