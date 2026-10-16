@@ -8,7 +8,7 @@
   'use strict';
 
   // State
-  const stations = window.DRIVEWAVE_STATIONS || [];
+  const stations = window.AUTOWAVE_STATIONS || window.DRIVEWAVE_STATIONS || window.DEFAULT_STATIONS || [];
   let filteredStations = [...stations];
   let currentStation = null;
   let currentIndex = -1;

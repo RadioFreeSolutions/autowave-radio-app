@@ -1,4 +1,4 @@
-window.DEFAULT_STATIONS = [
+window.AUTOWAVE_STATIONS = window.DRIVEWAVE_STATIONS = window.DEFAULT_STATIONS = [
   {
     "id": "283402b5-dc2e-11e9-a8ba-52543be04c81",
     "name": "Heart UK",
