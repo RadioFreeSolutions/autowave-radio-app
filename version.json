@@ -2,5 +2,5 @@
   "versionCode": 14,
   "versionName": "4.0.2",
   "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v4.0.2-release.apk",
-  "releaseNotes": "AutoWave Radio v4.0.2: מניעה מוחלטת של זליגת סוללה וגלישה - השהיה אוטומטית בעוצמת שמע 0 או השתקה (Zero-Volume Guardian), סגירה מיידית בעת החלקת ה-Island/התראה, השבתת שירות בהשהיה של 3 דקות, טיימר שינה ובטיחות (Safety Sleep Guard), והקפאת DSP במצב השהיה."
+  "releaseNotes": "AutoWave Radio v4.0.2: Comprehensive battery & data drain protection (Zero-Volume auto-pause, Dynamic Island / notification swipe dismissal, 3-minute paused idle shutdown, continuous safety sleep guard, and hardware DSP energy savings)."
 }
