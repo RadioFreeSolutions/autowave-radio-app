@@ -542,8 +542,9 @@ footer.player-bar {
   display: flex;
   align-items: center;
   gap: 14px;
-  width: 300px;
+  flex: 1 1 0;
   min-width: 200px;
+  max-width: calc(50vw - 160px);
 }
 
 .player-art-box {
@@ -568,6 +569,8 @@ footer.player-bar {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  flex: 1 1 0;
+  overflow: hidden;
 }
 
 .player-track {
@@ -695,7 +698,9 @@ footer.player-bar {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 300px;
+  flex: 1 1 0;
+  min-width: 200px;
+  max-width: calc(50vw - 160px);
   justify-content: flex-end;
 }
 

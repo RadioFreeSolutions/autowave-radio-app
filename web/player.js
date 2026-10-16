@@ -683,7 +683,10 @@
     }
     currentTrackTitle = '';
 
-    const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
+    let streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
+    if (window.location.protocol === 'https:' && streamUrl && streamUrl.startsWith('http://')) {
+      streamUrl = streamUrl.replace(/^http:\/\//i, 'https://');
+    }
     if (!streamUrl || station.isHls || streamUrl.includes('.m3u8')) return;
 
     try {
@@ -773,7 +776,10 @@
     isBuffering = true;
     updatePlaybackState(false);
 
-    const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
+    let streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
+    if (window.location.protocol === 'https:' && streamUrl && streamUrl.startsWith('http://')) {
+      streamUrl = streamUrl.replace(/^http:\/\//i, 'https://');
+    }
     const isHls = station.isHls || streamUrl.includes('.m3u8');
 
     // HLS Support check
@@ -967,6 +973,7 @@
       if (titleEl) titleEl.textContent = title;
       if (subEl) subEl.textContent = sub;
       if (playEl) playEl.textContent = isPlaying ? '⏸' : '▶';
+      pipWindow.document.title = currentTrackTitle ? `${currentTrackTitle} - ${title}` : `${title} • AutoWave`;
     } catch (e) {}
   }
 
@@ -1082,6 +1089,7 @@
       width: 360,
       height: 150,
     });
+    pipWindow.document.title = currentStation ? `${currentStation.name} • AutoWave` : 'AutoWave Radio';
 
     const style = pipWindow.document.createElement('style');
     style.textContent = `

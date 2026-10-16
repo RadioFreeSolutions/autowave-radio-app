@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AutoWave Radio Web Player | Pure Live Hit Radio (No Ads Added, No Paywalls)</title>
   <meta name="description" content="Listen to 170 curated high-bitrate live radio streams online with no ads added. Pop hits, Latin, Rock, Chill, and commute radio. Free web player with driving mode and steering-wheel controls." />

@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AutoWave Radio - Pure Driving Radio for Android &amp; Android Auto | Free &amp; Ad-Free</title>
   <meta name="description" content="Download AutoWave Radio: 170 curated live radio streams with driving moods, seamless Android Auto steering-wheel integration, high-contrast car dashboard, and no ads added by AutoWave. Free forever." />
