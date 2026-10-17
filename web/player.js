@@ -121,7 +121,7 @@
     CALM_CHILL: { title: '☕ Calm & Chill', subtitle: 'Relaxed acoustics, soft vocals, and ambient companions for night cruising.' },
     ROCK: { title: '🎸 Rock Anthems', subtitle: 'Classic guitar riffs, 90s alt-rock anthems, and stadium rock.' },
     NEWS_COMMUTE: { title: '📰 News & Commute', subtitle: '24/7 world journalism, traffic, and talk in crystal-clear broadcasts.' },
-    FAVORITES: { title: '⭐ Favorites', subtitle: 'Your saved road-trip radio stations.' }
+    FAVORITES: { title: '❤️ Favorites', subtitle: 'Your saved road-trip radio stations.' }
   };
 
   /** Initialize App */
@@ -267,12 +267,6 @@
       if (/energy|nrg/i.test(after)) return 'NRG 98';
       const subWords = after.split(/\s+/).filter(w => !['the', 'a'].includes(w.toLowerCase()));
       return (subWords[0] || '181').slice(0, 6).toUpperCase();
-    }
-
-    // BBC
-    if (/BBC/i.test(clean)) {
-      const bbcMatch = clean.match(/BBC(?:\s+Radio)?\s*([0-9a-zA-Z]+)?/i);
-      return bbcMatch && bbcMatch[1] ? ('BBC ' + bbcMatch[1].toUpperCase()) : 'BBC';
     }
 
     // Specific Brands & Series
@@ -516,7 +510,7 @@
             </div>
           </div>
           <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
-            ★
+            ${isFav ? '❤️' : '♡'}
           </button>
         </div>
       `;
@@ -570,7 +564,9 @@
     }
 
     if (favPlayerBtn) {
-      favPlayerBtn.classList.toggle('favorited', favorites.has(station.id));
+      const isFav = favorites.has(station.id);
+      favPlayerBtn.classList.toggle('favorited', isFav);
+      favPlayerBtn.textContent = isFav ? '❤️' : '♡';
     }
 
     localStorage.setItem(LS_LAST_STATION, station.id);
@@ -898,7 +894,9 @@
     }
 
     if (currentStation && currentStation.id === id && favPlayerBtn) {
-      favPlayerBtn.classList.toggle('favorited', favorites.has(id));
+      const isFav = favorites.has(id);
+      favPlayerBtn.classList.toggle('favorited', isFav);
+      favPlayerBtn.textContent = isFav ? '❤️' : '♡';
     }
   }
 

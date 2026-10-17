@@ -500,12 +500,12 @@ main.main-content {
 }
 
 .card-fav-btn:hover {
-  color: #FFD700;
+  color: #FF4757;
   background: rgba(255, 255, 255, 0.05);
 }
 
 .card-fav-btn.favorited {
-  color: #FFD700;
+  color: #FF4757;
 }
 
 /* Empty State */
