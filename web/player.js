@@ -8,7 +8,7 @@
   'use strict';
 
   // State
-  const stations = window.DRIVEWAVE_STATIONS || [];
+  const stations = window.AUTOWAVE_STATIONS || [];
   let filteredStations = [...stations];
   let currentStation = null;
   let currentIndex = -1;
@@ -22,14 +22,15 @@
   const MAX_AUTO_SKIPS = 3;
 
   // LocalStorage keys
-  const LS_FAVS = 'drivewave_web_favorites';
-  const LS_VOLUME = 'drivewave_web_volume';
-  const LS_LAST_STATION = 'drivewave_web_last_station';
+  const LS_FAVS = 'autowave_radio_favorites';
+  const LS_VOLUME = 'autowave_radio_volume';
+  const LS_LAST_STATION = 'autowave_radio_last_station';
 
-  // Load favorites
+  // Load favorites (with seamless fallback/migration from legacy keys)
   let favorites = new Set();
   try {
-    const savedFavs = JSON.parse(localStorage.getItem(LS_FAVS) || '[]');
+    const rawFavs = localStorage.getItem(LS_FAVS) || localStorage.getItem('drivewave_web_favorites') || '[]';
+    const savedFavs = JSON.parse(rawFavs);
     favorites = new Set(savedFavs);
   } catch (e) {
     favorites = new Set();
@@ -38,7 +39,7 @@
   // Audio element
   const audio = new Audio();
   audio.preload = 'none';
-  audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || '0.85');
+  audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || localStorage.getItem('drivewave_web_volume') || '0.85');
 
   // DOM Elements
   const stationsGrid = document.getElementById('stations-grid');
@@ -136,7 +137,7 @@
     }
 
     // Restore last station if saved
-    const lastId = localStorage.getItem(LS_LAST_STATION);
+    const lastId = localStorage.getItem(LS_LAST_STATION) || localStorage.getItem('drivewave_web_last_station');
     if (lastId) {
       const found = stations.find(s => s.id === lastId);
       if (found) {

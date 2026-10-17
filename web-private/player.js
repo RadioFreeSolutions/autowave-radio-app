@@ -8,7 +8,7 @@
   'use strict';
 
   // State
-  const stations = window.DRIVEWAVE_STATIONS || [];
+  const stations = window.AUTOWAVE_STATIONS || [];
   let filteredStations = [...stations];
   let currentStation = null;
   let currentIndex = -1;
@@ -22,14 +22,15 @@
   const MAX_AUTO_SKIPS = 3;
 
   // LocalStorage keys
-  const LS_FAVS = 'drivewave_web_favorites';
-  const LS_VOLUME = 'drivewave_web_volume';
-  const LS_LAST_STATION = 'drivewave_web_last_station';
+  const LS_FAVS = 'autowave_radio_favorites';
+  const LS_VOLUME = 'autowave_radio_volume';
+  const LS_LAST_STATION = 'autowave_radio_last_station';
 
-  // Load favorites
+  // Load favorites (with seamless fallback/migration from legacy keys)
   let favorites = new Set();
   try {
-    const savedFavs = JSON.parse(localStorage.getItem(LS_FAVS) || '[]');
+    const rawFavs = localStorage.getItem(LS_FAVS) || localStorage.getItem('drivewave_web_favorites') || '[]';
+    const savedFavs = JSON.parse(rawFavs);
     favorites = new Set(savedFavs);
   } catch (e) {
     favorites = new Set();
@@ -38,7 +39,7 @@
   // Audio element
   const audio = new Audio();
   audio.preload = 'none';
-  audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || '0.85');
+  audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || localStorage.getItem('drivewave_web_volume') || '0.85');
 
   // DOM Elements
   const stationsGrid = document.getElementById('stations-grid');
@@ -121,7 +122,7 @@
     CALM_CHILL: { title: '☕ Calm & Chill', subtitle: 'Relaxed acoustics, soft vocals, and ambient companions for night cruising.' },
     ROCK: { title: '🎸 Rock Anthems', subtitle: 'Classic guitar riffs, 90s alt-rock anthems, and stadium rock.' },
     NEWS_COMMUTE: { title: '📰 News & Commute', subtitle: '24/7 world journalism, traffic, and talk in crystal-clear broadcasts.' },
-    FAVORITES: { title: '⭐ Favorites', subtitle: 'Your saved road-trip radio stations.' }
+    FAVORITES: { title: '❤️ Favorites', subtitle: 'Your saved road-trip radio stations.' }
   };
 
   /** Initialize App */
@@ -136,7 +137,7 @@
     }
 
     // Restore last station if saved
-    const lastId = localStorage.getItem(LS_LAST_STATION);
+    const lastId = localStorage.getItem(LS_LAST_STATION) || localStorage.getItem('drivewave_web_last_station');
     if (lastId) {
       const found = stations.find(s => s.id === lastId);
       if (found) {
@@ -267,12 +268,6 @@
       if (/energy|nrg/i.test(after)) return 'NRG 98';
       const subWords = after.split(/\s+/).filter(w => !['the', 'a'].includes(w.toLowerCase()));
       return (subWords[0] || '181').slice(0, 6).toUpperCase();
-    }
-
-    // BBC
-    if (/BBC/i.test(clean)) {
-      const bbcMatch = clean.match(/BBC(?:\s+Radio)?\s*([0-9a-zA-Z]+)?/i);
-      return bbcMatch && bbcMatch[1] ? ('BBC ' + bbcMatch[1].toUpperCase()) : 'BBC';
     }
 
     // Specific Brands & Series
@@ -516,7 +511,7 @@
             </div>
           </div>
           <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
-            ★
+            ${isFav ? '❤️' : '♡'}
           </button>
         </div>
       `;
@@ -570,7 +565,9 @@
     }
 
     if (favPlayerBtn) {
-      favPlayerBtn.classList.toggle('favorited', favorites.has(station.id));
+      const isFav = favorites.has(station.id);
+      favPlayerBtn.classList.toggle('favorited', isFav);
+      favPlayerBtn.textContent = isFav ? '❤️' : '♡';
     }
 
     localStorage.setItem(LS_LAST_STATION, station.id);
@@ -898,7 +895,9 @@
     }
 
     if (currentStation && currentStation.id === id && favPlayerBtn) {
-      favPlayerBtn.classList.toggle('favorited', favorites.has(id));
+      const isFav = favorites.has(id);
+      favPlayerBtn.classList.toggle('favorited', isFav);
+      favPlayerBtn.textContent = isFav ? '❤️' : '♡';
     }
   }
 

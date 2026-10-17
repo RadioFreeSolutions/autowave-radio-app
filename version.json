@@ -1,6 +1,6 @@
 {
-  "versionCode": 20,
-  "versionName": "5.5.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.5.0-release.apk",
-  "releaseNotes": "DriveWave v5.5.0: Explicit copyright blacklist enforcement (purging non-distributable streams like BBC), Web player favorite heart icons & theme sync, and in-car audio quality optimizations."
+  "versionCode": 21,
+  "versionName": "5.6.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.6.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.6.0: Complete unified brand transition to AutoWave Radio across all artifacts, copyright blacklist enforcement, Web player favorite heart icons & theme sync."
 }

@@ -4020,4 +4020,3 @@ window.AUTOWAVE_STATIONS = [
     ]
   }
 ];
-window.DRIVEWAVE_STATIONS = window.AUTOWAVE_STATIONS;
