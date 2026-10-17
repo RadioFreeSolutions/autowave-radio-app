@@ -7,20 +7,20 @@
 **Live Hit Radio & Curated Driving Moods for Android & Android Auto**
 
 [![Android Auto](https://img.shields.io/badge/Android%20Auto-100%25%20Certified-00FF7F?style=for-the-badge&logo=androidauto&logoColor=black)](https://github.com/RadioFreeSolutions/autowave-radio-app)
-[![Version](https://img.shields.io/badge/Version-5.1.0-7C4DFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/RadioFreeSolutions/autowave-radio-app)
-[![Size](https://img.shields.io/badge/APK%20Size-3.8%20MB-00FF7F?style=for-the-badge)](drivewave-v5.1.0-release.apk)
+[![Version](https://img.shields.io/badge/Version-5.2.0-7C4DFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/RadioFreeSolutions/autowave-radio-app)
+[![Size](https://img.shields.io/badge/APK%20Size-3.8%20MB-00FF7F?style=for-the-badge)](drivewave-v5.2.0-release.apk)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20No%20Ads%20Added-FF9100?style=for-the-badge)](https://github.com/RadioFreeSolutions/autowave-radio-app)
 [![License](https://img.shields.io/badge/License-Free-blue?style=for-the-badge)](https://github.com/RadioFreeSolutions/autowave-radio-app)
 
 <br/>
 
-<a href="drivewave-v5.1.0-release.apk">
-  <img src="https://img.shields.io/badge/⬇️%20DOWNLOAD%20RELEASE%20APK%20(v5.1.0)-00FF7F?style=for-the-badge&logoColor=black&labelColor=1A2333" height="52" alt="Download APK" />
+<a href="drivewave-v5.2.0-release.apk">
+  <img src="https://img.shields.io/badge/⬇️%20DOWNLOAD%20RELEASE%20APK%20(v5.2.0)-00FF7F?style=for-the-badge&logoColor=black&labelColor=1A2333" height="52" alt="Download APK" />
 </a>
 
 <br/><br/>
 
-[📱 **Direct APK Download**](drivewave-v5.1.0-release.apk) • [🌐 **Live Web Player**](web/) • [🛡️ **Privacy Policy**](privacy.html)
+[📱 **Direct APK Download**](drivewave-v5.2.0-release.apk) • [🌐 **Live Web Player**](web/) • [🛡️ **Privacy Policy**](privacy.html)
 
 ---
 

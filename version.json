@@ -1,6 +1,6 @@
 {
-  "versionCode": 16,
-  "versionName": "5.1.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.1.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.1.0: Removed zero-volume auto-pause to eliminate unintended playback interruptions while driving with Android Auto or muted phone, added exponential backoff retry for network reconnects, and optimized foreground service detachment when paused to maximize battery efficiency."
+  "versionCode": 17,
+  "versionName": "5.2.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.2.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.2.0: Added persistent Shuffle mode (enabled by default on install) to mix station discovery without auto-skipping, and introduced a 15-second resume Now Playing startup prompt to prevent sudden volume spikes on launch (immediate auto-start while driving in car mode)."
 }
