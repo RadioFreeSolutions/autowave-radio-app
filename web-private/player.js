@@ -132,7 +132,7 @@
     setupMediaSession();
 
     if (searchInput) {
-      searchInput.placeholder = `Search ${stations.length} stations, genres, or artists...`;
+      searchInput.placeholder = 'Search curated stations, genres, or artists...';
     }
 
     // Restore last station if saved
@@ -153,13 +153,11 @@
       const mood = el.getAttribute('data-mood');
       const badge = el.querySelector('.nav-badge');
       if (!badge) return;
-      if (mood === 'ALL') {
-        badge.textContent = stations.length;
-      } else if (mood === 'FAVORITES') {
+      if (mood === 'FAVORITES') {
         badge.textContent = favorites.size;
+        badge.style.display = favorites.size > 0 ? '' : 'none';
       } else {
-        const count = stations.filter(s => s.moods && s.moods.includes(mood)).length;
-        badge.textContent = count;
+        badge.style.display = 'none';
       }
     });
 
@@ -191,10 +189,10 @@
 
     // Update shelf title and subtitle dynamically
     const meta = MOOD_META[currentMood] || MOOD_META.ALL;
-    if (shelfTitle) shelfTitle.innerHTML = meta.title + ` <span style="font-size: 16px; color: var(--accent); font-weight: 600;">(${filteredStations.length})</span>`;
+    if (shelfTitle) shelfTitle.innerHTML = meta.title;
     if (shelfSubtitle) {
       if (currentMood === 'ALL' && !searchQuery) {
-        shelfSubtitle.textContent = `${stations.length} hand-picked, verified live radio broadcasts.`;
+        shelfSubtitle.textContent = 'Hand-picked, verified live radio broadcasts.';
       } else {
         shelfSubtitle.textContent = meta.subtitle;
       }

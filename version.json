@@ -1,6 +1,6 @@
 {
-  "versionCode": 15,
-  "versionName": "5.0.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.0.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.0.0: Rebranded application ID (com.autowave.radio), Google Play production release, verified broadcaster & support contact (autowaveradio@gmail.com), comprehensive battery saver guard, and enhanced web player layout."
+  "versionCode": 16,
+  "versionName": "5.1.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.1.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.1.0: Removed zero-volume auto-pause to eliminate unintended playback interruptions while driving with Android Auto or muted phone, added exponential backoff retry for network reconnects, and optimized foreground service detachment when paused to maximize battery efficiency."
 }

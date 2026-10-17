@@ -8,7 +8,7 @@
   'use strict';
 
   // State
-  const stations = window.AUTOWAVE_STATIONS || window.DRIVEWAVE_STATIONS || window.DEFAULT_STATIONS || [];
+  const stations = window.DRIVEWAVE_STATIONS || [];
   let filteredStations = [...stations];
   let currentStation = null;
   let currentIndex = -1;
@@ -132,7 +132,7 @@
     setupMediaSession();
 
     if (searchInput) {
-      searchInput.placeholder = `Search ${stations.length} stations, genres, or artists...`;
+      searchInput.placeholder = 'Search curated stations, genres, or artists...';
     }
 
     // Restore last station if saved
@@ -153,13 +153,11 @@
       const mood = el.getAttribute('data-mood');
       const badge = el.querySelector('.nav-badge');
       if (!badge) return;
-      if (mood === 'ALL') {
-        badge.textContent = stations.length;
-      } else if (mood === 'FAVORITES') {
+      if (mood === 'FAVORITES') {
         badge.textContent = favorites.size;
+        badge.style.display = favorites.size > 0 ? '' : 'none';
       } else {
-        const count = stations.filter(s => s.moods && s.moods.includes(mood)).length;
-        badge.textContent = count;
+        badge.style.display = 'none';
       }
     });
 
@@ -191,10 +189,10 @@
 
     // Update shelf title and subtitle dynamically
     const meta = MOOD_META[currentMood] || MOOD_META.ALL;
-    if (shelfTitle) shelfTitle.innerHTML = meta.title + ` <span style="font-size: 16px; color: var(--accent); font-weight: 600;">(${filteredStations.length})</span>`;
+    if (shelfTitle) shelfTitle.innerHTML = meta.title;
     if (shelfSubtitle) {
       if (currentMood === 'ALL' && !searchQuery) {
-        shelfSubtitle.textContent = `${stations.length} hand-picked, verified live radio broadcasts.`;
+        shelfSubtitle.textContent = 'Hand-picked, verified live radio broadcasts.';
       } else {
         shelfSubtitle.textContent = meta.subtitle;
       }
@@ -683,10 +681,7 @@
     }
     currentTrackTitle = '';
 
-    let streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
-    if (window.location.protocol === 'https:' && streamUrl && streamUrl.startsWith('http://')) {
-      streamUrl = streamUrl.replace(/^http:\/\//i, 'https://');
-    }
+    const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
     if (!streamUrl || station.isHls || streamUrl.includes('.m3u8')) return;
 
     try {
@@ -776,10 +771,7 @@
     isBuffering = true;
     updatePlaybackState(false);
 
-    let streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
-    if (window.location.protocol === 'https:' && streamUrl && streamUrl.startsWith('http://')) {
-      streamUrl = streamUrl.replace(/^http:\/\//i, 'https://');
-    }
+    const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
     const isHls = station.isHls || streamUrl.includes('.m3u8');
 
     // HLS Support check
@@ -973,7 +965,6 @@
       if (titleEl) titleEl.textContent = title;
       if (subEl) subEl.textContent = sub;
       if (playEl) playEl.textContent = isPlaying ? '⏸' : '▶';
-      pipWindow.document.title = currentTrackTitle ? `${currentTrackTitle} - ${title}` : `${title} • AutoWave`;
     } catch (e) {}
   }
 
@@ -1089,7 +1080,6 @@
       width: 360,
       height: 150,
     });
-    pipWindow.document.title = currentStation ? `${currentStation.name} • AutoWave` : 'AutoWave Radio';
 
     const style = pipWindow.document.createElement('style');
     style.textContent = `

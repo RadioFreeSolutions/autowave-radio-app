@@ -2,14 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script>
-    if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-      location.replace('https://' + location.host + location.pathname + location.search + location.hash);
-    }
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AutoWave Radio Web Player | Pure Live Hit Radio (No Ads Added, No Paywalls)</title>
-  <meta name="description" content="Listen to 170 curated high-bitrate live radio streams online with no ads added. Pop hits, Latin, Rock, Chill, and commute radio. Free web player with driving mode and steering-wheel controls." />
+  <meta name="description" content="Listen to curated high-bitrate live radio streams online with no ads added. Pop hits, Latin, Rock, Chill, and commute radio. Free web player with driving mode and steering-wheel controls." />
   <meta name="keywords" content="web radio, online radio player, free internet radio, live radio stations, driving music, autowave, autowave radio, bbc radio live, pop hits radio, latin radio, car web radio" />
   <meta name="author" content="RadioFreeSolutions" />
   <meta name="robots" content="index, follow" />
@@ -26,7 +21,7 @@
   <meta property="og:type" content="music.radio_station" />
   <meta property="og:site_name" content="AutoWave Radio Web Player" />
   <meta property="og:title" content="AutoWave Radio Web Player | Pure Live Hit Radio (No Ads Added, No Paywalls)" />
-  <meta property="og:description" content="Instant live radio streaming across Pop, Latin, Rock, and Chill. 170 curated streams, no ads added by AutoWave, steering wheel & media key control." />
+  <meta property="og:description" content="Instant live radio streaming across Pop, Latin, Rock, and Chill. Curated streams, no ads added by AutoWave, steering wheel & media key control." />
   <meta property="og:url" content="https://radiofreesolutions.github.io/autowave-radio-app/web/" />
   <meta property="og:image" content="https://radiofreesolutions.github.io/autowave-radio-app/web/icon-512.png" />
   <meta property="og:image:width" content="512" />
@@ -36,7 +31,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AutoWave Radio Web Player | Pure Live Hit Radio" />
-  <meta name="twitter:description" content="Instant live radio streaming with driving mode. 170 curated streams, no ads added by AutoWave." />
+  <meta name="twitter:description" content="Instant live radio streaming with driving mode. Curated streams, no ads added by AutoWave." />
   <meta name="twitter:image" content="https://radiofreesolutions.github.io/autowave-radio-app/web/icon-512.png" />
 
   <!-- Schema.org JSON-LD -->
@@ -56,7 +51,7 @@
           "price": "0",
           "priceCurrency": "USD"
         },
-        "description": "Free web radio player featuring 170 curated live radio streams, no ads added, driving mode, and steering-wheel media key control.",
+        "description": "Free web radio player featuring curated live radio streams, no ads added, driving mode, and steering-wheel media key control.",
         "image": "https://radiofreesolutions.github.io/autowave-radio-app/web/icon-512.png",
         "creator": {
           "@type": "Organization",
@@ -97,42 +92,34 @@
         <li class="nav-item active" data-mood="ALL">
           <span>🔥</span>
           <span>All Stations</span>
-          <span class="nav-badge">170</span>
         </li>
         <li class="nav-item" data-mood="POP_HITS">
           <span>⭐</span>
           <span>Top Rated</span>
-          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="LATIN_SPANISH">
           <span>💃</span>
           <span>Latin & Spanish</span>
-          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="LONG_DRIVE">
           <span>🛣️</span>
           <span>Long Drive</span>
-          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="FUN_ENERGY">
           <span>⚡</span>
           <span>Fun & Energy</span>
-          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="CALM_CHILL">
           <span>☕</span>
           <span>Calm & Chill</span>
-          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="ROCK">
           <span>🎸</span>
           <span>Rock Anthems</span>
-          <span class="nav-badge">0</span>
         </li>
         <li class="nav-item" data-mood="NEWS_COMMUTE">
           <span>📰</span>
           <span>News & Commute</span>
-          <span class="nav-badge">0</span>
         </li>
       </ul>
 
@@ -142,6 +129,10 @@
           <span>⭐</span>
           <span>Favorites</span>
           <span class="nav-badge" id="fav-count">0</span>
+        </li>
+        <li class="nav-item" id="nav-info-btn">
+          <span>ℹ️</span>
+          <span>About &amp; Legal</span>
         </li>
       </ul>
 
@@ -157,7 +148,7 @@
         </a>
         <div class="mobile-top-actions">
           <a href="../" class="btn-mobile-action" title="Back to AutoWave Radio Home">🏠</a>
-          <a href="../drivewave-v5.0.0-release.apk" class="btn-get-app-mobile" download title="Download AutoWave Radio APK">
+          <a href="../drivewave-v5.1.0-release.apk" class="btn-get-app-mobile" download title="Download AutoWave Radio APK">
             <span>⚡</span>
             <div class="get-app-labels">
               <span class="get-app-title">GET APP</span>
@@ -177,14 +168,14 @@
       <header class="top-bar">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" class="search-input" placeholder="Search 170 curated stations, genres, or artists..." autocomplete="off" />
+          <input type="text" id="search-input" class="search-input" placeholder="Search curated stations, genres, or artists..." autocomplete="off" />
         </div>
 
         <div class="top-actions">
           <a href="../" class="btn-top-action" title="Back to AutoWave Radio Home">
             <span>🏠</span> Home
           </a>
-          <a href="../drivewave-v4.0.0-release.apk" class="btn-get-app-top" download title="Download AutoWave Radio APK for Android">
+          <a href="../drivewave-v5.1.0-release.apk" class="btn-get-app-top" download title="Download AutoWave Radio APK for Android">
             <span class="get-app-icon">⚡</span>
             <div class="get-app-labels">
               <span class="get-app-title">GET APP</span>
@@ -221,7 +212,7 @@
       <!-- Shelf Banner -->
       <section class="shelf-header">
         <h1 class="shelf-title" id="shelf-title">🔥 All Stations</h1>
-        <p class="shelf-subtitle" id="shelf-subtitle">170 curated live radio streams, checked for playback availability.</p>
+        <p class="shelf-subtitle" id="shelf-subtitle">Curated live radio streams, checked for playback availability.</p>
       </section>
 
       <!-- Station Grid -->
@@ -350,7 +341,7 @@
               <span>📻</span> About AutoWave Radio
             </div>
             <p>
-              AutoWave Radio delivers 170 curated, high-bitrate live radio streams engineered for uninterrupted listening.
+              AutoWave Radio delivers curated, high-bitrate live radio streams engineered for uninterrupted listening.
               Featuring quick mood filtering (Pop Hits, Latin &amp; Spanish, Long Drive, Rock, Chillout), high-contrast Cockpit Driving Mode, and steering-wheel controls via standard MediaSession keys.
             </p>
           </div>
@@ -375,7 +366,7 @@
               If you are a copyright owner, station administrator, or legal representative wishing to update station metadata or request stream removal:
             </p>
             <p style="margin-top: 6px;">
-              Email: <a href="mailto:autowaveradio@gmail.com" class="modal-contact-link">autowaveradio@gmail.com</a>
+              Email: <a href="mailto:legal.drivewave@gmail.com" class="modal-contact-link">legal.drivewave@gmail.com</a>
             </p>
             <p style="margin-top: 4px; font-size: 12px; color: var(--text-dim);">
               Requests are verified and resolved promptly.
@@ -393,8 +384,8 @@
               <a href="../privacy.html" class="btn-top-action" target="_blank" style="border-color: var(--accent); color: var(--accent); font-weight: 700;">
                 <span>🛡️</span> Privacy Policy &amp; Legal Terms
               </a>
-              <a href="../drivewave-v5.0.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
-                <span>⬇️</span> Download APK (v5.0.0)
+              <a href="../drivewave-v5.1.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
+                <span>⬇️</span> Download APK (v5.1.0)
               </a>
               <a href="../" class="btn-top-action">
                 <span>🏠</span> Homepage
@@ -437,7 +428,7 @@
       if (navigator.share) {
         navigator.share({
           title: 'AutoWave Radio Web - Pure Driving Radio',
-          text: 'Listen to 170 curated live radio streams (Pop, Latin, Rock, Chill):',
+          text: 'Listen to curated live radio streams (Pop, Latin, Rock, Chill):',
           url: window.location.href
         }).catch(function() {});
       } else {
