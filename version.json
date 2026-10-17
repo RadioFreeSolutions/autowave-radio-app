@@ -1,6 +1,6 @@
 {
-  "versionCode": 18,
-  "versionName": "5.3.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.3.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.3.0: Intelligent queue navigation with guaranteed historical rewind (Back never shuffles), fair non-repeating shuffle cycle, bidirectional history redo, and cold-start-only 15-second resume prompt."
+  "versionCode": 19,
+  "versionName": "5.4.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/drivewave-v5.4.0-release.apk",
+  "releaseNotes": "DriveWave v5.4.0: Android Auto station logos & artwork with OkHttpBitmapLoader, dashboard favorite (heart) and shuffle toggle controls, seamless queue shuffle navigation, and calm silent launch."
 }

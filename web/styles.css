@@ -542,8 +542,9 @@ footer.player-bar {
   display: flex;
   align-items: center;
   gap: 14px;
-  width: 300px;
-  min-width: 200px;
+  flex: 1 1 0;
+  max-width: 480px;
+  min-width: 0;
 }
 
 .player-art-box {
