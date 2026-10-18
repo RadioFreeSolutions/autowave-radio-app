@@ -36,7 +36,7 @@
   let playbackHistory = [];
   const MAX_HISTORY = 50;
   let lastNavTimestamp = 0;
-  const NAV_DEBOUNCE_MS = 350;
+  const NAV_DEBOUNCE_MS = 500;
 
   // LocalStorage keys
   const LS_FAVS = 'autowave_radio_favorites';
@@ -74,6 +74,7 @@
   const searchInput = document.getElementById('search-input');
   const shelfTitle = document.getElementById('shelf-title');
   const shelfSubtitle = document.getElementById('shelf-subtitle');
+  const btnUnblockAll = document.getElementById('btn-unblock-all');
   const navItems = document.querySelectorAll('.nav-item');
 
   // Player DOM Elements
@@ -152,7 +153,8 @@
     CALM_CHILL: { title: '☕ Calm & Chill', subtitle: 'Relaxed acoustics, soft vocals, and ambient companions for night cruising.' },
     ROCK: { title: '🎸 Rock Anthems', subtitle: 'Classic guitar riffs, 90s alt-rock anthems, and stadium rock.' },
     NEWS_COMMUTE: { title: '📰 News & Commute', subtitle: '24/7 world journalism, traffic, and talk in crystal-clear broadcasts.' },
-    FAVORITES: { title: '❤️ Favorites', subtitle: 'Your saved road-trip radio stations.' }
+    FAVORITES: { title: '❤️ Favorites', subtitle: 'Your saved road-trip radio stations.' },
+    BLOCKED: { title: '🚫 Blocked Stations', subtitle: 'Stations you have blocked. They will not play in shuffle or appear in categories.' }
   };
 
   /** Initialize App */
@@ -228,6 +230,9 @@
       if (mood === 'FAVORITES') {
         badge.textContent = favorites.size;
         badge.style.display = favorites.size > 0 ? '' : 'none';
+      } else if (mood === 'BLOCKED') {
+        badge.textContent = blockedStations.size;
+        badge.style.display = blockedStations.size > 0 ? '' : 'none';
       } else {
         badge.style.display = 'none';
       }
@@ -237,19 +242,27 @@
     if (mobileFavBadge) {
       mobileFavBadge.textContent = favorites.size;
     }
+    const mobileBlockedBadge = document.getElementById('mobile-blocked-badge');
+    if (mobileBlockedBadge) {
+      mobileBlockedBadge.textContent = blockedStations.size;
+    }
   }
 
   /** Filter stations based on mood and search query */
   function applyFilter() {
     filteredStations = stations.filter(s => {
-      // Exclude blocked stations
-      if (blockedStations.has(s.id)) return false;
+      if (currentMood === 'BLOCKED') {
+        if (!blockedStations.has(s.id)) return false;
+      } else {
+        // Exclude blocked stations from normal browsing
+        if (blockedStations.has(s.id)) return false;
 
-      // Mood match
-      if (currentMood === 'FAVORITES') {
-        if (!favorites.has(s.id)) return false;
-      } else if (currentMood !== 'ALL') {
-        if (!s.moods || !s.moods.includes(currentMood)) return false;
+        // Mood match
+        if (currentMood === 'FAVORITES') {
+          if (!favorites.has(s.id)) return false;
+        } else if (currentMood !== 'ALL') {
+          if (!s.moods || !s.moods.includes(currentMood)) return false;
+        }
       }
 
       // Search match
@@ -273,6 +286,10 @@
       } else {
         shelfSubtitle.textContent = meta.subtitle;
       }
+    }
+
+    if (btnUnblockAll) {
+      btnUnblockAll.style.display = (currentMood === 'BLOCKED' && blockedStations.size > 0) ? 'inline-flex' : 'none';
     }
 
     renderStations();
@@ -570,6 +587,24 @@
         </div>
       `;
 
+      const isBlockedMood = (currentMood === 'BLOCKED');
+      const actionHtml = isBlockedMood ? `
+        <div class="card-actions-group">
+          <button class="card-unblock-btn" title="Unblock Station" data-unblockid="${st.id}">
+            <span>✓</span> Unblock
+          </button>
+        </div>
+      ` : `
+        <div class="card-actions-group">
+          <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
+            ${isFav ? '❤️' : '♡'}
+          </button>
+          <button class="card-block-btn" title="Block Station" data-blockid="${st.id}">
+            🚫
+          </button>
+        </div>
+      `;
+
       return `
         <div class="station-card ${activeClass}" data-id="${st.id}" data-idx="${idx}">
           <div class="card-art-box">
@@ -583,14 +618,7 @@
               <span>${genre}</span>
             </div>
           </div>
-          <div class="card-actions-group">
-            <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
-              ${isFav ? '❤️' : '♡'}
-            </button>
-            <button class="card-block-btn" title="Block Station" data-blockid="${st.id}">
-              🚫
-            </button>
-          </div>
+          ${actionHtml}
         </div>
       `;
     }).join('');
@@ -598,6 +626,12 @@
     // Attach click listeners to cards
     stationsGrid.querySelectorAll('.station-card').forEach(card => {
       card.addEventListener('click', (e) => {
+        if (e.target.closest('.card-unblock-btn')) {
+          e.stopPropagation();
+          const id = e.target.closest('.card-unblock-btn').getAttribute('data-unblockid');
+          if (id) unblockStation(id);
+          return;
+        }
         if (e.target.closest('.card-block-btn')) {
           e.stopPropagation();
           const id = e.target.closest('.card-block-btn').getAttribute('data-blockid');
@@ -627,9 +661,26 @@
     if (!id) return;
     blockedStations.add(id);
     localStorage.setItem(LS_BLOCKED, JSON.stringify([...blockedStations]));
+    updateBadges();
     if (currentStation && currentStation.id === id) {
       playNext(false);
     }
+    applyFilter();
+  }
+
+  function unblockStation(id) {
+    if (!id) return;
+    blockedStations.delete(id);
+    localStorage.setItem(LS_BLOCKED, JSON.stringify([...blockedStations]));
+    updateBadges();
+    applyFilter();
+  }
+
+  function unblockAll() {
+    if (blockedStations.size === 0) return;
+    blockedStations.clear();
+    localStorage.setItem(LS_BLOCKED, JSON.stringify([]));
+    updateBadges();
     applyFilter();
   }
 
@@ -855,26 +906,37 @@
     updatePlaybackState(false);
   }
 
-  /** Handle fatal stream failure with fallback URL retry and smooth auto-advance */
+  /** Handle fatal stream failure with fallback URL retry and clean backoff without auto-skipping */
   function handleFatalStreamError(station) {
+    if (!station) return;
+
     if (retryCount === 0 && station.fallbackUrl && station.fallbackUrl !== station.streamUrl) {
-      console.log('Retrying station with fallback URL...');
+      console.log('Retrying station with fallback URL...', station.name);
       retryCount++;
-      startAudio(station);
+      if (playerTrack) playerTrack.textContent = `${station.name} (Retrying fallback...)`;
+      setTimeout(() => {
+        if (currentStation && currentStation.id === station.id) {
+          startAudio(station);
+        }
+      }, 1000);
       return;
     }
 
-    console.warn('Stream unavailable:', station.name);
-    if (consecutiveAutoSkips < MAX_AUTO_SKIPS && filteredStations.length > 1) {
-      consecutiveAutoSkips++;
-      if (playerTrack) playerTrack.textContent = `${station.name} (Connecting next...)`;
+    if (retryCount < 2) {
+      console.log(`Retrying station attempt ${retryCount + 1}...`, station.name);
+      retryCount++;
+      if (playerTrack) playerTrack.textContent = `${station.name} (Reconnecting...)`;
       setTimeout(() => {
-        playNext(false);
-      }, 800);
-    } else {
-      updatePlaybackState(false);
-      if (playerTrack) playerTrack.textContent = `${station.name} (Stream Offline)`;
+        if (currentStation && currentStation.id === station.id) {
+          startAudio(station);
+        }
+      }, 1800);
+      return;
     }
+
+    console.warn('Stream unavailable after retries:', station.name);
+    updatePlaybackState(false);
+    if (playerTrack) playerTrack.textContent = `${station.name} (Stream Offline)`;
   }
 
   /** Toggle Play / Pause */
@@ -902,7 +964,7 @@
   /** Play next station in current filter */
   function playNext(fromUser = true) {
     const now = Date.now();
-    if (fromUser && (now - lastNavTimestamp < NAV_DEBOUNCE_MS)) return;
+    if (now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
     lastNavTimestamp = now;
 
     if (filteredStations.length === 0) return;
@@ -922,7 +984,7 @@
   /** Play previous station in current filter (never shuffle on back!) */
   function playPrevious(fromUser = true) {
     const now = Date.now();
-    if (fromUser && (now - lastNavTimestamp < NAV_DEBOUNCE_MS)) return;
+    if (now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
     lastNavTimestamp = now;
 
     if (filteredStations.length === 0) return;
@@ -1322,6 +1384,10 @@
         searchQuery = e.target.value.trim();
         applyFilter();
       });
+    }
+
+    if (btnUnblockAll) {
+      btnUnblockAll.addEventListener('click', unblockAll);
     }
 
     // Nav Items (Desktop Sidebar Moods)

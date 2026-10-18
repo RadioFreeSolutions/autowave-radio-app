@@ -130,6 +130,11 @@
           <span>Favorites</span>
           <span class="nav-badge" id="fav-count">0</span>
         </li>
+        <li class="nav-item" data-mood="BLOCKED">
+          <span>🚫</span>
+          <span>Block List</span>
+          <span class="nav-badge" id="blocked-count">0</span>
+        </li>
       </ul>
 
     </aside>
@@ -144,7 +149,7 @@
         </a>
         <div class="mobile-top-actions">
           <a href="../" class="btn-mobile-action" title="Back to AutoWave Radio Home">🏠</a>
-          <a href="../autowave-radio-v5.10.0-release.apk" class="btn-get-app-mobile" download title="Download AutoWave Radio APK">
+          <a href="../autowave-radio-v5.11.0-release.apk" class="btn-get-app-mobile" download title="Download AutoWave Radio APK">
             <span>⚡</span>
             <div class="get-app-labels">
               <span class="get-app-title">GET APP</span>
@@ -170,7 +175,7 @@
           <a href="../" class="btn-top-action" title="Back to AutoWave Radio Home">
             <span>🏠</span> Home
           </a>
-          <a href="../autowave-radio-v5.10.0-release.apk" class="btn-get-app-top" download title="Download AutoWave Radio APK for Android">
+          <a href="../autowave-radio-v5.11.0-release.apk" class="btn-get-app-top" download title="Download AutoWave Radio APK for Android">
             <span class="get-app-icon">⚡</span>
             <div class="get-app-labels">
               <span class="get-app-title">GET APP</span>
@@ -202,12 +207,20 @@
         <div class="mood-pill" data-mood="ROCK">🎸 Rock</div>
         <div class="mood-pill" data-mood="NEWS_COMMUTE">📰 News</div>
         <div class="mood-pill" data-mood="FAVORITES">❤️ Favs <span id="mobile-fav-badge" class="mood-pill-badge">0</span></div>
+        <div class="mood-pill" data-mood="BLOCKED">🚫 Blocked <span id="mobile-blocked-badge" class="mood-pill-badge">0</span></div>
       </div>
 
       <!-- Shelf Banner -->
       <section class="shelf-header">
-        <h1 class="shelf-title" id="shelf-title">🔥 All Stations</h1>
-        <p class="shelf-subtitle" id="shelf-subtitle">Curated live radio streams, checked for playback availability.</p>
+        <div class="shelf-header-row">
+          <div>
+            <h1 class="shelf-title" id="shelf-title">🔥 All Stations</h1>
+            <p class="shelf-subtitle" id="shelf-subtitle">Curated live radio streams, checked for playback availability.</p>
+          </div>
+          <button id="btn-unblock-all" class="btn-unblock-all" style="display: none;" title="Unblock All Stations">
+            <span>🚫</span> Unblock All
+          </button>
+        </div>
       </section>
 
       <!-- Station Grid -->
@@ -381,8 +394,8 @@
               <a href="../privacy.html" class="btn-top-action" target="_blank" style="border-color: var(--accent); color: var(--accent); font-weight: 700;">
                 <span>🛡️</span> Privacy Policy &amp; Legal Terms
               </a>
-              <a href="../autowave-radio-v5.10.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
-                <span>⬇️</span> Download APK (v5.10.0)
+              <a href="../autowave-radio-v5.11.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
+                <span>⬇️</span> Download APK (v5.11.0)
               </a>
               <a href="../" class="btn-top-action">
                 <span>🏠</span> Homepage
