@@ -1,6 +1,6 @@
 {
-  "versionCode": 22,
-  "versionName": "5.7.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.7.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.7.0: Fix playback skipping/double NEXT issues, crisp dynamic monogram gradient badges for Android Auto, Station Block feature across AA, mobile & web, and streamlined web player."
+  "versionCode": 23,
+  "versionName": "5.8.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.8.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.8.0: Web player shuffle mode (default ON) with non-repeating deck & history back, 100% verified HTTPS audio streams, zero DOM thrashing, and ultra-smooth playback."
 }

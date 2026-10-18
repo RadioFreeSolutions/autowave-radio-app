@@ -21,6 +21,23 @@
   let consecutiveAutoSkips = 0;
   const MAX_AUTO_SKIPS = 3;
 
+  // Shuffle & History state (Default: ON, saved across sessions)
+  const LS_SHUFFLE = 'autowave_radio_shuffle';
+  let isShuffle = true;
+  try {
+    const savedShuffle = localStorage.getItem(LS_SHUFFLE);
+    if (savedShuffle !== null) {
+      isShuffle = (savedShuffle === 'true');
+    }
+  } catch (e) {
+    isShuffle = true;
+  }
+  let shuffleDeck = [];
+  let playbackHistory = [];
+  const MAX_HISTORY = 50;
+  let lastNavTimestamp = 0;
+  const NAV_DEBOUNCE_MS = 350;
+
   // LocalStorage keys
   const LS_FAVS = 'autowave_radio_favorites';
   const LS_VOLUME = 'autowave_radio_volume';
@@ -48,7 +65,7 @@
 
   // Audio element
   const audio = new Audio();
-  audio.preload = 'none';
+  audio.preload = 'auto';
   audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || localStorage.getItem('drivewave_web_volume') || '0.85');
 
   // DOM Elements
@@ -63,6 +80,7 @@
   const playerArt = document.getElementById('player-art');
   const playerTrack = document.getElementById('player-track');
   const playerStation = document.getElementById('player-station');
+  const shuffleBtn = document.getElementById('btn-shuffle');
   const playPauseBtn = document.getElementById('btn-play-pause');
   const playIcon = document.getElementById('play-icon');
   const pauseIcon = document.getElementById('pause-icon');
@@ -79,6 +97,7 @@
   const dmArtwork = document.getElementById('dm-artwork');
   const dmTrackTitle = document.getElementById('dm-track-title');
   const dmStationName = document.getElementById('dm-station-name');
+  const dmShuffleBtn = document.getElementById('dm-btn-shuffle');
   const dmPlayPauseBtn = document.getElementById('dm-btn-play');
   const dmPlayIcon = document.getElementById('dm-play-icon');
   const dmPauseIcon = document.getElementById('dm-pause-icon');
@@ -91,6 +110,7 @@
   const miniArt = document.getElementById('mini-art');
   const miniTitle = document.getElementById('mini-title');
   const miniSub = document.getElementById('mini-sub');
+  const miniShuffleBtn = document.getElementById('btn-mini-shuffle');
   const btnMiniPrev = document.getElementById('btn-mini-prev');
   const btnMiniPlay = document.getElementById('btn-mini-play');
   const miniPlayIcon = document.getElementById('mini-play-icon');
@@ -138,6 +158,7 @@
   /** Initialize App */
   function init() {
     updateBadges();
+    updateShuffleUI();
     applyFilter();
     setupEventListeners();
     setupMediaSession();
@@ -156,6 +177,46 @@
     } else if (stations.length > 0) {
       setStationUI(stations[0], false);
     }
+  }
+
+  function refillShuffleDeck() {
+    if (filteredStations.length === 0) {
+      shuffleDeck = [];
+      return;
+    }
+    const indices = [];
+    for (let i = 0; i < filteredStations.length; i++) {
+      if (currentIndex === -1 || i !== currentIndex) {
+        indices.push(i);
+      }
+    }
+    // Fisher-Yates shuffle
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = indices[i];
+      indices[i] = indices[j];
+      indices[j] = temp;
+    }
+    shuffleDeck = indices;
+  }
+
+  function toggleShuffle() {
+    isShuffle = !isShuffle;
+    localStorage.setItem(LS_SHUFFLE, isShuffle ? 'true' : 'false');
+    updateShuffleUI();
+    if (isShuffle) {
+      refillShuffleDeck();
+    }
+  }
+
+  function updateShuffleUI() {
+    const btns = [shuffleBtn, dmShuffleBtn, miniShuffleBtn];
+    btns.forEach(btn => {
+      if (!btn) return;
+      btn.classList.toggle('active', isShuffle);
+      btn.setAttribute('aria-pressed', isShuffle ? 'true' : 'false');
+      btn.title = isShuffle ? 'Shuffle is ON (Click to turn OFF)' : 'Shuffle is OFF (Click to turn ON)';
+    });
   }
 
   /** Update sidebar counts */
@@ -200,6 +261,8 @@
 
       return true;
     });
+
+    refillShuffleDeck();
 
     // Update shelf title and subtitle dynamically
     const meta = MOOD_META[currentMood] || MOOD_META.ALL;
@@ -565,9 +628,21 @@
     blockedStations.add(id);
     localStorage.setItem(LS_BLOCKED, JSON.stringify([...blockedStations]));
     if (currentStation && currentStation.id === id) {
-      playNextStation();
+      playNext(false);
     }
     applyFilter();
+  }
+
+  function updateActiveStationCard() {
+    if (!stationsGrid) return;
+    const prevActive = stationsGrid.querySelectorAll('.station-card.active-playing');
+    prevActive.forEach(el => el.classList.remove('active-playing'));
+    if (currentStation) {
+      const currentEl = stationsGrid.querySelector(`.station-card[data-id="${currentStation.id}"]`);
+      if (currentEl) {
+        currentEl.classList.add('active-playing');
+      }
+    }
   }
 
   /** Set Station in UI without necessarily playing */
@@ -584,7 +659,7 @@
     if (dmTrackTitle) dmTrackTitle.textContent = station.name;
     if (miniTitle) miniTitle.textContent = station.name;
 
-    const subtitleText = `${station.flag} ${station.country || 'Live'} • Live Stream`;
+    const subtitleText = `${station.flag || '📻'} ${station.country || 'Live'} • Live Stream`;
     if (playerStation) {
       playerStation.innerHTML = `<span>📻</span> <span>${subtitleText}</span>`;
     }
@@ -605,17 +680,22 @@
 
     updateDocumentPipUI();
     renderVideoPipFrame();
+    updateActiveStationCard();
 
     if (shouldPlay) {
       startAudio(station);
     }
   }
 
-  /** Play a station */
-  function playStation(station) {
+  /** Play a station with history tracking */
+  function playStation(station, recordHistory = true) {
+    if (!station) return;
+    if (recordHistory && currentStation && currentStation.id !== station.id) {
+      playbackHistory.push(currentStation.id);
+      if (playbackHistory.length > MAX_HISTORY) playbackHistory.shift();
+    }
     retryCount = 0;
     setStationUI(station, true);
-    renderStations();
   }
 
   let icyAbortController = null;
@@ -699,92 +779,6 @@
     // Update PiP and Tab Title
     updateDocumentPipUI();
     renderVideoPipFrame();
-    updateTabTitle();
-  }
-
-  function startMetadataStream(station) {
-    if (icyAbortController) {
-      try { icyAbortController.abort(); } catch (e) {}
-      icyAbortController = null;
-    }
-    currentTrackTitle = '';
-
-    const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
-    if (!streamUrl || station.isHls || streamUrl.includes('.m3u8')) return;
-
-    try {
-      icyAbortController = new AbortController();
-      const signal = icyAbortController.signal;
-
-      fetch(streamUrl, {
-        headers: { 'Icy-MetaData': '1' },
-        signal: signal,
-        mode: 'cors'
-      }).then(response => {
-        const metaint = parseInt(response.headers.get('icy-metaint'), 10);
-        if (!metaint || !response.body) return;
-
-        const reader = response.body.getReader();
-        let byteCounter = 0;
-        let readingMeta = false;
-        let metaLength = 0;
-        let metaBuffer = [];
-
-        function pump() {
-          return reader.read().then(({ done, value }) => {
-            if (done || signal.aborted) return;
-            const chunk = value;
-            let offset = 0;
-
-            while (offset < chunk.length) {
-              if (!readingMeta) {
-                const remaining = metaint - byteCounter;
-                if (offset + remaining <= chunk.length) {
-                  offset += remaining;
-                  byteCounter = 0;
-                  readingMeta = true;
-                  if (offset < chunk.length) {
-                    metaLength = chunk[offset] * 16;
-                    offset += 1;
-                    metaBuffer = [];
-                    if (metaLength === 0) readingMeta = false;
-                  }
-                } else {
-                  byteCounter += (chunk.length - offset);
-                  offset = chunk.length;
-                }
-              } else {
-                if (metaBuffer.length < metaLength) {
-                  const need = metaLength - metaBuffer.length;
-                  const available = chunk.length - offset;
-                  const take = Math.min(need, available);
-                  for (let i = 0; i < take; i++) {
-                    metaBuffer.push(chunk[offset + i]);
-                  }
-                  offset += take;
-                  if (metaBuffer.length >= metaLength) {
-                    readingMeta = false;
-                    byteCounter = 0;
-                    try {
-                      const rawStr = new TextDecoder('utf-8').decode(new Uint8Array(metaBuffer));
-                      const match = rawStr.match(/StreamTitle='(.*?)';/);
-                      if (match && match[1]) {
-                        const cleaned = cleanStreamTitle(match[1]);
-                        if (cleaned && cleaned.toLowerCase() !== station.name.toLowerCase()) {
-                          onNewTrackInfo(cleaned, station);
-                        }
-                      }
-                    } catch (e) {}
-                  }
-                }
-              }
-            }
-            return pump();
-          }).catch(() => {});
-        }
-        return pump();
-      }).catch(() => {});
-    } catch (e) {}
   }
 
   /** Start HTML5 / HLS Audio playback */
@@ -792,9 +786,17 @@
     if (!station) return;
 
     if (hlsInstance) {
-      hlsInstance.destroy();
+      try {
+        hlsInstance.destroy();
+      } catch (e) {}
       hlsInstance = null;
     }
+
+    try {
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+    } catch (e) {}
 
     isBuffering = true;
     updatePlaybackState(false);
@@ -806,8 +808,11 @@
     if (isHls && window.Hls && window.Hls.isSupported()) {
       hlsInstance = new window.Hls({
         enableWorker: true,
-        lowLatencyMode: true,
-        backBufferLength: 30
+        lowLatencyMode: false,
+        backBufferLength: 60,
+        maxBufferLength: 30,
+        maxMaxBufferLength: 60,
+        liveSyncDurationCount: 3
       });
       hlsInstance.loadSource(streamUrl);
       hlsInstance.attachMedia(audio);
@@ -836,11 +841,11 @@
       });
     } else {
       // Native audio or Safari native HLS
+      audio.preload = 'auto';
       audio.src = streamUrl;
       audio.play().catch(handlePlayError);
     }
 
-    startMetadataStream(station);
     updateMediaSession(station);
   }
 
@@ -860,12 +865,11 @@
     }
 
     console.warn('Stream unavailable:', station.name);
-    // Smooth auto-fallback: advance to next station so driver is never left in silence
     if (consecutiveAutoSkips < MAX_AUTO_SKIPS && filteredStations.length > 1) {
       consecutiveAutoSkips++;
       if (playerTrack) playerTrack.textContent = `${station.name} (Connecting next...)`;
       setTimeout(() => {
-        playNext();
+        playNext(false);
       }, 800);
     } else {
       updatePlaybackState(false);
@@ -896,17 +900,44 @@
   }
 
   /** Play next station in current filter */
-  function playNext() {
+  function playNext(fromUser = true) {
+    const now = Date.now();
+    if (fromUser && (now - lastNavTimestamp < NAV_DEBOUNCE_MS)) return;
+    lastNavTimestamp = now;
+
     if (filteredStations.length === 0) return;
-    const nextIdx = (currentIndex + 1) % filteredStations.length;
-    playStation(filteredStations[nextIdx]);
+
+    if (isShuffle && filteredStations.length > 1) {
+      if (shuffleDeck.length === 0) {
+        refillShuffleDeck();
+      }
+      const nextIdx = shuffleDeck.pop();
+      playStation(filteredStations[nextIdx], true);
+    } else {
+      const nextIdx = (currentIndex + 1) % filteredStations.length;
+      playStation(filteredStations[nextIdx], true);
+    }
   }
 
-  /** Play previous station in current filter */
-  function playPrevious() {
+  /** Play previous station in current filter (never shuffle on back!) */
+  function playPrevious(fromUser = true) {
+    const now = Date.now();
+    if (fromUser && (now - lastNavTimestamp < NAV_DEBOUNCE_MS)) return;
+    lastNavTimestamp = now;
+
     if (filteredStations.length === 0) return;
+
+    if (playbackHistory.length > 0) {
+      const prevId = playbackHistory.pop();
+      const found = filteredStations.find(s => s.id === prevId);
+      if (found && (!currentStation || found.id !== currentStation.id)) {
+        playStation(found, false);
+        return;
+      }
+    }
+
     const prevIdx = (currentIndex - 1 + filteredStations.length) % filteredStations.length;
-    playStation(filteredStations[prevIdx]);
+    playStation(filteredStations[prevIdx], false);
   }
 
   /** Toggle Favorite */
@@ -1220,7 +1251,7 @@
     updateDocumentPipUI();
     renderVideoPipFrame();
     updateTabTitle();
-    renderStations();
+    updateActiveStationCard();
   }
 
   /** Setup MediaSession API (Steering wheel & keyboard multimedia keys) */
@@ -1228,8 +1259,8 @@
     if ('mediaSession' in navigator) {
       navigator.mediaSession.setActionHandler('play', () => togglePlayPause());
       navigator.mediaSession.setActionHandler('pause', () => togglePlayPause());
-      navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious());
-      navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
+      navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious(true));
+      navigator.mediaSession.setActionHandler('nexttrack', () => playNext(true));
     }
   }
 
@@ -1251,7 +1282,12 @@
   /** Setup Event Listeners */
   function setupEventListeners() {
     // Audio events
-    audio.addEventListener('playing', () => updatePlaybackState(true));
+    audio.addEventListener('playing', () => {
+      isBuffering = false;
+      consecutiveAutoSkips = 0;
+      retryCount = 0;
+      updatePlaybackState(true);
+    });
     audio.addEventListener('pause', () => updatePlaybackState(false));
     audio.addEventListener('waiting', () => { isBuffering = true; });
     audio.addEventListener('error', () => {
@@ -1259,9 +1295,10 @@
     });
 
     // Player bar controls
+    if (shuffleBtn) shuffleBtn.addEventListener('click', toggleShuffle);
     if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
-    if (prevBtn) prevBtn.addEventListener('click', playPrevious);
-    if (nextBtn) nextBtn.addEventListener('click', playNext);
+    if (prevBtn) prevBtn.addEventListener('click', () => playPrevious(true));
+    if (nextBtn) nextBtn.addEventListener('click', () => playNext(true));
 
     if (favPlayerBtn) {
       favPlayerBtn.addEventListener('click', () => {
@@ -1351,9 +1388,10 @@
     }
 
     // Driving Mode Controls
+    if (dmShuffleBtn) dmShuffleBtn.addEventListener('click', toggleShuffle);
     if (dmPlayPauseBtn) dmPlayPauseBtn.addEventListener('click', togglePlayPause);
-    if (dmPrevBtn) dmPrevBtn.addEventListener('click', playPrevious);
-    if (dmNextBtn) dmNextBtn.addEventListener('click', playNext);
+    if (dmPrevBtn) dmPrevBtn.addEventListener('click', () => playPrevious(true));
+    if (dmNextBtn) dmNextBtn.addEventListener('click', () => playNext(true));
 
     // Corner Mini Widget controls
     if (btnMiniClose) {
@@ -1363,9 +1401,10 @@
         hideMiniWidget();
       });
     }
+    if (miniShuffleBtn) miniShuffleBtn.addEventListener('click', toggleShuffle);
     if (btnMiniPlay) btnMiniPlay.addEventListener('click', togglePlayPause);
-    if (btnMiniPrev) btnMiniPrev.addEventListener('click', playPrevious);
-    if (btnMiniNext) btnMiniNext.addEventListener('click', playNext);
+    if (btnMiniPrev) btnMiniPrev.addEventListener('click', () => playPrevious(true));
+    if (btnMiniNext) btnMiniNext.addEventListener('click', () => playNext(true));
     if (btnMiniPip) btnMiniPip.addEventListener('click', togglePopoutMiniPlayer);
     if (btnToggleMini) btnToggleMini.addEventListener('click', togglePopoutMiniPlayer);
 
@@ -1414,18 +1453,21 @@
       });
     }
 
-    // Keyboard navigation (Space: Play/Pause, ArrowLeft: Prev, ArrowRight: Next, Escape: Close modal/cockpit)
+    // Keyboard navigation (Space: Play/Pause, ArrowLeft: Prev, ArrowRight: Next, S: Shuffle, Escape: Close modal/cockpit)
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT') return;
       if (e.code === 'Space') {
         e.preventDefault();
         togglePlayPause();
+      } else if (e.code === 'KeyS' || e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        toggleShuffle();
       } else if (e.code === 'ArrowRight') {
         e.preventDefault();
-        playNext();
+        playNext(true);
       } else if (e.code === 'ArrowLeft') {
         e.preventDefault();
-        playPrevious();
+        playPrevious(true);
       } else if (e.code === 'Escape') {
         if (drivingModeOverlay && drivingModeOverlay.classList.contains('active')) {
           drivingModeOverlay.classList.remove('active');

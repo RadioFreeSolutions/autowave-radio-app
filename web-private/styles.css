@@ -625,6 +625,48 @@ footer.player-bar {
   background: rgba(255, 255, 255, 0.08);
 }
 
+.btn-control.btn-shuffle {
+  position: relative;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.btn-control.btn-shuffle.active {
+  color: var(--accent);
+  background: rgba(0, 255, 127, 0.12);
+  border: 1px solid rgba(0, 255, 127, 0.35);
+  box-shadow: 0 0 12px rgba(0, 255, 127, 0.35);
+}
+
+.btn-control.btn-shuffle.active:hover {
+  background: rgba(0, 255, 127, 0.2);
+  box-shadow: 0 0 16px rgba(0, 255, 127, 0.5);
+}
+
+.dm-btn-shuffle {
+  font-size: 22px;
+  color: var(--text-muted);
+}
+
+.dm-btn-shuffle.active {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  background: rgba(0, 255, 127, 0.18) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 127, 0.5) !important;
+}
+
+.btn-mini-shuffle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.btn-mini-shuffle.active {
+  color: var(--accent) !important;
+  border-color: rgba(0, 255, 127, 0.5) !important;
+  background: rgba(0, 255, 127, 0.15) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.4) !important;
+}
+
 .btn-play-pause {
   width: 48px;
   height: 48px;
@@ -1208,6 +1250,12 @@ footer.player-bar {
     width: 34px;
     height: 34px;
     font-size: 15px;
+  }
+
+  .btn-control.btn-shuffle {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
   }
 
   .btn-play-pause {
