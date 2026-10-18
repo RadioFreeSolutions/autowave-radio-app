@@ -1,6 +1,6 @@
 {
-  "versionCode": 24,
-  "versionName": "5.9.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.9.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.9.0: Cold start always opens in STOP mode (never autoplays unexpected sound), added Heart / Favorite button directly on MiniPlayer and Now Playing screen."
+  "versionCode": 25,
+  "versionName": "5.10.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.10.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.10.0: Fix Island/notification dismissal completely stopping playback & tearing down service, dedicated Blocked Stations management screen with individual unblock buttons."
 }
