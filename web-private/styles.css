@@ -438,28 +438,6 @@ main.main-content {
   font-size: 24px;
 }
 
-.card-play-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  font-size: 20px;
-  color: var(--accent);
-}
-
-.station-card:hover .card-play-overlay {
-  opacity: 1;
-}
-
-.station-card.active-playing .card-play-overlay {
-  opacity: 1;
-  background: rgba(0, 255, 127, 0.2);
-}
-
 .card-details {
   flex: 1;
   min-width: 0;
@@ -488,15 +466,25 @@ main.main-content {
   text-overflow: ellipsis;
 }
 
-.card-fav-btn {
+.card-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.card-fav-btn,
+.card-block-btn {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-dim);
   cursor: pointer;
   padding: 6px;
   border-radius: 8px;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-fav-btn:hover {
@@ -506,6 +494,17 @@ main.main-content {
 
 .card-fav-btn.favorited {
   color: #FF4757;
+}
+
+.card-block-btn {
+  opacity: 0.55;
+  font-size: 14px;
+}
+
+.card-block-btn:hover {
+  opacity: 1;
+  background: rgba(239, 68, 68, 0.18);
+  color: #EF4444;
 }
 
 /* Empty State */

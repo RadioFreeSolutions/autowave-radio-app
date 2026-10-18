@@ -25,6 +25,7 @@
   const LS_FAVS = 'autowave_radio_favorites';
   const LS_VOLUME = 'autowave_radio_volume';
   const LS_LAST_STATION = 'autowave_radio_last_station';
+  const LS_BLOCKED = 'autowave_radio_blocked';
 
   // Load favorites (with seamless fallback/migration from legacy keys)
   let favorites = new Set();
@@ -34,6 +35,15 @@
     favorites = new Set(savedFavs);
   } catch (e) {
     favorites = new Set();
+  }
+
+  // Load blocked stations
+  let blockedStations = new Set();
+  try {
+    const rawBlocked = localStorage.getItem(LS_BLOCKED) || '[]';
+    blockedStations = new Set(JSON.parse(rawBlocked));
+  } catch (e) {
+    blockedStations = new Set();
   }
 
   // Audio element
@@ -171,6 +181,9 @@
   /** Filter stations based on mood and search query */
   function applyFilter() {
     filteredStations = stations.filter(s => {
+      // Exclude blocked stations
+      if (blockedStations.has(s.id)) return false;
+
       // Mood match
       if (currentMood === 'FAVORITES') {
         if (!favorites.has(s.id)) return false;
@@ -498,9 +511,6 @@
         <div class="station-card ${activeClass}" data-id="${st.id}" data-idx="${idx}">
           <div class="card-art-box">
             ${artHtml}
-            <div class="card-play-overlay">
-              <span>${isCurr && isPlaying ? '⏸' : '▶'}</span>
-            </div>
           </div>
           <div class="card-details">
             <div class="card-title">${st.name}</div>
@@ -510,9 +520,14 @@
               <span>${genre}</span>
             </div>
           </div>
-          <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
-            ${isFav ? '❤️' : '♡'}
-          </button>
+          <div class="card-actions-group">
+            <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
+              ${isFav ? '❤️' : '♡'}
+            </button>
+            <button class="card-block-btn" title="Block Station" data-blockid="${st.id}">
+              🚫
+            </button>
+          </div>
         </div>
       `;
     }).join('');
@@ -520,6 +535,12 @@
     // Attach click listeners to cards
     stationsGrid.querySelectorAll('.station-card').forEach(card => {
       card.addEventListener('click', (e) => {
+        if (e.target.closest('.card-block-btn')) {
+          e.stopPropagation();
+          const id = e.target.closest('.card-block-btn').getAttribute('data-blockid');
+          if (id) blockStation(id);
+          return;
+        }
         if (e.target.closest('.card-fav-btn')) {
           e.stopPropagation();
           const id = e.target.closest('.card-fav-btn').getAttribute('data-favid');
@@ -537,6 +558,16 @@
         }
       });
     });
+  }
+
+  function blockStation(id) {
+    if (!id) return;
+    blockedStations.add(id);
+    localStorage.setItem(LS_BLOCKED, JSON.stringify([...blockedStations]));
+    if (currentStation && currentStation.id === id) {
+      playNextStation();
+    }
+    applyFilter();
   }
 
   /** Set Station in UI without necessarily playing */
