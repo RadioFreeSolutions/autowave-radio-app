@@ -1,6 +1,6 @@
 {
-  "versionCode": 23,
-  "versionName": "5.8.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.8.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.8.0: Web player shuffle mode (default ON) with non-repeating deck & history back, 100% verified HTTPS audio streams, zero DOM thrashing, and ultra-smooth playback."
+  "versionCode": 24,
+  "versionName": "5.9.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.9.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.9.0: Cold start always opens in STOP mode (never autoplays unexpected sound), added Heart / Favorite button directly on MiniPlayer and Now Playing screen."
 }
