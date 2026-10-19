@@ -3329,32 +3329,6 @@
     ]
   },
   {
-    "id": "es-los40-spain-001",
-    "name": "LOS40 España",
-    "fullName": "LOS40 España",
-    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
-    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40.mp3",
-    "favicon": "",
-    "country": "Spain",
-    "countryCode": "ES",
-    "flag": "🇪🇸",
-    "tags": [
-      "pop",
-      "top40",
-      "latin",
-      "spanish",
-      "los40",
-      "hits"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 128,
-    "moods": [
-      "POP_HITS",
-      "LATIN_SPANISH"
-    ]
-  },
-  {
     "id": "es-cadena-dial-002",
     "name": "Cadena Dial (Música en Español)",
     "fullName": "Cadena Dial (Música en Español)",
@@ -3454,56 +3428,6 @@
     ]
   },
   {
-    "id": "es-los40-classic-006",
-    "name": "LOS40 Classic España",
-    "fullName": "LOS40 Classic España",
-    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
-    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
-    "favicon": "",
-    "country": "Spain",
-    "countryCode": "ES",
-    "flag": "🇪🇸",
-    "tags": [
-      "80s",
-      "90s",
-      "classic hits",
-      "spanish",
-      "pop"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 128,
-    "moods": [
-      "POP_HITS",
-      "LATIN_SPANISH",
-      "LONG_DRIVE"
-    ]
-  },
-  {
-    "id": "es-los40-urban-007",
-    "name": "LOS40 Urban (Reggaeton & Trap)",
-    "fullName": "LOS40 Urban (Reggaeton & Trap)",
-    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_URBAN.mp3",
-    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_URBAN.mp3",
-    "favicon": "",
-    "country": "Spain",
-    "countryCode": "ES",
-    "flag": "🇪🇸",
-    "tags": [
-      "reggaeton",
-      "urban",
-      "latin",
-      "trap",
-      "spanish"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 128,
-    "moods": [
-      "LATIN_SPANISH"
-    ]
-  },
-  {
     "id": "us-el-zol-1079-008",
     "name": "El Zol 106.7 FM (Miami Latino Hits)",
     "fullName": "El Zol 106.7 FM (Miami Latino Hits)",
@@ -3576,31 +3500,6 @@
       "POP_HITS",
       "LATIN_SPANISH",
       "FUN_ENERGY"
-    ]
-  },
-  {
-    "id": "mx-los40-mexico-011",
-    "name": "LOS40 México",
-    "fullName": "LOS40 México",
-    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_MEXICO.mp3",
-    "fallbackUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_MEXICO.mp3",
-    "favicon": "",
-    "country": "Mexico",
-    "countryCode": "MX",
-    "flag": "🇲🇽",
-    "tags": [
-      "pop",
-      "latin",
-      "mexico",
-      "spanish",
-      "top40"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 128,
-    "moods": [
-      "POP_HITS",
-      "LATIN_SPANISH"
     ]
   },
   {

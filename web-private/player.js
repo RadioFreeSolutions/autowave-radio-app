@@ -427,13 +427,6 @@
       if (/hip\s*hop/i.test(clean)) return 'URBAN HH';
       if (/r&b/i.test(clean)) return 'URB R&B';
       return 'URBAN';
-    }
-    if (/LOS40/i.test(clean) || /Los\s*40/i.test(clean)) {
-      if (/classic/i.test(clean)) return 'LOS40 CL';
-      if (/urban/i.test(clean)) return 'LOS40 UR';
-      if (/m[eé]xico/i.test(clean)) return 'LOS40 MX';
-      return 'LOS40';
-    }
     if (/Classic\s*Hits\s*109/i.test(clean)) {
       if (/soft/i.test(clean)) return 'CH109 SR';
       return 'CH109';

@@ -1,6 +1,6 @@
 {
-  "versionCode": 26,
-  "versionName": "5.11.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.11.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.11.0: Dedicated Block List under Favorites in Web Player with individual unblock and Unblock All, full resolution of NEXT multi-skip/auto-skip issue across Web and Android."
+  "versionCode": 27,
+  "versionName": "5.12.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.12.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.12.0: Remove all LOS40 stations across app and web, officially enforce LOS40 exclusion in Stream Blacklist Policy, update seed catalog to v12."
 }
