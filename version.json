@@ -1,6 +1,6 @@
 {
-  "versionCode": 27,
-  "versionName": "5.12.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.12.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.12.0: Remove all LOS40 stations across app and web, officially enforce LOS40 exclusion in Stream Blacklist Policy, update seed catalog to v12."
+  "versionCode": 28,
+  "versionName": "5.13.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.13.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.13.0: 10-Minute Battery Saver auto-shutdown policy terminating background service, wake locks, notifications, and active UI when idle."
 }

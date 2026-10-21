@@ -68,6 +68,38 @@
   audio.preload = 'auto';
   audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || localStorage.getItem('drivewave_web_volume') || '0.85');
 
+  // 10-Minute Idle Battery Saver Watchdog
+  let idleShutdownTimer = null;
+  const IDLE_SHUTDOWN_TIMEOUT_MS = 600000; // 10 minutes
+
+  function startIdleShutdownWatchdog() {
+    clearTimeout(idleShutdownTimer);
+    idleShutdownTimer = setTimeout(() => {
+      if (!isPlaying) {
+        if (hlsInstance) {
+          try {
+            hlsInstance.destroy();
+          } catch (e) {}
+          hlsInstance = null;
+        }
+        try {
+          audio.pause();
+          audio.removeAttribute('src');
+          audio.load();
+        } catch (e) {}
+        console.log('AutoWave Web: 10-minute battery saver auto-shutdown complete.');
+      }
+    }, IDLE_SHUTDOWN_TIMEOUT_MS);
+  }
+
+  function cancelIdleShutdownWatchdog() {
+    if (idleShutdownTimer) {
+      clearTimeout(idleShutdownTimer);
+      idleShutdownTimer = null;
+    }
+  }
+
+
   // DOM Elements
   const stationsGrid = document.getElementById('stations-grid');
   const emptyState = document.getElementById('empty-state');
@@ -159,6 +191,7 @@
 
   /** Initialize App */
   function init() {
+    startIdleShutdownWatchdog();
     updateBadges();
     updateShuffleUI();
     applyFilter();
@@ -1289,6 +1322,11 @@
   /** Update playback button and equalizer UI */
   function updatePlaybackState(playing) {
     isPlaying = playing;
+    if (playing) {
+      cancelIdleShutdownWatchdog();
+    } else {
+      startIdleShutdownWatchdog();
+    }
 
     if (playIcon) playIcon.style.display = playing ? 'none' : 'inline-block';
     if (pauseIcon) pauseIcon.style.display = playing ? 'inline-block' : 'none';
