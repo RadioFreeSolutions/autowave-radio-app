@@ -460,6 +460,7 @@
       if (/hip\s*hop/i.test(clean)) return 'URBAN HH';
       if (/r&b/i.test(clean)) return 'URB R&B';
       return 'URBAN';
+    }
     if (/Classic\s*Hits\s*109/i.test(clean)) {
       if (/soft/i.test(clean)) return 'CH109 SR';
       return 'CH109';
