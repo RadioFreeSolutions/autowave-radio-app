@@ -1,6 +1,6 @@
 {
-  "versionCode": 28,
-  "versionName": "5.13.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.13.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.13.0: 10-Minute Battery Saver auto-shutdown policy terminating background service, wake locks, notifications, and active UI when idle."
+  "versionCode": 29,
+  "versionName": "5.14.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.14.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.14.0: Deep sleep & battery safety update: eliminated WAKE_LOCK, enabled hardware audio offload, added multi-tier idle watchdogs, and improved sleep guard."
 }
