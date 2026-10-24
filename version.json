@@ -1,6 +1,6 @@
 {
-  "versionCode": 30,
-  "versionName": "5.15.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.15.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.15.0: Next & Back navigation controls directly on the bottom mini-player bar, plus robust stream-error battery protections."
+  "versionCode": 31,
+  "versionName": "5.16.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.16.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.16.0: Ultra-low battery consumption release: Instant screen-off shutdown, rapid idle/pause teardown, deep sleep zero-drain guarantee, and background network optimizations."
 }
