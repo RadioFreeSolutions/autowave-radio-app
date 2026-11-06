@@ -1,6 +1,6 @@
 {
-  "versionCode": 32,
-  "versionName": "5.17.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.17.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.17.0: Purged Spanish & Latin stations to focus exclusively on premium US and UK radio streams."
+  "versionCode": 33,
+  "versionName": "5.18.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.18.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.18.0: Live synchronized song lyrics powered by LRCLib for Android and Web."
 }
