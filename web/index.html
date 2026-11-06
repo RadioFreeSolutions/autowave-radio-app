@@ -426,8 +426,14 @@
           <div id="lyrics-content" class="lyrics-content"></div>
         </div>
         <div class="lyrics-footer" id="lyrics-footer" style="display:none;">
-          <span class="lyrics-source">Lyrics from LRCLib</span>
-          <span class="lyrics-sync-badge" id="lyrics-sync-badge" style="display:none;">⏱ Synced</span>
+          <span class="lyrics-source">Lyrics via LRCLib • Click line to sync</span>
+          <div class="lyrics-sync-controls" id="lyrics-sync-controls" style="display:none; align-items:center; gap:6px;">
+            <button id="btn-sync-minus" class="sync-nudge-btn" title="Nudge 1s earlier">-1s</button>
+            <span id="sync-offset-val" class="sync-offset-val" style="display:none;" title="Click to reset offset">0.0s</span>
+            <button id="btn-sync-plus" class="sync-nudge-btn" title="Nudge 1s later">+1s</button>
+            <span class="lyrics-sync-badge" id="lyrics-sync-badge">⏱ Synced</span>
+          </div>
+          <span class="lyrics-plain-badge" id="lyrics-plain-badge" style="display:none;">Plain Lyrics</span>
         </div>
       </div>
     </div>

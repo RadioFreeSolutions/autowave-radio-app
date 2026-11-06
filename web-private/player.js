@@ -836,51 +836,48 @@
 
   function cleanStreamTitle(raw) {
     if (!raw) return "";
-    let title = raw.trim().replace(/^['"\s`]+|['"\s`]+$/g, '');
+    let text = raw.trim();
+    if (!text) return "";
 
-    // Loop to strip nested wrappers like StreamTitle=, TEXT=, TITLE=, etc.
+    // 1. Check if format has explicit key-value pairs (e.g. title="Believer",artist="IMAGINE DRAGONS",url=...)
+    const titleMatch = text.match(/(?:^|[,;\s])title=['"]?([^'",;]+)['"]?/i);
+    const artistMatch = text.match(/(?:^|[,;\s])artist=['"]?([^'",;]+)['"]?/i);
+    if (titleMatch || artistMatch) {
+      const t = titleMatch ? titleMatch[1].trim().replace(/^['"]+|['"]+$/g, '') : '';
+      const a = artistMatch ? artistMatch[1].trim().replace(/^['"]+|['"]+$/g, '') : '';
+      if (t && a) {
+        return `${a} - ${t}`;
+      } else if (t) {
+        text = t;
+      } else if (a) {
+        text = a;
+      }
+    }
+
+    // 2. Strip outer quotes
+    text = text.trim().replace(/^['"\s`]+|['"\s`]+$/g, '');
+
+    // 3. Loop to strip nested wrappers like StreamTitle=, TEXT=, TITLE=, etc.
     let changed = true;
     let loops = 0;
     while (changed && loops < 5) {
       loops++;
-      const prev = title;
-      title = title.replace(/^StreamTitle\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      title = title.replace(/^TEXT\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      title = title.replace(/^TITLE\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      title = title.replace(/^(?:SONG|TRACK)\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      title = title.replace(/^['"\s`;]+|['"\s`;]+$/g, '');
-      changed = (title !== prev);
+      const prev = text;
+      text = text.replace(/^StreamTitle\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      text = text.replace(/^TEXT\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      text = text.replace(/^TITLE\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      text = text.replace(/^(?:SONG|TRACK)\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
+      text = text.replace(/^['"\s`;]+|['"\s`;]+$/g, '');
+      changed = (text !== prev);
     }
 
-    // Handle artist=...;title=...
-    const atMatch = title.match(/^artist=['"]?(.*?)['"]?[;,]\s*title=['"]?(.*?)['"]?$/i);
-    if (atMatch) {
-      const a = atMatch[1].trim().replace(/^['"]+|['"]+$/g, '');
-      const t = atMatch[2].trim().replace(/^['"]+|['"]+$/g, '');
-      title = (a && t) ? `${a} - ${t}` : (t || a);
-    }
+    // 4. Strip trailing parameters (e.g. ,url=... or ;url=... or ,artist=...)
+    text = text.replace(/[,;]\s*(?:url|artist|song_spot|MediaBaseId|itunesTrackId|amgTrackId|amgArtistId|TAID|TPID|cartcutId|StreamUrl|text)=.*$/i, '').trim();
 
-    // Strip TITLE=... prefix
-    title = title.replace(/^title[:=]\s*['"]?(.*?)['"]?$/i, '$1').trim();
-
-    // Strip trailing key=value pairs after semicolon
-    const semiIdx = title.indexOf(';');
-    if (semiIdx > 0) {
-      const after = title.substring(semiIdx + 1);
-      if (/^\s*[a-zA-Z0-9_-]+=/i.test(after)) {
-        title = title.substring(0, semiIdx).trim();
-      }
-    }
-
-    // Strip known ICY keys
-    ['song_spot=', 'MediaBaseId=', 'itunesTrackId=', 'amgTrackId=', 'amgArtistId=', 'StreamUrl=', 'text='].forEach(k => {
-      const idx = title.toLowerCase().indexOf(k.toLowerCase());
-      if (idx > 0) title = title.substring(0, idx).trim();
-    });
-
-    title = title.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE|NP):\s*/i, '');
-    title = title.replace(/^\s*(?:text|title|song|track)\s*[:=]\s*/i, '');
-    return title.trim().replace(/^['"`\s-]+|['"`\s-;]+$/g, '');
+    // 5. Strip common redundant prefixes
+    text = text.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE|NP):\s*/i, '');
+    text = text.replace(/^\s*(?:text|title|song|track)\s*[:=]\s*/i, '');
+    return text.trim().replace(/^['"`\s-,]+|['"`\s-;,]+$/g, '');
   }
 
   function onNewTrackInfo(track, station) {
@@ -947,6 +944,12 @@
   let lyricsStartedAt = null; // Date.now() when track changed and lyrics loaded
   let lyricsLastActiveIdx = -1;
   let lyricsCurrentTrack = ''; // track we last fetched for
+  let lyricsOffsetSec = 0;
+  let lyricsSyncControls = null;
+  let lyricsPlainBadge = null;
+  let btnSyncMinus = null;
+  let btnSyncPlus = null;
+  let syncOffsetVal = null;
 
   function initLyricsElements() {
     lyricsOverlay = document.getElementById('lyrics-overlay');
@@ -957,6 +960,33 @@
     lyricsArtistName = document.getElementById('lyrics-artist-name');
     lyricsSyncBadge = document.getElementById('lyrics-sync-badge');
     lyricsFooter = document.getElementById('lyrics-footer');
+    lyricsSyncControls = document.getElementById('lyrics-sync-controls');
+    lyricsPlainBadge = document.getElementById('lyrics-plain-badge');
+    btnSyncMinus = document.getElementById('btn-sync-minus');
+    btnSyncPlus = document.getElementById('btn-sync-plus');
+    syncOffsetVal = document.getElementById('sync-offset-val');
+
+    if (btnSyncMinus) {
+      btnSyncMinus.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lyricsOffsetSec -= 1.0;
+        updateSyncOffsetDisplay();
+      });
+    }
+    if (btnSyncPlus) {
+      btnSyncPlus.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lyricsOffsetSec += 1.0;
+        updateSyncOffsetDisplay();
+      });
+    }
+    if (syncOffsetVal) {
+      syncOffsetVal.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lyricsOffsetSec = 0.0;
+        updateSyncOffsetDisplay();
+      });
+    }
 
     const btn = document.getElementById('btn-lyrics');
     const mobileBtn = document.getElementById('btn-lyrics-mobile');
@@ -1062,18 +1092,39 @@
     }
   }
 
+  function updateSyncOffsetDisplay() {
+    if (syncOffsetVal) {
+      syncOffsetVal.textContent = (lyricsOffsetSec >= 0 ? '+' : '') + lyricsOffsetSec.toFixed(1) + 's';
+      syncOffsetVal.style.display = lyricsOffsetSec !== 0 ? 'inline-block' : 'none';
+    }
+    lyricsLastActiveIdx = -1; // force immediate re-scroll to active line
+  }
+
   function renderSyncedLyrics(parsed) {
     lyricsContent.innerHTML = '';
     lyricsContent.className = 'lyrics-content';
     lyricsLines = [];
+    lyricsOffsetSec = 0;
+    updateSyncOffsetDisplay();
+
     for (const { time, text } of parsed) {
       const el = document.createElement('div');
       el.className = 'lyrics-line';
       el.textContent = text;
+      el.title = 'Click to snap lyrics to this line';
+      el.addEventListener('click', () => {
+        if (!lyricsStartedAt) return;
+        // Audio buffer latency compensation (~2000ms delay)
+        const baseElapsed = (Date.now() - (lyricsStartedAt + 2000)) / 1000;
+        lyricsOffsetSec = time - baseElapsed;
+        updateSyncOffsetDisplay();
+      });
       lyricsContent.appendChild(el);
       lyricsLines.push({ time, el });
     }
-    lyricsSyncBadge && (lyricsSyncBadge.style.display = '');
+    if (lyricsSyncControls) lyricsSyncControls.style.display = 'flex';
+    if (lyricsSyncBadge) lyricsSyncBadge.style.display = '';
+    if (lyricsPlainBadge) lyricsPlainBadge.style.display = 'none';
     startSyncAnimation();
   }
 
@@ -1081,6 +1132,7 @@
     lyricsContent.innerHTML = '';
     lyricsContent.className = 'lyrics-content lyrics-plain';
     lyricsLines = [];
+    lyricsOffsetSec = 0;
     const lines = text.split('\n');
     for (const line of lines) {
       const el = document.createElement('div');
@@ -1088,7 +1140,9 @@
       el.textContent = line || '\u00A0';
       lyricsContent.appendChild(el);
     }
-    lyricsSyncBadge && (lyricsSyncBadge.style.display = 'none');
+    if (lyricsSyncControls) lyricsSyncControls.style.display = 'none';
+    if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
+    if (lyricsPlainBadge) lyricsPlainBadge.style.display = '';
     stopSyncAnimation();
   }
 
@@ -1098,7 +1152,9 @@
         <span class="lyrics-no-icon">🎵</span>
         No lyrics found for<br><strong>"${track}"</strong>
       </div>`;
-    lyricsSyncBadge && (lyricsSyncBadge.style.display = 'none');
+    if (lyricsSyncControls) lyricsSyncControls.style.display = 'none';
+    if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
+    if (lyricsPlainBadge) lyricsPlainBadge.style.display = 'none';
     stopSyncAnimation();
   }
 
@@ -1120,7 +1176,8 @@
       lyricsAnimFrame = null;
       return;
     }
-    const elapsed = lyricsStartedAt ? (Date.now() - lyricsStartedAt) / 1000 : 0;
+    // 2000ms buffer latency compensation for live stream + user fine offset
+    const elapsed = lyricsStartedAt ? (((Date.now() - (lyricsStartedAt + 2000)) / 1000) + lyricsOffsetSec) : 0;
     // Find active line
     let activeIdx = -1;
     for (let i = lyricsLines.length - 1; i >= 0; i--) {
@@ -1149,6 +1206,8 @@
     lyricsLoading.style.display = '';
     lyricsContent.innerHTML = '';
     if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
+    if (lyricsSyncControls) lyricsSyncControls.style.display = 'none';
+    if (lyricsPlainBadge) lyricsPlainBadge.style.display = 'none';
     if (lyricsFooter) lyricsFooter.style.display = 'none';
 
     const searchInput = document.getElementById('lyrics-search-input');
@@ -1199,6 +1258,8 @@
     } else if (!track) {
       if (lyricsLoading) lyricsLoading.style.display = 'none';
       if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
+      if (lyricsSyncControls) lyricsSyncControls.style.display = 'none';
+      if (lyricsPlainBadge) lyricsPlainBadge.style.display = 'none';
       if (lyricsFooter) lyricsFooter.style.display = 'none';
       const stName = currentStation ? currentStation.name : 'Live Radio';
       if (lyricsTrackName) lyricsTrackName.textContent = stName;
