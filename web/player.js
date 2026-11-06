@@ -54,10 +54,10 @@
     favorites = new Set();
   }
 
-  // Load blocked stations
+  // Load blocked stations (with seamless fallback/migration from legacy keys)
   let blockedStations = new Set();
   try {
-    const rawBlocked = localStorage.getItem(LS_BLOCKED) || '[]';
+    const rawBlocked = localStorage.getItem(LS_BLOCKED) || localStorage.getItem('drivewave_web_blocked') || '[]';
     blockedStations = new Set(JSON.parse(rawBlocked));
   } catch (e) {
     blockedStations = new Set();
@@ -82,6 +82,7 @@
           } catch (e) {}
           hlsInstance = null;
         }
+        stopIcyMetadataReader();
         try {
           audio.pause();
           audio.removeAttribute('src');
@@ -201,15 +202,18 @@
       searchInput.placeholder = 'Search curated stations, genres, or artists...';
     }
 
-    // Restore last station if saved
+    // Restore last station if saved (never restore a blocked station)
     const lastId = localStorage.getItem(LS_LAST_STATION) || localStorage.getItem('drivewave_web_last_station');
-    if (lastId) {
+    if (lastId && !blockedStations.has(lastId)) {
       const found = stations.find(s => s.id === lastId);
       if (found) {
         setStationUI(found, false);
       }
+    } else if (filteredStations.length > 0) {
+      setStationUI(filteredStations[0], false);
     } else if (stations.length > 0) {
-      setStationUI(stations[0], false);
+      const firstValid = stations.find(s => !blockedStations.has(s.id));
+      if (firstValid) setStationUI(firstValid, false);
     }
   }
 
@@ -686,18 +690,24 @@
   function blockStation(id) {
     if (!id) return;
     blockedStations.add(id);
-    localStorage.setItem(LS_BLOCKED, JSON.stringify([...blockedStations]));
+    const serialized = JSON.stringify([...blockedStations]);
+    localStorage.setItem(LS_BLOCKED, serialized);
+    localStorage.setItem('drivewave_web_blocked', serialized);
     updateBadges();
+    applyFilter();
     if (currentStation && currentStation.id === id) {
+      localStorage.removeItem(LS_LAST_STATION);
+      localStorage.removeItem('drivewave_web_last_station');
       playNext(false);
     }
-    applyFilter();
   }
 
   function unblockStation(id) {
     if (!id) return;
     blockedStations.delete(id);
-    localStorage.setItem(LS_BLOCKED, JSON.stringify([...blockedStations]));
+    const serialized = JSON.stringify([...blockedStations]);
+    localStorage.setItem(LS_BLOCKED, serialized);
+    localStorage.setItem('drivewave_web_blocked', serialized);
     updateBadges();
     applyFilter();
   }
@@ -706,6 +716,7 @@
     if (blockedStations.size === 0) return;
     blockedStations.clear();
     localStorage.setItem(LS_BLOCKED, JSON.stringify([]));
+    localStorage.setItem('drivewave_web_blocked', JSON.stringify([]));
     updateBadges();
     applyFilter();
   }
@@ -907,6 +918,24 @@
       });
     }
 
+    const searchInput = document.getElementById('lyrics-search-input');
+    const searchBtn = document.getElementById('btn-lyrics-search');
+    function triggerLyricsSearch() {
+      const q = searchInput?.value?.trim();
+      if (q) {
+        loadLyricsForTrack(q);
+      }
+    }
+    if (searchBtn) searchBtn.addEventListener('click', triggerLyricsSearch);
+    if (searchInput) {
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          triggerLyricsSearch();
+        }
+      });
+    }
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && lyricsVisible) closeLyricsModal();
       if ((e.key === 'l' || e.key === 'L') && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -1058,6 +1087,11 @@
     if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
     if (lyricsFooter) lyricsFooter.style.display = 'none';
 
+    const searchInput = document.getElementById('lyrics-search-input');
+    if (searchInput && document.activeElement !== searchInput) {
+      searchInput.value = track;
+    }
+
     const { title, artist } = parseTrackQuery(track);
     if (lyricsTrackName) lyricsTrackName.textContent = title || track;
     if (lyricsArtistName) lyricsArtistName.textContent = artist || '';
@@ -1119,9 +1153,103 @@
     else openLyricsModal();
   }
 
+  // ============================================================
+  // Icecast ICY Metadata Reader for Non-HLS Live Streams
+  // ============================================================
+  let metadataAbortController = null;
+
+  function stopIcyMetadataReader() {
+    if (metadataAbortController) {
+      metadataAbortController.abort();
+      metadataAbortController = null;
+    }
+  }
+
+  async function startIcyMetadataReader(station, streamUrl) {
+    stopIcyMetadataReader();
+
+    const isHls = station.isHls || streamUrl.includes('.m3u8');
+    if (isHls) return; // Handled by HLS fragment metadata
+
+    const controller = new AbortController();
+    metadataAbortController = controller;
+
+    let targetUrl = streamUrl;
+    if (window.location.protocol === 'https:' && targetUrl.startsWith('http://')) {
+      targetUrl = targetUrl.replace(/^http:\/\//, 'https://');
+    }
+
+    async function streamIcy(url) {
+      const res = await fetch(url, {
+        headers: { 'Icy-MetaData': '1' },
+        signal: controller.signal
+      });
+      if (!res.ok || !res.body) return false;
+
+      const metaintHeader = res.headers.get('icy-metaint');
+      const metaint = metaintHeader ? parseInt(metaintHeader, 10) : 0;
+      if (!metaint || isNaN(metaint)) return false;
+
+      const reader = res.body.getReader();
+      let buffer = new Uint8Array(0);
+
+      function appendBuffer(chunk) {
+        const next = new Uint8Array(buffer.length + chunk.length);
+        next.set(buffer, 0);
+        next.set(chunk, buffer.length);
+        buffer = next;
+      }
+
+      while (!controller.signal.aborted) {
+        while (buffer.length < metaint + 1 && !controller.signal.aborted) {
+          const { done, value } = await reader.read();
+          if (done) return true;
+          appendBuffer(value);
+        }
+
+        const lenByte = buffer[metaint];
+        const metaLength = lenByte * 16;
+        const totalBlock = metaint + 1 + metaLength;
+
+        while (buffer.length < totalBlock && !controller.signal.aborted) {
+          const { done, value } = await reader.read();
+          if (done) return true;
+          appendBuffer(value);
+        }
+
+        if (metaLength > 0) {
+          const metaBytes = buffer.slice(metaint + 1, totalBlock);
+          const metaStr = new TextDecoder('utf-8').decode(metaBytes);
+          const match = metaStr.match(/StreamTitle=['"]?(.*?)['"]?(?:;|$)/i);
+          if (match && match[1]) {
+            const cleaned = cleanStreamTitle(match[1]);
+            if (cleaned && cleaned.toLowerCase() !== station.name.toLowerCase() && cleaned !== currentTrackTitle) {
+              onNewTrackInfo(cleaned, station);
+            }
+          }
+        }
+
+        buffer = buffer.slice(totalBlock);
+      }
+      return true;
+    }
+
+    try {
+      await streamIcy(targetUrl);
+    } catch (e) {
+      if (!controller.signal.aborted) {
+        try {
+          const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`;
+          await streamIcy(proxyUrl);
+        } catch (_) {}
+      }
+    }
+  }
+
   /** Start HTML5 / HLS Audio playback */
   function startAudio(station) {
     if (!station) return;
+    stopIcyMetadataReader();
 
     if (hlsInstance) {
       try {
@@ -1182,6 +1310,7 @@
       audio.preload = 'auto';
       audio.src = streamUrl;
       audio.play().catch(handlePlayError);
+      startIcyMetadataReader(station, streamUrl);
     }
 
     updateMediaSession(station);
@@ -1657,6 +1786,13 @@
     if (favPlayerBtn) {
       favPlayerBtn.addEventListener('click', () => {
         if (currentStation) toggleFavorite(currentStation.id);
+      });
+    }
+
+    const playerBlockBtn = document.getElementById('btn-player-block');
+    if (playerBlockBtn) {
+      playerBlockBtn.addEventListener('click', () => {
+        if (currentStation) blockStation(currentStation.id);
       });
     }
 
