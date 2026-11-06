@@ -733,19 +733,64 @@
     }
   }
 
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function resetTrackState(station) {
+    stopIcyMetadataReader();
+    stopSyncAnimation();
+    currentTrackTitle = '';
+    lyricsCurrentTrack = '';
+    lyricsLines = [];
+    lyricsStartedAt = null;
+    lyricsLastActiveIdx = -1;
+
+    const stName = station ? station.name : '';
+    if (playerTrack) {
+      playerTrack.textContent = stName;
+      playerTrack.title = stName;
+    }
+    if (dmTrackTitle) dmTrackTitle.textContent = stName;
+    if (miniTitle) miniTitle.textContent = stName;
+
+    // Reset Lyrics UI state immediately
+    if (lyricsOverlay) {
+      if (lyricsTrackName) lyricsTrackName.textContent = stName || 'Live Radio';
+      if (lyricsArtistName) lyricsArtistName.textContent = 'Live Broadcast';
+      const searchInput = document.getElementById('lyrics-search-input');
+      if (searchInput && document.activeElement !== searchInput) searchInput.value = '';
+      if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
+      if (lyricsFooter) lyricsFooter.style.display = 'none';
+      if (lyricsContent) {
+        lyricsContent.innerHTML = `
+          <div class="lyrics-no-results">
+            <span class="lyrics-no-icon">📻</span>
+            Listening to <strong>${escapeHtml(stName || 'Live Radio')}</strong><br>
+            <span style="font-size: 13px; color: var(--text-muted); margin-top: 8px; display: block;">
+              Waiting for live song broadcast info...<br>
+              Or search lyrics for any song above 🔍
+            </span>
+          </div>`;
+      }
+      if (lyricsLoading) lyricsLoading.style.display = 'none';
+    }
+  }
+
   /** Set Station in UI without necessarily playing */
   function setStationUI(station, shouldPlay = false) {
     currentStation = station;
     currentIndex = filteredStations.findIndex(s => s.id === station.id);
+    resetTrackState(station);
 
     const artUrl = station.favicon || 'icon-512.png';
     if (playerArt) playerArt.src = artUrl;
     if (dmArtwork) dmArtwork.src = artUrl;
     if (miniArt) miniArt.src = artUrl;
-
-    if (playerTrack) playerTrack.textContent = station.name;
-    if (dmTrackTitle) dmTrackTitle.textContent = station.name;
-    if (miniTitle) miniTitle.textContent = station.name;
 
     const subtitleText = `${station.flag || '📻'} ${station.country || 'Live'} • Live Stream`;
     if (playerStation) {
@@ -840,8 +885,18 @@
 
   function onNewTrackInfo(track, station) {
     if (!track) return;
-
+    // Guard against delayed stream packets from previous station
+    if (station && currentStation && station.id !== currentStation.id) return;
     if (track === currentTrackTitle) return;
+
+    // Filter out if metadata is just the station name or station slogan
+    if (station) {
+      const normTrack = track.toLowerCase().trim();
+      const normStation = station.name.toLowerCase().trim();
+      if (normTrack === normStation) return;
+      if (normTrack.includes(normStation) && normTrack.length < normStation.length + 6) return;
+    }
+
     currentTrackTitle = track;
     lyricsStartedAt = Date.now();
     // Auto-refresh lyrics if modal is open
@@ -985,9 +1040,18 @@
       url = `https://lrclib.net/api/search?track_name=${encodeURIComponent(title)}&artist_name=${encodeURIComponent(artist)}`;
     }
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      let res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      if (!res.ok && artist) {
+        res = await fetch(`https://lrclib.net/api/search?q=${q}`, { signal: AbortSignal.timeout(8000) });
+      }
       if (!res.ok) return null;
-      const data = await res.json();
+      let data = await res.json();
+      if ((!Array.isArray(data) || data.length === 0) && artist) {
+        const fbRes = await fetch(`https://lrclib.net/api/search?q=${q}`, { signal: AbortSignal.timeout(6000) });
+        if (fbRes.ok) {
+          data = await fbRes.json();
+        }
+      }
       if (!Array.isArray(data) || data.length === 0) return null;
       // Prefer entries with syncedLyrics first
       const withSync = data.find(r => r.syncedLyrics);
@@ -1134,7 +1198,24 @@
       loadLyricsForTrack(track);
     } else if (!track) {
       if (lyricsLoading) lyricsLoading.style.display = 'none';
-      renderNoResults('(no track playing)');
+      if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
+      if (lyricsFooter) lyricsFooter.style.display = 'none';
+      const stName = currentStation ? currentStation.name : 'Live Radio';
+      if (lyricsTrackName) lyricsTrackName.textContent = stName;
+      if (lyricsArtistName) lyricsArtistName.textContent = 'Live Broadcast';
+      const searchInput = document.getElementById('lyrics-search-input');
+      if (searchInput && !searchInput.value) searchInput.value = '';
+      if (lyricsContent) {
+        lyricsContent.innerHTML = `
+          <div class="lyrics-no-results">
+            <span class="lyrics-no-icon">📻</span>
+            Listening to <strong>${escapeHtml(stName)}</strong><br>
+            <span style="font-size: 13px; color: var(--text-muted); margin-top: 8px; display: block;">
+              Waiting for live song broadcast info...<br>
+              Or search lyrics for any song above 🔍
+            </span>
+          </div>`;
+      }
     } else {
       // Resume sync animation if same track
       if (lyricsLines.length > 0) startSyncAnimation();
@@ -1160,7 +1241,9 @@
 
   function stopIcyMetadataReader() {
     if (metadataAbortController) {
-      metadataAbortController.abort();
+      try {
+        metadataAbortController.abort();
+      } catch (e) {}
       metadataAbortController = null;
     }
   }
@@ -1173,6 +1256,7 @@
 
     const controller = new AbortController();
     metadataAbortController = controller;
+    const targetStationId = station.id;
 
     let targetUrl = streamUrl;
     if (window.location.protocol === 'https:' && targetUrl.startsWith('http://')) {
@@ -1186,8 +1270,13 @@
       });
       if (!res.ok || !res.body) return false;
 
-      const metaintHeader = res.headers.get('icy-metaint');
-      const metaint = metaintHeader ? parseInt(metaintHeader, 10) : 0;
+      let metaint = 0;
+      for (const [key, val] of res.headers.entries()) {
+        if (key.toLowerCase() === 'icy-metaint') {
+          metaint = parseInt(val, 10);
+          break;
+        }
+      }
       if (!metaint || isNaN(metaint)) return false;
 
       const reader = res.body.getReader();
@@ -1200,12 +1289,14 @@
         buffer = next;
       }
 
-      while (!controller.signal.aborted) {
+      while (!controller.signal.aborted && currentStation && currentStation.id === targetStationId) {
         while (buffer.length < metaint + 1 && !controller.signal.aborted) {
           const { done, value } = await reader.read();
           if (done) return true;
           appendBuffer(value);
         }
+
+        if (controller.signal.aborted || !currentStation || currentStation.id !== targetStationId) return true;
 
         const lenByte = buffer[metaint];
         const metaLength = lenByte * 16;
@@ -1217,13 +1308,15 @@
           appendBuffer(value);
         }
 
+        if (controller.signal.aborted || !currentStation || currentStation.id !== targetStationId) return true;
+
         if (metaLength > 0) {
           const metaBytes = buffer.slice(metaint + 1, totalBlock);
           const metaStr = new TextDecoder('utf-8').decode(metaBytes);
           const match = metaStr.match(/StreamTitle=['"]?(.*?)['"]?(?:;|$)/i);
           if (match && match[1]) {
             const cleaned = cleanStreamTitle(match[1]);
-            if (cleaned && cleaned.toLowerCase() !== station.name.toLowerCase() && cleaned !== currentTrackTitle) {
+            if (cleaned) {
               onNewTrackInfo(cleaned, station);
             }
           }
@@ -1237,11 +1330,16 @@
     try {
       await streamIcy(targetUrl);
     } catch (e) {
-      if (!controller.signal.aborted) {
-        try {
-          const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`;
-          await streamIcy(proxyUrl);
-        } catch (_) {}
+      if (!controller.signal.aborted && currentStation && currentStation.id === targetStationId) {
+        if (station.fallbackUrl && station.fallbackUrl !== streamUrl) {
+          try {
+            let fbUrl = station.fallbackUrl;
+            if (window.location.protocol === 'https:' && fbUrl.startsWith('http://')) {
+              fbUrl = fbUrl.replace(/^http:\/\//, 'https://');
+            }
+            await streamIcy(fbUrl);
+          } catch (_) {}
+        }
       }
     }
   }

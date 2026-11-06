@@ -1,6 +1,6 @@
 {
-  "versionCode": 34,
-  "versionName": "5.19.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.19.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.19.0: Persistent Block List across updates, 2-tier taller Mini Player, favorites first, default shuffle, and Web live song metadata reader."
+  "versionCode": 35,
+  "versionName": "5.20.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.20.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.20.0: Instant track & lyrics state reset on station change, manual lyrics search bar, robust fallback stream reader, and CORS handling."
 }
