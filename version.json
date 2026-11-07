@@ -1,6 +1,6 @@
 {
-  "versionCode": 38,
-  "versionName": "5.23.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.23.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.23.0: Complete Android Auto redesign with dedicated Live Lyrics support, synchronized song lyrics subtitles on Now Playing car screen, and direct All Stations catalog browsing (categories streamlined)."
+  "versionCode": 39,
+  "versionName": "5.23.1",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.23.1-release.apk",
+  "releaseNotes": "AutoWave Radio v5.23.1: Restored authentic official Electric Neon AutoWave Radio app logo/icon, plus Android Auto redesign with Live Lyrics and direct All Stations catalog."
 }
