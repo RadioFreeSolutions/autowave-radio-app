@@ -839,45 +839,113 @@
     let text = raw.trim();
     if (!text) return "";
 
-    // 1. Check if format has explicit key-value pairs (e.g. title="Believer",artist="IMAGINE DRAGONS",url=...)
-    const titleMatch = text.match(/(?:^|[,;\s])title=['"]?([^'",;]+)['"]?/i);
-    const artistMatch = text.match(/(?:^|[,;\s])artist=['"]?([^'",;]+)['"]?/i);
-    if (titleMatch || artistMatch) {
-      const t = titleMatch ? titleMatch[1].trim().replace(/^['"]+|['"]+$/g, '') : '';
-      const a = artistMatch ? artistMatch[1].trim().replace(/^['"]+|['"]+$/g, '') : '';
-      if (t && a) {
-        return `${a} - ${t}`;
-      } else if (t) {
-        text = t;
-      } else if (a) {
-        text = a;
+    // 1. Extract content inside StreamTitle='...' or StreamTitle="..." or StreamTitle=...
+    const streamTitleQuoted = text.match(/^StreamTitle\s*[:=]\s*(['"])(.*?)\1\s*;?$/is);
+    if (streamTitleQuoted) {
+      text = streamTitleQuoted[2].trim();
+    } else {
+      text = text.replace(/^StreamTitle\s*[:=]\s*(.*?)(?:;.*)?$/is, '$1').trim();
+    }
+
+    // Strip prefixes like TITLE=, TEXT=, SONG=, TRACK= if whole string begins with them
+    text = text.replace(/^(?:TEXT|TITLE|SONG|TRACK)\s*[:=]\s*(['"]?)(.*?)\1\s*;?$/is, '$2').trim();
+
+    // Strip enclosing outer quotes ONLY if both ends match
+    if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith("'") && text.endsWith("'"))) {
+      text = text.slice(1, -1).trim();
+    }
+
+    // 2. Key-value format check:
+    const titleMatch = text.match(/(?:^|[,;\s])(?:title|song)\s*=\s*(['"])(.*?)\1/i);
+    const artistMatch = text.match(/(?:^|[,;\s])artist\s*=\s*(['"])(.*?)\1/i);
+    const spotRegex = /spot\s*block|commercial|ad\s*break|station\s*id|sweeper|promo/i;
+
+    let effectiveTitleMatch = titleMatch;
+    if (!effectiveTitleMatch) {
+      const tm = text.match(/(?:^|[,;\s])text\s*=\s*(['"])(.*?)\1/i);
+      if (tm && !spotRegex.test(tm[2])) {
+        effectiveTitleMatch = tm;
       }
     }
 
-    // 2. Strip outer quotes
-    text = text.trim().replace(/^['"\s`]+|['"\s`]+$/g, '');
-
-    // 3. Loop to strip nested wrappers like StreamTitle=, TEXT=, TITLE=, etc.
-    let changed = true;
-    let loops = 0;
-    while (changed && loops < 5) {
-      loops++;
-      const prev = text;
-      text = text.replace(/^StreamTitle\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      text = text.replace(/^TEXT\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      text = text.replace(/^TITLE\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      text = text.replace(/^(?:SONG|TRACK)\s*[:=]\s*['"]?(.*?)['"]?(?:;.*)?$/i, '$1').trim();
-      text = text.replace(/^['"\s`;]+|['"\s`;]+$/g, '');
-      changed = (text !== prev);
+    if (effectiveTitleMatch && artistMatch) {
+      const t = effectiveTitleMatch[2].trim().replace(/^['"]+|['"]+$/g, '');
+      const a = artistMatch[2].trim().replace(/^['"]+|['"]+$/g, '');
+      if (t && a) {
+        text = `${a} - ${t}`;
+      }
+    } else {
+      // Check prefix artist before "- text=..." e.g. 'Teddy Swims - text="The Door" amgTrackId="123"'
+      const prefixArtistMatch = text.match(/^(.*?)\s*-\s*(?:text|title|song)\s*=\s*(['"])(.*?)\2/i);
+      if (prefixArtistMatch) {
+        const a = prefixArtistMatch[1].trim();
+        const t = prefixArtistMatch[3].trim().replace(/^['"]+|['"]+$/g, '');
+        if (a && t && !spotRegex.test(t)) {
+          text = `${a} - ${t}`;
+        }
+      }
     }
 
-    // 4. Strip trailing parameters (e.g. ,url=... or ;url=... or ,artist=...)
-    text = text.replace(/[,;]\s*(?:url|artist|song_spot|MediaBaseId|itunesTrackId|amgTrackId|amgArtistId|TAID|TPID|cartcutId|StreamUrl|text)=.*$/i, '').trim();
+    // 3. Strip all broadcast metadata key-value parameters
+    const paramRegex = /[,;]?\s*\b(?:amgTrackId|itunesTrackId|MediaBaseId|cartcutId|song_spot|length|time|uid|buyurl|StreamUrl|url|artist|title|album|song|text|label|genre)\s*=\s*(?:"[^"]*"|'[^']*'|[^\s;,]+)/gi;
+    text = text.replace(paramRegex, '').trim();
 
-    // 5. Strip common redundant prefixes
+    // 4. Filter out commercials, promos, station bumpers, spot blocks
+    const promoRegex = /^(?:-\s*)?(?:spot\s*block.*|commercial.*|ad\s*break.*|station\s*id.*|sweeper.*|jingle.*|promo.*|unknown|no\s*title|live\s*stream)$/i;
+    if (promoRegex.test(text.trim())) {
+      return "";
+    }
+
+    // 5. Replace underscores with spaces (e.g. things_i_dont_regret or Artist_Name)
+    text = text.replace(/_/g, ' ');
+
+    // 6. Strip technical tags & file suffixes (fgmstr4416, fgmstr, mstr, cartcut, etc.)
+    text = text.replace(/\b(?:fgmstr|mstr|cartcut)\d*\b/gi, '');
+    text = text.replace(/\b\d+(?:kbps|khz)\b/gi, '');
+    text = text.replace(/\b(?:cbr|vbr)\d*\b/gi, '');
+    text = text.replace(/\.(?:mp3|m4a|aac|wav|flac|ogg)\b/gi, '');
+
+    // 7. Strip common redundant prefixes
     text = text.replace(/^(?:NOW PLAYING|NOW ON AIR|LIVE|NP):\s*/i, '');
     text = text.replace(/^\s*(?:text|title|song|track)\s*[:=]\s*/i, '');
-    return text.trim().replace(/^['"`\s-,]+|['"`\s-;,]+$/g, '');
+
+    // 8. Strip video / quality / edition clutter in brackets/parentheses
+    text = text.replace(/\s*[\[(]\s*(?:official\s+(?:audio|video|music\s+video)|lyrics?|visualizer|hd|hq)\s*[\])]/gi, '');
+    text = text.replace(/\s*[\[(]\s*(?:clean(?:\s+version)?|radio\s+edit)\s*[\])]/gi, '');
+
+    // 9. Normalize multiple spaces & dashes
+    text = text.replace(/\s*[\u2013\u2014]\s*|\s+--\s+/g, ' - ');
+    text = text.replace(/\s+-\s+/g, ' - ');
+
+    // Check for "Song by Artist"
+    if (!text.includes(' - ')) {
+      const byMatch = text.match(/^(.*?)\s+by\s+(.*)$/i);
+      if (byMatch) {
+        const song = byMatch[1].trim();
+        const artist = byMatch[2].trim();
+        if (song && artist) {
+          text = `${artist} - ${song}`;
+        }
+      } else {
+        const sepMatch = text.match(/^(.*?)\s+[:|/]\s+(.*)$/);
+        if (sepMatch) {
+          const p1 = sepMatch[1].trim();
+          const p2 = sepMatch[2].trim();
+          if (p1 && p2) {
+            text = `${p1} - ${p2}`;
+          }
+        }
+      }
+    }
+
+    text = text.replace(/\s{2,}/g, ' ').trim();
+    text = text.replace(/^['"`\s-,.;]+|['"`\s-,.;]+$/g, '');
+
+    if (text.length < 2 || text === '-') {
+      return "";
+    }
+
+    return text;
   }
 
   function onNewTrackInfo(track, station) {

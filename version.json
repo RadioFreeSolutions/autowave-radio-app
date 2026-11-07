@@ -1,6 +1,6 @@
 {
-  "versionCode": 36,
-  "versionName": "5.21.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.21.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.21.0: Interactive tap-to-sync lyrics, timing nudge controls, stream buffer compensation, full Gemini & Google Assistant voice support, adaptive vector app icon, and stream title parsing."
+  "versionCode": 37,
+  "versionName": "5.22.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.22.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.22.0: Comprehensive stream title parser fixing artist/title separation, stripping audio playout tags (fgmstr) & parameters, station monogram preservation, and disabled in-app update checks for full Google Play compliance."
 }
