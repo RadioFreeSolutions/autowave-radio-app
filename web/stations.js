@@ -2000,33 +2000,6 @@ window.AUTOWAVE_STATIONS = [
     ]
   },
   {
-    "id": "10edd1ec-192b-40ff-aaf2-645471d04dfb",
-    "name": "CruiseOne Radio",
-    "fullName": "CruiseOne Radio",
-    "streamUrl": "https://solid24.streamupsolutions.com/proxy/cmxicxxx?mp=/256kbps",
-    "fallbackUrl": "https://solid24.streamupsolutions.com/proxy/cmxicxxx?mp=/256kbps",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "electronic",
-      "indie",
-      "indie rock",
-      "pop",
-      "rock"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 480,
-    "moods": [
-      "POP_HITS",
-      "ROCK",
-      "FUN_ENERGY",
-      "LONG_DRIVE"
-    ]
-  },
-  {
     "id": "658e103a-ed12-41d7-be75-e3dd6b55902b",
     "name": "Joy Hits UK",
     "fullName": "Joy Hits UK",
@@ -2818,28 +2791,6 @@ window.AUTOWAVE_STATIONS = [
     ]
   },
   {
-    "id": "3eba571c-a1ac-4632-ae3a-810c659b2cfd",
-    "name": "Like Radio - CHILL (MP3)",
-    "fullName": "Like Radio - CHILL (MP3)",
-    "streamUrl": "http://likeradiostream.com/likechill",
-    "fallbackUrl": "http://likeradiostream.com/likechill",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "chill",
-      "pop"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 263,
-    "moods": [
-      "POP_HITS",
-      "CALM_CHILL"
-    ]
-  },
-  {
     "id": "d08917dc-72da-4f72-b580-821e6a4661d6",
     "name": "Pop! 93.1 - 95.9 WQYX",
     "fullName": "Pop! 93.1 - 95.9 WQYX",
@@ -2978,31 +2929,6 @@ window.AUTOWAVE_STATIONS = [
     "bitrate": 98,
     "moods": [
       "POP_HITS"
-    ]
-  },
-  {
-    "id": "18078cac-f5ea-4922-930c-974b935da7cd",
-    "name": "Vibe 1",
-    "fullName": "Vibe 1",
-    "streamUrl": "https://stream3.themediasite.co.uk:8106/stream",
-    "fallbackUrl": "https://stream3.themediasite.co.uk:8106/stream",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "classic hits",
-      "hits",
-      "hot adult contemporary",
-      "local radio",
-      "pop"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 423,
-    "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
     ]
   },
   {
@@ -3450,31 +3376,6 @@ window.AUTOWAVE_STATIONS = [
       "POP_HITS",
       "CALM_CHILL",
       "LONG_DRIVE"
-    ]
-  },
-  {
-    "id": "new-kexp-seattle-10",
-    "name": "KEXP 90.3 Seattle",
-    "fullName": "KEXP 90.3 Seattle",
-    "streamUrl": "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
-    "fallbackUrl": "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
-    "favicon": "",
-    "country": "United States",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "pop",
-      "alternative",
-      "indie",
-      "rock",
-      "hits"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 128,
-    "moods": [
-      "POP_HITS",
-      "ROCK"
     ]
   },
   {

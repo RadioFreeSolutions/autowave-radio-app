@@ -565,8 +565,13 @@ body:not(.mini-player-active) .pip-restore-bar { display: none; }
 .lyrics-no-results { text-align: center; color: var(--text-muted); padding: 40px 20px; font-size: 15px; line-height: 1.6; }
 .lyrics-no-results .lyrics-no-icon { font-size: 36px; display: block; margin-bottom: 12px; }
 .lyrics-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 10px 20px; border-top: 1px solid rgba(255, 255, 255, 0.07); font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
-.lyrics-sync-badge { background: rgba(0, 255, 127, 0.15); color: var(--accent); border-radius: 10px; padding: 2px 8px; font-weight: 700; font-size: 11px; }
-.lyrics-plain-badge { background: rgba(255, 255, 255, 0.08); color: var(--text-muted); border-radius: 10px; padding: 2px 8px; font-weight: 600; font-size: 11px; }
+.lyrics-footer-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.lyrics-state-badge { border-radius: 10px; padding: 3px 9px; font-weight: 700; font-size: 11px; white-space: nowrap; background: rgba(255, 255, 255, 0.08); color: var(--text-muted); }
+.lyrics-state-badge.is-synced { background: rgba(0, 255, 127, 0.16); color: var(--accent); }
+.lyrics-state-badge.is-manual { background: rgba(0, 176, 255, 0.16); color: #4CC9FF; }
+.lyrics-state-badge.is-waiting { background: rgba(245, 158, 11, 0.16); color: #FBBF24; }
+.lyrics-state-badge.is-lost, .lyrics-state-badge.is-unverified { background: rgba(244, 63, 94, 0.14); color: #FB7185; }
+.lyrics-hint { padding: 10px 20px; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); background: rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255, 255, 255, 0.07); flex-shrink: 0; }
 .sync-nudge-btn { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--accent); padding: 5px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; transition: background 0.15s ease; min-height: 30px; }
 .sync-nudge-btn:hover { background: rgba(0, 255, 127, 0.2); border-color: var(--accent); }
 .sync-offset-val { font-size: 11px; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.06); padding: 3px 6px; border-radius: 5px; cursor: pointer; }
