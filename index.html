@@ -9,8 +9,8 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AutoWave Radio - Pure Driving Radio for Android &amp; Android Auto | Free &amp; Ad-Free</title>
-  <meta name="description" content="Download AutoWave Radio: Curated live radio streams with driving moods, seamless Android Auto steering-wheel integration, high-contrast car dashboard, and no ads added by AutoWave. Free forever." />
-  <meta name="keywords" content="Android Auto radio, car radio app, driving radio, live radio APK, autowave, autowave radio, ad-free radio, internet radio, Pop Hits, Rock radio, BBC Radio, Capital FM, Z100, car music player" />
+  <meta name="description" content="Download AutoWave Radio: curated live radio streams with driving moods, live synced lyrics, Android Auto steering-wheel integration, a battery-smart engine, and no ads added by AutoWave Radio. Free forever." />
+  <meta name="keywords" content="Android Auto radio, car radio app, driving radio, live radio APK, autowave, autowave radio, ad-free radio, internet radio, live lyrics radio, Pop Hits, Rock radio, BBC Radio, Capital FM, Z100, car music player" />
   <meta name="author" content="RadioFreeSolutions" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://radiofreesolutions.github.io/autowave-radio-app/" />
@@ -25,7 +25,7 @@
   <meta property="og:site_name" content="AutoWave Radio" />
   <meta property="og:url" content="https://radiofreesolutions.github.io/autowave-radio-app/" />
   <meta property="og:title" content="AutoWave Radio - Pure Driving Radio for Android &amp; Android Auto" />
-  <meta property="og:description" content="Curated live radio streams, Android Auto steering-wheel controls, car dashboard mode, and no ads added by AutoWave. Free forever." />
+  <meta property="og:description" content="Curated live radio, live synced lyrics, Android Auto steering-wheel controls, and no ads added by AutoWave Radio. Free forever." />
   <meta property="og:image" content="https://radiofreesolutions.github.io/autowave-radio-app/play_store_icon_512.png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
@@ -34,7 +34,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AutoWave Radio - Pure Driving Radio for Android &amp; Android Auto" />
-  <meta name="twitter:description" content="Curated live radio streams, Android Auto support &amp; no ads added by AutoWave. Free forever." />
+  <meta name="twitter:description" content="Curated live radio, live synced lyrics, Android Auto support &amp; no ads added by AutoWave Radio. Free forever." />
   <meta name="twitter:image" content="https://radiofreesolutions.github.io/autowave-radio-app/play_store_icon_512.png" />
 
   <!-- Schema.org JSON-LD Structured Data -->
@@ -56,7 +56,16 @@
           "price": "0",
           "priceCurrency": "USD"
         },
-        "description": "Pure live radio app engineered specifically for drivers and Android Auto car head units. Features curated live radio streams across Pop, Rock, and Chill with no ads added by AutoWave.",
+        "featureList": [
+          "Curated live radio streams across Pop, Rock, Chill, Energy, Long Drive and News moods",
+          "Live synchronized song lyrics with tap-to-sync",
+          "Android Auto and steering-wheel controls",
+          "Gemini and Google Assistant voice commands",
+          "Persistent block list and favorites",
+          "Battery saver auto-shutdown",
+          "No accounts and no analytics"
+        ],
+        "description": "Pure live radio app engineered specifically for drivers and Android Auto car head units. Features curated live radio streams across Pop, Rock, and Chill with no ads added by AutoWave Radio.",
         "image": "https://radiofreesolutions.github.io/autowave-radio-app/play_store_icon_512.png",
         "author": {
           "@type": "Organization",
@@ -89,19 +98,23 @@
     ]
   }
   </script>
-  
+
   <style>
     :root {
       --bg: #070A10;
-      --card-bg: rgba(18, 24, 38, 0.7);
+      --bg-2: #0B1019;
+      --card-bg: rgba(18, 24, 38, 0.72);
       --card-border: rgba(255, 255, 255, 0.08);
       --accent: #00FF7F;
+      --accent-2: #00B0FF;
       --accent-glow: rgba(0, 255, 127, 0.35);
       --purple: #8B5CF6;
       --purple-glow: rgba(139, 92, 246, 0.3);
       --text-main: #F3F4F6;
       --text-muted: #9CA3AF;
-      --success: #10B981;
+      --text-dim: #6B7280;
+      --danger: #F87171;
+      --radius: 20px;
     }
 
     * {
@@ -111,35 +124,38 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
     body {
       background-color: var(--bg);
       color: var(--text-main);
       overflow-x: hidden;
       line-height: 1.6;
       min-height: 100vh;
-      background-image: 
-        radial-gradient(circle at 20% 15%, rgba(0, 255, 127, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 80% 65%, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
+      background-image:
+        radial-gradient(circle at 15% 8%, rgba(0, 255, 127, 0.13) 0%, transparent 38%),
+        radial-gradient(circle at 88% 30%, rgba(139, 92, 246, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 20% 78%, rgba(0, 176, 255, 0.08) 0%, transparent 40%);
+      background-repeat: no-repeat;
     }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
 
     .container {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 24px 20px 80px 20px;
+      padding: 20px 20px 80px 20px;
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
     }
 
-    /* Header */
+    /* ---------- Header ---------- */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0 32px 0;
-      gap: 16px;
-    }
-
-    .header-main {
-      display: flex;
-      align-items: center;
+      padding: 12px 0 28px 0;
       gap: 16px;
     }
 
@@ -149,6 +165,7 @@
       gap: 12px;
       text-decoration: none;
       color: white;
+      min-height: 44px;
     }
 
     .logo-img {
@@ -165,46 +182,40 @@
       letter-spacing: -0.5px;
       background: linear-gradient(135deg, #FFF, var(--accent));
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       white-space: nowrap;
     }
 
-    .nav-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .nav-actions { display: flex; gap: 8px; align-items: center; }
 
     .nav-btn {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 10px;
+      padding: 10px 14px;
+      min-height: 44px;
+      border-radius: 12px;
       font-size: 13.5px;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       white-space: nowrap;
+      font-family: inherit;
     }
+    .nav-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.2); }
+    .nav-btn-accent { border-color: rgba(0, 255, 127, 0.4); color: var(--accent); }
 
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .nav-btn-accent {
-      border-color: rgba(0, 255, 127, 0.4);
-      color: var(--accent);
-    }
-
-    /* Hero */
+    /* ---------- Hero ---------- */
     .hero {
-      text-align: center;
-      padding: 40px 10px 50px 10px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      padding: 24px 0 56px 0;
     }
 
     .badge-pill {
@@ -215,451 +226,367 @@
       border: 1px solid rgba(0, 255, 127, 0.3);
       padding: 6px 16px;
       border-radius: 30px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .hero-title {
-      font-size: clamp(34px, 6vw, 60px);
+      font-size: clamp(36px, 6vw, 64px);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.08;
       margin-bottom: 20px;
-      letter-spacing: -1.5px;
+      letter-spacing: -1.8px;
     }
-
     .hero-title span {
       background: linear-gradient(135deg, var(--accent) 0%, #A78BFA 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-subtitle {
-      font-size: clamp(16px, 2.5vw, 20px);
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 36px auto;
+    .hero-feature-pill {
+      display: inline-block;
+      background: rgba(0, 255, 127, 0.08);
+      border: 1px solid rgba(0, 255, 127, 0.25);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #E0F7FA;
+      margin-bottom: 20px;
     }
 
-    .cta-group {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
+    .hero-subtitle {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 30px;
     }
+
+    .cta-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
 
     .btn-download {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, var(--accent) 0%, #00B0FF 100%);
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
       color: #050811;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
-      padding: 18px 36px;
+      padding: 16px 28px;
+      min-height: 54px;
       border-radius: 16px;
       text-decoration: none;
       box-shadow: 0 10px 30px var(--accent-glow);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
+    }
+    .btn-download:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0, 255, 127, 0.5); }
+    .btn-download:active { transform: translateY(0); }
+    .btn-purple {
+      background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+      color: #FFF;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+    }
+    .btn-purple:hover { box-shadow: 0 14px 40px rgba(139, 92, 246, 0.55); }
+
+    .meta-tagline { font-size: 13px; color: var(--text-muted); margin-top: 14px; }
+
+    /* ---------- Phone mockup ---------- */
+    .device-wrap { display: flex; justify-content: center; position: relative; }
+    .device-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 8% 6%;
+      background: radial-gradient(circle, rgba(0, 255, 127, 0.22), transparent 65%);
+      filter: blur(30px);
+      z-index: 0;
+    }
+
+    .phone {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      max-width: 380px;
+      max-width: 310px;
+      background: linear-gradient(180deg, #0F1626, #0A0F1B);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 38px;
+      padding: 14px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 6px rgba(255, 255, 255, 0.03);
     }
+    .phone-notch { width: 90px; height: 6px; border-radius: 6px; background: rgba(255, 255, 255, 0.12); margin: 0 auto 14px auto; }
 
-    .btn-download:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(0, 255, 127, 0.5);
+    .np-head { display: flex; align-items: center; gap: 12px; }
+    .np-art {
+      width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0;
+      box-shadow: 0 4px 16px var(--accent-glow);
     }
+    .np-live { font-size: 10.5px; font-weight: 800; letter-spacing: 1px; color: var(--accent); display: flex; align-items: center; gap: 6px; }
+    .np-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: pulse 1.6s ease-in-out infinite; }
+    .np-station { font-weight: 800; font-size: 16px; line-height: 1.2; }
+    .np-track { font-size: 12.5px; color: var(--text-muted); }
 
-    .btn-download:active {
-      transform: translateY(0);
+    .np-eq { display: flex; gap: 4px; align-items: flex-end; height: 34px; margin: 16px 0 12px 0; }
+    .np-eq b {
+      flex: 1; border-radius: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--purple));
+      animation: eq 1.2s ease-in-out infinite;
+      transform-origin: bottom;
+      height: 100%;
     }
+    .np-eq b:nth-child(2n) { animation-duration: 0.9s; }
+    .np-eq b:nth-child(3n) { animation-duration: 1.5s; }
+    .np-eq b:nth-child(4n) { animation-delay: -0.4s; }
+    .np-eq b:nth-child(5n) { animation-delay: -0.8s; }
 
-    .meta-tagline {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Badges Bar */
-    .badges-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin: 40px 0;
-    }
-
-    .feature-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .np-lyrics {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--card-border);
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* Moods Section */
-    .section-title {
-      font-size: 28px;
-      font-weight: 800;
+      border-radius: 16px;
+      padding: 14px 14px;
+      min-height: 132px;
+      display: flex; flex-direction: column; justify-content: center; gap: 8px;
       text-align: center;
-      margin: 60px 0 16px 0;
-      letter-spacing: -0.5px;
+    }
+    .np-lyrics p { font-size: 14px; color: var(--text-dim); transition: all 0.4s ease; }
+    .np-lyrics p.is-active { color: #fff; font-weight: 800; font-size: 16.5px; text-shadow: 0 0 18px var(--accent-glow); }
+    .np-lyrics small { display: block; font-size: 10px; color: var(--text-dim); letter-spacing: 0.6px; text-transform: uppercase; margin-top: 4px; }
+
+    .np-controls { display: flex; justify-content: center; align-items: center; gap: 22px; margin-top: 16px; font-size: 20px; }
+    .np-controls .play {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #050811; display: flex; align-items: center; justify-content: center; font-size: 20px;
+      box-shadow: 0 8px 24px var(--accent-glow);
     }
 
-    .section-desc {
-      text-align: center;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      font-size: 16px;
-    }
+    @keyframes eq { 0%,100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-    .moods-grid {
+    /* ---------- Stat strip ---------- */
+    .stat-strip {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .mood-card {
+      grid-template-columns: repeat(4, 1fr);
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 24px;
+      border-radius: var(--radius);
+      overflow: hidden;
       backdrop-filter: blur(12px);
-      transition: all 0.25s ease;
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .stat { padding: 22px 12px; text-align: center; border-right: 1px solid var(--card-border); }
+    .stat:last-child { border-right: 0; }
+    .stat-num { font-size: clamp(26px, 4vw, 38px); font-weight: 900; letter-spacing: -1px; line-height: 1.1;
+      background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-label { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ---------- Highlights bar ---------- */
+    .badges-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 36px 0 8px 0; }
+    .feature-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      padding: 10px 18px; border-radius: 12px;
+      font-size: 14px; font-weight: 600;
     }
 
-    .mood-card:hover {
-      border-color: rgba(0, 255, 127, 0.3);
-      transform: translateY(-4px);
-    }
+    /* ---------- Sections ---------- */
+    .eyebrow { text-align: center; font-size: 12.5px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); margin: 84px 0 10px 0; }
+    .section-title { font-size: clamp(26px, 4vw, 38px); font-weight: 900; text-align: center; margin: 0 0 14px 0; letter-spacing: -0.8px; line-height: 1.15; }
+    .section-desc { text-align: center; color: var(--text-muted); margin: 0 auto 40px auto; font-size: 16.5px; max-width: 700px; }
 
-    .mood-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
+    .moat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .moat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+      position: relative;
     }
+    .moat-card:hover { border-color: rgba(0, 255, 127, 0.32); transform: translateY(-4px); }
+    .moat-card.is-hero { grid-column: span 2; background: linear-gradient(135deg, rgba(0, 255, 127, 0.1), rgba(139, 92, 246, 0.12)); border-color: rgba(0, 255, 127, 0.28); }
+    .moat-icon { font-size: 26px; width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.06); margin-bottom: 16px; }
+    .moat-title { font-size: 19px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.2px; }
+    .moat-text { color: var(--text-muted); font-size: 14.5px; }
+    .moat-tag { display: inline-block; margin-top: 14px; font-size: 11.5px; color: var(--accent); font-weight: 700; background: rgba(0, 255, 127, 0.08); padding: 4px 10px; border-radius: 6px; }
 
-    .mood-icon {
-      font-size: 28px;
-      background: rgba(255, 255, 255, 0.05);
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
+    /* ---------- Compare table ---------- */
+    .compare {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
     }
+    .compare-row { display: grid; grid-template-columns: 1.3fr 1fr 1fr; align-items: center; border-bottom: 1px solid var(--card-border); }
+    .compare-row:last-child { border-bottom: 0; }
+    .compare-row > div { padding: 15px 18px; font-size: 14.5px; }
+    .compare-row.head > div { font-size: 12.5px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); background: rgba(255, 255, 255, 0.03); }
+    .compare-row.head .us { color: var(--accent); }
+    .compare-row .us { background: rgba(0, 255, 127, 0.05); font-weight: 700; }
+    .compare-row .them { color: var(--text-muted); }
+    .yes { color: var(--accent); font-weight: 800; }
+    .no { color: var(--danger); font-weight: 800; }
+    .compare-note { text-align: center; color: var(--text-dim); font-size: 12.5px; margin-top: 12px; }
 
-    .mood-title {
-      font-size: 19px;
-      font-weight: 700;
-      color: #FFF;
+    /* ---------- Use cases ---------- */
+    .moods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+    .mood-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 18px; padding: 24px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, transform 0.25s ease;
     }
+    .mood-card:hover { border-color: rgba(0, 255, 127, 0.3); transform: translateY(-4px); }
+    .mood-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .mood-icon { font-size: 26px; background: rgba(255, 255, 255, 0.05); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0; }
+    .mood-title { font-size: 18px; font-weight: 700; color: #FFF; }
+    .mood-text { color: var(--text-muted); font-size: 14px; margin-bottom: 14px; }
+    .mood-tags { font-size: 12px; color: var(--accent); font-weight: 600; background: rgba(0, 255, 127, 0.08); display: inline-block; padding: 4px 10px; border-radius: 6px; }
 
-    .mood-text {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .mood-tags {
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 600;
-      background: rgba(0, 255, 127, 0.08);
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-
-    /* Install steps */
+    /* ---------- Install steps ---------- */
     .steps-container {
       background: linear-gradient(180deg, rgba(18, 24, 38, 0.9) 0%, rgba(11, 15, 24, 0.9) 100%);
       border: 1px solid var(--card-border);
       border-radius: 24px;
-      padding: 36px 28px;
-      margin-top: 50px;
+      padding: 38px 30px;
+      margin-top: 84px;
     }
+    .steps-container h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .steps-container > p { color: var(--text-muted); font-size: 14.5px; }
+    .step-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 26px; }
+    .step-item { display: flex; flex-direction: column; gap: 10px; }
+    .step-num { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), var(--purple)); color: #000; border-radius: 10px; font-weight: 900; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+    .step-title { font-weight: 700; font-size: 16px; }
+    .step-desc { color: var(--text-muted); font-size: 14px; }
+    .step-desc code { background: rgba(255, 255, 255, 0.07); padding: 1px 6px; border-radius: 5px; font-size: 12.5px; word-break: break-all; }
 
-    .step-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-      margin-top: 24px;
-    }
-
-    .step-item {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .step-num {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--accent), var(--purple));
-      color: #000;
-      border-radius: 10px;
-      font-weight: 900;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .step-title {
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .step-desc {
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
-    /* Support section */
-    .support-box {
-      margin-top: 60px;
-      text-align: center;
-      padding: 40px 20px;
-      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-      border: 1px solid rgba(139, 92, 246, 0.2);
+    /* ---------- Web player band ---------- */
+    .web-band {
+      margin-top: 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+      padding: 30px 30px;
+      background: radial-gradient(circle at 10% 50%, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
       border-radius: 24px;
     }
+    .web-band h3 { font-size: 21px; font-weight: 800; margin-bottom: 6px; }
+    .web-band p { color: var(--text-muted); font-size: 14.5px; max-width: 560px; }
 
-    .btn-paypal {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #00457C;
-      color: white;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-weight: 700;
-      margin-top: 18px;
-      transition: background 0.2s ease;
-    }
+    /* ---------- FAQ ---------- */
+    .faq { max-width: 800px; margin: 0 auto; display: grid; gap: 10px; }
+    .faq details { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 0 20px; }
+    .faq summary { cursor: pointer; padding: 18px 0; font-weight: 700; font-size: 15.5px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-size: 22px; color: var(--accent); flex-shrink: 0; transition: transform 0.2s ease; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { color: var(--text-muted); font-size: 14.5px; padding-bottom: 18px; }
 
-    .btn-paypal:hover {
-      background: #0079C1;
-    }
-
-    /* Footer */
+    /* ---------- Footer ---------- */
     footer {
       text-align: center;
-      margin-top: 80px;
+      margin-top: 84px;
       color: var(--text-muted);
       font-size: 13px;
       border-top: 1px solid var(--card-border);
       padding-top: 30px;
     }
 
-    /* Mobile Responsive Optimizations */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- Tablet ---------- */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 36px; text-align: center; padding-top: 8px; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; }
+      .cta-group { justify-content: center; }
+      .moat-grid { grid-template-columns: repeat(2, 1fr); }
+      .moat-card.is-hero { grid-column: span 2; }
+    }
+
+    /* ---------- Phones ---------- */
     @media (max-width: 680px) {
-      .container {
-        padding: 16px 14px 60px 14px;
-      }
+      .container { padding: 14px 14px 60px 14px; padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
 
-      header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        padding: 10px 0 20px 0;
-      }
+      header { flex-direction: column; align-items: stretch; gap: 12px; padding: 8px 0 16px 0; }
+      .logo-container { justify-content: center; }
+      .nav-actions { width: 100%; gap: 6px; }
+      .nav-actions .nav-btn { flex: 1; justify-content: center; padding: 10px 6px; font-size: 12px; gap: 4px; }
 
-      .header-main {
-        justify-content: space-between;
-        width: 100%;
-      }
+      .badge-pill { font-size: 11px; padding: 5px 12px; margin-bottom: 16px; }
+      .hero-title { font-size: clamp(30px, 9vw, 42px); letter-spacing: -1px; }
+      .hero-feature-pill { font-size: 12.5px; padding: 6px 12px; line-height: 1.4; }
+      .hero-subtitle { font-size: 15px; line-height: 1.55; margin-bottom: 22px; }
+      .cta-group { flex-direction: column; width: 100%; gap: 10px; }
+      .btn-download { width: 100%; padding: 15px 16px; font-size: 16px; border-radius: 14px; }
+      .meta-tagline { font-size: 12px; }
 
-      .logo-img {
-        width: 40px;
-        height: 40px;
-      }
+      .phone { max-width: 280px; }
 
-      .logo-text {
-        font-size: 20px;
-      }
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 18px 8px; border-bottom: 1px solid var(--card-border); }
+      .stat:nth-child(2n) { border-right: 0; }
+      .stat:nth-last-child(-n+2) { border-bottom: 0; }
 
-      .nav-actions {
-        width: 100%;
-        gap: 6px;
-        justify-content: space-between;
-      }
+      .badges-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 24px 0 0 0; }
+      .feature-badge { padding: 10px 8px; font-size: 11.5px; justify-content: center; text-align: center; border-radius: 10px; }
+      .feature-badge:last-child:nth-child(odd) { grid-column: span 2; }
 
-      .nav-actions .nav-btn {
-        flex: 1;
-        justify-content: center;
-        padding: 8px 6px;
-        font-size: 12px;
-        gap: 4px;
-      }
+      .eyebrow { margin: 56px 0 8px 0; font-size: 11.5px; }
+      .section-title { font-size: 25px; }
+      .section-desc { font-size: 14.5px; margin-bottom: 24px; padding: 0 4px; }
 
-      .hero {
-        padding: 16px 0 28px 0;
-      }
+      .moat-grid { grid-template-columns: 1fr; gap: 12px; }
+      .moat-card.is-hero { grid-column: auto; }
+      .moat-card { padding: 20px 18px; border-radius: 16px; }
+      .moat-icon { width: 46px; height: 46px; font-size: 23px; margin-bottom: 12px; }
+      .moat-title { font-size: 17px; }
+      .moat-text { font-size: 13.5px; }
 
-      .badge-pill {
-        font-size: 11.5px;
-        padding: 5px 12px;
-        margin-bottom: 14px;
-      }
+      .compare-row { grid-template-columns: 1.25fr 0.9fr 0.9fr; }
+      .compare-row > div { padding: 12px 10px; font-size: 12.5px; }
+      .compare-row.head > div { font-size: 10.5px; letter-spacing: 0.4px; }
 
-      .hero-title {
-        font-size: clamp(28px, 8.5vw, 40px);
-        letter-spacing: -0.8px;
-        margin-bottom: 14px;
-      }
+      .moods-grid { grid-template-columns: 1fr; gap: 12px; }
+      .mood-card { padding: 18px 16px; border-radius: 16px; }
+      .mood-title { font-size: 16.5px; }
+      .mood-text { font-size: 13px; line-height: 1.5; margin-bottom: 10px; }
+      .mood-tags { font-size: 11px; padding: 3px 8px; }
 
-      .hero-feature-pill {
-        font-size: 12px !important;
-        padding: 6px 12px !important;
-        line-height: 1.4 !important;
-      }
+      .steps-container { padding: 22px 16px; border-radius: 18px; margin-top: 56px; }
+      .steps-container h2 { font-size: 20px; }
+      .step-list { grid-template-columns: 1fr; gap: 16px; margin-top: 18px; }
+      .step-item { flex-direction: row; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+      .step-num { flex-shrink: 0; width: 32px; height: 32px; font-size: 14px; border-radius: 8px; }
+      .step-title { font-size: 15px; flex: 1; min-width: 0; align-self: center; }
+      .step-desc { font-size: 12.5px; line-height: 1.5; flex-basis: 100%; padding-left: 44px; margin-top: -6px; }
 
-      .hero-subtitle {
-        font-size: 14.5px;
-        line-height: 1.55;
-        margin-bottom: 22px;
-        padding: 0 4px;
-      }
+      .web-band { padding: 22px 18px; border-radius: 18px; flex-direction: column; align-items: stretch; text-align: center; }
+      .web-band h3 { font-size: 18px; }
+      .web-band p { font-size: 13.5px; max-width: none; }
 
-      .cta-group {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        width: 100%;
-        max-width: 100% !important;
-        gap: 10px;
-      }
+      .faq summary { font-size: 14.5px; }
+      .faq details p { font-size: 13.5px; }
 
-      .btn-download {
-        max-width: 100%;
-        width: 100%;
-        padding: 15px 16px;
-        font-size: 16px;
-        border-radius: 14px;
-      }
-
-      .badges-bar {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        margin: 24px 0;
-      }
-
-      .feature-badge {
-        padding: 10px 8px;
-        font-size: 11.5px;
-        justify-content: center;
-        text-align: center;
-        border-radius: 10px;
-      }
-
-      .feature-badge:last-child:nth-child(odd) {
-        grid-column: span 2;
-      }
-
-      .section-title {
-        font-size: 22px;
-        margin: 36px 0 8px 0;
-      }
-
-      .section-desc {
-        font-size: 13.5px;
-        margin-bottom: 20px;
-        padding: 0 4px;
-      }
-
-      .moods-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .mood-card {
-        padding: 16px 14px;
-        border-radius: 16px;
-      }
-
-      .mood-title {
-        font-size: 16.5px;
-      }
-
-      .mood-text {
-        font-size: 13px;
-        margin-bottom: 10px;
-        line-height: 1.5;
-      }
-
-      .mood-tags {
-        font-size: 11px;
-        padding: 3px 8px;
-      }
-
-      .steps-container {
-        padding: 20px 14px;
-        border-radius: 18px;
-        margin-top: 32px;
-      }
-
-      .step-list {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        margin-top: 16px;
-      }
-
-      .step-item {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .step-num {
-        flex-shrink: 0;
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        border-radius: 8px;
-      }
-
-      .step-title {
-        font-size: 15px;
-      }
-
-      .step-desc {
-        font-size: 12.5px;
-        line-height: 1.5;
-      }
-
-      footer {
-        margin-top: 40px;
-        padding-top: 20px;
-        font-size: 11.5px;
-        line-height: 1.6;
-      }
+      footer { margin-top: 48px; padding-top: 20px; font-size: 11.5px; line-height: 1.6; padding-bottom: env(safe-area-inset-bottom); }
     }
 
     @media (max-width: 360px) {
-      .hero-title {
-        font-size: 26px;
-      }
-      .badges-bar {
-        grid-template-columns: 1fr;
-      }
-      .feature-badge:last-child:nth-child(odd) {
-        grid-column: span 1;
-      }
+      .hero-title { font-size: 27px; }
+      .badges-bar { grid-template-columns: 1fr; }
+      .feature-badge:last-child:nth-child(odd) { grid-column: span 1; }
+      .logo-text { font-size: 19px; }
     }
   </style>
 </head>
@@ -667,12 +594,10 @@
 
   <div class="container">
     <header>
-      <div class="header-main">
-        <a href="#" class="logo-container">
-          <img src="play_store_icon_512.png" alt="AutoWave Radio Icon" class="logo-img" />
-          <span class="logo-text">AutoWave Radio</span>
-        </a>
-      </div>
+      <a href="#" class="logo-container">
+        <img src="play_store_icon_512.png" alt="AutoWave Radio Icon" class="logo-img" width="44" height="44" />
+        <span class="logo-text">AutoWave Radio</span>
+      </a>
       <div class="nav-actions">
         <a href="web/" class="nav-btn nav-btn-accent">
           <span>🌐</span> Web Player
@@ -689,43 +614,191 @@
     <main>
       <!-- Hero -->
       <section class="hero">
-        <div class="badge-pill">
-          <span>⚡</span> v5.22.0 Ready for Android & Android Auto
-        </div>
-        <h1 class="hero-title">
-          Pure Driving Radio.<br/>
-          <span>Zero Distractions.</span>
-        </h1>
-        <div style="margin-bottom: 22px;">
-          <span class="hero-feature-pill" style="display: inline-block; background: rgba(0, 255, 127, 0.08); border: 1px solid rgba(0, 255, 127, 0.25); border-radius: 20px; padding: 6px 16px; font-size: 14px; font-weight: 600; color: #E0F7FA;">
-            ✨ 100% Free • No ads added by AutoWave • No subscription
-          </span>
-        </div>
-        <p class="hero-subtitle">
-          The ultimate live radio streaming player built exclusively for the road. Curated live radio streams, real-time song titles, driving moods, and seamless Android Auto steering-wheel integration.
-        </p>
+        <div class="hero-copy">
+          <div class="badge-pill">
+            <span>⚡</span> v5.23.1 Ready for Android &amp; Android Auto
+          </div>
+          <h1 class="hero-title">
+            Pure Driving Radio.<br/>
+            <span>Zero Distractions.</span>
+          </h1>
+          <div>
+            <span class="hero-feature-pill">✨ 100% Free • No ads added by AutoWave Radio • No subscription</span>
+          </div>
+          <p class="hero-subtitle">
+            The ultimate live radio streaming player built exclusively for the road. Curated live radio streams, real-time song titles, live synced lyrics, driving moods, and seamless Android Auto steering-wheel integration.
+          </p>
 
-        <div class="cta-group">
-          <a href="autowave-radio-v5.23.1-release.apk" class="btn-download" download>
-            <span>⬇️</span> Download APK (3.8 MB)
-          </a>
-          <a href="web/" class="btn-download" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); color: #FFF; box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);">
-            <span>🌐</span> Launch Web Player
-          </a>
+          <div class="cta-group">
+            <a href="autowave-radio-v5.23.1-release.apk" class="btn-download" download>
+              <span>⬇️</span> Download APK (3.8 MB)
+            </a>
+            <a href="web/" class="btn-download btn-purple">
+              <span>🌐</span> Launch Web Player
+            </a>
+          </div>
+          <p class="meta-tagline">Direct install for Android • Web Player works in any browser, iPad, &amp; car screens</p>
         </div>
-        <p class="meta-tagline" style="text-align: center; margin-top: 10px;">Direct install for Android • Web Player works in any browser, iPad, & car screens</p>
+
+        <!-- Illustrative player mockup -->
+        <div class="device-wrap" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="np-head">
+              <img class="np-art" src="play_store_icon_512.png" alt="" width="54" height="54" />
+              <div>
+                <div class="np-live"><i></i> LIVE</div>
+                <div class="np-station">Now Playing</div>
+                <div class="np-track">Live stream • real-time title</div>
+              </div>
+            </div>
+            <div class="np-eq">
+              <b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b>
+            </div>
+            <div class="np-lyrics" id="npLyrics">
+              <p>Lyrics follow the broadcast</p>
+              <p class="is-active">Every line lands right on the beat</p>
+              <p>Even though it's a live stream</p>
+              <small>Illustrative example</small>
+            </div>
+            <div class="np-controls">
+              <span>⏮</span><span class="play">▶</span><span>⏭</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stat strip -->
+      <section class="stat-strip" aria-label="AutoWave Radio at a glance">
+        <div class="stat"><div class="stat-num">156</div><div class="stat-label">hand-picked live stations</div></div>
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label">driving mood shelves</div></div>
+        <div class="stat"><div class="stat-num">3.8 MB</div><div class="stat-label">entire app download</div></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">accounts, logins or trackers</div></div>
       </section>
 
       <!-- Highlights Bar -->
       <div class="badges-bar">
         <div class="feature-badge">🚗 100% Android Auto Certified</div>
         <div class="feature-badge">🎛️ Steering Wheel Controls (Next/Prev)</div>
-        <div class="feature-badge">🎙️ Gemini & Google Assistant Voice</div>
-        <div class="feature-badge">🛡️ No Ads Added by AutoWave &amp; Zero Tracking</div>
+        <div class="feature-badge">🎙️ Gemini &amp; Google Assistant Voice</div>
+        <div class="feature-badge">🛡️ No Ads Added by AutoWave Radio &amp; Zero Tracking</div>
         <div class="feature-badge">📻 Curated Live Radio Streams</div>
       </div>
 
+      <!-- Why different / Moat -->
+      <div class="eyebrow">Why AutoWave Radio is different</div>
+      <h2 class="section-title">Built around the driver, not the dashboard of ads</h2>
+      <p class="section-desc">Most radio apps are built to hold your attention. AutoWave Radio is built to give it back to the road. Here is what sets it apart.</p>
+
+      <div class="moat-grid">
+        <div class="moat-card is-hero">
+          <div class="moat-icon">🎤</div>
+          <div class="moat-title">Live synced lyrics, on a live stream</div>
+          <p class="moat-text">Radio has no timeline, so lyrics are normally impossible to sync. AutoWave Radio identifies the current song from the stream, finds the lyrics, and aligns them to what you hear. It compensates for stream buffering, lets you tap to sync or nudge the timing, and resets instantly when you change station.</p>
+          <span class="moat-tag">Android &amp; Web • Tap-to-sync • Manual lyrics search</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🔒</div>
+          <div class="moat-title">Private by architecture</div>
+          <p class="moat-text">No accounts, no analytics SDKs, no advertising IDs, no location permission. Favorites and history stay on your device. With no backend collecting data, there is nothing to leak or sell.</p>
+          <span class="moat-tag">Zero data collected</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🧭</div>
+          <div class="moat-title">Curated, not a giant directory</div>
+          <p class="moat-text">Instead of an endless unsorted directory, you get a hand-picked catalog of hit stations from the US and UK, sorted into mood shelves: Pop Hits, Long Drive, Fun &amp; Energy, Rock, Calm &amp; Chill, and News &amp; Commute.</p>
+          <span class="moat-tag">156 stations • 6 moods</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🚘</div>
+          <div class="moat-title">Truly hands-free</div>
+          <p class="moat-text">Native Android Auto, steering-wheel Next/Prev, and Gemini or Google Assistant voice commands. Large, high-contrast controls keep interactions short and your eyes up.</p>
+          <span class="moat-tag">Android Auto • Voice • Steering wheel</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🔋</div>
+          <div class="moat-title">Battery-smart engine</div>
+          <p class="moat-text">A built-in battery saver shuts down idle playback and releases resources, with deep-sleep safety and instant shutdown when the screen goes off, so a forgotten stream never drains your phone.</p>
+          <span class="moat-tag">Auto-shutdown • Low power</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🧠</div>
+          <div class="moat-title">You decide what never plays</div>
+          <p class="moat-text">Block any station once and it stays blocked, with one-tap unblock later. Favorites come first, and shuffle never repeats until the whole queue has played. Rewind steps back through what you actually heard.</p>
+          <span class="moat-tag">Persistent block list • Smart shuffle</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🏷️</div>
+          <div class="moat-title">Clean song titles</div>
+          <p class="moat-text">Radio stations send messy metadata. AutoWave Radio's parser strips audio tags and junk, falls back to a secondary metadata reader, and shows a clean artist and title in real time.</p>
+          <span class="moat-tag">Robust title parser</span>
+        </div>
+
+        <div class="moat-card">
+          <div class="moat-icon">🌐</div>
+          <div class="moat-title">One product, every screen</div>
+          <p class="moat-text">The same catalog, favorites, block list and lyrics run in the installable Web Player for any browser, tablet, desktop, or in-car browser. No app store required.</p>
+          <span class="moat-tag">Android • Web • PWA</span>
+        </div>
+      </div>
+
+      <!-- Comparison -->
+      <div class="eyebrow">The difference at a glance</div>
+      <h2 class="section-title">AutoWave Radio vs. typical radio apps</h2>
+      <p class="section-desc">A general comparison against the common pattern of ad-supported radio apps, not any single product.</p>
+
+      <div class="compare" role="table" aria-label="Comparison of AutoWave Radio with typical radio apps">
+        <div class="compare-row head" role="row">
+          <div role="columnheader">Feature</div>
+          <div class="us" role="columnheader">AutoWave Radio</div>
+          <div role="columnheader">Typical apps</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Account or login required</div>
+          <div class="us" role="cell"><span class="yes">✓</span> Never</div>
+          <div class="them" role="cell"><span class="no">✕</span> Often</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Ads added by the app</div>
+          <div class="us" role="cell"><span class="yes">✓</span> None</div>
+          <div class="them" role="cell"><span class="no">✕</span> Banners and video</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Analytics &amp; trackers</div>
+          <div class="us" role="cell"><span class="yes">✓</span> None</div>
+          <div class="them" role="cell"><span class="no">✕</span> Common</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Live synced lyrics</div>
+          <div class="us" role="cell"><span class="yes">✓</span> Built in</div>
+          <div class="them" role="cell"><span class="no">✕</span> Rare</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Driving-first UI &amp; voice</div>
+          <div class="us" role="cell"><span class="yes">✓</span> Yes</div>
+          <div class="them" role="cell"><span class="no">✕</span> Phone-first</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Idle battery protection</div>
+          <div class="us" role="cell"><span class="yes">✓</span> Auto-shutdown</div>
+          <div class="them" role="cell"><span class="no">✕</span> Varies</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="cell">Cost</div>
+          <div class="us" role="cell"><span class="yes">✓</span> Free</div>
+          <div class="them" role="cell"><span class="no">✕</span> Free tier or subscription</div>
+        </div>
+      </div>
+      <p class="compare-note">AutoWave Radio streams publicly available broadcasts. Third-party station content may include its own advertising.</p>
+
       <!-- Perfect Everywhere Section -->
+      <div class="eyebrow">Use it everywhere</div>
       <h2 class="section-title">Built for the Car, Perfect Everywhere</h2>
       <p class="section-desc">Engineered for seamless Android Auto vehicle integration, and ready for your home, office, gym, and weekend parties.</p>
 
@@ -787,29 +860,69 @@
 
       <!-- Installation Guide -->
       <div class="steps-container">
-        <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">📲 How to Install in 3 Easy Steps</h2>
-        <p style="color: var(--text-muted); font-size: 14px;">Fast, direct installation on any Android smartphone:</p>
-        
+        <h2>📲 How to Install in 3 Easy Steps</h2>
+        <p>Fast, direct installation on any Android smartphone:</p>
+
         <div class="step-list">
           <div class="step-item">
             <div class="step-num">1</div>
             <div class="step-title">Download APK</div>
             <div class="step-desc">Tap the download button above to get <code>autowave-radio-v5.23.1-release.apk</code> (only 3.8 MB).</div>
-
           </div>
 
           <div class="step-item">
             <div class="step-num">2</div>
-            <div class="step-title">Tap Open & Install</div>
+            <div class="step-title">Tap Open &amp; Install</div>
             <div class="step-desc">Tap the completed download. If Android asks, allow "Install from this source" in settings.</div>
           </div>
 
           <div class="step-item">
             <div class="step-num">3</div>
-            <div class="step-title">Drive & Enjoy!</div>
+            <div class="step-title">Drive &amp; Enjoy!</div>
             <div class="step-desc">Open AutoWave Radio on your phone or plug into Android Auto in your car. Done!</div>
           </div>
         </div>
+      </div>
+
+      <!-- Web player band -->
+      <div class="web-band">
+        <div>
+          <h3>🌐 No Android? Start listening in your browser</h3>
+          <p>The Web Player has the same catalog, favorites, block list, and live lyrics, and it works on iPad, desktop, and car screens.</p>
+        </div>
+        <a href="web/" class="btn-download btn-purple"><span>▶</span> Launch Web Player</a>
+      </div>
+
+      <!-- FAQ -->
+      <div class="eyebrow">Questions</div>
+      <h2 class="section-title">Quick answers</h2>
+      <p class="section-desc">The things people ask before they install.</p>
+
+      <div class="faq">
+        <details>
+          <summary>Is AutoWave Radio really free?</summary>
+          <p>Yes. There is no subscription, no paywall, and no ads added by AutoWave Radio.</p>
+        </details>
+        <details>
+          <summary>Do I need an account?</summary>
+          <p>No. There is no sign-up or login. Your favorites and recently played stations are stored only on your device.</p>
+        </details>
+        <details>
+          <summary>How do live lyrics work on radio?</summary>
+          <p>AutoWave Radio reads the live song title from the stream, looks up matching timed lyrics, and syncs them to what you hear, compensating for stream buffering. If a line is off, tap to sync or nudge the timing, or search for the lyrics manually.</p>
+        </details>
+        <details>
+          <summary>Does it work with Android Auto and voice commands?</summary>
+          <p>Yes. It connects over USB or wireless Android Auto, supports steering-wheel Next/Prev, and works with Gemini and Google Assistant voice commands.</p>
+        </details>
+        <details>
+          <summary>Why is it an APK and not on an app store?</summary>
+          <p>AutoWave Radio is currently distributed as a direct install. Android may ask you to allow installs from this source once. The Web Player needs no installation.</p>
+        </details>
+        <details>
+          <summary>Will it drain my battery?</summary>
+          <p>It is designed not to. A battery saver shuts down idle playback and releases resources, and idle streams are shut down automatically so a forgotten stream does not keep running.</p>
+        </details>
       </div>
 
     </main>
@@ -825,7 +938,7 @@
       if (navigator.share) {
         navigator.share({
           title: 'AutoWave Radio - Pure Driving Radio',
-          text: 'Listen to live driving radio with AutoWave Radio (No Ads Added by AutoWave, Free Forever, Android Auto support):',
+          text: 'Listen to live driving radio with AutoWave Radio (No Ads Added by AutoWave Radio, Free Forever, Android Auto support):',
           url: window.location.href
         }).catch(function() {});
       } else {
@@ -833,6 +946,30 @@
         alert('Link copied to clipboard! Share it with your friends.');
       }
     }
+
+    // Illustrative lyric scroller in the player mockup (decorative only)
+    (function () {
+      try {
+        var box = document.getElementById('npLyrics');
+        if (!box || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var lines = [
+          'Lyrics follow the broadcast',
+          'Every line lands right on the beat',
+          'Even though it’s a live stream',
+          'Tap to sync, nudge to perfect',
+          'No accounts. No ads. Just radio.'
+        ];
+        var i = 1;
+        setInterval(function () {
+          i = (i + 1) % lines.length;
+          var p = box.querySelectorAll('p');
+          for (var k = 0; k < 3; k++) {
+            p[k].textContent = lines[(i + k - 1 + lines.length) % lines.length];
+            p[k].className = (k === 1) ? 'is-active' : '';
+          }
+        }, 2600);
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>
