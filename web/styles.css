@@ -555,6 +555,7 @@ body:not(.mini-player-active) .pip-restore-bar { display: none; }
 .lyrics-search-input:focus { border-color: var(--accent); }
 .lyrics-search-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(0, 255, 127, 0.15); border: 1px solid rgba(0, 255, 127, 0.4); color: var(--accent); padding: 10px 14px; border-radius: 12px; font-size: 13px; font-weight: 700; white-space: nowrap; transition: background 0.2s ease, color 0.2s ease; }
 .lyrics-search-btn:hover { background: var(--accent); color: #050811; }
+.lyrics-card, .lyrics-content, .lyrics-line, .lyrics-hint, .lyrics-search-input { direction: ltr; text-align: left; unicode-bidi: plaintext; }
 .lyrics-body { overflow-y: auto; flex: 1; padding: 16px 20px; scroll-behavior: smooth; overscroll-behavior: contain; }
 .lyrics-loading { text-align: center; color: var(--text-muted); padding: 40px 0; font-size: 15px; }
 .lyrics-content { display: flex; flex-direction: column; gap: 2px; }
