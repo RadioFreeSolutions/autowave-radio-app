@@ -7,8 +7,28 @@
 (function () {
   'use strict';
 
+  // Safe storage: private mode, blocked cookies or a full quota must never break playback.
+  // This shadows the global on purpose so every existing call below is protected.
+  const localStorage = {
+    getItem(key) { try { return window.localStorage.getItem(key); } catch (e) { return null; } },
+    setItem(key, val) { try { window.localStorage.setItem(key, val); } catch (e) {} },
+    removeItem(key) { try { window.localStorage.removeItem(key); } catch (e) {} }
+  };
+
+  // Streams that are plain http:// only and have no working https endpoint (verified Nov 2026),
+  // or are dead. Browsers block/upgrade http audio on this https page, so they can never play on web.
+  // They remain in the shared catalog for the Android app, which allows cleartext traffic.
+  const WEB_UNPLAYABLE = new Set([
+    '942218e4-32f2-4131-8a73-e3432a8cf4d0', '7f7e3c30-08f0-4f52-a0a0-653d5a184800', '9606ceae-0601-11e8-ae97-52543be04c81',
+    '1a8ae079-d15a-4309-9df0-55590df8e3c2', '2982e72e-6e80-4fe3-b119-0f44d8f1f789', 'a51b79dd-68e6-44ce-8ebe-2fb5d909c318',
+    '963f9bfc-0601-11e8-ae97-52543be04c81', '10edd1ec-192b-40ff-aaf2-645471d04dfb', '72e3e855-4a87-43f5-a431-5b5aba8ee5da',
+    '6749ce2d-15b6-47f1-a6ec-bcd32b49ffd1', '1d110b47-b10e-4839-af42-dea9a83bcbd6', '89199933-8a91-4afb-879f-0c4cd72c769e',
+    '22256540-0fc5-4dc2-a3ed-de8085377ef7', '3eba571c-a1ac-4632-ae3a-810c659b2cfd', '824b1a6a-660f-4902-8a01-fe54aa27e24f',
+    '18078cac-f5ea-4922-930c-974b935da7cd', 'fc8ba7fc-045b-4d48-abbd-e0ca8af95ae9'
+  ]);
+
   // State
-  const stations = window.AUTOWAVE_STATIONS || [];
+  const stations = (window.AUTOWAVE_STATIONS || []).filter(s => !WEB_UNPLAYABLE.has(s.id));
   let filteredStations = [...stations];
   let currentStation = null;
   let currentIndex = -1;
@@ -66,7 +86,18 @@
   // Audio element
   const audio = new Audio();
   audio.preload = 'auto';
-  audio.volume = parseFloat(localStorage.getItem(LS_VOLUME) || localStorage.getItem('drivewave_web_volume') || '0.85');
+  (function initVolume() {
+    const raw = parseFloat(localStorage.getItem(LS_VOLUME) || localStorage.getItem('drivewave_web_volume') || '0.85');
+    audio.volume = Number.isFinite(raw) ? Math.min(1, Math.max(0, raw)) : 0.85;
+  })();
+
+  // Reconnect / pause bookkeeping
+  const LIVE_RESUME_STALE_MS = 15000; // a paused live stream older than this is reloaded instead of resumed
+  let pausedAt = 0;
+  let lastStartAt = 0;
+  let retryTimer = null;
+  let streamOffline = false;
+  let currentStreamUrl = '';
 
   // 10-Minute Idle Battery Saver Watchdog
   let idleShutdownTimer = null;
@@ -159,6 +190,56 @@
   const btnInfoClose = document.getElementById('btn-info-close');
 
   const volumePercent = document.getElementById('volume-percent');
+  const btnMute = document.getElementById('btn-mute');
+
+  // Hero ("Now Playing") elements
+  const heroEl = document.getElementById('now-hero');
+  const heroArt = document.getElementById('hero-art');
+  const heroKicker = document.getElementById('hero-kicker');
+  const heroTitle = document.getElementById('hero-title');
+  const heroSub = document.getElementById('hero-sub');
+  const heroPlayBtn = document.getElementById('hero-play');
+  const heroPlayLabel = document.getElementById('hero-play-label');
+  const heroLyricsBtn = document.getElementById('hero-lyrics');
+  const heroFavBtn = document.getElementById('hero-fav');
+
+  /** Small helpers */
+  function iconSvg(id) {
+    return '<svg class="i"><use href="#' + id + '"/></svg>';
+  }
+  function heartSvg(on) {
+    return iconSvg(on ? 'i-heart-fill' : 'i-heart');
+  }
+  function shortCountry(c) {
+    if (!c) return 'Live';
+    if (/united kingdom/i.test(c)) return 'UK';
+    if (/united states/i.test(c)) return 'USA';
+    return c;
+  }
+  function showToast(msg, kind) {
+    const region = document.getElementById('toast-region');
+    if (!region) return;
+    const el = document.createElement('div');
+    el.className = 'toast' + (kind === 'warn' ? ' warn' : '');
+    el.textContent = msg;
+    region.appendChild(el);
+    while (region.children.length > 3) region.removeChild(region.firstChild);
+    setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 350); }, 3200);
+  }
+  window.AutoWaveToast = showToast;
+
+  function timeoutSignal(ms) {
+    if (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) return AbortSignal.timeout(ms);
+    const c = new AbortController();
+    setTimeout(() => c.abort(), ms);
+    return c.signal;
+  }
+
+  function setBuffering(on) {
+    isBuffering = on;
+    [playPauseBtn, dmPlayPauseBtn, btnMiniPlay, heroPlayBtn].forEach(b => { if (b) b.classList.toggle('is-buffering', on); });
+    updateHero();
+  }
 
   function updateVolumeTrack(val) {
     const pct = Math.round(val * 100);
@@ -178,7 +259,7 @@
 
   // Mood Descriptions
   const MOOD_META = {
-    ALL: { title: '🔥 All Stations', subtitle: 'Curated high-bitrate live radio broadcasts from around the world.' },
+    ALL: { title: '🔥 All Stations', subtitle: 'Curated live radio broadcasts from the UK and US.' },
     POP_HITS: { title: '⭐ Top Rated', subtitle: 'World-famous pop hit music stations and chart-toppers.' },
     LONG_DRIVE: { title: '🛣️ Long Drive', subtitle: 'Highway cruising rhythms, road trip classics, and steady tempo hits.' },
     FUN_ENERGY: { title: '⚡ Fun & Energy', subtitle: 'Dance hits, electronic energy, and party anthems to keep your drive energized.' },
@@ -201,6 +282,7 @@
     if (searchInput) {
       searchInput.placeholder = 'Search curated stations, genres, or artists...';
     }
+    updateHero();
 
     // Restore last station if saved (never restore a blocked station)
     const lastId = localStorage.getItem(LS_LAST_STATION) || localStorage.getItem('drivewave_web_last_station');
@@ -583,6 +665,68 @@
     return gradients[Math.abs(hash) % gradients.length];
   }
 
+  /** Glow color matching the station gradient (used for the hero background) */
+  function getStationGlow(str) {
+    let hash = 0;
+    for (let i = 0; i < (str || '').length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const glows = [
+      'rgba(2, 132, 199, 0.30)', 'rgba(124, 58, 237, 0.30)', 'rgba(5, 150, 105, 0.30)', 'rgba(217, 119, 6, 0.28)',
+      'rgba(219, 39, 119, 0.28)', 'rgba(6, 182, 212, 0.28)', 'rgba(79, 70, 229, 0.30)', 'rgba(71, 85, 105, 0.32)'
+    ];
+    return glows[Math.abs(hash) % glows.length];
+  }
+
+  /** Refresh the "Now Playing" hero from current state */
+  function updateHero() {
+    if (!heroEl) return;
+    const st = currentStation;
+
+    if (!st) {
+      if (heroKicker) heroKicker.textContent = 'READY TO PLAY';
+      if (heroTitle) heroTitle.textContent = 'Pick a station to start';
+      if (heroSub) heroSub.textContent = 'Curated live radio. No accounts, no ads added.';
+      if (heroPlayLabel) heroPlayLabel.textContent = 'Play';
+      return;
+    }
+
+    const mono = getStationMonogram(st.name);
+    if (heroArt) {
+      heroArt.style.background = getStationGradient(st.name);
+      heroArt.style.setProperty('--ms', mono.length > 6 ? '0.66' : (mono.length > 5 ? '0.76' : (mono.length > 3 ? '0.9' : '1')));
+      heroArt.innerHTML = `<span class="hero-mono">${escapeHtml(mono)}</span><span class="hero-flag">${escapeHtml(st.flag || '')}</span>`;
+    }
+    heroEl.style.setProperty('--hero-glow', getStationGlow(st.name));
+
+    if (heroTitle) heroTitle.textContent = currentTrackTitle || st.name;
+    if (heroSub) {
+      heroSub.textContent = currentTrackTitle
+        ? `${st.name} • ${shortCountry(st.country)}`
+        : `${st.flag || '📻'} ${shortCountry(st.country)} • Live stream`;
+    }
+
+    if (heroKicker) {
+      if (streamOffline) heroKicker.textContent = 'STREAM OFFLINE';
+      else if (isBuffering) heroKicker.textContent = 'CONNECTING...';
+      else if (isPlaying) heroKicker.textContent = 'NOW PLAYING';
+      else if (lastStartAt === 0) heroKicker.textContent = 'READY TO PLAY';
+      else heroKicker.textContent = 'PAUSED';
+    }
+
+    if (heroPlayLabel) heroPlayLabel.textContent = isPlaying ? 'Pause' : 'Play';
+    if (heroPlayBtn) {
+      const ic = heroPlayBtn.querySelector('.hero-play-icon');
+      if (ic) ic.innerHTML = iconSvg(isPlaying ? 'i-pause' : 'i-play');
+    }
+    if (heroFavBtn) {
+      const fav = favorites.has(st.id);
+      heroFavBtn.classList.toggle('favorited', fav);
+      heroFavBtn.innerHTML = heartSvg(fav);
+      heroFavBtn.setAttribute('aria-pressed', fav ? 'true' : 'false');
+    }
+  }
+
   /** Render station cards in grid */
   function renderStations() {
     if (!stationsGrid) return;
@@ -602,93 +746,101 @@
       const favClass = isFav ? 'favorited' : '';
       const flag = st.flag || '📻';
       const tagList = Array.isArray(st.tags) ? st.tags : (st.tags ? String(st.tags).split(',') : []);
-      const rawGenre = tagList[0] ? tagList[0].trim() : (st.country || 'Live');
+      const rawGenre = tagList[0] ? tagList[0].trim() : shortCountry(st.country);
       const genre = rawGenre ? (rawGenre.charAt(0).toUpperCase() + rawGenre.slice(1)) : 'Live';
 
       const monogram = getStationMonogram(st.name);
       const bgGrad = getStationGradient(st.name);
       const subLabel = st.flag || st.countryCode || 'LIVE';
-      const monoFontSize = monogram.length > 5 ? '11px' : (monogram.length > 3 ? '12.5px' : '14px');
+      const monoFontSize = monogram.length > 6 ? '9.5px' : (monogram.length > 5 ? '10.5px' : (monogram.length > 3 ? '12px' : '14px'));
+      const safeName = escapeHtml(st.name);
+      const safeId = escapeHtml(st.id);
 
       const artHtml = `
         <div class="card-art-badge" style="background: ${bgGrad}">
-          <span class="card-badge-monogram" style="font-size: ${monoFontSize};">${monogram}</span>
-          <span class="card-badge-country">${subLabel}</span>
+          <span class="card-badge-monogram" style="font-size: ${monoFontSize};">${escapeHtml(monogram)}</span>
+          <span class="card-badge-country">${escapeHtml(subLabel)}</span>
         </div>
+        <div class="card-play-overlay" aria-hidden="true">${iconSvg('i-play')}</div>
+        <span class="card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
       `;
 
       const isBlockedMood = (currentMood === 'BLOCKED');
       const actionHtml = isBlockedMood ? `
         <div class="card-actions-group">
-          <button class="card-unblock-btn" title="Unblock Station" data-unblockid="${st.id}">
+          <button class="card-unblock-btn" title="Unblock Station" aria-label="Unblock ${safeName}" data-unblockid="${safeId}">
             <span>✓</span> Unblock
           </button>
         </div>
       ` : `
         <div class="card-actions-group">
-          <button class="card-fav-btn ${favClass}" title="Favorite" data-favid="${st.id}">
-            ${isFav ? '❤️' : '♡'}
+          <button class="card-fav-btn ${favClass}" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}" aria-label="${isFav ? 'Remove' : 'Add'} ${safeName} ${isFav ? 'from' : 'to'} favorites" aria-pressed="${isFav ? 'true' : 'false'}" data-favid="${safeId}">
+            ${heartSvg(isFav)}
           </button>
-          <button class="card-block-btn" title="Block Station" data-blockid="${st.id}">
-            🚫
+          <button class="card-block-btn" title="Block Station" aria-label="Block ${safeName}" data-blockid="${safeId}">
+            ${iconSvg('i-block')}
           </button>
         </div>
       `;
 
       return `
-        <div class="station-card ${activeClass}" data-id="${st.id}" data-idx="${idx}">
+        <div class="station-card ${activeClass}" data-id="${safeId}" data-idx="${idx}" role="button" tabindex="0" aria-label="${isCurr ? 'Pause or resume' : 'Play'} ${safeName}">
           <div class="card-art-box">
             ${artHtml}
           </div>
           <div class="card-details">
-            <div class="card-title">${st.name}</div>
+            <div class="card-title">${safeName}</div>
             <div class="card-meta">
-              <span>${flag}</span>
+              <span>${escapeHtml(flag)}</span>
               <span>•</span>
-              <span>${genre}</span>
+              <span>${escapeHtml(genre)}</span>
             </div>
           </div>
           ${actionHtml}
         </div>
       `;
     }).join('');
+  }
 
-    // Attach click listeners to cards
-    stationsGrid.querySelectorAll('.station-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.card-unblock-btn')) {
-          e.stopPropagation();
-          const id = e.target.closest('.card-unblock-btn').getAttribute('data-unblockid');
-          if (id) unblockStation(id);
-          return;
-        }
-        if (e.target.closest('.card-block-btn')) {
-          e.stopPropagation();
-          const id = e.target.closest('.card-block-btn').getAttribute('data-blockid');
-          if (id) blockStation(id);
-          return;
-        }
-        if (e.target.closest('.card-fav-btn')) {
-          e.stopPropagation();
-          const id = e.target.closest('.card-fav-btn').getAttribute('data-favid');
-          toggleFavorite(id);
-          return;
-        }
-        const id = card.getAttribute('data-id');
-        const st = stations.find(s => s.id === id);
-        if (st) {
-          if (currentStation && currentStation.id === st.id) {
-            togglePlayPause();
-          } else {
-            playStation(st);
-          }
-        }
-      });
-    });
+  /** One delegated handler for all cards (no per-render listener buildup) */
+  function handleGridActivate(e) {
+    const unblockBtn = e.target.closest('.card-unblock-btn');
+    if (unblockBtn) {
+      e.stopPropagation();
+      const id = unblockBtn.getAttribute('data-unblockid');
+      if (id) unblockStation(id);
+      return;
+    }
+    const blockBtn = e.target.closest('.card-block-btn');
+    if (blockBtn) {
+      e.stopPropagation();
+      const id = blockBtn.getAttribute('data-blockid');
+      if (id) blockStation(id);
+      return;
+    }
+    const favBtn = e.target.closest('.card-fav-btn');
+    if (favBtn) {
+      e.stopPropagation();
+      const id = favBtn.getAttribute('data-favid');
+      if (id) toggleFavorite(id);
+      return;
+    }
+    const card = e.target.closest('.station-card');
+    if (!card) return;
+    const id = card.getAttribute('data-id');
+    const st = stations.find(s => s.id === id);
+    if (st) {
+      if (currentStation && currentStation.id === st.id) {
+        togglePlayPause();
+      } else {
+        playStation(st);
+      }
+    }
   }
 
   function blockStation(id) {
     if (!id) return;
+    const wasIdx = currentIndex;
     blockedStations.add(id);
     const serialized = JSON.stringify([...blockedStations]);
     localStorage.setItem(LS_BLOCKED, serialized);
@@ -698,8 +850,34 @@
     if (currentStation && currentStation.id === id) {
       localStorage.removeItem(LS_LAST_STATION);
       localStorage.removeItem('drivewave_web_last_station');
-      playNext(false);
+      if (filteredStations.length > 0) {
+        if (isShuffle && filteredStations.length > 1) {
+          playNext(false); // not user-debounced: a block must always move on, even right after a skip
+        } else {
+          // The station that slid into the blocked one's slot is the natural "next"
+          playStation(filteredStations[Math.min(Math.max(wasIdx, 0), filteredStations.length - 1)], false);
+        }
+      } else {
+        stopPlaybackCompletely();
+      }
     }
+    showToast('Station blocked. You can unblock it from the Block List.');
+  }
+
+  /** Stop audio and release the stream (used when nothing is left to play) */
+  function stopPlaybackCompletely() {
+    stopIcyMetadataReader();
+    if (hlsInstance) {
+      try { hlsInstance.destroy(); } catch (e) {}
+      hlsInstance = null;
+    }
+    try {
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+    } catch (e) {}
+    setBuffering(false);
+    updatePlaybackState(false);
   }
 
   function unblockStation(id) {
@@ -726,7 +904,7 @@
     const prevActive = stationsGrid.querySelectorAll('.station-card.active-playing');
     prevActive.forEach(el => el.classList.remove('active-playing'));
     if (currentStation) {
-      const currentEl = stationsGrid.querySelector(`.station-card[data-id="${currentStation.id}"]`);
+      const currentEl = Array.from(stationsGrid.querySelectorAll('.station-card')).find(el => el.getAttribute('data-id') === currentStation.id);
       if (currentEl) {
         currentEl.classList.add('active-playing');
       }
@@ -779,12 +957,14 @@
       }
       if (lyricsLoading) lyricsLoading.style.display = 'none';
     }
+    updateHero();
   }
 
   /** Set Station in UI without necessarily playing */
   function setStationUI(station, shouldPlay = false) {
     currentStation = station;
     currentIndex = filteredStations.findIndex(s => s.id === station.id);
+    streamOffline = false;
     resetTrackState(station);
 
     const artUrl = station.favicon || 'icon-512.png';
@@ -792,9 +972,9 @@
     if (dmArtwork) dmArtwork.src = artUrl;
     if (miniArt) miniArt.src = artUrl;
 
-    const subtitleText = `${station.flag || '📻'} ${station.country || 'Live'} • Live Stream`;
+    const subtitleText = `${station.flag || '📻'} ${shortCountry(station.country)} • Live Stream`;
     if (playerStation) {
-      playerStation.innerHTML = `<span>📻</span> <span>${subtitleText}</span>`;
+      playerStation.innerHTML = `<span>📻</span> <span>${escapeHtml(subtitleText)}</span>`;
     }
     if (dmStationName) {
       dmStationName.textContent = subtitleText;
@@ -806,7 +986,7 @@
     if (favPlayerBtn) {
       const isFav = favorites.has(station.id);
       favPlayerBtn.classList.toggle('favorited', isFav);
-      favPlayerBtn.textContent = isFav ? '❤️' : '♡';
+      favPlayerBtn.innerHTML = heartSvg(isFav);
     }
 
     localStorage.setItem(LS_LAST_STATION, station.id);
@@ -814,6 +994,7 @@
     updateDocumentPipUI();
     renderVideoPipFrame();
     updateActiveStationCard();
+    updateHero();
 
     if (shouldPlay) {
       startAudio(station);
@@ -975,7 +1156,7 @@
       playerTrack.title = track;
     }
     if (playerStation && station) {
-      playerStation.innerHTML = `<span>📻</span> <span>${station.name} • Live</span>`;
+      playerStation.innerHTML = `<span>📻</span> <span>${escapeHtml(station.name)} • Live</span>`;
     }
 
     // Update Cockpit Driving Mode
@@ -989,9 +1170,11 @@
     // Update MediaSession
     updateMediaSession(station, track);
 
-    // Update PiP and Tab Title
+    // Update PiP, hero and Tab Title
     updateDocumentPipUI();
     renderVideoPipFrame();
+    updateHero();
+    updateTabTitle();
   }
 
   // ============================================================
@@ -1138,14 +1321,14 @@
       url = `https://lrclib.net/api/search?track_name=${encodeURIComponent(title)}&artist_name=${encodeURIComponent(artist)}`;
     }
     try {
-      let res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      let res = await fetch(url, { signal: timeoutSignal(8000) });
       if (!res.ok && artist) {
-        res = await fetch(`https://lrclib.net/api/search?q=${q}`, { signal: AbortSignal.timeout(8000) });
+        res = await fetch(`https://lrclib.net/api/search?q=${q}`, { signal: timeoutSignal(8000) });
       }
       if (!res.ok) return null;
       let data = await res.json();
       if ((!Array.isArray(data) || data.length === 0) && artist) {
-        const fbRes = await fetch(`https://lrclib.net/api/search?q=${q}`, { signal: AbortSignal.timeout(6000) });
+        const fbRes = await fetch(`https://lrclib.net/api/search?q=${q}`, { signal: timeoutSignal(6000) });
         if (fbRes.ok) {
           data = await fbRes.json();
         }
@@ -1218,7 +1401,7 @@
     lyricsContent.innerHTML = `
       <div class="lyrics-no-results">
         <span class="lyrics-no-icon">🎵</span>
-        No lyrics found for<br><strong>"${track}"</strong>
+        No lyrics found for<br><strong>"${escapeHtml(track)}"</strong>
       </div>`;
     if (lyricsSyncControls) lyricsSyncControls.style.display = 'none';
     if (lyricsSyncBadge) lyricsSyncBadge.style.display = 'none';
@@ -1470,6 +1653,61 @@
           } catch (_) {}
         }
       }
+    } finally {
+      // Release the slot so a later resume can start a fresh reader
+      if (metadataAbortController === controller) {
+        metadataAbortController = null;
+      }
+    }
+  }
+
+  /** Decode the text payload of an ID3 text frame */
+  function decodeId3Text(bytes) {
+    if (!bytes.length) return '';
+    const enc = bytes[0];
+    let body = bytes.subarray(1);
+    let label = 'utf-8';
+    if (enc === 0) label = 'iso-8859-1';
+    else if (enc === 1) {
+      if (body[0] === 0xFE && body[1] === 0xFF) { label = 'utf-16be'; body = body.subarray(2); }
+      else if (body[0] === 0xFF && body[1] === 0xFE) { label = 'utf-16le'; body = body.subarray(2); }
+      else label = 'utf-16le';
+    } else if (enc === 2) label = 'utf-16be';
+    return new TextDecoder(label).decode(body).replace(/\u0000+$/g, '').trim();
+  }
+
+  /** Pull "Artist - Title" out of an HLS timed-metadata sample (ID3v2), or return '' if there is none */
+  function extractHlsTitle(data) {
+    try {
+      if (!data || data.length < 10) return '';
+      const isId3 = data[0] === 0x49 && data[1] === 0x44 && data[2] === 0x33;
+      if (!isId3) {
+        const s = new TextDecoder('utf-8').decode(data);
+        // eslint-disable-next-line no-control-regex
+        return /[\u0000-\u0008\u000E-\u001F�]/.test(s.replace(/\u0000+$/g, '')) ? '' : s;
+      }
+      const ver = data[3];
+      const tagSize = ((data[6] & 0x7f) << 21) | ((data[7] & 0x7f) << 14) | ((data[8] & 0x7f) << 7) | (data[9] & 0x7f);
+      const end = Math.min(data.length, 10 + tagSize);
+      let pos = 10;
+      let title = '';
+      let artist = '';
+      while (pos + 10 <= end) {
+        const id = String.fromCharCode(data[pos], data[pos + 1], data[pos + 2], data[pos + 3]);
+        if (!/^[A-Z0-9]{4}$/.test(id)) break;
+        const size = ver === 4
+          ? ((data[pos + 4] & 0x7f) << 21) | ((data[pos + 5] & 0x7f) << 14) | ((data[pos + 6] & 0x7f) << 7) | (data[pos + 7] & 0x7f)
+          : ((data[pos + 4] << 24) | (data[pos + 5] << 16) | (data[pos + 6] << 8) | data[pos + 7]) >>> 0;
+        if (size === 0) break;
+        const payload = data.subarray(pos + 10, pos + 10 + size);
+        if (id === 'TIT2') title = decodeId3Text(payload);
+        else if (id === 'TPE1') artist = decodeId3Text(payload);
+        pos += 10 + size;
+      }
+      if (!title) return '';
+      return artist ? `${artist} - ${title}` : title;
+    } catch (e) {
+      return '';
     }
   }
 
@@ -1477,6 +1715,10 @@
   function startAudio(station) {
     if (!station) return;
     stopIcyMetadataReader();
+    clearTimeout(retryTimer);
+    retryTimer = null;
+    lastStartAt = Date.now();
+    streamOffline = false;
 
     if (hlsInstance) {
       try {
@@ -1491,10 +1733,11 @@
       audio.load();
     } catch (e) {}
 
-    isBuffering = true;
+    setBuffering(true);
     updatePlaybackState(false);
 
     const streamUrl = (retryCount > 0 && station.fallbackUrl) ? station.fallbackUrl : station.streamUrl;
+    currentStreamUrl = streamUrl;
     const isHls = station.isHls || streamUrl.includes('.m3u8');
 
     // HLS Support check
@@ -1517,7 +1760,8 @@
           for (const sample of data.samples) {
             if (sample.data) {
               try {
-                const str = new TextDecoder('utf-8').decode(sample.data);
+                const str = extractHlsTitle(sample.data);
+                if (!str) continue;
                 const cleaned = cleanStreamTitle(str);
                 if (cleaned && cleaned !== currentTrackTitle && cleaned.toLowerCase() !== station.name.toLowerCase()) {
                   onNewTrackInfo(cleaned, station);
@@ -1553,11 +1797,15 @@
   function handleFatalStreamError(station) {
     if (!station) return;
 
+    // A retry is already scheduled (audio 'error' and HLS 'fatal' can both fire for one failure)
+    if (retryTimer) return;
+
     if (retryCount === 0 && station.fallbackUrl && station.fallbackUrl !== station.streamUrl) {
       console.log('Retrying station with fallback URL...', station.name);
       retryCount++;
       if (playerTrack) playerTrack.textContent = `${station.name} (Retrying fallback...)`;
-      setTimeout(() => {
+      retryTimer = setTimeout(() => {
+        retryTimer = null;
         if (currentStation && currentStation.id === station.id) {
           startAudio(station);
         }
@@ -1569,7 +1817,8 @@
       console.log(`Retrying station attempt ${retryCount + 1}...`, station.name);
       retryCount++;
       if (playerTrack) playerTrack.textContent = `${station.name} (Reconnecting...)`;
-      setTimeout(() => {
+      retryTimer = setTimeout(() => {
+        retryTimer = null;
         if (currentStation && currentStation.id === station.id) {
           startAudio(station);
         }
@@ -1578,8 +1827,11 @@
     }
 
     console.warn('Stream unavailable after retries:', station.name);
+    streamOffline = true;
+    setBuffering(false);
     updatePlaybackState(false);
     if (playerTrack) playerTrack.textContent = `${station.name} (Stream Offline)`;
+    showToast(`${station.name} is offline right now. Try the next station.`, 'warn');
   }
 
   /** Toggle Play / Pause */
@@ -1595,7 +1847,11 @@
       audio.pause();
       updatePlaybackState(false);
     } else {
-      if (!audio.src && !hlsInstance) {
+      // A live stream paused for a while would resume from stale buffered audio (or a dropped
+      // connection). Reconnect to the live edge instead; short pauses just resume.
+      const stale = pausedAt > 0 && (Date.now() - pausedAt) > LIVE_RESUME_STALE_MS;
+      if ((!audio.src && !hlsInstance) || stale || streamOffline) {
+        retryCount = 0;
         startAudio(currentStation);
       } else {
         audio.play().catch(handlePlayError);
@@ -1607,7 +1863,8 @@
   /** Play next station in current filter */
   function playNext(fromUser = true) {
     const now = Date.now();
-    if (now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
+    // Only user taps are debounced; programmatic skips (e.g. after blocking) must always go through
+    if (fromUser && now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
     lastNavTimestamp = now;
 
     if (filteredStations.length === 0) return;
@@ -1616,18 +1873,32 @@
       if (shuffleDeck.length === 0) {
         refillShuffleDeck();
       }
-      const nextIdx = shuffleDeck.pop();
+      // The deck can contain the station we are on (e.g. after tapping a card directly): skip it
+      let nextIdx = shuffleDeck.pop();
+      if (nextIdx === currentIndex) {
+        if (shuffleDeck.length === 0) refillShuffleDeck();
+        nextIdx = shuffleDeck.pop();
+      }
       playStation(filteredStations[nextIdx], true);
     } else {
       const nextIdx = (currentIndex + 1) % filteredStations.length;
       playStation(filteredStations[nextIdx], true);
+    }
+    scrollActiveCardIntoView();
+  }
+
+  function scrollActiveCardIntoView() {
+    if (!stationsGrid) return;
+    const el = stationsGrid.querySelector('.station-card.active-playing');
+    if (el && el.scrollIntoView) {
+      try { el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {}
     }
   }
 
   /** Play previous station in current filter (never shuffle on back!) */
   function playPrevious(fromUser = true) {
     const now = Date.now();
-    if (now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
+    if (fromUser && now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
     lastNavTimestamp = now;
 
     if (filteredStations.length === 0) return;
@@ -1643,6 +1914,7 @@
 
     const prevIdx = (currentIndex - 1 + filteredStations.length) % filteredStations.length;
     playStation(filteredStations[prevIdx], false);
+    scrollActiveCardIntoView();
   }
 
   /** Toggle Favorite */
@@ -1664,8 +1936,9 @@
     if (currentStation && currentStation.id === id && favPlayerBtn) {
       const isFav = favorites.has(id);
       favPlayerBtn.classList.toggle('favorited', isFav);
-      favPlayerBtn.textContent = isFav ? '❤️' : '♡';
+      favPlayerBtn.innerHTML = heartSvg(isFav);
     }
+    updateHero();
   }
 
   let miniManuallyClosed = false;
@@ -1870,10 +2143,10 @@
 
     pipWindow.document.body.innerHTML = `
       <div class="pip-card">
-        <img class="pip-art" src="${art}" alt="Artwork" />
+        <img class="pip-art" src="${escapeHtml(art)}" alt="Artwork" />
         <div class="pip-info">
-          <div class="pip-title">${title}</div>
-          <div class="pip-sub">${sub}</div>
+          <div class="pip-title">${escapeHtml(title)}</div>
+          <div class="pip-sub">${escapeHtml(sub)}</div>
         </div>
         <div class="pip-controls">
           <button id="pip-prev" class="pip-btn" title="Previous">⏮</button>
@@ -1938,11 +2211,17 @@
 
   /** Update playback button and equalizer UI */
   function updatePlaybackState(playing) {
+    if (!playing && isPlaying) pausedAt = Date.now();
+    if (playing) pausedAt = 0;
     isPlaying = playing;
+    document.body.classList.toggle('is-playing', playing);
     if (playing) {
       cancelIdleShutdownWatchdog();
     } else {
       startIdleShutdownWatchdog();
+    }
+    if ('mediaSession' in navigator) {
+      try { navigator.mediaSession.playbackState = playing ? 'playing' : 'paused'; } catch (e) {}
     }
 
     if (playIcon) playIcon.style.display = playing ? 'none' : 'inline-block';
@@ -1962,6 +2241,7 @@
     renderVideoPipFrame();
     updateTabTitle();
     updateActiveStationCard();
+    updateHero();
   }
 
   /** Setup MediaSession API (Steering wheel & keyboard multimedia keys) */
@@ -1971,6 +2251,11 @@
       navigator.mediaSession.setActionHandler('pause', () => togglePlayPause());
       navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious(true));
       navigator.mediaSession.setActionHandler('nexttrack', () => playNext(true));
+      try {
+        navigator.mediaSession.setActionHandler('stop', () => {
+          if (isPlaying) togglePlayPause();
+        });
+      } catch (e) { /* 'stop' is not supported everywhere */ }
     }
   }
 
@@ -1993,15 +2278,42 @@
   function setupEventListeners() {
     // Audio events
     audio.addEventListener('playing', () => {
-      isBuffering = false;
       consecutiveAutoSkips = 0;
       retryCount = 0;
+      streamOffline = false;
+      setBuffering(false);
       updatePlaybackState(true);
+      // Resuming from a pause: the metadata reader was stopped to save bandwidth, restart it
+      if (currentStation && !metadataAbortController && currentStreamUrl) {
+        startIcyMetadataReader(currentStation, currentStreamUrl);
+      }
     });
-    audio.addEventListener('pause', () => updatePlaybackState(false));
-    audio.addEventListener('waiting', () => { isBuffering = true; });
+    audio.addEventListener('pause', () => {
+      setBuffering(false);
+      // Ignore the pause() that startAudio() itself issues while switching streams
+      if (Date.now() - lastStartAt > 1000) stopIcyMetadataReader();
+      updatePlaybackState(false);
+    });
+    audio.addEventListener('waiting', () => { if (!audio.paused) setBuffering(true); });
+    audio.addEventListener('canplay', () => { if (!audio.paused) setBuffering(false); });
     audio.addEventListener('error', () => {
+      // Clearing the src while switching stations can raise a spurious error: ignore it
+      if (!audio.getAttribute('src') && !hlsInstance) return;
       if (currentStation) handleFatalStreamError(currentStation);
+    });
+    // A live stream never legitimately ends: reconnect if the connection dropped
+    audio.addEventListener('ended', () => {
+      if (currentStation && isPlaying) {
+        retryCount = 0;
+        handleFatalStreamError(currentStation);
+      }
+    });
+    // Network came back while we were offline/stalled
+    window.addEventListener('online', () => {
+      if (currentStation && (streamOffline || (isPlaying && audio.paused))) {
+        retryCount = 0;
+        startAudio(currentStation);
+      }
     });
 
     // Player bar controls
@@ -2027,9 +2339,54 @@
     if (volumeSlider) {
       volumeSlider.addEventListener('input', (e) => {
         const val = parseFloat(e.target.value);
+        if (!Number.isFinite(val)) return;
         audio.volume = val;
+        if (audio.muted && val > 0) audio.muted = false;
         updateVolumeTrack(val);
+        updateMuteUI();
         localStorage.setItem(LS_VOLUME, val);
+      });
+    }
+
+    // Mute button
+    function updateMuteUI() {
+      if (!btnMute) return;
+      const muted = audio.muted || audio.volume === 0;
+      btnMute.innerHTML = iconSvg(muted ? 'i-mute' : 'i-volume');
+      btnMute.setAttribute('aria-pressed', muted ? 'true' : 'false');
+    }
+    if (btnMute) {
+      btnMute.addEventListener('click', () => {
+        if (audio.volume === 0) {
+          audio.volume = 0.5;
+          if (volumeSlider) volumeSlider.value = 0.5;
+          updateVolumeTrack(0.5);
+        }
+        audio.muted = !audio.muted;
+        updateMuteUI();
+      });
+      updateMuteUI();
+    }
+    window.toggleMuteShortcut = () => { if (btnMute) btnMute.click(); };
+
+    // Hero buttons
+    if (heroPlayBtn) heroPlayBtn.addEventListener('click', togglePlayPause);
+    if (heroLyricsBtn) heroLyricsBtn.addEventListener('click', () => openLyricsModal());
+    if (heroFavBtn) {
+      heroFavBtn.addEventListener('click', () => {
+        if (currentStation) toggleFavorite(currentStation.id);
+        else showToast('Pick a station first.');
+      });
+    }
+
+    // Station grid: one delegated handler (click + keyboard activation)
+    if (stationsGrid) {
+      stationsGrid.addEventListener('click', handleGridActivate);
+      stationsGrid.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('station-card')) {
+          e.preventDefault();
+          handleGridActivate(e);
+        }
       });
     }
 
@@ -2176,27 +2533,55 @@
 
     // Keyboard navigation (Space: Play/Pause, ArrowLeft: Prev, ArrowRight: Next, S: Shuffle, Escape: Close modal/cockpit)
     window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT') return;
-      if (e.code === 'Space') {
-        e.preventDefault();
-        togglePlayPause();
-      } else if (e.code === 'KeyS' || e.key === 's' || e.key === 'S') {
-        e.preventDefault();
-        toggleShuffle();
-      } else if (e.code === 'ArrowRight') {
-        e.preventDefault();
-        playNext(true);
-      } else if (e.code === 'ArrowLeft') {
-        e.preventDefault();
-        playPrevious(true);
-      } else if (e.code === 'Escape') {
+      // Never hijack browser shortcuts (Ctrl/Cmd+S, Alt+Left for back, ...)
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (e.target && e.target.isContentEditable)) return;
+
+      if (e.code === 'Escape') {
         if (drivingModeOverlay && drivingModeOverlay.classList.contains('active')) {
           drivingModeOverlay.classList.remove('active');
         }
         if (infoModal && infoModal.classList.contains('active')) {
           infoModal.classList.remove('active');
         }
+        return;
       }
+
+      // Space/Enter on a focused button or link must keep its normal action
+      // (otherwise Space would both click the button and toggle playback = no-op)
+      const onActivatable = tag === 'BUTTON' || tag === 'A' || (e.target && e.target.getAttribute && e.target.getAttribute('role') === 'button');
+
+      if (e.code === 'Space') {
+        if (onActivatable) return;
+        e.preventDefault();
+        togglePlayPause();
+      } else if (e.code === 'KeyS') {
+        e.preventDefault();
+        toggleShuffle();
+      } else if (e.code === 'KeyM') {
+        e.preventDefault();
+        if (window.toggleMuteShortcut) window.toggleMuteShortcut();
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        playNext(true);
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        playPrevious(true);
+      }
+    });
+
+    // Keyboard access for the mood navigation (sidebar items and mobile pills)
+    document.querySelectorAll('.nav-item, .mood-pill').forEach(el => {
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
     });
 
     initLyricsElements();
