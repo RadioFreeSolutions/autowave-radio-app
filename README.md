@@ -87,3 +87,5 @@ flowchart LR
   <sub>AutoWave Radio is an independent radio streamer aggregating publicly available broadcasts. All radio trademarks and logos belong to their respective broadcaster networks.</sub><br/>
   <sub>Drive Safe. Keep your eyes on the road.</sub>
 </div>
+
+<sub>Latest release: v5.24.1 (Nov 2026).</sub>
