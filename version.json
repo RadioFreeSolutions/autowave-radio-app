@@ -1,6 +1,6 @@
 {
-  "versionCode": 42,
-  "versionName": "5.24.2",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.24.2-release.apk",
-  "releaseNotes": "AutoWave Radio v5.24.2: live lyrics now start in sync. A per-station timing correction (remembered, adjustable in half-second steps) fixes the 1-5 second lag."
+  "versionCode": 43,
+  "versionName": "5.25.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.25.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.25.0: gentle station changes (the current station fades out and the next one fades in), favorites and blocked stations survive a reinstall (automatic backup plus Save/Restore in Settings), the app now closes after 5 minutes without playback, and the total station count is no longer shown anywhere."
 }
