@@ -1,6 +1,6 @@
 {
-  "versionCode": 41,
-  "versionName": "5.24.1",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.24.1-release.apk",
-  "releaseNotes": "AutoWave Radio v5.24.1: app facelift (new header, cleaner station cards, real icons, polished players, brand glow), proper adaptive launcher icon so Android Auto and the launcher show the AutoWave logo instead of a black circle on a white square, lyrics always left-to-right (English), lower battery use (the lyrics timer only runs while lyrics are being viewed)."
+  "versionCode": 42,
+  "versionName": "5.24.2",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.24.2-release.apk",
+  "releaseNotes": "AutoWave Radio v5.24.2: live lyrics now start in sync. A per-station timing correction (remembered, adjustable in half-second steps) fixes the 1-5 second lag."
 }

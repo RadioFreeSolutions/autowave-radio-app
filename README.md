@@ -7,20 +7,20 @@
 **Live Hit Radio & Curated Driving Moods for Android & Android Auto**
 
 [![Android Auto](https://img.shields.io/badge/Android%20Auto-100%25%20Certified-00FF7F?style=for-the-badge&logo=androidauto&logoColor=black)](https://github.com/RadioFreeSolutions/autowave-radio-app)
-[![Version](https://img.shields.io/badge/Version-5.24.1-7C4DFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/RadioFreeSolutions/autowave-radio-app)
-[![Size](https://img.shields.io/badge/APK%20Size-4.1%20MB-00FF7F?style=for-the-badge)](autowave-radio-v5.24.1-release.apk)
+[![Version](https://img.shields.io/badge/Version-5.24.2-7C4DFF?style=for-the-badge&logo=android&logoColor=white)](https://github.com/RadioFreeSolutions/autowave-radio-app)
+[![Size](https://img.shields.io/badge/APK%20Size-4.1%20MB-00FF7F?style=for-the-badge)](autowave-radio-v5.24.2-release.apk)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20No%20Ads%20Added-FF9100?style=for-the-badge)](https://github.com/RadioFreeSolutions/autowave-radio-app)
 [![License](https://img.shields.io/badge/License-Free-blue?style=for-the-badge)](https://github.com/RadioFreeSolutions/autowave-radio-app)
 
 <br/>
 
-<a href="autowave-radio-v5.24.1-release.apk">
-  <img src="https://img.shields.io/badge/⬇️%20DOWNLOAD%20RELEASE%20APK%20(v5.24.1)-00FF7F?style=for-the-badge&logoColor=black&labelColor=1A2333" height="52" alt="Download APK" />
+<a href="autowave-radio-v5.24.2-release.apk">
+  <img src="https://img.shields.io/badge/⬇️%20DOWNLOAD%20RELEASE%20APK%20(v5.24.2)-00FF7F?style=for-the-badge&logoColor=black&labelColor=1A2333" height="52" alt="Download APK" />
 </a>
 
 <br/><br/>
 
-[📱 **Direct APK Download**](autowave-radio-v5.24.1-release.apk) • [🌐 **Live Web Player**](web/) • [🛡️ **Privacy Policy**](privacy.html)
+[📱 **Direct APK Download**](autowave-radio-v5.24.2-release.apk) • [🌐 **Live Web Player**](web/) • [🛡️ **Privacy Policy**](privacy.html)
 
 ---
 
@@ -62,7 +62,7 @@ flowchart LR
     A["1. Download APK\n(Tap the button above)"] --> B["2. Tap Open\n(Allow unknown apps if asked)"] --> C["3. Tap Install\n& Drive Safe! 🚗"]
 ```
 
-1. **Download:** Tap the [Download APK Link](autowave-radio-v5.24.1-release.apk) (only 4.1 MB).
+1. **Download:** Tap the [Download APK Link](autowave-radio-v5.24.2-release.apk) (only 4.1 MB).
 2. **Open:** When download completes, tap the notification or open the file from your Downloads folder.
    *(If prompted by Android: toggle "Allow from this source" to permit installation).*
 3. **Launch:** Tap **Install** and open **AutoWave Radio**!
@@ -74,7 +74,7 @@ flowchart LR
 
 * **App Name:** AutoWave Radio
 * **Package ID:** `com.autowave.radio`
-* **Version:** `5.24.1` (Build 41)
+* **Version:** `5.24.2` (Build 42)
 * **File Size:** ~4.1 MB (R8 / ProGuard optimized)
 * **Min Android Version:** Android 6.0 (API 23+)
 * **Target Android Version:** Android 15 / 16 (API 36)
@@ -88,4 +88,4 @@ flowchart LR
   <sub>Drive Safe. Keep your eyes on the road.</sub>
 </div>
 
-<sub>Latest release: v5.24.1 (Nov 2026).</sub>
+<sub>Latest release: v5.24.2 (Nov 2026).</sub>
