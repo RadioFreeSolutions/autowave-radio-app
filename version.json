@@ -1,6 +1,6 @@
 {
-  "versionCode": 43,
-  "versionName": "5.25.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.25.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.25.0: gentle station changes (the current station fades out and the next one fades in), favorites and blocked stations survive a reinstall (automatic backup plus Save/Restore in Settings), the app now closes after 5 minutes without playback, and the total station count is no longer shown anywhere."
+  "versionCode": 44,
+  "versionName": "5.25.1",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.25.1-release.apk",
+  "releaseNotes": "AutoWave Radio v5.25.1: fixes a crash caused by Android Auto / notification artwork memory use, listening for hours with the screen off no longer ends the app (sleep guard is now unlimited by default), plus gentle station fades, favorites and blocked stations that survive a reinstall, and a 5 minute no-playback close."
 }
