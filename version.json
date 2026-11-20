@@ -1,6 +1,6 @@
 {
-  "versionCode": 46,
-  "versionName": "5.26.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.26.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.26.0: a failing stream gets one more try after 15 seconds and then the app moves to the next station; a station that fails 5 times in a row is blocked automatically. With no network connection nothing is skipped or blocked."
+  "versionCode": 47,
+  "versionName": "5.27.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.27.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.27.0: redesigned lyrics sync - lyrics no longer jump back when a station flashes its name or a slogan mid-song, lines change exactly on time, lyrics load instantly for songs heard before and retry by themselves when the lyrics service is busy. The artist name is always shown in Android Auto, song names no longer show HTML or broadcaster tags, and the Lyrics button (phone and car) now remembers your choice."
 }
