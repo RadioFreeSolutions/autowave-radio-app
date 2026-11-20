@@ -94,6 +94,9 @@
   // Reconnect / pause bookkeeping
   const LIVE_RESUME_STALE_MS = 15000; // a paused live stream older than this is reloaded instead of resumed
   let pausedAt = 0;
+  // True only when the LISTENER paused/stopped. The 'pause' event (which also fires right before
+  // 'ended' when a server drops the stream) cannot tell the difference, so reconnect logic uses this.
+  let userPaused = false;
   let lastStartAt = 0;
   let retryTimer = null;
   let streamOffline = false;
@@ -139,7 +142,7 @@
   const shelfTitle = document.getElementById('shelf-title');
   const shelfSubtitle = document.getElementById('shelf-subtitle');
   const btnUnblockAll = document.getElementById('btn-unblock-all');
-  const navItems = document.querySelectorAll('.nav-item');
+  const navItems = document.querySelectorAll('.nav-item[data-mood]'); // not the Info button
 
   // Player DOM Elements
   const playerArt = document.getElementById('player-art');
@@ -393,6 +396,9 @@
       return true;
     });
 
+    // The playing station's position in the NEW list (it was the position in the old one, so Next
+    // played an arbitrary station and the shuffle deck excluded the wrong card)
+    currentIndex = currentStation ? filteredStations.findIndex(s => s.id === currentStation.id) : -1;
     refillShuffleDeck();
 
     // Update shelf title and subtitle dynamically
@@ -866,6 +872,9 @@
 
   /** Stop audio and release the stream (used when nothing is left to play) */
   function stopPlaybackCompletely() {
+    // A pending reconnect would otherwise restart the station we just stopped (e.g. just blocked)
+    if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+    userPaused = true;
     stopIcyMetadataReader();
     if (hlsInstance) {
       try { hlsInstance.destroy(); } catch (e) {}
@@ -1016,7 +1025,9 @@
 
   function cleanStreamTitle(raw) {
     if (!raw) return "";
-    let text = raw.trim();
+    const LS = window.AutoWaveLyricsSync;
+    // HTML/XML tags, entities, URL encoding, JSON and invisible characters -> plain text
+    let text = LS ? LS.sanitizeTitle(raw) : String(raw).trim();
     if (!text) return "";
 
     // 1. Extract content inside StreamTitle='...' or StreamTitle="..." or StreamTitle=...
@@ -1078,6 +1089,8 @@
     // 3. Strip all broadcast metadata key-value parameters
     const paramRegex = /[,;]?\s*\b(?:amgTrackId|itunesTrackId|MediaBaseId|cartcutId|song_spot|length|time|uid|buyurl|StreamUrl|url|artist|title|album|song|text|label|genre)\s*=\s*(?:"[^"]*"|'[^']*'|[^\s;,]+)/gi;
     text = text.replace(paramRegex, '').trim();
+    // ...and every other automation tag (amgArtistId, TAID, TPID, unsID, spotInstanceId, ...)
+    if (LS) text = LS.stripAutomationTags(text);
 
     // 4. Filter out commercials, promos, station bumpers, spot blocks
     const promoRegex = /^(?:-\s*)?(?:spot\s*block.*|commercial.*|(?:stop\s*|start\s*)?ad\s*-?\s*break.*|ad\s*\d+|station\s*id.*|sweeper.*|jingle.*|promo.*|.*\bpreset\s*\d+.*|.*#1\s+(?:hit\s+)?music\s+station.*|unknown|no\s*title|live\s*stream)$/i;
@@ -1134,7 +1147,7 @@
       return "";
     }
 
-    return text;
+    return LS ? LS.clampTitle(text) : text;
   }
 
   function onNewTrackInfo(track, station) {
@@ -1390,7 +1403,44 @@
    * Looks the song up on LRCLIB with progressively wider queries, then lets the local matcher pick
    * the right entry. `failed` is true only when no request could be completed at all (offline).
    */
-  async function fetchLyricCandidates(rawTrack) {
+  // Lookup cache: stations rotate the same hits and re-announce songs after slogans. Each of those used
+  // to be a fresh LRCLIB round-trip (slow, and bursts are answered with 429). Failures are never cached.
+  const lyricsCache = new Map(); // key -> {result, at}
+  const LYRICS_CACHE_MAX = 120;
+  const LYRICS_FOUND_TTL_MS = 12 * 60 * 60 * 1000;
+  const LYRICS_NOT_FOUND_TTL_MS = 30 * 60 * 1000;
+  const LYRICS_RETRY_DELAYS_MS = [6000, 20000];
+
+  function lyricsCacheKey(rawTrack) {
+    return LyricsSync.normalizeText(rawTrack).replace(/ /g, '');
+  }
+
+  /** Cached lookup with automatic retries while the lyrics service cannot be reached. */
+  async function fetchLyricCandidates(rawTrack, isCurrent = () => true) {
+    const key = lyricsCacheKey(rawTrack);
+    const hit = lyricsCache.get(key);
+    if (hit) {
+      const ttl = hit.result.candidates.length ? LYRICS_FOUND_TTL_MS : LYRICS_NOT_FOUND_TTL_MS;
+      if (Date.now() - hit.at <= ttl) {
+        lyricsCache.delete(key); lyricsCache.set(key, hit); // most recently used last
+        return hit.result;
+      }
+      lyricsCache.delete(key);
+    }
+    let result = await fetchLyricCandidatesOnce(rawTrack);
+    for (let i = 0; result.failed && i < LYRICS_RETRY_DELAYS_MS.length && isCurrent(); i++) {
+      await new Promise(r => setTimeout(r, LYRICS_RETRY_DELAYS_MS[i]));
+      if (!isCurrent()) break;
+      result = await fetchLyricCandidatesOnce(rawTrack);
+    }
+    if (!result.failed) {
+      lyricsCache.set(key, { result, at: Date.now() });
+      while (lyricsCache.size > LYRICS_CACHE_MAX) lyricsCache.delete(lyricsCache.keys().next().value);
+    }
+    return result;
+  }
+
+  async function fetchLyricCandidatesOnce(rawTrack) {
     const seen = new Set();
     const all = [];
     let okRequests = 0;
@@ -1482,28 +1532,37 @@
     stopSyncAnimation();
   }
 
-  // A 250ms timer (not requestAnimationFrame): lyric lines change every few seconds, and a timer keeps
-  // running in background tabs and embedded views where animation frames are suspended.
+  // A timer (not requestAnimationFrame): it keeps running in background tabs and embedded views where
+  // animation frames are suspended. It wakes up right at the next line boundary (a fixed 250 ms
+  // interval showed each line up to a quarter second late), never busier than every 40 ms.
+  const LYRICS_TICK_MS = 250;
   function startSyncAnimation() {
     stopSyncAnimation();
     lyricsLastActiveIdx = -1;
     syncLyricsFrame();
-    lyricsAnimFrame = setInterval(syncLyricsFrame, 250);
   }
 
   function stopSyncAnimation() {
     if (lyricsAnimFrame) {
-      clearInterval(lyricsAnimFrame);
+      clearTimeout(lyricsAnimFrame);
       lyricsAnimFrame = null;
     }
   }
 
   function syncLyricsFrame() {
+    lyricsAnimFrame = null;
     if (!lyricsVisible || lyricsLines.length === 0 || !syncEngine) {
       stopSyncAnimation();
       return;
     }
     const res = syncEngine.evaluate(mediaNowSec());
+    let delay = LYRICS_TICK_MS;
+    if ((res.status === LyricsSync.STATUS.SYNCED || res.status === LyricsSync.STATUS.MANUAL) &&
+        Number.isFinite(res.elapsed) && !audio.paused) {
+      const toNext = LyricsSync.secondsToNextLine(syncEngine.lyrics.lines, res.activeIndex, res.elapsed);
+      if (toNext !== null) delay = Math.max(40, Math.min(LYRICS_TICK_MS, toNext * 1000 + 30));
+    }
+    lyricsAnimFrame = setTimeout(syncLyricsFrame, delay);
     applySyncStatusUi(res);
 
     // Highlight ONLY when the engine vouches for the position; otherwise show lyrics without a cursor
@@ -1547,7 +1606,7 @@
     if (lyricsTrackName) lyricsTrackName.textContent = parsedQuery.title || track;
     if (lyricsArtistName) lyricsArtistName.textContent = parsedQuery.artist || '';
 
-    const { candidates, failed } = await fetchLyricCandidates(track);
+    const { candidates, failed } = await fetchLyricCandidates(track, () => token === lyricsLoadToken);
     // Guard: the track (or stream) changed while we were loading
     if (token !== lyricsLoadToken) return;
 
@@ -1588,10 +1647,20 @@
     renderNoResults(track, false);
   }
 
+  // Lyrics on/off is remembered like shuffle: one press, kept across visits until pressed again
+  const LS_LYRICS = 'autowave_radio_lyrics';
+  function rememberLyrics(on) {
+    try { localStorage.setItem(LS_LYRICS, on ? 'true' : 'false'); } catch (e) { /* private mode */ }
+  }
+  function lyricsRemembered() {
+    try { return localStorage.getItem(LS_LYRICS) === 'true'; } catch (e) { return false; }
+  }
+
   function openLyricsModal() {
     if (!lyricsOverlay) return;
     lyricsOverlay.classList.remove('hidden');
     lyricsVisible = true;
+    rememberLyrics(true);
     const track = currentTrackTitle;
     if (track && track !== lyricsCurrentTrack) {
       loadLyricsForTrack(track);
@@ -1627,6 +1696,7 @@
     if (!lyricsOverlay) return;
     lyricsOverlay.classList.add('hidden');
     lyricsVisible = false;
+    rememberLyrics(false);
     stopSyncAnimation();
   }
 
@@ -1713,8 +1783,15 @@
 
         if (metaLength > 0) {
           const metaBytes = buffer.slice(metaint + 1, totalBlock);
-          const metaStr = new TextDecoder('utf-8').decode(metaBytes);
-          const match = metaStr.match(/StreamTitle=['"]?(.*?)['"]?(?:;|$)/i);
+          // Many Shoutcast/Icecast servers send Latin-1: decode strictly as UTF-8, fall back to Latin-1
+          let metaStr;
+          try { metaStr = new TextDecoder('utf-8', { fatal: true }).decode(metaBytes); }
+          catch (e) { metaStr = new TextDecoder('iso-8859-1').decode(metaBytes); }
+          metaStr = metaStr.replace(/\u0000+$/g, '');
+          // Quoted form first, so a ';' inside the title ("A - Song; Remix") is not a terminator
+          const match = metaStr.match(/StreamTitle='([\s\S]*?)';/i) ||
+            metaStr.match(/StreamTitle="([\s\S]*?)";/i) ||
+            metaStr.match(/StreamTitle=['"]?(.*?)['"]?(?:;|$)/i);
           if (match && match[1]) {
             const cleaned = cleanStreamTitle(match[1]);
             if (cleaned) {
@@ -1808,6 +1885,7 @@
     retryTimer = null;
     lastStartAt = Date.now();
     streamOffline = false;
+    userPaused = false;
     resetLyricsSyncForNewStream();
 
     if (hlsInstance) {
@@ -1880,6 +1958,8 @@
   /** Handle play promise error */
   function handlePlayError(err) {
     console.warn('Playback error or blocked by autoplay:', err);
+    // An aborted play() is just a station switch; anything else must not leave "CONNECTING..." up
+    if (!err || err.name !== 'AbortError') setBuffering(false);
     updatePlaybackState(false);
   }
 
@@ -1924,6 +2004,21 @@
     showToast(`${station.name} is offline right now. Try the next station.`, 'warn');
   }
 
+  /** Listener pause / stop (also cancels a pending reconnect). */
+  function pausePlayback() {
+    userPaused = true;
+    if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+    audio.pause();
+    setBuffering(false);
+    updatePlaybackState(false);
+  }
+
+  /** Listener play: explicit, so a headset/steering-wheel "play" never pauses. */
+  function resumePlayback() {
+    if (isPlaying && !audio.paused) return;
+    togglePlayPause();
+  }
+
   /** Toggle Play / Pause */
   function togglePlayPause() {
     if (!currentStation) {
@@ -1933,10 +2028,11 @@
       return;
     }
 
-    if (isPlaying) {
-      audio.pause();
-      updatePlaybackState(false);
+    // Connecting or waiting for a retry counts as "on": the press must stop it, not start it again
+    if (isPlaying || isBuffering || retryTimer) {
+      pausePlayback();
     } else {
+      userPaused = false;
       // A live stream paused for a while would resume from stale buffered audio (or a dropped
       // connection). Reconnect to the live edge instead; short pauses just resume.
       const stale = pausedAt > 0 && (Date.now() - pausedAt) > LIVE_RESUME_STALE_MS;
@@ -1956,6 +2052,19 @@
     // Only user taps are debounced; programmatic skips (e.g. after blocking) must always go through
     if (fromUser && now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
     lastNavTimestamp = now;
+
+    // In the Block List view the visible list is ONLY blocked stations: never play from it
+    if (currentMood === 'BLOCKED') {
+      const pool = stations.filter(s => !blockedStations.has(s.id));
+      if (pool.length === 0) return;
+      const at = currentStation ? pool.findIndex(s => s.id === currentStation.id) : -1;
+      const others = pool.filter(s => !currentStation || s.id !== currentStation.id);
+      const pick = (isShuffle && others.length > 0)
+        ? others[Math.floor(Math.random() * others.length)]
+        : pool[(at + 1) % pool.length];
+      playStation(pick, true);
+      return;
+    }
 
     if (filteredStations.length === 0) return;
 
@@ -1991,19 +2100,22 @@
     if (fromUser && now - lastNavTimestamp < NAV_DEBOUNCE_MS) return;
     lastNavTimestamp = now;
 
-    if (filteredStations.length === 0) return;
+    // Block List view: step back through the non-blocked stations, never into a blocked one
+    const prevPool = currentMood === 'BLOCKED' ? stations.filter(s => !blockedStations.has(s.id)) : filteredStations;
+    if (prevPool.length === 0) return;
 
     if (playbackHistory.length > 0) {
       const prevId = playbackHistory.pop();
-      const found = filteredStations.find(s => s.id === prevId);
+      const found = prevPool.find(s => s.id === prevId);
       if (found && (!currentStation || found.id !== currentStation.id)) {
         playStation(found, false);
         return;
       }
     }
 
-    const prevIdx = (currentIndex - 1 + filteredStations.length) % filteredStations.length;
-    playStation(filteredStations[prevIdx], false);
+    const at = currentStation ? prevPool.findIndex(s => s.id === currentStation.id) : -1;
+    const prevIdx = ((at < 0 ? 0 : at) - 1 + prevPool.length) % prevPool.length;
+    playStation(prevPool[prevIdx], false);
     scrollActiveCardIntoView();
   }
 
@@ -2337,8 +2449,8 @@
   /** Setup MediaSession API (Steering wheel & keyboard multimedia keys) */
   function setupMediaSession() {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.setActionHandler('play', () => togglePlayPause());
-      navigator.mediaSession.setActionHandler('pause', () => togglePlayPause());
+      navigator.mediaSession.setActionHandler('play', () => resumePlayback());
+      navigator.mediaSession.setActionHandler('pause', () => pausePlayback());
       navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious(true));
       navigator.mediaSession.setActionHandler('nexttrack', () => playNext(true));
       try {
@@ -2351,8 +2463,14 @@
 
   function updateMediaSession(station, track = '') {
     if ('mediaSession' in navigator && station) {
-      const displayTitle = track || station.name;
-      const displayArtist = track ? `${station.name} • AutoWave Radio` : `AutoWave Radio • ${station.country || 'Live Radio'}`;
+      // Lock screen / Bluetooth car displays: song as the title and the ARTIST on the artist line
+      const sep = track ? track.indexOf(' - ') : -1;
+      const songArtist = sep > 0 ? track.slice(0, sep).trim() : '';
+      const songTitle = sep > 0 ? track.slice(sep + 3).trim() : track;
+      const displayTitle = songTitle || station.name;
+      const displayArtist = track
+        ? (songArtist ? `${songArtist} • ${station.name}` : `${station.name} • AutoWave Radio`)
+        : `AutoWave Radio • ${station.country || 'Live Radio'}`;
       navigator.mediaSession.metadata = new MediaMetadata({
         title: displayTitle,
         artist: displayArtist,
@@ -2372,9 +2490,12 @@
       retryCount = 0;
       streamOffline = false;
       setBuffering(false);
+      const resumedFromPause = pausedAt > 0;
       updatePlaybackState(true);
-      // Resuming from a pause: the metadata reader was stopped to save bandwidth, restart it
-      if (currentStation && !metadataAbortController && currentStreamUrl) {
+      // Resuming from a REAL pause (not a rebuffer): the metadata reader was stopped to save bandwidth,
+      // restart it. HLS titles come from the stream itself and need no reader.
+      const isHlsNow = !!hlsInstance || (currentStreamUrl || '').includes('.m3u8');
+      if (resumedFromPause && currentStation && !metadataAbortController && currentStreamUrl && !isHlsNow) {
         if (syncEngine) syncEngine.markNextTrackUncertain();
         startIcyMetadataReader(currentStation, currentStreamUrl);
       }
@@ -2394,7 +2515,8 @@
     });
     // A live stream never legitimately ends: reconnect if the connection dropped
     audio.addEventListener('ended', () => {
-      if (currentStation && isPlaying) {
+      // 'pause' fires just before 'ended' and clears isPlaying, so only the listener's own pause counts
+      if (currentStation && !userPaused) {
         retryCount = 0;
         handleFatalStreamError(currentStation);
       }
@@ -2664,7 +2786,7 @@
     });
 
     // Keyboard access for the mood navigation (sidebar items and mobile pills)
-    document.querySelectorAll('.nav-item, .mood-pill').forEach(el => {
+    document.querySelectorAll('.nav-item[data-mood], .mood-pill').forEach(el => {
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
       el.addEventListener('keydown', (e) => {
@@ -2676,6 +2798,8 @@
     });
 
     initLyricsElements();
+    // The listener left lyrics on last time: they stay on
+    if (lyricsRemembered()) openLyricsModal();
   }
 
   // Run on DOM ready

@@ -44,6 +44,8 @@
   const EARLY_SEC = 3;             // how far before the anchor we tolerate (clock/jitter)
   const TIMING_TOLERANCE_SEC = 12; // |interval between titles - lyric duration| considered consistent
   const TIMING_BAD_SEC = 30;       // ...a next title this much EARLIER than the lyric duration is a timing failure
+  const RECENT_SONGS = 4;          // songs remembered so a slogan title cannot destroy a song's anchor
+  const RESTORE_WINDOW_SEC = 360;  // restore window for a song whose duration is not known yet
 
   // ---------------------------------------------------------------------------------------------
   // Text normalisation and similarity
@@ -239,6 +241,8 @@
       this.nudgeSec = 0;
       this.seenTrackSinceConnect = false;
       this.timing = { trusted: false, strikes: 0 };
+      this.recent = [];            // last few song anchors (newest last), see onTrack "restored"
+      this.pendingStrike = false;  // early title: a strike only once it proves to be a real song
     }
 
     /**
@@ -254,6 +258,29 @@
         this.anchor.title = title;
         return { fresh: this.anchor.fresh, refinement: true };
       }
+      // A song interrupted by a slogan / station-name / jingle title and then re-announced: resume it
+      // from its ORIGINAL start instead of restarting the lyrics from the top.
+      if (Number.isFinite(mediaStartSec)) {
+        for (let i = this.recent.length - 1; i >= 0; i--) {
+          const r = this.recent[i];
+          const restoreWindow = (Number.isFinite(r.durationSec) ? r.durationSec : RESTORE_WINDOW_SEC) + OVERRUN_SEC;
+          const since = mediaStartSec - r.startSec;
+          if (r !== this.anchor && sameSong(r.title, title) && since >= 0 && since <= restoreWindow) {
+            this.recent.splice(i, 1);
+            this.recent.push(r);
+            r.title = title;
+            this.pendingStrike = false;
+            this.prevAnchor = this.anchor;
+            this.anchor = r;
+            this.lyrics = null;
+            this.manualStart = null;
+            this.nudgeSec = 0;
+            this.seenTrackSinceConnect = true;
+            return { fresh: r.fresh, refinement: false, restored: true };
+          }
+        }
+      }
+      this.pendingStrike = false;
       const fresh = this.seenTrackSinceConnect;   // first title after connecting = mid-song
       // Timing validation: the gap between two witnessed song starts should match the lyric duration
       if (fresh && this.anchor && this.anchor.fresh && this.lyrics && this.lyrics.verified &&
@@ -266,13 +293,14 @@
           this.timing.trusted = true;
           this.timing.strikes = 0;
         } else if (delta < -TIMING_BAD_SEC) {
-          this.timing.strikes++;
-          this.timing.trusted = false;
+          this.pendingStrike = true; // judged in setLyrics: slogans flashed mid-song are not songs
         }
       }
       this.seenTrackSinceConnect = true;
       this.prevAnchor = this.anchor;
-      this.anchor = { startSec: mediaStartSec, fresh, title };
+      this.anchor = { startSec: mediaStartSec, fresh, title, durationSec: null };
+      this.recent.push(this.anchor);
+      while (this.recent.length > RECENT_SONGS) this.recent.shift();
       this.lyrics = null;
       this.manualStart = null;
       this.nudgeSec = 0;
@@ -290,6 +318,14 @@
     /** @param {{lines:Array, durationSec:number, verified:boolean, plain:string[], manualOnly:boolean}|null} l */
     setLyrics(l) {
       this.lyrics = l;
+      if (l && l.verified) {
+        if (this.anchor) this.anchor.durationSec = l.durationSec;
+        if (this.pendingStrike) {
+          this.timing.strikes++;
+          this.timing.trusted = false;
+        }
+      }
+      if (l) this.pendingStrike = false; // setLyrics(null) means "loading": verdict still pending
       this.manualStart = null;
       this.nudgeSec = 0;
     }
@@ -338,6 +374,118 @@
     }
   }
 
+  /** Seconds until the line after `index` starts, or null when there is none. */
+  function secondsToNextLine(lines, index, elapsed) {
+    const next = lines[index + 1];
+    return next ? Math.max(0, next.time - elapsed) : null;
+  }
+
+  // ---------------------------------------------------------------------------------------------
+  // Live title sanitising (port of TrackTitleSanitizer + cleanStreamTitle tag removal in the app)
+  // ---------------------------------------------------------------------------------------------
+
+  const NAMED_ENTITIES = {
+    amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', ndash: '–', mdash: '—',
+    lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”', hellip: '…',
+    aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú',
+    Aacute: 'Á', Eacute: 'É', agrave: 'à', egrave: 'è', auml: 'ä', ouml: 'ö',
+    uuml: 'ü', Auml: 'Ä', Ouml: 'Ö', Uuml: 'Ü', szlig: 'ß', ntilde: 'ñ',
+    ccedil: 'ç', oslash: 'ø', aring: 'å', copy: '©', reg: '®', trade: '™'
+  };
+  const TITLE_MAX = 140;
+  const RE_TAG = /<\/?[A-Za-z][A-Za-z0-9:_-]*(?:\s[^<>]{0,400})?\/?>/g;
+
+  function decodeEntities(input) {
+    let text = String(input);
+    for (let pass = 0; pass < 2 && text.includes('&'); pass++) {
+      text = text.replace(/&(#[xX][0-9a-fA-F]{1,6}|#\d{1,7}|[A-Za-z]{2,8});?/g, (m, body) => {
+        let cp = null;
+        if (/^#[xX]/.test(body)) cp = parseInt(body.slice(2), 16);
+        else if (body[0] === '#') cp = parseInt(body.slice(1), 10);
+        if (cp !== null) {
+          return (cp >= 1 && cp <= 0x10FFFF && !(cp >= 0xD800 && cp <= 0xDFFF)) ? String.fromCodePoint(cp) : '';
+        }
+        return Object.prototype.hasOwnProperty.call(NAMED_ENTITIES, body) ? NAMED_ENTITIES[body] : m;
+      });
+    }
+    return text;
+  }
+
+  function xmlField(text, names) {
+    for (const n of names) {
+      const m = new RegExp('<' + n + '(?:\\s[^>]*)?>([\\s\\S]*?)</' + n + '>', 'i').exec(text);
+      if (m) {
+        const v = m[1].replace(RE_TAG, ' ').replace(/\s+/g, ' ').trim();
+        if (v) return v;
+      }
+    }
+    return null;
+  }
+
+  function jsonField(text, names) {
+    for (const n of names) {
+      const m = new RegExp('"' + n + '"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"', 'i').exec(text);
+      if (m && m[1].trim()) return m[1].replace(/\\"/g, '"').replace(/\\\//g, '/').trim();
+    }
+    return null;
+  }
+
+  /**
+   * Broadcaster metadata -> plain text, BEFORE the player's song/artist parsing: HTML/XML tags,
+   * entities (also double-encoded), URL encoding, JSON payloads and invisible characters.
+   * key="value" tags are left for the parser (it reads artist=/title=); see stripAutomationTags.
+   */
+  function sanitizeTitle(raw) {
+    if (raw == null) return '';
+    let text = String(raw);
+    if (!text.trim()) return '';
+    if ((text.match(/%[0-9A-Fa-f]{2}/g) || []).length >= 2) {
+      try { text = decodeURIComponent(text.replace(/\+/g, '%2B')); } catch (_) { /* keep as is */ }
+    }
+    text = decodeEntities(text);
+    if (text.includes('<') && text.includes('>')) {
+      const artist = xmlField(text, ['artist', 'performer', 'creator']);
+      const title = xmlField(text, ['title', 'song', 'track', 'name']);
+      if (artist && title) {
+        text = artist + ' - ' + title;
+      } else {
+        text = text.replace(/<\?[^>]*\?>|<!--[\s\S]*?-->/g, ' ').replace(/<br\s*\/?>/gi, ' - ').replace(RE_TAG, ' ');
+      }
+    }
+    const t = text.trim();
+    if (t[0] === '{' && t.includes('":')) {
+      const artist = jsonField(t, ['artist', 'artistName', 'performer']);
+      const title = jsonField(t, ['title', 'song', 'track', 'trackName', 'name']);
+      if (artist && title) text = artist + ' - ' + title;
+      else if (title) text = title;
+    }
+    text = text.replace(/[\u0000-\u001F\u007F-\u009F­​-‏‪-‮⁠-⁤⁦-⁩﻿�]/g, ' ');
+    text = text.replace(/\s+/g, ' ').trim();
+    return text.length > TITLE_MAX * 3 ? text.slice(0, TITLE_MAX * 3) : text;
+  }
+
+  /**
+   * Removes every automation key="value" tag that is left AFTER the title/artist keys were read
+   * (amgArtistId, TAID, TPID, unsID, spotInstanceId, amgArtworkURL, ...). Keys of 3+ characters only, so
+   * "E=MC2" survives; apostrophes are never touched ("Guns N' Roses").
+   */
+  function stripAutomationTags(input) {
+    let text = String(input || '');
+    text = text.replace(/[,;]?\s*\b[A-Za-z_][A-Za-z0-9_.-]{2,}\s*=\s*(?:"[^"]*"|'[^']*')/g, '').trim();
+    const tail = /\s[A-Za-z_][A-Za-z0-9_.-]{2,}\s*=\s*["']/.exec(text); // broken quoting: cut the rest
+    if (tail) text = text.slice(0, tail.index);
+    return text.replace(/(^|\s)[A-Za-z]?"+(?=\s|$)/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  /** Final length guard for anything shown on screen. */
+  function clampTitle(text, max = TITLE_MAX) {
+    const s = String(text || '');
+    if (s.length <= max) return s;
+    let cut = s.lastIndexOf(' ', max - 1);
+    if (cut <= max / 2) cut = max - 1;
+    return s.slice(0, cut).replace(/[\s,(\[-]+$/, '') + '…';
+  }
+
   function indexAt(lines, elapsed) {
     // last line whose time <= elapsed (lines are sorted)
     let lo = 0, hi = lines.length - 1, ans = -1;
@@ -375,6 +523,7 @@
   return {
     STATUS, VERIFIED_COMBINED, MIN_DURATION_SEC, OVERRUN_SEC, EARLY_SEC,
     normalizeText, similarity, parseTrack, scoreCandidate, isVerified, chooseBest, durationOk,
-    parseLrc, SyncEngine, indexAt, buildQueries, sameSong
+    parseLrc, SyncEngine, indexAt, buildQueries, sameSong, secondsToNextLine, sanitizeTitle, decodeEntities,
+    stripAutomationTags, clampTitle
   };
 });
