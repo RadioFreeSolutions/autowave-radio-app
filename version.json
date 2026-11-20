@@ -1,6 +1,6 @@
 {
-  "versionCode": 48,
-  "versionName": "5.28.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.28.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.28.0: Shuffle is remembered like Lyrics (car and phone stay in sync); favourites found in online search now appear in Favorites; Unblock All no longer brings old blocks back; Previous works on the first press and across folders; a failing last station moves on instead of going silent; blocking no longer skips an extra station; voice next/previous station works; sleep timer and car-disconnect shutdown fixed; web player: reconnects when a stream drops, lyrics sync redesign and clean song names."
+  "versionCode": 49,
+  "versionName": "5.29.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.29.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.29.0: lyrics are now saved on your device (up to 100 MB), so songs you have heard before show their lyrics instantly after a restart, offline, and when the lyrics service is down."
 }

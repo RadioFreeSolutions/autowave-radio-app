@@ -1407,12 +1407,108 @@
   // to be a fresh LRCLIB round-trip (slow, and bursts are answered with 429). Failures are never cached.
   const lyricsCache = new Map(); // key -> {result, at}
   const LYRICS_CACHE_MAX = 120;
-  const LYRICS_FOUND_TTL_MS = 12 * 60 * 60 * 1000;
-  const LYRICS_NOT_FOUND_TTL_MS = 30 * 60 * 1000;
+  const LYRICS_NOT_FOUND_TTL_MS = 24 * 60 * 60 * 1000;   // somebody may upload the lyrics
+  const LYRICS_UNSYNCED_TTL_MS = 7 * 24 * 60 * 60 * 1000; // synced ones may follow
+  const LYRICS_DISK_MAX_BYTES = 100 * 1024 * 1024;
   const LYRICS_RETRY_DELAYS_MS = [6000, 20000];
 
   function lyricsCacheKey(rawTrack) {
     return LyricsSync.normalizeText(rawTrack).replace(/ /g, '');
+  }
+
+  /** Found with synced lyrics = kept for good (lyrics do not change); the rest can still improve. */
+  function lyricsFresh(result, at) {
+    const cands = result.candidates || [];
+    let ttl;
+    if (!cands.length) ttl = LYRICS_NOT_FOUND_TTL_MS;
+    else if (cands.some(c => c && typeof c.syncedLyrics === 'string' && c.syncedLyrics.trim())) return true;
+    else ttl = LYRICS_UNSYNCED_TTL_MS;
+    return Date.now() - at <= ttl;
+  }
+
+  // ---- persistent copy (IndexedDB): the songs a station rotates are instant after a reload ----------
+  // 'songs' holds the answers, 'meta' a tiny size/last-used record per song so the 100 MB cap can evict
+  // the songs used longest ago without reading every answer. Any failure is just a cache miss.
+  const lyricsDisk = (() => {
+    let dbPromise = null;
+    let puts = 0;
+    const open = () => {
+      if (dbPromise) return dbPromise;
+      dbPromise = new Promise(resolve => {
+        try {
+          const req = indexedDB.open('autowave_lyrics', 1);
+          req.onupgradeneeded = () => {
+            req.result.createObjectStore('songs', { keyPath: 'key' });
+            req.result.createObjectStore('meta', { keyPath: 'key' });
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => resolve(null);
+          req.onblocked = () => resolve(null);
+        } catch (e) { resolve(null); }
+      });
+      return dbPromise;
+    };
+    const done = tx => new Promise(res => { tx.oncomplete = () => res(true); tx.onerror = tx.onabort = () => res(false); });
+    const reqResult = r => new Promise(res => { r.onsuccess = () => res(r.result); r.onerror = () => res(undefined); });
+
+    async function get(key) {
+      try {
+        const db = await open(); if (!db) return null;
+        const tx = db.transaction(['songs', 'meta'], 'readwrite');
+        const rec = await reqResult(tx.objectStore('songs').get(key));
+        if (!rec) return null;
+        const m = await reqResult(tx.objectStore('meta').get(key));
+        if (m) tx.objectStore('meta').put({ key, size: m.size, used: Date.now() });
+        return { result: rec.result, at: rec.at };
+      } catch (e) { return null; }
+    }
+
+    async function put(key, result, at) {
+      try {
+        const db = await open(); if (!db) return;
+        const json = JSON.stringify(result);
+        const tx = db.transaction(['songs', 'meta'], 'readwrite');
+        tx.objectStore('songs').put({ key, result, at });
+        tx.objectStore('meta').put({ key, size: json.length * 2, used: Date.now() });
+        await done(tx);
+        if (++puts % 20 === 0) await evict(db);
+      } catch (e) { /* storage full or unavailable: stay with the memory cache */ }
+    }
+
+    async function evict(db) {
+      const all = await reqResult(db.transaction('meta').objectStore('meta').getAll());
+      if (!all) return;
+      let total = all.reduce((n, m) => n + m.size, 0);
+      if (total <= LYRICS_DISK_MAX_BYTES) return;
+      all.sort((a, b) => a.used - b.used);
+      const tx = db.transaction(['songs', 'meta'], 'readwrite');
+      for (const m of all) {
+        if (total <= LYRICS_DISK_MAX_BYTES * 0.9) break;
+        tx.objectStore('songs').delete(m.key);
+        tx.objectStore('meta').delete(m.key);
+        total -= m.size;
+      }
+      await done(tx);
+    }
+    return { get, put };
+  })();
+
+  // A search returns up to ~20 near matches; only the few the matcher would ever pick are worth keeping.
+  function trimForStorage(rawTrack, candidates) {
+    const keep = [];
+    let rest = candidates || [];
+    for (let i = 0; i < 3; i++) {
+      const best = LyricsSync.chooseBest(rawTrack, rest);
+      if (!best) break;
+      keep.push(best.cand);
+      rest = rest.filter(c => c !== best.cand);
+    }
+    return keep;
+  }
+
+  function rememberLyrics(key, result) {
+    lyricsCache.set(key, { result, at: Date.now() });
+    while (lyricsCache.size > LYRICS_CACHE_MAX) lyricsCache.delete(lyricsCache.keys().next().value);
   }
 
   /** Cached lookup with automatic retries while the lyrics service cannot be reached. */
@@ -1420,12 +1516,16 @@
     const key = lyricsCacheKey(rawTrack);
     const hit = lyricsCache.get(key);
     if (hit) {
-      const ttl = hit.result.candidates.length ? LYRICS_FOUND_TTL_MS : LYRICS_NOT_FOUND_TTL_MS;
-      if (Date.now() - hit.at <= ttl) {
+      if (lyricsFresh(hit.result, hit.at)) {
         lyricsCache.delete(key); lyricsCache.set(key, hit); // most recently used last
         return hit.result;
       }
       lyricsCache.delete(key);
+    }
+    const stored = await lyricsDisk.get(key);
+    if (stored && stored.result && lyricsFresh(stored.result, stored.at)) {
+      lyricsCache.set(key, stored);
+      return stored.result;
     }
     let result = await fetchLyricCandidatesOnce(rawTrack);
     for (let i = 0; result.failed && i < LYRICS_RETRY_DELAYS_MS.length && isCurrent(); i++) {
@@ -1434,8 +1534,8 @@
       result = await fetchLyricCandidatesOnce(rawTrack);
     }
     if (!result.failed) {
-      lyricsCache.set(key, { result, at: Date.now() });
-      while (lyricsCache.size > LYRICS_CACHE_MAX) lyricsCache.delete(lyricsCache.keys().next().value);
+      rememberLyrics(key, result);
+      lyricsDisk.put(key, { candidates: trimForStorage(rawTrack, result.candidates), failed: false }, Date.now());
     }
     return result;
   }
