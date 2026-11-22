@@ -46,6 +46,7 @@
   const TIMING_BAD_SEC = 30;       // ...a next title this much EARLIER than the lyric duration is a timing failure
   const RECENT_SONGS = 4;          // songs remembered so a slogan title cannot destroy a song's anchor
   const RESTORE_WINDOW_SEC = 360;  // restore window for a song whose duration is not known yet
+  const MAX_OFFSET_SEC = 5;        // the listener's fixed timing offset is limited to +/- this many seconds
 
   // ---------------------------------------------------------------------------------------------
   // Text normalisation and similarity
@@ -229,7 +230,20 @@
 
   class SyncEngine {
     constructor() {
+      // The listener's FIXED timing offset (seconds, +/- MAX_OFFSET_SEC). Unlike nudgeSec it belongs to the
+      // listener's ears/device, not to a song, so it survives new songs and stream reconnects.
+      // Positive = lyrics appear LATER, negative = EARLIER.
+      this.offsetSec = 0;
       this.resetStream();
+    }
+
+    /** Sets the fixed timing offset, clamped to +/- MAX_OFFSET_SEC and rounded to 0.1 s. Returns the value used. */
+    setOffset(sec) {
+      const v = Number(sec);
+      this.offsetSec = Number.isFinite(v)
+        ? Math.round(Math.max(-MAX_OFFSET_SEC, Math.min(MAX_OFFSET_SEC, v)) * 10) / 10
+        : 0;
+      return this.offsetSec;
     }
 
     /** Called whenever the stream (re)connects: position continuity is gone, trust must be re-earned. */
@@ -332,7 +346,9 @@
 
     /** The listener tapped the line they are hearing right now. */
     manualSync(lineTimeSec, mediaNowSec) {
-      this.manualStart = mediaNowSec - lineTimeSec;
+      // The tapped line is exactly what the listener hears NOW, so cancel the fixed offset out of this
+      // song's position: the tapped line shows immediately, and the offset keeps acting from there on.
+      this.manualStart = mediaNowSec - lineTimeSec - this.offsetSec;
       this.nudgeSec = 0;
     }
 
@@ -356,8 +372,9 @@
 
       // Human-confirmed sync beats everything
       if (this.manualStart !== null) {
-        const elapsed = mediaNowSec - this.manualStart + this.nudgeSec;
-        if (hasDuration && elapsed > duration + OVERRUN_SEC + 6) return none(STATUS.LOST, 'song ended');
+        const raw = mediaNowSec - this.manualStart + this.nudgeSec;
+        if (hasDuration && raw > duration + OVERRUN_SEC + 6) return none(STATUS.LOST, 'song ended');
+        const elapsed = raw - this.offsetSec;
         return { status: STATUS.MANUAL, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: true, reason: 'tapped by listener' };
       }
 
@@ -370,7 +387,9 @@
       const elapsed = mediaNowSec - this.anchor.startSec + this.nudgeSec;
       if (elapsed < -EARLY_SEC) return none(STATUS.WAITING, 'song has not started yet');
       if (elapsed > duration + OVERRUN_SEC) return none(STATUS.LOST, 'song outlived its lyrics');
-      return { status: STATUS.SYNCED, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: this.timing.trusted, reason: 'witnessed song start' };
+      // The fixed offset only moves the highlighted line; it never changes whether the sync is trusted
+      const shifted = elapsed - this.offsetSec;
+      return { status: STATUS.SYNCED, elapsed: shifted, activeIndex: indexAt(l.lines, shifted), trusted: this.timing.trusted, reason: 'witnessed song start' };
     }
   }
 
@@ -521,7 +540,7 @@
   }
 
   return {
-    STATUS, VERIFIED_COMBINED, MIN_DURATION_SEC, OVERRUN_SEC, EARLY_SEC,
+    STATUS, VERIFIED_COMBINED, MIN_DURATION_SEC, OVERRUN_SEC, EARLY_SEC, MAX_OFFSET_SEC,
     normalizeText, similarity, parseTrack, scoreCandidate, isVerified, chooseBest, durationOk,
     parseLrc, SyncEngine, indexAt, buildQueries, sameSong, secondsToNextLine, sanitizeTitle, decodeEntities,
     stripAutomationTags, clampTitle

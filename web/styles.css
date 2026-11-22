@@ -573,9 +573,16 @@ body:not(.mini-player-active) .pip-restore-bar { display: none; }
 .lyrics-state-badge.is-waiting { background: rgba(245, 158, 11, 0.16); color: #FBBF24; }
 .lyrics-state-badge.is-lost, .lyrics-state-badge.is-unverified { background: rgba(244, 63, 94, 0.14); color: #FB7185; }
 .lyrics-hint { padding: 10px 20px; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); background: rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255, 255, 255, 0.07); flex-shrink: 0; }
-.sync-nudge-btn { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--accent); padding: 5px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; transition: background 0.15s ease; min-height: 30px; }
+.lyrics-sync-controls { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+.sync-timing-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.sync-nudge-btn { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--accent); width: 32px; padding: 0; border-radius: 8px; font-size: 16px; line-height: 1; font-weight: 700; transition: background 0.15s ease; min-height: 32px; }
 .sync-nudge-btn:hover { background: rgba(0, 255, 127, 0.2); border-color: var(--accent); }
-.sync-offset-val { font-size: 11px; font-weight: 600; color: var(--text-main); background: rgba(255, 255, 255, 0.06); padding: 3px 6px; border-radius: 5px; cursor: pointer; }
+.sync-offset-slider { -webkit-appearance: none; appearance: none; width: 140px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.22); outline: none; cursor: pointer; touch-action: pan-y; }
+.sync-offset-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); border: 2px solid #070A10; }
+.sync-offset-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); border: 2px solid #070A10; }
+.sync-offset-slider:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+.sync-offset-val { font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 42px; text-align: center; color: var(--text-main); background: rgba(255, 255, 255, 0.06); padding: 4px 6px; border-radius: 5px; cursor: pointer; }
+@media (max-width: 480px) { .lyrics-sync-controls { flex-wrap: wrap; justify-content: flex-end; } .sync-offset-slider { width: 120px; } }
 @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
 /* ---------- Toasts ---------- */
