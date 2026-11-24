@@ -1,6 +1,6 @@
 {
-  "versionCode": 49,
-  "versionName": "5.29.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.29.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.29.0: lyrics are now saved on your device (up to 100 MB), so songs you have heard before show their lyrics instantly after a restart, offline, and when the lyrics service is down."
+  "versionCode": 50,
+  "versionName": "5.30.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.30.0-release.apk",
+  "releaseNotes": "AutoWave Radio v5.30.0: new Lyrics Timing slider (up to 5 s earlier or later, 0.1 s steps) so you can sing along, applied on the phone and in the car; the car Lyrics button now keeps your last saved setting and shows a clear off icon."
 }

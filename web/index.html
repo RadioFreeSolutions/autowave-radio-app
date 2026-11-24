@@ -182,7 +182,7 @@
           <button id="btn-lyrics-mobile" class="btn-mobile-action" title="Song Lyrics" aria-label="Song lyrics"><svg class="i"><use href="#i-lyrics"/></svg></button>
           <button id="btn-share-mobile" class="btn-mobile-action" onclick="shareAutoWave()" title="Share" aria-label="Share"><svg class="i"><use href="#i-share"/></svg></button>
           <button id="btn-info-mobile" class="btn-mobile-action" title="Info &amp; Legal" aria-label="Info, privacy and legal">ℹ️</button>
-          <a href="../autowave-radio-v5.29.0-release.apk" class="btn-mobile-action btn-get-app-mobile" download title="Download AutoWave Radio APK (Android only)" aria-label="Get the Android app">
+          <a href="../autowave-radio-v5.30.0-release.apk" class="btn-mobile-action btn-get-app-mobile" download title="Download AutoWave Radio APK (Android only)" aria-label="Get the Android app">
             <svg class="i"><use href="#i-download"/></svg>
           </a>
           <!-- Support button disabled until 100K downloads
@@ -206,7 +206,7 @@
           <button id="btn-share-top" class="btn-top-action" onclick="shareAutoWave()">
             <svg class="i"><use href="#i-share"/></svg> Share
           </button>
-          <a href="../autowave-radio-v5.29.0-release.apk" class="btn-get-app-top" download title="Download AutoWave Radio APK for Android">
+          <a href="../autowave-radio-v5.30.0-release.apk" class="btn-get-app-top" download title="Download AutoWave Radio APK for Android">
             <svg class="i get-app-icon"><use href="#i-download"/></svg>
             <div class="get-app-labels">
               <span class="get-app-title">GET APP</span>
@@ -448,8 +448,8 @@
               <a href="../privacy.html" class="btn-top-action" target="_blank" style="border-color: var(--accent); color: var(--accent); font-weight: 700;">
                 <span>🛡️</span> Privacy Policy &amp; Legal Terms
               </a>
-              <a href="../autowave-radio-v5.29.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
-                <span>⬇️</span> Download APK (v5.29.0)
+              <a href="../autowave-radio-v5.30.0-release.apk" class="btn-top-action" style="background: var(--accent); color: #000; font-weight: 700;" download>
+                <span>⬇️</span> Download APK (v5.30.0)
               </a>
               <a href="../" class="btn-top-action">
                 <span>🏠</span> Homepage
@@ -482,10 +482,12 @@
         <div class="lyrics-footer" id="lyrics-footer" style="display:none;">
           <span class="lyrics-source">Lyrics via LRCLib • Tap the line you hear to sync</span>
           <div class="lyrics-footer-right">
-            <div class="lyrics-sync-controls" id="lyrics-sync-controls" style="display:none; align-items:center; gap:6px;">
-              <button id="btn-sync-minus" class="sync-nudge-btn" title="Nudge 1s earlier">-1s</button>
-              <span id="sync-offset-val" class="sync-offset-val" style="display:none;" title="Click to reset offset">0.0s</span>
-              <button id="btn-sync-plus" class="sync-nudge-btn" title="Nudge 1s later">+1s</button>
+            <div class="lyrics-sync-controls" id="lyrics-sync-controls" style="display:none;" title="Fixed lyrics timing, kept for every song">
+              <span class="sync-timing-label">Timing</span>
+              <button id="btn-sync-minus" class="sync-nudge-btn" title="Show lyrics 0.1s later" aria-label="Lyrics 0.1 seconds later">&minus;</button>
+              <input type="range" id="sync-offset-slider" class="sync-offset-slider" min="-5" max="5" step="0.1" value="0" aria-label="Lyrics timing offset, minus 5 to plus 5 seconds" />
+              <button id="btn-sync-plus" class="sync-nudge-btn" title="Show lyrics 0.1s earlier" aria-label="Lyrics 0.1 seconds earlier">+</button>
+              <span id="sync-offset-val" class="sync-offset-val" title="Tap to reset to 0">0.0s</span>
             </div>
             <span class="lyrics-state-badge" id="lyrics-state-badge" style="display:none;"></span>
           </div>

@@ -46,6 +46,15 @@
   const TIMING_BAD_SEC = 30;       // ...a next title this much EARLIER than the lyric duration is a timing failure
   const RECENT_SONGS = 4;          // songs remembered so a slogan title cannot destroy a song's anchor
   const RESTORE_WINDOW_SEC = 360;  // restore window for a song whose duration is not known yet
+  const MAX_USER_OFFSET_SEC = 5;   // listener's global timing preference: -5.0 .. +5.0 s
+  const USER_OFFSET_STEP_SEC = 0.1; // ...in 0.1 s steps
+
+  /** Clamps to +-MAX_USER_OFFSET_SEC and snaps to 0.1 s (mirror of LyricsSyncEngine.normalizeUserOffset). */
+  function normalizeUserOffset(v) {
+    if (!Number.isFinite(v)) return 0;
+    const snapped = Math.round(Math.round(v / USER_OFFSET_STEP_SEC) * USER_OFFSET_STEP_SEC * 10) / 10;
+    return Math.max(-MAX_USER_OFFSET_SEC, Math.min(MAX_USER_OFFSET_SEC, snapped));
+  }
 
   // ---------------------------------------------------------------------------------------------
   // Text normalisation and similarity
@@ -229,8 +238,14 @@
 
   class SyncEngine {
     constructor() {
+      // The listener's global timing preference (positive = lines appear earlier). Not part of
+      // resetStream(): it is a setting, not something learned about a stream.
+      this._userOffsetSec = 0;
       this.resetStream();
     }
+
+    get userOffsetSec() { return this._userOffsetSec; }
+    set userOffsetSec(v) { this._userOffsetSec = normalizeUserOffset(v); }
 
     /** Called whenever the stream (re)connects: position continuity is gone, trust must be re-earned. */
     resetStream() {
@@ -356,7 +371,7 @@
 
       // Human-confirmed sync beats everything
       if (this.manualStart !== null) {
-        const elapsed = mediaNowSec - this.manualStart + this.nudgeSec;
+        const elapsed = mediaNowSec - this.manualStart + this.nudgeSec + this._userOffsetSec;
         if (hasDuration && elapsed > duration + OVERRUN_SEC + 6) return none(STATUS.LOST, 'song ended');
         return { status: STATUS.MANUAL, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: true, reason: 'tapped by listener' };
       }
@@ -367,7 +382,7 @@
       if (!hasDuration) return none(STATUS.WAITING, 'lyrics have no duration to validate against');
       if (this.timingDistrusted) return none(STATUS.WAITING, 'station metadata timing is unreliable');
 
-      const elapsed = mediaNowSec - this.anchor.startSec + this.nudgeSec;
+      const elapsed = mediaNowSec - this.anchor.startSec + this.nudgeSec + this._userOffsetSec;
       if (elapsed < -EARLY_SEC) return none(STATUS.WAITING, 'song has not started yet');
       if (elapsed > duration + OVERRUN_SEC) return none(STATUS.LOST, 'song outlived its lyrics');
       return { status: STATUS.SYNCED, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: this.timing.trusted, reason: 'witnessed song start' };
@@ -523,7 +538,7 @@
   return {
     STATUS, VERIFIED_COMBINED, MIN_DURATION_SEC, OVERRUN_SEC, EARLY_SEC,
     normalizeText, similarity, parseTrack, scoreCandidate, isVerified, chooseBest, durationOk,
-    parseLrc, SyncEngine, indexAt, buildQueries, sameSong, secondsToNextLine, sanitizeTitle, decodeEntities,
+    parseLrc, SyncEngine, normalizeUserOffset, MAX_USER_OFFSET_SEC, USER_OFFSET_STEP_SEC, indexAt, buildQueries, sameSong, secondsToNextLine, sanitizeTitle, decodeEntities,
     stripAutomationTags, clampTitle
   };
 });

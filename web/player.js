@@ -1228,6 +1228,23 @@
   let btnSyncMinus = null;
   let btnSyncPlus = null;
   let syncOffsetVal = null;
+  let syncOffsetSlider = null;
+
+  // Fixed lyrics timing (+/- MAX_OFFSET_SEC): remembered on this device and applied to every song
+  const LS_LYRICS_OFFSET = 'autowave_radio_lyrics_offset';
+  if (syncEngine) {
+    let saved = 0;
+    try { saved = parseFloat(localStorage.getItem(LS_LYRICS_OFFSET) || '0'); } catch (e) { /* storage unavailable */ }
+    syncEngine.userOffsetSec = saved; // the engine clamps to +-5s and snaps to 0.1s
+  }
+
+  function setLyricsOffset(sec) {
+    if (!syncEngine) return;
+    syncEngine.userOffsetSec = sec;
+    const v = syncEngine.userOffsetSec;
+    try { localStorage.setItem(LS_LYRICS_OFFSET, String(v)); } catch (e) { /* storage unavailable */ }
+    updateSyncOffsetDisplay();
+  }
 
   /** Media-timeline second the playhead is at (immune to stalls and pauses, unlike wall-clock). */
   function mediaNowSec() {
@@ -1334,28 +1351,31 @@
     btnSyncMinus = document.getElementById('btn-sync-minus');
     btnSyncPlus = document.getElementById('btn-sync-plus');
     syncOffsetVal = document.getElementById('sync-offset-val');
+    syncOffsetSlider = document.getElementById('sync-offset-slider');
 
     if (btnSyncMinus) {
       btnSyncMinus.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (syncEngine) syncEngine.nudge(-1.0);
-        updateSyncOffsetDisplay();
+        if (syncEngine) setLyricsOffset(syncEngine.userOffsetSec - 0.1);
       });
     }
     if (btnSyncPlus) {
       btnSyncPlus.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (syncEngine) syncEngine.nudge(1.0);
-        updateSyncOffsetDisplay();
+        if (syncEngine) setLyricsOffset(syncEngine.userOffsetSec + 0.1);
       });
+    }
+    if (syncOffsetSlider) {
+      syncOffsetSlider.addEventListener('input', () => setLyricsOffset(parseFloat(syncOffsetSlider.value)));
+      syncOffsetSlider.addEventListener('click', (e) => e.stopPropagation());
     }
     if (syncOffsetVal) {
       syncOffsetVal.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (syncEngine) syncEngine.resetNudge();
-        updateSyncOffsetDisplay();
+        setLyricsOffset(0);
       });
     }
+    updateSyncOffsetDisplay();
 
     const btn = document.getElementById('btn-lyrics');
     const mobileBtn = document.getElementById('btn-lyrics-mobile');
@@ -1569,11 +1589,9 @@
   }
 
   function updateSyncOffsetDisplay() {
-    const n = syncEngine ? syncEngine.nudgeSec : 0;
-    if (syncOffsetVal) {
-      syncOffsetVal.textContent = (n >= 0 ? '+' : '') + n.toFixed(1) + 's';
-      syncOffsetVal.style.display = n !== 0 ? 'inline-block' : 'none';
-    }
+    const n = syncEngine ? syncEngine.userOffsetSec : 0;
+    if (syncOffsetVal) syncOffsetVal.textContent = (n > 0 ? '+' : '') + n.toFixed(1) + 's';
+    if (syncOffsetSlider) syncOffsetSlider.value = String(n);
     lyricsLastActiveIdx = -1; // force immediate re-scroll to the active line
   }
 
