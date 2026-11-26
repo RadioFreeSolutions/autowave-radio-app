@@ -1870,26 +1870,6 @@
     ]
   },
   {
-    "id": "175684b7-3b41-4fe9-ab92-513d2b543b89",
-    "name": "Sun FM",
-    "fullName": "Sun FM",
-    "streamUrl": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
-    "fallbackUrl": "http://edge-ads-03-gos2.sharp-stream.com/sunfmi.aac",
-    "favicon": "",
-    "country": "The United Kingdom Of Great Britain And Northern Ireland",
-    "countryCode": "GB",
-    "flag": "🇬🇧",
-    "tags": [
-      "pop music"
-    ],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 94,
-    "moods": [
-      "POP_HITS"
-    ]
-  },
-  {
     "id": "aa03434e-e002-4d61-9581-2812ea5a1a90",
     "name": "kmfm (Canterbury)",
     "fullName": "kmfm (Canterbury)",
@@ -2763,31 +2743,6 @@
     "bitrate": 98,
     "moods": [
       "POP_HITS"
-    ]
-  },
-  {
-    "id": "d7ada165-3f96-4cd8-bda7-a116d744063f",
-    "name": "Throwback 103 (Z103 [KFTZ] Web Radio)",
-    "fullName": "Throwback 103 (Z103 [KFTZ] Web Radio)",
-    "streamUrl": "https://ice26.securenetsystems.net/KFTZ2?playSessionID=CB1B7298-D80B-E801-181EA80344ED131A",
-    "fallbackUrl": "https://ice26.securenetsystems.net/KFTZ2?playSessionID=CB1B7298-D80B-E801-181EA80344ED131A",
-    "favicon": "",
-    "country": "The United States Of America",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "contemporary hits radio",
-      "flashback",
-      "oldies",
-      "pop",
-      "top 40"
-    ],
-    "isHls": false,
-    "codec": "AAC",
-    "bitrate": 73,
-    "moods": [
-      "POP_HITS",
-      "LONG_DRIVE"
     ]
   },
   {

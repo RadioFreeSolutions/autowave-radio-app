@@ -1,6 +1,6 @@
 {
-  "versionCode": 50,
-  "versionName": "5.30.0",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v5.30.0-release.apk",
-  "releaseNotes": "AutoWave Radio v5.30.0: new Lyrics Timing slider (up to 5 s earlier or later, 0.1 s steps) so you can sing along, applied on the phone and in the car; the car Lyrics button now keeps your last saved setting and shows a clear off icon."
+  "versionCode": 51,
+  "versionName": "6.0.0",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v6.0.0-release.apk",
+  "releaseNotes": "AutoWave Radio v6.0.0: 2-column dark-glass grid, Favorites-first auto queue, lyrics drift compensation, on-demand phone lyrics sheet, Israel-verified catalog"
 }

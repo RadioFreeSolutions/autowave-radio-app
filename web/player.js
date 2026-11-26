@@ -287,13 +287,18 @@
     }
     updateHero();
 
-    // Restore last station if saved (never restore a blocked station)
+    // Restore last station if saved (never restore a blocked station); prefer favorites on fresh entry
     const lastId = localStorage.getItem(LS_LAST_STATION) || localStorage.getItem('drivewave_web_last_station');
-    if (lastId && !blockedStations.has(lastId)) {
+    const firstFav = favorites.size > 0
+      ? stations.find(s => favorites.has(s.id) && !blockedStations.has(s.id))
+      : null;
+    if (lastId && !blockedStations.has(lastId) && (favorites.size === 0 || favorites.has(lastId))) {
       const found = stations.find(s => s.id === lastId);
       if (found) {
         setStationUI(found, false);
       }
+    } else if (firstFav) {
+      setStationUI(firstFav, false);
     } else if (filteredStations.length > 0) {
       setStationUI(filteredStations[0], false);
     } else if (stations.length > 0) {
@@ -307,20 +312,25 @@
       shuffleDeck = [];
       return;
     }
-    const indices = [];
+    const favIndices = [];
+    const otherIndices = [];
     for (let i = 0; i < filteredStations.length; i++) {
       if (currentIndex === -1 || i !== currentIndex) {
-        indices.push(i);
+        if (favorites.has(filteredStations[i].id)) favIndices.push(i);
+        else otherIndices.push(i);
       }
     }
-    // Fisher-Yates shuffle
-    for (let i = indices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = indices[i];
-      indices[i] = indices[j];
-      indices[j] = temp;
-    }
-    shuffleDeck = indices;
+    const shuffleArr = (arr) => {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+      return arr;
+    };
+    // Favorites first, then the rest of the catalog
+    shuffleDeck = shuffleArr(favIndices).concat(shuffleArr(otherIndices));
   }
 
   function toggleShuffle() {
@@ -932,6 +942,7 @@
     stopIcyMetadataReader();
     stopSyncAnimation();
     currentTrackTitle = '';
+    icyMetadataBlocked = false;
     resetLyricsSyncForNewStream();
 
     const stName = station ? station.name : '';
@@ -1022,6 +1033,7 @@
 
   let icyAbortController = null;
   let currentTrackTitle = '';
+  let icyMetadataBlocked = false;
 
   function cleanStreamTitle(raw) {
     if (!raw) return "";
@@ -1923,8 +1935,9 @@
       return true;
     }
 
+    let anySucceeded = false;
     try {
-      await streamIcy(targetUrl);
+      anySucceeded = await streamIcy(targetUrl);
     } catch (e) {
       if (!controller.signal.aborted && currentStation && currentStation.id === targetStationId) {
         if (station.fallbackUrl && station.fallbackUrl !== streamUrl) {
@@ -1933,7 +1946,7 @@
             if (window.location.protocol === 'https:' && fbUrl.startsWith('http://')) {
               fbUrl = fbUrl.replace(/^http:\/\//, 'https://');
             }
-            await streamIcy(fbUrl);
+            anySucceeded = await streamIcy(fbUrl);
           } catch (_) {}
         }
       }
@@ -1941,6 +1954,19 @@
       // Release the slot so a later resume can start a fresh reader
       if (metadataAbortController === controller) {
         metadataAbortController = null;
+      }
+      if (!anySucceeded && !controller.signal.aborted && currentStation && currentStation.id === targetStationId && !currentTrackTitle) {
+        icyMetadataBlocked = true;
+        if (lyricsOverlay && lyricsContent && !lyricsCurrentTrack) {
+          lyricsContent.innerHTML = `
+            <div class="lyrics-no-results">
+              <span class="lyrics-no-icon">🔍</span>
+              <strong>${escapeHtml(station.name)}</strong> does not expose live song titles to web browsers (CORS policy).<br>
+              <span style="font-size: 13px; color: var(--text-muted); margin-top: 8px; display: block;">
+                Type the song name in the search box above to load lyrics, then tap any line to sync!
+              </span>
+            </div>`;
+        }
       }
     }
   }
@@ -2054,6 +2080,15 @@
                 }
               } catch (e) {}
             }
+          }
+        }
+      });
+      hlsInstance.on(window.Hls.Events.FRAG_CHANGED, (event, data) => {
+        const fragTitle = data && data.frag && data.frag.title;
+        if (fragTitle) {
+          const cleaned = cleanStreamTitle(fragTitle);
+          if (cleaned && cleaned !== currentTrackTitle && cleaned.toLowerCase() !== station.name.toLowerCase()) {
+            onNewTrackInfo(cleaned, station);
           }
         }
       });

@@ -48,6 +48,10 @@
   const RESTORE_WINDOW_SEC = 360;  // restore window for a song whose duration is not known yet
   const MAX_USER_OFFSET_SEC = 5;   // listener's global timing preference: -5.0 .. +5.0 s
   const USER_OFFSET_STEP_SEC = 0.1; // ...in 0.1 s steps
+  const DRIFT_MIN_ELAPSED_SEC = 25;
+  const MIN_DRIFT_RATE = 0.955;
+  const MAX_DRIFT_RATE = 1.045;
+  const DRIFT_DEADBAND = 0.005;
 
   /** Clamps to +-MAX_USER_OFFSET_SEC and snaps to 0.1 s (mirror of LyricsSyncEngine.normalizeUserOffset). */
   function normalizeUserOffset(v) {
@@ -253,6 +257,7 @@
       this.prevAnchor = null;      // previous fresh anchor, for timing validation
       this.lyrics = null;          // {lines, durationSec, verified, plain, manualOnly}
       this.manualStart = null;     // media-time second at which the song is believed to have started
+      this.driftRate = 1.0;        // per-song playback speed ratio learned on mid-song re-sync
       this.nudgeSec = 0;
       this.seenTrackSinceConnect = false;
       this.timing = { trusted: false, strikes: 0 };
@@ -318,6 +323,7 @@
       while (this.recent.length > RECENT_SONGS) this.recent.shift();
       this.lyrics = null;
       this.manualStart = null;
+      this.driftRate = 1.0;
       this.nudgeSec = 0;
       return { fresh };
     }
@@ -342,12 +348,24 @@
       }
       if (l) this.pendingStrike = false; // setLyrics(null) means "loading": verdict still pending
       this.manualStart = null;
+      this.driftRate = 1.0;
       this.nudgeSec = 0;
     }
 
     /** The listener tapped the line they are hearing right now. */
     manualSync(lineTimeSec, mediaNowSec) {
-      this.manualStart = mediaNowSec - lineTimeSec;
+      let learnedRate = 1.0;
+      if (this.anchor && this.anchor.fresh && this.lyrics && this.lyrics.verified && lineTimeSec > 0) {
+        const expectedElapsed = mediaNowSec - this.anchor.startSec + this.nudgeSec;
+        if (expectedElapsed >= DRIFT_MIN_ELAPSED_SEC) {
+          const ratio = lineTimeSec / expectedElapsed;
+          if (ratio >= MIN_DRIFT_RATE && ratio <= MAX_DRIFT_RATE && Math.abs(ratio - 1.0) >= DRIFT_DEADBAND) {
+            learnedRate = ratio;
+          }
+        }
+      }
+      this.driftRate = learnedRate;
+      this.manualStart = mediaNowSec - (lineTimeSec / this.driftRate);
       this.nudgeSec = 0;
     }
 
@@ -371,7 +389,7 @@
 
       // Human-confirmed sync beats everything
       if (this.manualStart !== null) {
-        const elapsed = mediaNowSec - this.manualStart + this.nudgeSec + this._userOffsetSec;
+        const elapsed = (mediaNowSec - this.manualStart) * this.driftRate + this.nudgeSec + this._userOffsetSec;
         if (hasDuration && elapsed > duration + OVERRUN_SEC + 6) return none(STATUS.LOST, 'song ended');
         return { status: STATUS.MANUAL, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: true, reason: 'tapped by listener' };
       }
