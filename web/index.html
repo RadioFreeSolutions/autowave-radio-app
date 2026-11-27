@@ -247,7 +247,15 @@
     </main>
 
     <!-- Persistent Bottom Player Bar -->
-    <footer class="player-bar">
+    <footer class="player-bar" id="player-bar">
+      <!-- Always-on Karaoke strip (visible automatically whenever lyrics are synced) -->
+      <div id="player-karaoke" class="player-karaoke" dir="ltr" style="display: none;" role="button" tabindex="0" title="Live synced lyrics (tap to open full lyrics)">
+        <span class="pk-note" aria-hidden="true">🎤</span>
+        <span id="pk-prev" class="pk-prev"></span>
+        <span id="pk-curr" class="pk-curr">♪</span>
+        <span id="pk-next" class="pk-next"></span>
+      </div>
+
       <!-- Left: Station Info -->
       <div class="player-left">
         <div class="player-art-box">

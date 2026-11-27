@@ -175,6 +175,11 @@
   const dmLyricPrev = document.getElementById('dm-lyric-prev');
   const dmLyricCurr = document.getElementById('dm-lyric-curr');
   const dmLyricNext = document.getElementById('dm-lyric-next');
+  const playerBarEl = document.getElementById('player-bar');
+  const playerKaraokeEl = document.getElementById('player-karaoke');
+  const pkPrev = document.getElementById('pk-prev');
+  const pkCurr = document.getElementById('pk-curr');
+  const pkNext = document.getElementById('pk-next');
 
   // Floating Corner Mini Widget Elements
   const cornerMiniWidget = document.getElementById('corner-mini-widget');
@@ -954,6 +959,7 @@
     icyMetadataBlocked = false;
     resetLyricsSyncForNewStream();
     updateDrivingKaraoke(null);
+    updatePlayerKaraoke(null);
 
     const stName = station ? station.name : '';
     if (playerTrack) {
@@ -1216,8 +1222,8 @@
       anchor = syncEngine ? syncEngine.onTrack(track, nowPos) : null;
       saveStationMemory();
     }
-    // Auto-refresh lyrics if the modal or Driving/Karaoke mode is open
-    if ((lyricsVisible || isDrivingModeOpen()) && !(anchor && anchor.refinement)) {
+    // Always fetch lyrics in the background so synced songs show the live karaoke row automatically
+    if (!(anchor && anchor.refinement)) {
       loadLyricsForTrack(track);
     }
 
@@ -1373,6 +1379,31 @@
     dmKaraoke.style.display = 'flex';
   }
 
+  function updatePlayerKaraoke(res) {
+    if (!playerKaraokeEl) return;
+    if (!res || !syncEngine || !syncEngine.lyrics || !syncEngine.lyrics.lines || !syncEngine.lyrics.lines.length) {
+      playerKaraokeEl.style.display = 'none';
+      if (playerBarEl) playerBarEl.classList.remove('has-karaoke');
+      return;
+    }
+    const S = LyricsSync.STATUS;
+    if (res.status !== S.SYNCED && res.status !== S.MANUAL) {
+      playerKaraokeEl.style.display = 'none';
+      if (playerBarEl) playerBarEl.classList.remove('has-karaoke');
+      return;
+    }
+    const lines = syncEngine.lyrics.lines;
+    const idx = res.activeIndex;
+    const prev = idx > 0 ? lines[idx - 1].text : '';
+    const curr = (idx >= 0 && idx < lines.length) ? lines[idx].text : '♪';
+    const next = (idx + 1 >= 0 && idx + 1 < lines.length) ? lines[idx + 1].text : '';
+    if (pkPrev) pkPrev.textContent = prev;
+    if (pkCurr) pkCurr.textContent = curr;
+    if (pkNext) pkNext.textContent = next;
+    playerKaraokeEl.style.display = 'flex';
+    if (playerBarEl) playerBarEl.classList.add('has-karaoke');
+  }
+
   /**
    * How far ahead of the playhead the metadata connection is. A title that arrives now belongs to a
    * song that begins this many seconds from the playhead (the buffered-but-unplayed audio).
@@ -1509,6 +1540,15 @@
     if (btn) btn.addEventListener('click', openLyricsModal);
     if (mobileBtn) mobileBtn.addEventListener('click', openLyricsModal);
     if (dmBtn) dmBtn.addEventListener('click', openLyricsModal);
+    if (playerKaraokeEl) {
+      playerKaraokeEl.addEventListener('click', openLyricsModal);
+      playerKaraokeEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLyricsModal();
+        }
+      });
+    }
     if (closeBtn) closeBtn.addEventListener('click', closeLyricsModal);
     if (lyricsOverlay) {
       lyricsOverlay.addEventListener('click', (e) => {
@@ -1717,6 +1757,7 @@
     if (syncOffsetVal) syncOffsetVal.textContent = (n > 0 ? '+' : '') + n.toFixed(1) + 's';
     if (syncOffsetSlider) syncOffsetSlider.value = String(n);
     lyricsLastActiveIdx = -1; // force immediate re-scroll to the active line
+    if (lyricsLines.length > 0) startSyncAnimation();
   }
 
   function renderSyncedLyrics(parsed) {
@@ -1794,8 +1835,10 @@
 
   function syncLyricsFrame() {
     lyricsAnimFrame = null;
-    if ((!lyricsVisible && !isDrivingModeOpen()) || lyricsLines.length === 0 || !syncEngine) {
+    if (lyricsLines.length === 0 || !syncEngine) {
       stopSyncAnimation();
+      updatePlayerKaraoke(null);
+      updateDrivingKaraoke(null);
       return;
     }
     const res = syncEngine.evaluate(mediaNowSec());
@@ -1805,9 +1848,12 @@
       const toNext = LyricsSync.secondsToNextLine(syncEngine.lyrics.lines, res.activeIndex, res.elapsed);
       if (toNext !== null) delay = Math.max(40, Math.min(LYRICS_TICK_MS, toNext * 1000 + 30));
     }
-    lyricsAnimFrame = setTimeout(syncLyricsFrame, delay);
+    if (!audio.paused || lyricsVisible || isDrivingModeOpen()) {
+      lyricsAnimFrame = setTimeout(syncLyricsFrame, delay);
+    }
     applySyncStatusUi(res);
     updateDrivingKaraoke(res);
+    updatePlayerKaraoke(res);
 
     // Highlight ONLY when the engine vouches for the position; otherwise show lyrics without a cursor
     const S = LyricsSync.STATUS;
@@ -1946,7 +1992,7 @@
     lyricsOverlay.classList.add('hidden');
     lyricsVisible = false;
     rememberLyrics(false);
-    stopSyncAnimation();
+    if (audio.paused && !isDrivingModeOpen()) stopSyncAnimation();
   }
 
   function toggleLyricsModal() {
@@ -2953,6 +2999,7 @@
         if (syncEngine) syncEngine.markNextTrackUncertain();
         startIcyMetadataReader(currentStation, currentStreamUrl);
       }
+      if (lyricsLines.length > 0 && !lyricsAnimFrame) startSyncAnimation();
     });
     audio.addEventListener('pause', () => {
       setBuffering(false);
@@ -3125,7 +3172,7 @@
     function closeDrivingMode() {
       if (!drivingModeOverlay) return;
       drivingModeOverlay.classList.remove('active');
-      if (!lyricsVisible) stopSyncAnimation();
+      if (!lyricsVisible && audio.paused) stopSyncAnimation();
     }
 
     const btnDrivingMobile = document.getElementById('btn-driving-mobile');

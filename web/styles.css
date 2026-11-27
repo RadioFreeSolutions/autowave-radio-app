@@ -77,7 +77,7 @@ input { font: inherit; }
 #app-container {
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) var(--player-height);
+  grid-template-rows: minmax(0, 1fr) auto;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
@@ -372,9 +372,26 @@ footer.player-bar {
   border-top: 1px solid var(--border-color);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center; gap: 16px;
+  align-items: center; column-gap: 16px; row-gap: 0;
+  min-height: var(--player-height);
   padding: 0 24px; z-index: 100;
 }
+footer.player-bar.has-karaoke { padding-bottom: 10px; }
+.player-karaoke {
+  grid-column: 1 / -1;
+  margin: 0 -24px 8px;
+  padding: 6px 24px;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  background: linear-gradient(90deg, rgba(0, 255, 127, 0.05), rgba(0, 255, 127, 0.14), rgba(139, 92, 246, 0.08));
+  border-bottom: 1px solid rgba(0, 255, 127, 0.22);
+  cursor: pointer; min-width: 0; overflow: hidden; user-select: none;
+}
+.player-karaoke:hover { background: linear-gradient(90deg, rgba(0, 255, 127, 0.09), rgba(0, 255, 127, 0.2), rgba(139, 92, 246, 0.12)); }
+.pk-note { font-size: 13px; flex-shrink: 0; }
+.pk-prev { font-size: 12px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 24%; }
+.pk-curr { font-size: 14px; font-weight: 800; color: #FFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 0 12px rgba(0, 255, 127, 0.35); }
+.pk-next { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 24%; }
+.pk-prev:empty, .pk-next:empty { display: none; }
 body.mini-player-active footer.player-bar { display: none !important; }
 
 .player-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
@@ -687,8 +704,12 @@ body.mini-player-active .toast-region { bottom: 90px; }
   .card-play-overlay { display: none; }
 
   /* Docked player bar */
-  footer.player-bar { grid-template-columns: minmax(0, 1fr) auto; padding: 0 12px; padding-bottom: var(--safe-bottom); height: calc(var(--player-height) + var(--safe-bottom)); gap: 8px; }
-  #app-container { grid-template-rows: minmax(0, 1fr) calc(var(--player-height) + var(--safe-bottom)); }
+  footer.player-bar { grid-template-columns: minmax(0, 1fr) auto; padding: 0 12px; padding-bottom: var(--safe-bottom); min-height: calc(var(--player-height) + var(--safe-bottom)); height: auto; column-gap: 8px; }
+  footer.player-bar.has-karaoke { padding-bottom: calc(8px + var(--safe-bottom)); }
+  .player-karaoke { margin: 0 -12px 6px; padding: 6px 12px; gap: 6px; }
+  .pk-prev, .pk-next { display: none; }
+  .pk-curr { font-size: 13.5px; text-align: center; }
+  #app-container { grid-template-rows: minmax(0, 1fr) auto; }
   .player-left { gap: 10px; }
   .player-art-box { width: 46px; height: 46px; border-radius: 10px; }
   .player-track { font-size: 13px; }
