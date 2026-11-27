@@ -40,12 +40,13 @@
   const VERIFIED_TITLE = 0.78;     // title alone must be at least this close
   const VERIFIED_ARTIST = 0.6;     // artist alone must be at least this close
   const MIN_DURATION_SEC = 30;     // lyrics shorter than this have no usable duration window
-  const OVERRUN_SEC = 4;           // how far past the lyric duration before we declare sync lost
+  const OVERRUN_SEC = 15;          // how far past the lyric duration before we declare sync lost
   const EARLY_SEC = 3;             // how far before the anchor we tolerate (clock/jitter)
   const TIMING_TOLERANCE_SEC = 12; // |interval between titles - lyric duration| considered consistent
-  const TIMING_BAD_SEC = 30;       // ...a next title this much EARLIER than the lyric duration is a timing failure
+  const TIMING_BAD_SEC = 60;       // ...a next title this much EARLIER than the lyric duration is a timing failure
   const RECENT_SONGS = 4;          // songs remembered so a slogan title cannot destroy a song's anchor
   const RESTORE_WINDOW_SEC = 360;  // restore window for a song whose duration is not known yet
+  const DEFAULT_USER_OFFSET_SEC = 1.2; // one-time sing-along default (+1.2 s)
   const MAX_USER_OFFSET_SEC = 5;   // listener's global timing preference: -5.0 .. +5.0 s
   const USER_OFFSET_STEP_SEC = 0.1; // ...in 0.1 s steps
   const DRIFT_MIN_ELAPSED_SEC = 25;
@@ -263,6 +264,7 @@
       this.timing = { trusted: false, strikes: 0 };
       this.recent = [];            // last few song anchors (newest last), see onTrack "restored"
       this.pendingStrike = false;  // early title: a strike only once it proves to be a real song
+      this.preserveRestoredSync = false;
     }
 
     /**
@@ -301,6 +303,7 @@
         }
       }
       this.pendingStrike = false;
+      this.preserveRestoredSync = false;
       const fresh = this.seenTrackSinceConnect;   // first title after connecting = mid-song
       // Timing validation: the gap between two witnessed song starts should match the lyric duration
       if (fresh && this.anchor && this.anchor.fresh && this.lyrics && this.lyrics.verified &&
@@ -314,6 +317,8 @@
           this.timing.strikes = 0;
         } else if (delta < -TIMING_BAD_SEC) {
           this.pendingStrike = true; // judged in setLyrics: slogans flashed mid-song are not songs
+        } else {
+          this.timing.strikes = 0;
         }
       }
       this.seenTrackSinceConnect = true;
@@ -326,6 +331,44 @@
       this.driftRate = 1.0;
       this.nudgeSec = 0;
       return { fresh };
+    }
+
+    /** An ad break, jingle, or station ID arrived before any song: the next real song is witnessed. */
+    onNonSongMetadata() {
+      this.seenTrackSinceConnect = true;
+    }
+
+    /** Restores a song anchor from per-station memory when returning to a station. */
+    restoreTrack({ title, mediaStartSec, fresh, durationSec, driftRate = 1.0, isManual = false, manualStartSec = null }) {
+      this.pendingStrike = false;
+      this.seenTrackSinceConnect = true;
+      this.prevAnchor = this.anchor;
+      this.anchor = { startSec: mediaStartSec, fresh, title, durationSec: durationSec ?? null };
+      this.recent.push(this.anchor);
+      while (this.recent.length > RECENT_SONGS) this.recent.shift();
+      this.lyrics = null;
+      this.driftRate = driftRate;
+      this.manualStart = isManual ? manualStartSec : null;
+      this.nudgeSec = 0;
+      this.preserveRestoredSync = true;
+    }
+
+    currentAnchorInfo(mediaNowSec) {
+      const a = this.anchor;
+      if (!a) return null;
+      const isManual = this.manualStart !== null;
+      if (!a.fresh && !isManual) return null;
+      const elapsedNoOffsetSec = isManual
+        ? (mediaNowSec - this.manualStart) * this.driftRate + this.nudgeSec
+        : (mediaNowSec - a.startSec) * this.driftRate;
+      return {
+        title: a.title,
+        elapsedNoOffsetSec,
+        durationSec: a.durationSec ?? (this.lyrics && this.lyrics.durationSec) ?? null,
+        fresh: a.fresh,
+        driftRate: this.driftRate,
+        isManual
+      };
     }
 
     /**
@@ -346,10 +389,20 @@
           this.timing.trusted = false;
         }
       }
-      if (l) this.pendingStrike = false; // setLyrics(null) means "loading": verdict still pending
-      this.manualStart = null;
-      this.driftRate = 1.0;
-      this.nudgeSec = 0;
+      if (l) {
+        this.pendingStrike = false; // setLyrics(null) means "loading": verdict still pending
+        if (this.preserveRestoredSync) {
+          this.preserveRestoredSync = false;
+        } else {
+          this.manualStart = null;
+          this.driftRate = 1.0;
+          this.nudgeSec = 0;
+        }
+      } else if (!this.preserveRestoredSync) {
+        this.manualStart = null;
+        this.driftRate = 1.0;
+        this.nudgeSec = 0;
+      }
     }
 
     /** The listener tapped the line they are hearing right now. */
@@ -372,7 +425,7 @@
     nudge(deltaSec) { this.nudgeSec += deltaSec; }
     resetNudge() { this.nudgeSec = 0; }
 
-    get timingDistrusted() { return this.timing.strikes >= 2; }
+    get timingDistrusted() { return this.timing.strikes >= 3; }
 
     /**
      * @param {number} mediaNowSec current media-timeline second
@@ -386,11 +439,13 @@
 
       const duration = l.durationSec;
       const hasDuration = Number.isFinite(duration) && duration >= MIN_DURATION_SEC;
+      const lastLineTime = l.lines.length ? l.lines[l.lines.length - 1].time : 0;
+      const effectiveEnd = hasDuration ? Math.max(duration, lastLineTime) : 0;
 
       // Human-confirmed sync beats everything
       if (this.manualStart !== null) {
         const elapsed = (mediaNowSec - this.manualStart) * this.driftRate + this.nudgeSec + this._userOffsetSec;
-        if (hasDuration && elapsed > duration + OVERRUN_SEC + 6) return none(STATUS.LOST, 'song ended');
+        if (hasDuration && elapsed > effectiveEnd + OVERRUN_SEC + 6) return none(STATUS.LOST, 'song ended');
         return { status: STATUS.MANUAL, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: true, reason: 'tapped by listener' };
       }
 
@@ -400,9 +455,10 @@
       if (!hasDuration) return none(STATUS.WAITING, 'lyrics have no duration to validate against');
       if (this.timingDistrusted) return none(STATUS.WAITING, 'station metadata timing is unreliable');
 
-      const elapsed = mediaNowSec - this.anchor.startSec + this.nudgeSec + this._userOffsetSec;
-      if (elapsed < -EARLY_SEC) return none(STATUS.WAITING, 'song has not started yet');
-      if (elapsed > duration + OVERRUN_SEC) return none(STATUS.LOST, 'song outlived its lyrics');
+      const elapsed = (mediaNowSec - this.anchor.startSec) * this.driftRate + this.nudgeSec + this._userOffsetSec;
+      if (elapsed < -(EARLY_SEC + MAX_USER_OFFSET_SEC)) return none(STATUS.WAITING, 'song has not started yet');
+      if (elapsed < 0) return { status: STATUS.SYNCED, elapsed, activeIndex: -1, trusted: this.timing.trusted, reason: 'song intro' };
+      if (elapsed > effectiveEnd + OVERRUN_SEC) return none(STATUS.LOST, 'song outlived its lyrics');
       return { status: STATUS.SYNCED, elapsed, activeIndex: indexAt(l.lines, elapsed), trusted: this.timing.trusted, reason: 'witnessed song start' };
     }
   }
@@ -554,7 +610,8 @@
   }
 
   return {
-    STATUS, VERIFIED_COMBINED, MIN_DURATION_SEC, OVERRUN_SEC, EARLY_SEC,
+    STATUS, VERIFIED_COMBINED, MIN_DURATION_SEC, OVERRUN_SEC, EARLY_SEC, RESTORE_WINDOW_SEC,
+    DEFAULT_USER_OFFSET_SEC,
     normalizeText, similarity, parseTrack, scoreCandidate, isVerified, chooseBest, durationOk,
     parseLrc, SyncEngine, normalizeUserOffset, MAX_USER_OFFSET_SEC, USER_OFFSET_STEP_SEC, indexAt, buildQueries, sameSong, secondsToNextLine, sanitizeTitle, decodeEntities,
     stripAutomationTags, clampTitle

@@ -2002,52 +2002,6 @@
     ]
   },
   {
-    "id": "589949be-60a2-411e-b6c4-86b3bede2f01",
-    "name": "Urban Radio - The Greatest R&B Hits",
-    "fullName": "Urban Radio - The Greatest R&B Hits",
-    "streamUrl": "http://hydra.cdnstream.com/1534_backup",
-    "fallbackUrl": "http://hydra.cdnstream.com/1534_backup",
-    "favicon": "",
-    "country": "The United States Of America",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "hits",
-      "music",
-      "r&b"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 2156,
-    "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
-    ]
-  },
-  {
-    "id": "b61fbabb-b1c5-4fb9-92ea-8336911ee04d",
-    "name": "Urban Radio - Hip Hop Hits",
-    "fullName": "Urban Radio - Hip Hop Hits",
-    "streamUrl": "http://hydra.cdnstream.com/1525_128",
-    "fallbackUrl": "http://hydra.cdnstream.com/1525_128",
-    "favicon": "",
-    "country": "The United States Of America",
-    "countryCode": "US",
-    "flag": "🇺🇸",
-    "tags": [
-      "hip hop",
-      "hits",
-      "music"
-    ],
-    "isHls": false,
-    "codec": "MP3",
-    "bitrate": 1983,
-    "moods": [
-      "POP_HITS",
-      "FUN_ENERGY"
-    ]
-  },
-  {
     "id": "72e3e855-4a87-43f5-a431-5b5aba8ee5da",
     "name": "Beatles Radio (MP3)",
     "fullName": "Beatles Radio (MP3)",

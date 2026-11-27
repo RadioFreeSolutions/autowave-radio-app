@@ -1,6 +1,6 @@
 {
-  "versionCode": 52,
-  "versionName": "6.0.1",
-  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v6.0.1-release.apk",
-  "releaseNotes": "AutoWave Radio v6.0.1: fixed lyrics cache sync & drift, +1.2s default offset, per-station sync memory, stale track fix, phone Karaoke Mode"
+  "versionCode": 53,
+  "versionName": "6.0.2",
+  "apkUrl": "https://raw.githubusercontent.com/RadioFreeSolutions/autowave-radio-app/main/autowave-radio-v6.0.2-release.apk",
+  "releaseNotes": "AutoWave Radio v6.0.2: mobile web header fix, removed categories, multi-source live song/artist detection, unified Karaoke Lyrics button, clean home UI, station exclusions"
 }

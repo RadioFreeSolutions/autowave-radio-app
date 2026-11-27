@@ -171,6 +171,10 @@
   const dmPauseIcon = document.getElementById('dm-pause-icon');
   const dmPrevBtn = document.getElementById('dm-btn-prev');
   const dmNextBtn = document.getElementById('dm-btn-next');
+  const dmKaraoke = document.getElementById('dm-karaoke');
+  const dmLyricPrev = document.getElementById('dm-lyric-prev');
+  const dmLyricCurr = document.getElementById('dm-lyric-curr');
+  const dmLyricNext = document.getElementById('dm-lyric-next');
 
   // Floating Corner Mini Widget Elements
   const cornerMiniWidget = document.getElementById('corner-mini-widget');
@@ -260,17 +264,11 @@
     updateVolumeTrack(audio.volume);
   }
 
-  // Mood Descriptions
+  // Library Shelf Descriptions (categories removed to match Android app)
   const MOOD_META = {
     ALL: { title: '🔥 All Stations', subtitle: 'Curated live radio broadcasts from the UK and US.' },
-    POP_HITS: { title: '⭐ Top Rated', subtitle: 'World-famous pop hit music stations and chart-toppers.' },
-    LONG_DRIVE: { title: '🛣️ Long Drive', subtitle: 'Highway cruising rhythms, road trip classics, and steady tempo hits.' },
-    FUN_ENERGY: { title: '⚡ Fun & Energy', subtitle: 'Dance hits, electronic energy, and party anthems to keep your drive energized.' },
-    CALM_CHILL: { title: '☕ Calm & Chill', subtitle: 'Relaxed acoustics, soft vocals, and ambient companions for night cruising.' },
-    ROCK: { title: '🎸 Rock Anthems', subtitle: 'Classic guitar riffs, 90s alt-rock anthems, and stadium rock.' },
-    NEWS_COMMUTE: { title: '📰 News & Commute', subtitle: '24/7 world journalism, traffic, and talk in crystal-clear broadcasts.' },
     FAVORITES: { title: '❤️ Favorites', subtitle: 'Your saved road-trip radio stations.' },
-    BLOCKED: { title: '🚫 Blocked Stations', subtitle: 'Stations you have blocked. They will not play in shuffle or appear in categories.' }
+    BLOCKED: { title: '🚫 Blocked Stations', subtitle: 'Stations you have blocked. They will not play in shuffle or appear in your library.' }
   };
 
   /** Initialize App */
@@ -379,8 +377,11 @@
     }
   }
 
-  /** Filter stations based on mood and search query */
+  /** Filter stations based on library view and search query */
   function applyFilter() {
+    if (currentMood !== 'ALL' && currentMood !== 'FAVORITES' && currentMood !== 'BLOCKED') {
+      currentMood = 'ALL';
+    }
     filteredStations = stations.filter(s => {
       if (currentMood === 'BLOCKED') {
         if (!blockedStations.has(s.id)) return false;
@@ -388,12 +389,8 @@
         // Exclude blocked stations from normal browsing
         if (blockedStations.has(s.id)) return false;
 
-        // Mood match
-        if (currentMood === 'FAVORITES') {
-          if (!favorites.has(s.id)) return false;
-        } else if (currentMood !== 'ALL') {
-          if (!s.moods || !s.moods.includes(currentMood)) return false;
-        }
+        // Library view match
+        if (currentMood === 'FAVORITES' && !favorites.has(s.id)) return false;
       }
 
       // Search match
@@ -405,6 +402,10 @@
 
       return true;
     });
+
+    if (currentMood === 'ALL' && favorites.size > 0) {
+      filteredStations.sort((a, b) => (favorites.has(b.id) ? 1 : 0) - (favorites.has(a.id) ? 1 : 0));
+    }
 
     // The playing station's position in the NEW list (it was the position in the old one, so Next
     // played an arbitrary station and the shuffle deck excluded the wrong card)
@@ -715,11 +716,18 @@
     }
     heroEl.style.setProperty('--hero-glow', getStationGlow(st.name));
 
-    if (heroTitle) heroTitle.textContent = currentTrackTitle || st.name;
-    if (heroSub) {
-      heroSub.textContent = currentTrackTitle
-        ? `${st.name} • ${shortCountry(st.country)}`
-        : `${st.flag || '📻'} ${shortCountry(st.country)} • Live stream`;
+    if (heroTitle || heroSub) {
+      const parsed = currentTrackTitle && LyricsSync ? LyricsSync.parseTrack(currentTrackTitle) : { artist: '', title: currentTrackTitle };
+      if (heroTitle) heroTitle.textContent = (parsed.title || currentTrackTitle) || st.name;
+      if (heroSub) {
+        if (currentTrackTitle) {
+          heroSub.textContent = parsed.artist
+            ? `${parsed.artist} • ${st.name} • ${shortCountry(st.country)}`
+            : `${st.name} • ${shortCountry(st.country)}`;
+        } else {
+          heroSub.textContent = `${st.flag || '📻'} ${shortCountry(st.country)} • Live stream`;
+        }
+      }
     }
 
     if (heroKicker) {
@@ -939,11 +947,13 @@
   }
 
   function resetTrackState(station) {
+    saveStationMemory();
     stopIcyMetadataReader();
     stopSyncAnimation();
     currentTrackTitle = '';
     icyMetadataBlocked = false;
     resetLyricsSyncForNewStream();
+    updateDrivingKaraoke(null);
 
     const stName = station ? station.name : '';
     if (playerTrack) {
@@ -1172,34 +1182,67 @@
     if (station) {
       const normTrack = track.toLowerCase().trim();
       const normStation = station.name.toLowerCase().trim();
-      if (normTrack === normStation) return;
-      if (normTrack.includes(normStation) && normTrack.length < normStation.length + 6) return;
+      if (normTrack === normStation || (normTrack.includes(normStation) && normTrack.length < normStation.length + 6)) {
+        if (syncEngine) syncEngine.onNonSongMetadata();
+        return;
+      }
     }
 
     currentTrackTitle = track;
-    // Record WHEN this song starts on the media timeline (and whether we witnessed it)
-    const anchor = syncEngine ? syncEngine.onTrack(track, mediaNowSec() + bufferLeadSec()) : null;
-    // Auto-refresh lyrics if the modal is open (a re-announced same song keeps its lyrics)
-    if (lyricsVisible && !(anchor && anchor.refinement)) {
+    const nowPos = mediaNowSec() + bufferLeadSec();
+    let anchor = null;
+    let restoredFromMemory = false;
+    if (syncEngine && station && !syncEngine.seenTrackSinceConnect) {
+      const mem = stationMemories.get(station.id);
+      if (mem && LyricsSync && LyricsSync.sameSong(mem.title, track)) {
+        const elapsedWallSec = (Date.now() - mem.wallStartMs) / 1000;
+        const maxDur = (mem.durationSec || LyricsSync.RESTORE_WINDOW_SEC) + LyricsSync.OVERRUN_SEC;
+        if (elapsedWallSec >= 0 && elapsedWallSec <= maxDur) {
+          const restoredStart = nowPos - elapsedWallSec;
+          syncEngine.restoreTrack({
+            title: track,
+            mediaStartSec: restoredStart,
+            fresh: mem.fresh,
+            durationSec: mem.durationSec,
+            driftRate: mem.driftRate,
+            isManual: mem.isManual,
+            manualStartSec: mem.isManual ? restoredStart : null
+          });
+          restoredFromMemory = true;
+        }
+      }
+    }
+    if (!restoredFromMemory) {
+      anchor = syncEngine ? syncEngine.onTrack(track, nowPos) : null;
+      saveStationMemory();
+    }
+    // Auto-refresh lyrics if the modal or Driving/Karaoke mode is open
+    if ((lyricsVisible || isDrivingModeOpen()) && !(anchor && anchor.refinement)) {
       loadLyricsForTrack(track);
     }
 
+    const parsed = LyricsSync ? LyricsSync.parseTrack(track) : { artist: '', title: track };
+    const displaySong = parsed.title || track;
+    const displaySub = station
+      ? (parsed.artist ? `${parsed.artist} • ${station.name}` : `${station.name} • Live`)
+      : parsed.artist;
+
     // Update Player Bar
     if (playerTrack) {
-      playerTrack.textContent = track;
+      playerTrack.textContent = displaySong;
       playerTrack.title = track;
     }
     if (playerStation && station) {
-      playerStation.innerHTML = `<span>📻</span> <span>${escapeHtml(station.name)} • Live</span>`;
+      playerStation.innerHTML = `<span>📻</span> <span>${escapeHtml(displaySub)}</span>`;
     }
 
-    // Update Cockpit Driving Mode
-    if (dmTrackTitle) dmTrackTitle.textContent = track;
-    if (dmStationName && station) dmStationName.textContent = station.name;
+    // Update Cockpit Driving / Karaoke Mode
+    if (dmTrackTitle) dmTrackTitle.textContent = displaySong;
+    if (dmStationName && station) dmStationName.textContent = displaySub;
 
     // Update Mini Player
-    if (miniTitle) miniTitle.textContent = track;
-    if (miniSub && station) miniSub.textContent = station.name;
+    if (miniTitle) miniTitle.textContent = displaySong;
+    if (miniSub && station) miniSub.textContent = displaySub;
 
     // Update MediaSession
     updateMediaSession(station, track);
@@ -1242,11 +1285,21 @@
   let syncOffsetVal = null;
   let syncOffsetSlider = null;
 
-  // Fixed lyrics timing (+/- MAX_OFFSET_SEC): remembered on this device and applied to every song
+  // Fixed lyrics timing (+/- MAX_OFFSET_SEC): remembered on this device, migrated once to +1.2s
   const LS_LYRICS_OFFSET = 'autowave_radio_lyrics_offset';
+  const LS_LYRICS_OFFSET_MIGRATED = 'autowave_radio_lyrics_offset_migrated_1_2';
+  const DEFAULT_WEB_OFFSET = (LyricsSync && LyricsSync.DEFAULT_USER_OFFSET_SEC) || 1.2;
   if (syncEngine) {
-    let saved = 0;
-    try { saved = parseFloat(localStorage.getItem(LS_LYRICS_OFFSET) || '0'); } catch (e) { /* storage unavailable */ }
+    let saved = DEFAULT_WEB_OFFSET;
+    try {
+      if (!localStorage.getItem(LS_LYRICS_OFFSET_MIGRATED)) {
+        localStorage.setItem(LS_LYRICS_OFFSET, String(DEFAULT_WEB_OFFSET));
+        localStorage.setItem(LS_LYRICS_OFFSET_MIGRATED, '1');
+      } else {
+        const raw = parseFloat(localStorage.getItem(LS_LYRICS_OFFSET));
+        if (Number.isFinite(raw)) saved = raw;
+      }
+    } catch (e) { /* storage unavailable */ }
     syncEngine.userOffsetSec = saved; // the engine clamps to +-5s and snaps to 0.1s
   }
 
@@ -1258,9 +1311,66 @@
     updateSyncOffsetDisplay();
   }
 
+  let lastRawPosSec = 0;
+  let posRebaseSec = 0;
+  const stationMemories = new Map();
+
+  function normalizeMediaPos(rawSec) {
+    if (!Number.isFinite(rawSec) || rawSec < 0) return lastRawPosSec + posRebaseSec;
+    if (lastRawPosSec > 1 && rawSec < lastRawPosSec - 0.5) {
+      posRebaseSec += lastRawPosSec - rawSec;
+    }
+    lastRawPosSec = rawSec;
+    return rawSec + posRebaseSec;
+  }
+
   /** Media-timeline second the playhead is at (immune to stalls and pauses, unlike wall-clock). */
   function mediaNowSec() {
-    return audio.currentTime || 0;
+    return normalizeMediaPos(audio.currentTime || 0);
+  }
+
+  function saveStationMemory() {
+    if (!currentStation || !syncEngine) return;
+    const info = syncEngine.currentAnchorInfo(mediaNowSec());
+    if (!info) return;
+    const wallStartMs = Date.now() - ((info.elapsedNoOffsetSec / (info.driftRate || 1)) * 1000);
+    if (stationMemories.size >= 16) {
+      stationMemories.delete(stationMemories.keys().next().value);
+    }
+    stationMemories.set(currentStation.id, {
+      title: info.title,
+      wallStartMs,
+      durationSec: info.durationSec,
+      fresh: info.fresh,
+      driftRate: info.driftRate,
+      isManual: info.isManual
+    });
+  }
+
+  function isDrivingModeOpen() {
+    return !!(drivingModeOverlay && drivingModeOverlay.classList.contains('active'));
+  }
+
+  function updateDrivingKaraoke(res) {
+    if (!dmKaraoke) return;
+    if (!res || !syncEngine || !syncEngine.lyrics || !syncEngine.lyrics.lines || !syncEngine.lyrics.lines.length) {
+      dmKaraoke.style.display = 'none';
+      return;
+    }
+    const S = LyricsSync.STATUS;
+    if (res.status !== S.SYNCED && res.status !== S.MANUAL) {
+      dmKaraoke.style.display = 'none';
+      return;
+    }
+    const lines = syncEngine.lyrics.lines;
+    const idx = res.activeIndex;
+    const prev = idx > 0 ? lines[idx - 1].text : '';
+    const curr = (idx >= 0 && idx < lines.length) ? lines[idx].text : '♪';
+    const next = (idx + 1 >= 0 && idx + 1 < lines.length) ? lines[idx + 1].text : '';
+    if (dmLyricPrev) dmLyricPrev.textContent = prev || ' ';
+    if (dmLyricCurr) dmLyricCurr.textContent = curr;
+    if (dmLyricNext) dmLyricNext.textContent = next || ' ';
+    dmKaraoke.style.display = 'flex';
   }
 
   /**
@@ -1291,6 +1401,8 @@
     lyricsLines = [];
     lyricsLastActiveIdx = -1;
     lyricsStatusSig = '';
+    lastRawPosSec = 0;
+    posRebaseSec = 0;
   }
 
   function setBadge(text, cls) {
@@ -1384,7 +1496,7 @@
     if (syncOffsetVal) {
       syncOffsetVal.addEventListener('click', (e) => {
         e.stopPropagation();
-        setLyricsOffset(0);
+        setLyricsOffset(DEFAULT_WEB_OFFSET);
       });
     }
     updateSyncOffsetDisplay();
@@ -1488,7 +1600,7 @@
         const db = await open(); if (!db) return null;
         const tx = db.transaction(['songs', 'meta'], 'readwrite');
         const rec = await reqResult(tx.objectStore('songs').get(key));
-        if (!rec) return null;
+        if (!rec || (rec.v || 1) < 2) return null;
         const m = await reqResult(tx.objectStore('meta').get(key));
         if (m) tx.objectStore('meta').put({ key, size: m.size, used: Date.now() });
         return { result: rec.result, at: rec.at };
@@ -1500,7 +1612,7 @@
         const db = await open(); if (!db) return;
         const json = JSON.stringify(result);
         const tx = db.transaction(['songs', 'meta'], 'readwrite');
-        tx.objectStore('songs').put({ key, result, at });
+        tx.objectStore('songs').put({ key, v: 2, result, at });
         tx.objectStore('meta').put({ key, size: json.length * 2, used: Date.now() });
         await done(tx);
         if (++puts % 20 === 0) await evict(db);
@@ -1623,6 +1735,7 @@
         if (!syncEngine) return;
         // A human confirming "this is the line I hear right now" is the strongest sync signal there is
         syncEngine.manualSync(time, mediaNowSec());
+        saveStationMemory();
         lyricsLastActiveIdx = -1;
         lyricsStatusSig = '';
         updateSyncOffsetDisplay();
@@ -1681,7 +1794,7 @@
 
   function syncLyricsFrame() {
     lyricsAnimFrame = null;
-    if (!lyricsVisible || lyricsLines.length === 0 || !syncEngine) {
+    if ((!lyricsVisible && !isDrivingModeOpen()) || lyricsLines.length === 0 || !syncEngine) {
       stopSyncAnimation();
       return;
     }
@@ -1694,6 +1807,7 @@
     }
     lyricsAnimFrame = setTimeout(syncLyricsFrame, delay);
     applySyncStatusUi(res);
+    updateDrivingKaraoke(res);
 
     // Highlight ONLY when the engine vouches for the position; otherwise show lyrics without a cursor
     const S = LyricsSync.STATUS;
@@ -1704,7 +1818,7 @@
         el.classList.toggle('active', idx === activeIdx);
         el.classList.toggle('passed', activeIdx >= 0 && idx < activeIdx);
       });
-      if (activeIdx >= 0) {
+      if (lyricsVisible && activeIdx >= 0) {
         lyricsLines[activeIdx].el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
@@ -1758,13 +1872,18 @@
     }
 
     const lines = best.synced ? LyricsSync.parseLrc(cand.syncedLyrics) : [];
+    const rawDuration = Number(cand.duration);
+    const effectiveDuration = (Number.isFinite(rawDuration) && rawDuration >= LyricsSync.MIN_DURATION_SEC)
+      ? rawDuration
+      : (lines.length ? (lines[lines.length - 1].time + 15) : NaN);
     syncEngine.setLyrics({
       lines,
-      durationSec: Number(cand.duration),
+      durationSec: effectiveDuration,
       verified: best.verified && !manual,
       plain: typeof cand.plainLyrics === 'string' ? cand.plainLyrics.split('\n') : [],
       manualOnly: !!manual
     });
+    saveStationMemory();
 
     if (lines.length > 0) {
       renderSyncedLyrics(lines);
@@ -1836,28 +1955,149 @@
   }
 
   // ============================================================
-  // Icecast ICY Metadata Reader for Non-HLS Live Streams
+  // Multi-source Live Track Metadata Reader (CORS APIs + ICY)
   // ============================================================
   let metadataAbortController = null;
+  let metadataPollTimer = null;
+  let metadataEventSource = null;
+
+  function isMetadataReaderActive() {
+    return !!(metadataAbortController || metadataPollTimer || metadataEventSource);
+  }
 
   function stopIcyMetadataReader() {
     if (metadataAbortController) {
-      try {
-        metadataAbortController.abort();
-      } catch (e) {}
+      try { metadataAbortController.abort(); } catch (e) {}
       metadataAbortController = null;
     }
+    if (metadataPollTimer) {
+      clearInterval(metadataPollTimer);
+      clearTimeout(metadataPollTimer);
+      metadataPollTimer = null;
+    }
+    if (metadataEventSource) {
+      try { metadataEventSource.close(); } catch (e) {}
+      metadataEventSource = null;
+    }
+  }
+
+  function detectApiMetadataSource(streamUrl) {
+    const u = String(streamUrl || '');
+    // 1. iHeartRadio (stream.revma.ihrhls.com/zc<ID>)
+    const ih = u.match(/ihrhls\.com\/zc(\d+)/i);
+    if (ih) return { kind: 'iheart', id: ih[1] };
+
+    // 2. Zeno.fm (stream.zeno.fm/<mount>)
+    const zn = u.match(/stream\.zeno\.fm\/([a-z0-9]+)/i);
+    if (zn) return { kind: 'zeno', id: zn[1] };
+
+    // 3. Radio.co (*.radio.co/<id>/listen)
+    const rc = u.match(/radio\.co\/([a-z0-9]+)\//i);
+    if (rc) return { kind: 'radioco', id: rc[1] };
+
+    // 4. Live365 (streaming.live365.com/<id> or live365-<...>.cdnstream.com/<id>)
+    const l3 = u.match(/(?:streaming\.live365\.com|live365[^/]*\.cdnstream\.com)\/([a-z0-9]+)/i);
+    if (l3) return { kind: 'live365', id: l3[1] };
+
+    // 5. SomaFM
+    const sf = u.match(/somafm\.com\/([a-z0-9-]+)/i);
+    if (sf) return { kind: 'somafm', id: sf[1].replace(/\d+$/, '') };
+
+    return null;
+  }
+
+  function startApiMetadataReader(station, source, controller) {
+    const targetStationId = station.id;
+    const isAlive = () => !controller.signal.aborted && currentStation && currentStation.id === targetStationId;
+
+    if (source.kind === 'zeno' && typeof EventSource !== 'undefined') {
+      try {
+        const es = new EventSource(`https://api.zeno.fm/mounts/metadata/subscribe/${source.id}`);
+        metadataEventSource = es;
+        es.onmessage = (evt) => {
+          if (!isAlive()) { es.close(); return; }
+          try {
+            const data = JSON.parse(evt.data);
+            const raw = data && (data.streamTitle || data.title);
+            if (raw) {
+              const cleaned = cleanStreamTitle(raw);
+              if (cleaned) onNewTrackInfo(cleaned, station);
+              else if (syncEngine) syncEngine.onNonSongMetadata();
+            }
+          } catch (_) {}
+        };
+        es.onerror = () => {
+          if (!isAlive()) es.close();
+        };
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    async function pollOnce() {
+      if (!isAlive()) return;
+      try {
+        let raw = '';
+        if (source.kind === 'iheart') {
+          const r = await fetch(`https://us.api.iheart.com/api/v3/live-meta/stream/${source.id}/currentTrackMeta`, { signal: controller.signal });
+          if (r.ok) {
+            const d = await r.json();
+            if (d && d.title) {
+              raw = d.artist ? `${d.artist} - ${d.title}` : d.title;
+            }
+          }
+        } else if (source.kind === 'radioco') {
+          const r = await fetch(`https://public.radio.co/stations/${source.id}/status`, { signal: controller.signal });
+          if (r.ok) {
+            const d = await r.json();
+            raw = d && d.current_track && d.current_track.title ? d.current_track.title : '';
+          }
+        } else if (source.kind === 'live365') {
+          const r = await fetch(`https://api.live365.com/station/${source.id}`, { signal: controller.signal });
+          if (r.ok) {
+            const d = await r.json();
+            const ct = d && d['current-track'];
+            if (ct && ct.title) raw = ct.artist ? `${ct.artist} - ${ct.title}` : ct.title;
+          }
+        } else if (source.kind === 'somafm') {
+          const r = await fetch('https://somafm.com/channels.json', { signal: controller.signal });
+          if (r.ok) {
+            const d = await r.json();
+            const ch = (d && d.channels || []).find(c => c.id === source.id);
+            if (ch && ch.lastPlaying) raw = ch.lastPlaying;
+          }
+        }
+        if (!isAlive()) return;
+        if (raw) {
+          const cleaned = cleanStreamTitle(raw);
+          if (cleaned) onNewTrackInfo(cleaned, station);
+          else if (syncEngine) syncEngine.onNonSongMetadata();
+        }
+      } catch (_) {}
+    }
+
+    pollOnce();
+    metadataPollTimer = setInterval(pollOnce, 10_000);
+    return true;
   }
 
   async function startIcyMetadataReader(station, streamUrl) {
     stopIcyMetadataReader();
 
-    const isHls = station.isHls || streamUrl.includes('.m3u8');
-    if (isHls) return; // Handled by HLS fragment metadata
-
     const controller = new AbortController();
     metadataAbortController = controller;
     const targetStationId = station.id;
+
+    // Try CORS-friendly broadcaster API first (iHeart, Zeno, Radio.co, Live365, SomaFM)
+    const apiSrc = detectApiMetadataSource(streamUrl) ||
+      (station.fallbackUrl ? detectApiMetadataSource(station.fallbackUrl) : null);
+    if (apiSrc && startApiMetadataReader(station, apiSrc, controller)) {
+      return;
+    }
+
+    const isHls = station.isHls || streamUrl.includes('.m3u8');
+    if (isHls) return; // Handled by HLS fragment / textTracks metadata
 
     let targetUrl = streamUrl;
     if (window.location.protocol === 'https:' && targetUrl.startsWith('http://')) {
@@ -1894,7 +2134,7 @@
         while (buffer.length < metaint + 1 && !controller.signal.aborted) {
           const { done, value } = await reader.read();
           if (done) return true;
-          appendBuffer(value);
+          if (value) appendBuffer(value);
         }
 
         if (controller.signal.aborted || !currentStation || currentStation.id !== targetStationId) return true;
@@ -1906,7 +2146,7 @@
         while (buffer.length < totalBlock && !controller.signal.aborted) {
           const { done, value } = await reader.read();
           if (done) return true;
-          appendBuffer(value);
+          if (value) appendBuffer(value);
         }
 
         if (controller.signal.aborted || !currentStation || currentStation.id !== targetStationId) return true;
@@ -1926,6 +2166,8 @@
             const cleaned = cleanStreamTitle(match[1]);
             if (cleaned) {
               onNewTrackInfo(cleaned, station);
+            } else if (syncEngine) {
+              syncEngine.onNonSongMetadata();
             }
           }
         }
@@ -1951,11 +2193,19 @@
         }
       }
     } finally {
-      // Release the slot so a later resume can start a fresh reader
       if (metadataAbortController === controller) {
         metadataAbortController = null;
       }
-      if (!anySucceeded && !controller.signal.aborted && currentStation && currentStation.id === targetStationId && !currentTrackTitle) {
+      // If the ICY connection closed normally while still playing this station, reconnect after 3s
+      if (anySucceeded && !controller.signal.aborted && !userPaused && currentStation && currentStation.id === targetStationId) {
+        metadataPollTimer = setTimeout(() => {
+          metadataPollTimer = null;
+          if (!userPaused && currentStation && currentStation.id === targetStationId) {
+            if (syncEngine) syncEngine.markNextTrackUncertain();
+            startIcyMetadataReader(station, streamUrl);
+          }
+        }, 3000);
+      } else if (!anySucceeded && !controller.signal.aborted && currentStation && currentStation.id === targetStationId && !currentTrackTitle) {
         icyMetadataBlocked = true;
         if (lyricsOverlay && lyricsContent && !lyricsCurrentTrack) {
           lyricsContent.innerHTML = `
@@ -1997,22 +2247,42 @@
         return /[\u0000-\u0008\u000E-\u001F�]/.test(s.replace(/\u0000+$/g, '')) ? '' : s;
       }
       const ver = data[3];
+      const flags = data[5];
       const tagSize = ((data[6] & 0x7f) << 21) | ((data[7] & 0x7f) << 14) | ((data[8] & 0x7f) << 7) | (data[9] & 0x7f);
       const end = Math.min(data.length, 10 + tagSize);
       let pos = 10;
+      if ((flags & 0x40) && pos + 4 <= end) {
+        const extSize = ver === 4
+          ? ((data[pos] & 0x7f) << 21) | ((data[pos + 1] & 0x7f) << 14) | ((data[pos + 2] & 0x7f) << 7) | (data[pos + 3] & 0x7f)
+          : (((data[pos] << 24) | (data[pos + 1] << 16) | (data[pos + 2] << 8) | data[pos + 3]) >>> 0) + 4;
+        pos += extSize;
+      }
       let title = '';
       let artist = '';
-      while (pos + 10 <= end) {
-        const id = String.fromCharCode(data[pos], data[pos + 1], data[pos + 2], data[pos + 3]);
-        if (!/^[A-Z0-9]{4}$/.test(id)) break;
-        const size = ver === 4
-          ? ((data[pos + 4] & 0x7f) << 21) | ((data[pos + 5] & 0x7f) << 14) | ((data[pos + 6] & 0x7f) << 7) | (data[pos + 7] & 0x7f)
-          : ((data[pos + 4] << 24) | (data[pos + 5] << 16) | (data[pos + 6] << 8) | data[pos + 7]) >>> 0;
-        if (size === 0) break;
-        const payload = data.subarray(pos + 10, pos + 10 + size);
-        if (id === 'TIT2') title = decodeId3Text(payload);
-        else if (id === 'TPE1') artist = decodeId3Text(payload);
-        pos += 10 + size;
+      if (ver === 2) {
+        while (pos + 6 <= end) {
+          const id = String.fromCharCode(data[pos], data[pos + 1], data[pos + 2]);
+          if (!/^[A-Z0-9]{3}$/.test(id)) break;
+          const size = (data[pos + 3] << 16) | (data[pos + 4] << 8) | data[pos + 5];
+          if (size === 0 || pos + 6 + size > end) break;
+          const payload = data.subarray(pos + 6, pos + 6 + size);
+          if (id === 'TT2') title = decodeId3Text(payload);
+          else if (id === 'TP1') artist = decodeId3Text(payload);
+          pos += 6 + size;
+        }
+      } else {
+        while (pos + 10 <= end) {
+          const id = String.fromCharCode(data[pos], data[pos + 1], data[pos + 2], data[pos + 3]);
+          if (!/^[A-Z0-9]{4}$/.test(id)) break;
+          const size = ver === 4
+            ? ((data[pos + 4] & 0x7f) << 21) | ((data[pos + 5] & 0x7f) << 14) | ((data[pos + 6] & 0x7f) << 7) | (data[pos + 7] & 0x7f)
+            : ((data[pos + 4] << 24) | (data[pos + 5] << 16) | (data[pos + 6] << 8) | data[pos + 7]) >>> 0;
+          if (size === 0 || pos + 10 + size > end) break;
+          const payload = data.subarray(pos + 10, pos + 10 + size);
+          if (id === 'TIT2') title = decodeId3Text(payload);
+          else if (id === 'TPE1') artist = decodeId3Text(payload);
+          pos += 10 + size;
+        }
       }
       if (!title) return '';
       return artist ? `${artist} - ${title}` : title;
@@ -2024,6 +2294,7 @@
   /** Start HTML5 / HLS Audio playback */
   function startAudio(station) {
     if (!station) return;
+    saveStationMemory();
     stopIcyMetadataReader();
     clearTimeout(retryTimer);
     retryTimer = null;
@@ -2101,6 +2372,36 @@
       // Native audio or Safari native HLS
       audio.preload = 'auto';
       audio.src = streamUrl;
+      if (isHls && audio.textTracks && !audio._autowaveTextTracksAttached) {
+        audio._autowaveTextTracksAttached = true;
+        const bindTrack = (tt) => {
+          if (!tt || tt._autowaveBound) return;
+          tt._autowaveBound = true;
+          tt.mode = 'hidden';
+          tt.addEventListener('cuechange', () => {
+            const cues = tt.activeCues;
+            if (!cues || !cues.length || !currentStation) return;
+            let title = '';
+            let artist = '';
+            for (let i = 0; i < cues.length; i++) {
+              const v = cues[i] && cues[i].value;
+              if (!v) continue;
+              const k = String(v.key || '').toUpperCase();
+              const d = typeof v.data === 'string' ? v.data.trim() : '';
+              if (!d) continue;
+              if (k === 'TIT2' || k === 'TT2' || k === 'TITLE') title = d;
+              else if (k === 'TPE1' || k === 'TP1' || k === 'ARTIST') artist = d;
+            }
+            const raw = title ? (artist ? `${artist} - ${title}` : title) : '';
+            if (raw) {
+              const cleaned = cleanStreamTitle(raw);
+              if (cleaned) onNewTrackInfo(cleaned, currentStation);
+            }
+          });
+        };
+        for (let i = 0; i < audio.textTracks.length; i++) bindTrack(audio.textTracks[i]);
+        audio.textTracks.addEventListener('addtrack', (e) => bindTrack(e.track));
+      }
       audio.play().catch(handlePlayError);
       startIcyMetadataReader(station, streamUrl);
     }
@@ -2648,7 +2949,7 @@
       // Resuming from a REAL pause (not a rebuffer): the metadata reader was stopped to save bandwidth,
       // restart it. HLS titles come from the stream itself and need no reader.
       const isHlsNow = !!hlsInstance || (currentStreamUrl || '').includes('.m3u8');
-      if (resumedFromPause && currentStation && !metadataAbortController && currentStreamUrl && !isHlsNow) {
+      if (resumedFromPause && currentStation && !isMetadataReaderActive() && currentStreamUrl && !isHlsNow) {
         if (syncEngine) syncEngine.markNextTrackUncertain();
         startIcyMetadataReader(currentStation, currentStreamUrl);
       }
@@ -2811,24 +3112,34 @@
       });
     }
 
+    function openDrivingMode() {
+      if (!drivingModeOverlay) return;
+      drivingModeOverlay.classList.add('active');
+      if (currentTrackTitle && currentTrackTitle !== lyricsCurrentTrack) {
+        loadLyricsForTrack(currentTrackTitle);
+      } else if (lyricsLines.length > 0) {
+        startSyncAnimation();
+      }
+    }
+
+    function closeDrivingMode() {
+      if (!drivingModeOverlay) return;
+      drivingModeOverlay.classList.remove('active');
+      if (!lyricsVisible) stopSyncAnimation();
+    }
+
     const btnDrivingMobile = document.getElementById('btn-driving-mobile');
     if (btnDrivingMobile) {
-      btnDrivingMobile.addEventListener('click', () => {
-        if (drivingModeOverlay) drivingModeOverlay.classList.add('active');
-      });
+      btnDrivingMobile.addEventListener('click', openDrivingMode);
     }
 
     // Driving Mode Open / Close
     if (btnDrivingMode) {
-      btnDrivingMode.addEventListener('click', () => {
-        if (drivingModeOverlay) drivingModeOverlay.classList.add('active');
-      });
+      btnDrivingMode.addEventListener('click', openDrivingMode);
     }
 
     if (btnExitDm) {
-      btnExitDm.addEventListener('click', () => {
-        if (drivingModeOverlay) drivingModeOverlay.classList.remove('active');
-      });
+      btnExitDm.addEventListener('click', closeDrivingMode);
     }
 
     // Driving Mode Controls
